@@ -903,9 +903,39 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     library: three destinations, and a sealed class is testable in the JVM suite
     where a NavController is not.
 
+    **The visual design pass came after the first build ran**, and running it is
+    what found the bugs. `MaterialTheme { }` with no arguments is not a neutral
+    choice - it ships Material 3's baseline purple and no dark scheme - so
+    `ui/theme/Theme.kt` now carries a real token set taken from a Dutch
+    shelf-edge price label: near-white paper, near-black numerals, and exactly
+    one saturated block for the bonus. That signal colour is the **chain's own**
+    (`chainSignal`), which is the one idea here that could not be lifted into a
+    different product. It forced a real detail: Jumbo's yellow gives 1.3:1
+    against white and 15.6:1 against near-black, so each chain carries its own
+    badge foreground rather than assuming white.
+
+    Two accessibility failures were fixed at the same time, both found by
+    looking at a running screen rather than by any test. Selection was a `"* "`
+    prefix on the label - no semantic state, and a screen reader announcing
+    "star groene pesto"; it is a `RadioButton` with `Modifier.selectable(role =
+    Role.RadioButton)` now. And the SAME asterisk meant "estimated macro" on the
+    offer list, with no legend anywhere: one character, two meanings, neither
+    explained. The offer list now carries a footnote and the customiser no
+    longer uses the character at all.
+
+    One copy bug the screenshots exposed: the totals block read "No macro data
+    for: sla" directly above a protein figure computed FROM sla. `sla` has
+    protein and kcal but no carbs or fat, so the line was flagged by the
+    any-macro-missing rule and then described with a sentence that overstated
+    it. `MealMathTest`'s fixture only had all-null unknowns, which is why it
+    passed. The copy is now "niet alle macro's bekend voor: ...".
+
     **Not done:** full-catalogue browsing and adding a raw unmatched SKU to a
     meal - milestone 14. Extras currently come from the seeded food-type
-    catalogue, so every one of them has real macros and a real price.
+    catalogue, so every one of them has real macros and a real price. The
+    archetype verdict strings are still English (they come from
+    `archetypes.py::_verdict`, not the app), so the UI is still bilingual at
+    that seam.
 
 Current position: **milestones 1-13 complete.** 669 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
