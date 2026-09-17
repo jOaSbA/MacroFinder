@@ -65,6 +65,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
+    // Saved meals, on-device only (milestone 13). DataStore rather than Room:
+    // the persisted state is a short list of small objects, and a JSON string
+    // through the serialization plugin already here beats adding KSP codegen
+    // and a database schema. See data/SavedMealsStore.kt.
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+
     // Unit tests (JVM, no emulator - see android/README.md). Compose UI itself
     // is intentionally left untested here; see that README for why.
     testImplementation("junit:junit:4.13.2")

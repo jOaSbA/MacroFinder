@@ -253,3 +253,27 @@ def test_a_food_type_with_no_macro_ships_null_not_zero(conn):
     conn.execute("UPDATE food_types SET fat_per_100g = NULL WHERE key = 'pasta_droog'")
     catalogue = {f["key"]: f for f in build_export(conn, chains=("ah",), on=TODAY)["food_types"]}
     assert catalogue["pasta_droog"]["macros_per_100g"]["fat_g"] is None
+
+
+def test_every_priceable_food_type_gets_a_rate_for_arbitrary_extras(conn):
+    """Milestone 13: "100 g ketchup" is priced from this map, not from a
+    template slot - the user may add anything, not only slot candidates."""
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+    prices = build_export(conn, chains=("ah",), on=TODAY)["chains"]["ah"]["food_type_prices"]
+
+    assert prices["kwark_mager"]["eur_per_kg"] == pytest.approx(2.40)
+    assert prices["kwark_mager"]["required_quantity"] == 1
+    # Absent means unknown. Nothing is mapped to a zero or a guessed rate.
+    assert "ketchup" not in prices
+
+
+def test_food_type_prices_agree_with_what_the_pricing_module_reports(conn):
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+
+    from bonusrank.prices import food_type_price
+    expected = food_type_price(conn, "kwark_mager", chain="ah", on=TODAY)
+
+    shipped = build_export(conn, chains=("ah",), on=TODAY)[
+        "chains"]["ah"]["food_type_prices"]["kwark_mager"]
+    assert shipped["eur_per_kg"] == expected.eur_per_kg
+    assert shipped["sku"] == expected.sku

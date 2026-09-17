@@ -28,6 +28,13 @@ data class ChainData(
     val offers: List<OfferEntry> = emptyList(),
     /** template key -> slot key -> that slot's candidates, ranked, at this chain. */
     val template_prices: Map<String, Map<String, List<SlotCandidate>>> = emptyMap(),
+    /**
+     * food type key -> its cheapest current rate here. Milestone 13: this is
+     * what prices an arbitrary extra the user typed in, which by definition is
+     * not one of some template slot's candidates. A key that is ABSENT has no
+     * known price - absent is the unknown, never a zero rate.
+     */
+    val food_type_prices: Map<String, FoodTypePriceEntry> = emptyMap(),
 )
 
 @Serializable
@@ -234,4 +241,15 @@ data class FoodTypeEntry(
     /** "4 boiled eggs" is this times four. Null where a unit makes no sense. */
     val g_per_unit: Double? = null,
     val macros_per_100g: Macros = Macros(),
+)
+
+@Serializable
+data class FoodTypePriceEntry(
+    val eur_per_kg: Double,
+    val sku: String? = null,
+    val product_name: String? = null,
+    val promo_text: String? = null,
+    /** Copy rule 3: a 2-for deal means two of them in the fridge. Show it. */
+    val required_quantity: Int = 1,
+    val is_personal_offer: Boolean = false,
 )

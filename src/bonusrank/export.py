@@ -29,6 +29,7 @@ from typing import Any
 
 from .archetypes import Comparison, PricedComposition, PricedReadyMade, compare
 from .optimiser import OptimisedComposition, RejectedPlan
+from .prices import FoodTypePrice, food_type_prices
 from .ranking import RankedOffer, rank
 from .templates import PricedCandidate, PricedTemplate, price_templates
 
@@ -66,6 +67,16 @@ def build_export(
             "template_prices": {
                 t.key: _template_prices_json(t)
                 for t in price_templates(conn, chain=chain, on=today)
+            },
+            # Milestone 13: a per-kilo rate for EVERY food type this chain can
+            # price, not just the ones some template slot offers. This is what
+            # lets the app cost an arbitrary extra the user types in ("100 g
+            # ketchup") without waiting for the next refresh. A food type with
+            # no current price simply has no key here - absent means unknown,
+            # exactly as `food_type_prices` returning no entry does.
+            "food_type_prices": {
+                key: _food_type_price_json(price)
+                for key, price in food_type_prices(conn, chain=chain, on=today).items()
             },
         }
 
@@ -146,6 +157,23 @@ def _candidate_json(candidate: PricedCandidate) -> dict[str, Any]:
         "required_quantity": price.required_quantity if price else None,
         "is_personal_offer": price.is_personal if price else False,
         "sku": price.sku if price else None,
+    }
+
+
+def _food_type_price_json(price: FoodTypePrice) -> dict[str, Any]:
+    """One food type's cheapest current rate at one chain.
+
+    `eur_per_kg` is the primitive the app multiplies by whatever quantity the
+    user types. Everything else is context the user is owed before acting on
+    it - copy rule 3's required quantity, and the PERSONAL corollary.
+    """
+    return {
+        "eur_per_kg": price.eur_per_kg,
+        "sku": price.sku,
+        "product_name": price.product_name,
+        "promo_text": price.promo_raw_text,
+        "required_quantity": price.required_quantity,
+        "is_personal_offer": price.is_personal,
     }
 
 

@@ -848,8 +848,68 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     and global, template-independent rules (`template_rules.template_id` is
     already nullable for it).
 
-Current position: **milestones 1-12 complete.** 667 Python tests, plus the
-Android app's own JVM unit tests (`android/app/src/test`).
+13. ~~The customiser screen, local re-pricing, saved meals.~~ **Done.** The app
+    can now build a meal, not only browse one: the Meals tab lists the templates,
+    each slot shows its candidates cheapest-first, and the total re-costs on
+    every tap. This is the first feature where the app computes rather than
+    displays, so the boundary is drawn explicitly - **Python ranks, Kotlin
+    re-prices, Python authors the rules, Kotlin evaluates them.** One
+    implementation of "what does a kilo cost" (`prices.py`), one of "is this a
+    dish" (`data/seed/templates.yaml`); the app multiplies rates and reads
+    notes.
+
+    Milestone 12 shipped food-type *macros* but no food-type *prices*, so an
+    arbitrary extra had nothing to cost itself against. `export.py` now ships
+    `chains.{chain}.food_type_prices` - a per-kilo rate for every food type that
+    chain can price, not just slot candidates. An absent key means unknown; no
+    food type is ever mapped to a zero rate.
+
+    **Rule evaluation is three-valued** (`data/MealRules.kt`): satisfied /
+    violated / **unknown**, and unknown reaches the screen as unknown rather
+    than quietly passing. A meal containing a line the app cannot identify makes
+    a rule about food types genuinely undecidable - that is the rule-language
+    twin of `_price_composition`'s unpriced-poisons-the-total rule and of
+    `_verdict` refusing to pick a winner when only one side is priced. It was
+    built in from the start rather than retrofitted, so milestone 14's raw
+    catalogue SKUs need a screen, not a rewrite. A rule **never blocks** a
+    choice; it shows the author's note and gets out of the way.
+
+    **Two symmetric poison rules in `data/MealMath.kt`**: one unpriced line
+    nulls the euro total, one line with a missing macro nulls that macro total,
+    and `unpricedLines`/`unknownMacroLines` name the culprit so the UI can say
+    WHICH line spoiled it instead of showing a bare dash.
+
+    **Saved meals store keys and quantities, never prices** - which is exactly
+    what makes them re-cost as the bonus rotates, and falls out of storing keys
+    rather than euros. They key on `(templateKey, slotKey, foodType)` STRINGS
+    and never on a database id: `load_templates` deletes and re-inserts its
+    child rows on every `bonusrank seed`, so an integer id would silently
+    re-point at a different slot - no error, just wrong food. Lines are an
+    ordered list with their own ids rather than a map keyed by food type,
+    because `composition_items`' composite primary key makes "50 g more of the
+    cheese I already picked" unrepresentable, and that constraint is right for a
+    hand-authored recipe and wrong on a plate.
+
+    Persistence is **DataStore plus the serialization plugin already present**,
+    not Room: the whole persisted state is a short list of small objects, and
+    Room would add KSP codegen, a schema and a migration story for a JSON
+    string. `serializeMeals`/`deserializeMeals` are split out of the store so
+    the round trip - the part that can silently lose a user's data - is
+    testable on the JVM, since DataStore itself would need the instrumentation
+    tests `android/README.md` says not to add. Unreadable stored data degrades
+    to an empty list rather than crashing.
+
+    Navigation is a `Screen` sealed interface in `UiState`, not a navigation
+    library: three destinations, and a sealed class is testable in the JVM suite
+    where a NavController is not.
+
+    **Not done:** full-catalogue browsing and adding a raw unmatched SKU to a
+    meal - milestone 14. Extras currently come from the seeded food-type
+    catalogue, so every one of them has real macros and a real price.
+
+Current position: **milestones 1-13 complete.** 669 Python tests, plus the
+Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
+decoding, rule evaluation, meal costing, saved-meal round trips).
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /

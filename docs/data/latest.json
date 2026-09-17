@@ -722,6 +722,1464 @@
           }
         }
       ],
+      "food_type_prices": {
+        "aardappelen": {
+          "eur_per_kg": 1.2833333333333334,
+          "is_personal_offer": false,
+          "product_name": "AH Iets kruimige aardappel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "96049"
+        },
+        "aardbeien": {
+          "eur_per_kg": 9.975000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Nederlandse aardbeien",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "491168"
+        },
+        "achterham": {
+          "eur_per_kg": 11.933333333333334,
+          "is_personal_offer": false,
+          "product_name": "AH Achterham",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "543345"
+        },
+        "amandeldrink_ongezoet": {
+          "eur_per_kg": 1.1691176470588238,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologisch amandeldrink ongezoet",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "605271"
+        },
+        "amandelen": {
+          "eur_per_kg": 12.450000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Ongebrande amandelen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "447633"
+        },
+        "amandelpasta": {
+          "eur_per_kg": 31.772727272727273,
+          "is_personal_offer": false,
+          "product_name": "Natù Amandelpasta",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "563950"
+        },
+        "ananas": {
+          "eur_per_kg": 11.56,
+          "is_personal_offer": false,
+          "product_name": "AH Verse ananas stukjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "133713"
+        },
+        "andijvie": {
+          "eur_per_kg": 5.78,
+          "is_personal_offer": false,
+          "product_name": "AH Andijvie fijngesneden grootverpakking",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "160720"
+        },
+        "appel": {
+          "eur_per_kg": 23.26666666666667,
+          "is_personal_offer": false,
+          "product_name": "Pink Lady Appels schaal 2-pack",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "598453"
+        },
+        "aubergine": {
+          "eur_per_kg": 17.95,
+          "is_personal_offer": false,
+          "product_name": "Klilah Aubergine babaganush",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "561049"
+        },
+        "augurken": {
+          "eur_per_kg": 5.2941176470588225,
+          "is_personal_offer": false,
+          "product_name": "AH Cocktail augurken zoetzuur",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "62820"
+        },
+        "avocado": {
+          "eur_per_kg": 7.975,
+          "is_personal_offer": false,
+          "product_name": "AH Avocado eetrijp",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "129400"
+        },
+        "bacon": {
+          "eur_per_kg": 13.933333333333332,
+          "is_personal_offer": false,
+          "product_name": "AH Bacon",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "543389"
+        },
+        "banaan": {
+          "eur_per_kg": 2.916666666666667,
+          "is_personal_offer": false,
+          "product_name": "Chiquita Ready to eat bananen",
+          "promo_text": "2 voor 3.50",
+          "required_quantity": 2,
+          "sku": "595323"
+        },
+        "beschuit": {
+          "eur_per_kg": 7.230769230769231,
+          "is_personal_offer": false,
+          "product_name": "Bolletje Echte beschuit",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "477554"
+        },
+        "biefstuk": {
+          "eur_per_kg": 36.5,
+          "is_personal_offer": false,
+          "product_name": "AH Kogelbiefstuk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "123836"
+        },
+        "blauwaderkaas": {
+          "eur_per_kg": 20.999999999999996,
+          "is_personal_offer": false,
+          "product_name": "AH Franse roquefort",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "513466"
+        },
+        "blauwe_bessen": {
+          "eur_per_kg": 13.266666666666667,
+          "is_personal_offer": false,
+          "product_name": "AH Blauwe bessen",
+          "promo_text": "€1.00 euro korting",
+          "required_quantity": 1,
+          "sku": "143235"
+        },
+        "bloemkool": {
+          "eur_per_kg": 6.2250000000000005,
+          "is_personal_offer": false,
+          "product_name": "AH Bloemkoolroosjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "395953"
+        },
+        "boerenkool": {
+          "eur_per_kg": 12.6,
+          "is_personal_offer": false,
+          "product_name": "AH Boerenkool kleinverpakking",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "395939"
+        },
+        "boter": {
+          "eur_per_kg": 4.58,
+          "is_personal_offer": false,
+          "product_name": "De Zaanse Hoeve Ongezouten roomboter",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "514748"
+        },
+        "brie": {
+          "eur_per_kg": 14.450000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Romige brie 60+",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "46563"
+        },
+        "broccoli": {
+          "eur_per_kg": 3.311111111111111,
+          "is_personal_offer": false,
+          "product_name": "AH Broccoliroosjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "226367"
+        },
+        "brood_volkoren": {
+          "eur_per_kg": 9.06060606060606,
+          "is_personal_offer": false,
+          "product_name": "Souq Libanees brood met volkoren tarwemeel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "450419"
+        },
+        "brood_wit": {
+          "eur_per_kg": 24.285714285714285,
+          "is_personal_offer": false,
+          "product_name": "AH Extra lang lekker casino wit half",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "50856"
+        },
+        "bruine_bonen_blik": {
+          "eur_per_kg": 3.1041666666666665,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Hollandse bruine bonen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "840"
+        },
+        "bulgur_droog": {
+          "eur_per_kg": 2.99,
+          "is_personal_offer": false,
+          "product_name": "Duru Bulgur grof",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "202222"
+        },
+        "cacaopoeder": {
+          "eur_per_kg": 15.56,
+          "is_personal_offer": false,
+          "product_name": "Blooker Cacaopoeder",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "127402"
+        },
+        "cashewnoten": {
+          "eur_per_kg": 11.0,
+          "is_personal_offer": false,
+          "product_name": "AH Ongezouten cashewnoten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "582886"
+        },
+        "champignons": {
+          "eur_per_kg": 7.56,
+          "is_personal_offer": false,
+          "product_name": "AH Kastanjechampignons",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "41203"
+        },
+        "chiazaad": {
+          "eur_per_kg": 14.509090909090911,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Chiazaad",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "470037"
+        },
+        "cornflakes": {
+          "eur_per_kg": 8.239999999999998,
+          "is_personal_offer": false,
+          "product_name": "Kellogg's Cornflakes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "162826"
+        },
+        "courgette": {
+          "eur_per_kg": 16.785714285714285,
+          "is_personal_offer": false,
+          "product_name": "AH Slaverrijker venkel/courgette",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "611652"
+        },
+        "couscous_droog": {
+          "eur_per_kg": 3.4749999999999996,
+          "is_personal_offer": false,
+          "product_name": "AH Couscous",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "525361"
+        },
+        "crackers_volkoren": {
+          "eur_per_kg": 6.60377358490566,
+          "is_personal_offer": false,
+          "product_name": "AH Knäckebröd pompoenpit",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "455671"
+        },
+        "diepvriesfruit": {
+          "eur_per_kg": 5.55,
+          "is_personal_offer": false,
+          "product_name": "AH Zakje met zomerfruit",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "376520"
+        },
+        "doperwten_blik": {
+          "eur_per_kg": 6.98901098901099,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Doperwten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "66113"
+        },
+        "druiven": {
+          "eur_per_kg": 3.9900000000000007,
+          "is_personal_offer": false,
+          "product_name": "AH Pitloze rode druiven",
+          "promo_text": "2 voor 3.99",
+          "required_quantity": 2,
+          "sku": "100232"
+        },
+        "edamame": {
+          "eur_per_kg": 19.083333333333336,
+          "is_personal_offer": false,
+          "product_name": "AH Slaverrijker sojabonen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "525266"
+        },
+        "ei_rauw": {
+          "eur_per_kg": 7.3965517241379315,
+          "is_personal_offer": false,
+          "product_name": "AH Vrije uitloop eieren M",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "104400"
+        },
+        "eiwit_vloeibaar": {
+          "eur_per_kg": 5.98,
+          "is_personal_offer": false,
+          "product_name": "AH Vloeibaar eiwit",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "614932"
+        },
+        "falafel": {
+          "eur_per_kg": 11.45,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Falafel pikant",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564792"
+        },
+        "feta": {
+          "eur_per_kg": 21.583333333333332,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Griekse feta",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "497552"
+        },
+        "frambozen": {
+          "eur_per_kg": 21.357142857142858,
+          "is_personal_offer": false,
+          "product_name": "AH Nederlandse frambozen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "367237"
+        },
+        "fricandeau": {
+          "eur_per_kg": 29.90909090909091,
+          "is_personal_offer": false,
+          "product_name": "AH Fricandeau",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "437064"
+        },
+        "friet_diepvries": {
+          "eur_per_kg": 1.797,
+          "is_personal_offer": false,
+          "product_name": "Aviko Pommes frites",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "169193"
+        },
+        "garnalen": {
+          "eur_per_kg": 28.523809523809526,
+          "is_personal_offer": false,
+          "product_name": "AH Garnalen knoflookmarinade",
+          "promo_text": "3 voor 5.99",
+          "required_quantity": 3,
+          "sku": "605145"
+        },
+        "gehaktbal": {
+          "eur_per_kg": 10.6125,
+          "is_personal_offer": false,
+          "product_name": "AH Gehaktballen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "370827"
+        },
+        "geitenkaas": {
+          "eur_per_kg": 13.2,
+          "is_personal_offer": false,
+          "product_name": "AH Verse geitenkaas naturel 48+",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "195373"
+        },
+        "gesneden_groente_mix": {
+          "eur_per_kg": 7.4750000000000005,
+          "is_personal_offer": false,
+          "product_name": "AH Roerbakgroente Italiaans fijngesneden",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "418283"
+        },
+        "haring": {
+          "eur_per_kg": 9.225000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Gerookte haringfilet",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "210991"
+        },
+        "haverdrink": {
+          "eur_per_kg": 1.0849514563106797,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologisch haverdrink ongezoet",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "605272"
+        },
+        "havermout": {
+          "eur_per_kg": 4.483333333333333,
+          "is_personal_offer": false,
+          "product_name": "Quaker Havermout voordeelverpakking",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "414776"
+        },
+        "honing": {
+          "eur_per_kg": 37.5,
+          "is_personal_offer": false,
+          "product_name": "Ricola Honing citroen echinacea 2-pack",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "605947"
+        },
+        "hummus": {
+          "eur_per_kg": 11.40952380952381,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologische hummus naturel",
+          "promo_text": "3 voor 5.99",
+          "required_quantity": 3,
+          "sku": "604921"
+        },
+        "huttenkase": {
+          "eur_per_kg": 9.475000000000001,
+          "is_personal_offer": false,
+          "product_name": "Danone Hüttenkäse original",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "67552"
+        },
+        "ijsbergsla": {
+          "eur_per_kg": 9.899999999999999,
+          "is_personal_offer": false,
+          "product_name": "AH Fijngesneden ijsbergsla",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "193247"
+        },
+        "kaas_belegen_48": {
+          "eur_per_kg": 22.185185185185187,
+          "is_personal_offer": false,
+          "product_name": "AH Excellent Oude kaas truffel",
+          "promo_text": "3 voor 5.99",
+          "required_quantity": 3,
+          "sku": "604929"
+        },
+        "kaas_geraspt_30": {
+          "eur_per_kg": 10.95,
+          "is_personal_offer": false,
+          "product_name": "De Zaanse Hoeve Mild 30+ geraspt",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "197172"
+        },
+        "kabeljauw": {
+          "eur_per_kg": 35.96,
+          "is_personal_offer": false,
+          "product_name": "AH Kabeljauwfilet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "416296"
+        },
+        "kalkoenfilet_rauw": {
+          "eur_per_kg": 23.92,
+          "is_personal_offer": false,
+          "product_name": "AH Kalkoenfilet minder vet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "548311"
+        },
+        "kapucijners_blik": {
+          "eur_per_kg": 4.145833333333333,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Kapucijners",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "825"
+        },
+        "karnemelk": {
+          "eur_per_kg": 1.2524271844660195,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Karnemelk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "61008"
+        },
+        "ketchup": {
+          "eur_per_kg": 11.526315789473683,
+          "is_personal_offer": false,
+          "product_name": "Thomy Ketch & co mayonnaise ketchup",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "602500"
+        },
+        "kidneybonen_blik": {
+          "eur_per_kg": 2.7083333333333335,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Kidneybonen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "30428"
+        },
+        "kikkererwten_blik": {
+          "eur_per_kg": 4.125,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Kikkererwten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "167873"
+        },
+        "kipdijfilet": {
+          "eur_per_kg": 14.257142857142856,
+          "is_personal_offer": false,
+          "product_name": "AH Scharrel kipdijfilet reepjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "531832"
+        },
+        "kipfilet_rauw": {
+          "eur_per_kg": 14.966666666666669,
+          "is_personal_offer": false,
+          "product_name": "AH Scharrel kipfilet 2 stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "533083"
+        },
+        "kipfilet_vleeswaren": {
+          "eur_per_kg": 17.266666666666666,
+          "is_personal_offer": false,
+          "product_name": "AH Scharrel gerookte kipfilet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "543390"
+        },
+        "kipgehakt": {
+          "eur_per_kg": 13.3,
+          "is_personal_offer": false,
+          "product_name": "AH Kipgehakt naturel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "436917"
+        },
+        "kipnuggets": {
+          "eur_per_kg": 10.890909090909092,
+          "is_personal_offer": false,
+          "product_name": "Mora Mini's kipnuggets",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "130035"
+        },
+        "kippenpoten": {
+          "eur_per_kg": 7.106060606060607,
+          "is_personal_offer": false,
+          "product_name": "AH Scharrel kippenpoten 2 stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "165537"
+        },
+        "kiwi": {
+          "eur_per_kg": 22.111111111111114,
+          "is_personal_offer": false,
+          "product_name": "AH Doosje met kiwi schijfjes 4-pack",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "620965"
+        },
+        "knakworst": {
+          "eur_per_kg": 4.125,
+          "is_personal_offer": false,
+          "product_name": "AH Kip knakworst",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "66067"
+        },
+        "knoflook": {
+          "eur_per_kg": 7.934782608695652,
+          "is_personal_offer": false,
+          "product_name": "Boursin Cuisine light knoflook & fijne kruiden",
+          "promo_text": "50% korting",
+          "required_quantity": 1,
+          "sku": "624539"
+        },
+        "knoflooksaus": {
+          "eur_per_kg": 12.450000000000001,
+          "is_personal_offer": false,
+          "product_name": "Passage to Asia Hoisin garlic stir fry sauce",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "613095"
+        },
+        "kokosmelk": {
+          "eur_per_kg": 6.45,
+          "is_personal_offer": false,
+          "product_name": "AH Kokosmelk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "161932"
+        },
+        "komkommer": {
+          "eur_per_kg": 9.956521739130435,
+          "is_personal_offer": false,
+          "product_name": "AH Snoepgroente komkommer",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "502305"
+        },
+        "koolvis": {
+          "eur_per_kg": 8.375,
+          "is_personal_offer": false,
+          "product_name": "AH Koolvisfilet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "39826"
+        },
+        "krentenbol": {
+          "eur_per_kg": 3.1587301587301586,
+          "is_personal_offer": false,
+          "product_name": "AH Extra lang lekker mini rozijnenbollen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "497624"
+        },
+        "kruiden_gedroogd": {
+          "eur_per_kg": 87.79999999999998,
+          "is_personal_offer": false,
+          "product_name": "Verstegen Italiaanse kruiden",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "557223"
+        },
+        "kwark_halfvol": {
+          "eur_per_kg": 3.38,
+          "is_personal_offer": false,
+          "product_name": "AH Halfvolle kwark",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "403752"
+        },
+        "kwark_mager": {
+          "eur_per_kg": 3.49,
+          "is_personal_offer": false,
+          "product_name": "Campina Magere milde kwark naturel voordeelpak",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "429777"
+        },
+        "kwark_mager_fruit": {
+          "eur_per_kg": 6.644444444444445,
+          "is_personal_offer": false,
+          "product_name": "Danio Romige kwark aardbei",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "67680"
+        },
+        "kwark_plantaardig": {
+          "eur_per_kg": 3.1125000000000003,
+          "is_personal_offer": false,
+          "product_name": "Alpro Plantaardige kwark naturel",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "407970"
+        },
+        "kwark_vol": {
+          "eur_per_kg": 3.9900000000000007,
+          "is_personal_offer": false,
+          "product_name": "Campina Volle kwark naturel voordeelpak",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "498201"
+        },
+        "leverworst": {
+          "eur_per_kg": 2.98,
+          "is_personal_offer": false,
+          "product_name": "AH Leverworst",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "67562"
+        },
+        "lijnzaad": {
+          "eur_per_kg": 5.98,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Lijnzaad gebroken",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "470036"
+        },
+        "linzen_droog": {
+          "eur_per_kg": 3.98,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologisch groene linzen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "469874"
+        },
+        "makreel_gerookt": {
+          "eur_per_kg": 73.0,
+          "is_personal_offer": false,
+          "product_name": "Encore Makreelfilet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "607159"
+        },
+        "mandarijn": {
+          "eur_per_kg": 2.49,
+          "is_personal_offer": false,
+          "product_name": "AH Mandarijnen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "94782"
+        },
+        "mango": {
+          "eur_per_kg": 6.633333333333333,
+          "is_personal_offer": false,
+          "product_name": "AH Mango",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "93224"
+        },
+        "melk_halfvol": {
+          "eur_per_kg": 0.8252427184466019,
+          "is_personal_offer": false,
+          "product_name": "AH Houdbare halfvolle melk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "450534"
+        },
+        "melk_mager": {
+          "eur_per_kg": 1.1553398058252426,
+          "is_personal_offer": false,
+          "product_name": "AH Magere melk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "1516"
+        },
+        "melk_vol": {
+          "eur_per_kg": 1.8446601941747571,
+          "is_personal_offer": false,
+          "product_name": "AH Volle melk",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "33710"
+        },
+        "melkpoeder_mager": {
+          "eur_per_kg": 15.475000000000001,
+          "is_personal_offer": false,
+          "product_name": "Two Cows Melkpoeder",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "198385"
+        },
+        "mosselen": {
+          "eur_per_kg": 4.995,
+          "is_personal_offer": false,
+          "product_name": "AH Verse mosselen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "226968"
+        },
+        "mozzarella": {
+          "eur_per_kg": 28.615384615384617,
+          "is_personal_offer": false,
+          "product_name": "AH Mozzarella geraspt",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "232017"
+        },
+        "muesli": {
+          "eur_per_kg": 4.99,
+          "is_personal_offer": false,
+          "product_name": "AH Muesli fruit & noten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "437365"
+        },
+        "naanbrood": {
+          "eur_per_kg": 6.725,
+          "is_personal_offer": false,
+          "product_name": "Koopmans Brood uit de pan naanbrood",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "580173"
+        },
+        "noedels_droog": {
+          "eur_per_kg": 9.977777777777778,
+          "is_personal_offer": false,
+          "product_name": "AH Mihoen kip ketjap",
+          "promo_text": "voor 4.49",
+          "required_quantity": 1,
+          "sku": "597737"
+        },
+        "olijfolie": {
+          "eur_per_kg": 4.074074074074074,
+          "is_personal_offer": false,
+          "product_name": "Fish Tales Ansjovisfilets in olijfolie 3-pack",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "600079"
+        },
+        "olijven": {
+          "eur_per_kg": 27.925407925407928,
+          "is_personal_offer": false,
+          "product_name": "AH Zoete olijven",
+          "promo_text": "3 voor 5.99",
+          "required_quantity": 3,
+          "sku": "399015"
+        },
+        "pangasius": {
+          "eur_per_kg": 10.671428571428573,
+          "is_personal_offer": false,
+          "product_name": "AH Pangasiusfilet",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "571234"
+        },
+        "paprika_groente": {
+          "eur_per_kg": 3.3625,
+          "is_personal_offer": false,
+          "product_name": "Aviko Wavy blends paprika",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "593653"
+        },
+        "paranoten": {
+          "eur_per_kg": 24.95,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Ongebrande paranoten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "397904"
+        },
+        "parmezaanse_kaas": {
+          "eur_per_kg": 13.266666666666666,
+          "is_personal_offer": false,
+          "product_name": "Paolo Mini grissini parmezaanse kaas zeezout",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "556733"
+        },
+        "pasta_droog": {
+          "eur_per_kg": 1.1,
+          "is_personal_offer": false,
+          "product_name": "Soubry Macaroni lang bel",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "600218"
+        },
+        "pasta_volkoren_droog": {
+          "eur_per_kg": 1.38,
+          "is_personal_offer": false,
+          "product_name": "AH Volkoren spaghetti",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "58169"
+        },
+        "pastasaus_tomaat": {
+          "eur_per_kg": 6.475,
+          "is_personal_offer": false,
+          "product_name": "AH Pomodoro e mascarpone pastasaus",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "591681"
+        },
+        "pecannoten": {
+          "eur_per_kg": 21.949999999999996,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Ongebrande pecannoten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "397901"
+        },
+        "peer": {
+          "eur_per_kg": 2.151960784313725,
+          "is_personal_offer": false,
+          "product_name": "Ola Festini peer",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "112579"
+        },
+        "pesto_groen": {
+          "eur_per_kg": 16.16216216216216,
+          "is_personal_offer": false,
+          "product_name": "Bertolli Pesto alla genovese",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "519105"
+        },
+        "pindakaas": {
+          "eur_per_kg": 7.3076923076923075,
+          "is_personal_offer": false,
+          "product_name": "Calvé Pindakaas pot",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "220739"
+        },
+        "pindas": {
+          "eur_per_kg": 2.28,
+          "is_personal_offer": false,
+          "product_name": "AH Gezouten pinda's",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "467589"
+        },
+        "pistachenoten": {
+          "eur_per_kg": 29.166666666666668,
+          "is_personal_offer": false,
+          "product_name": "AH Gezouten pistachenoten",
+          "promo_text": "3 voor 7.00",
+          "required_quantity": 3,
+          "sku": "559294"
+        },
+        "pitabrood": {
+          "eur_per_kg": 1.3166666666666667,
+          "is_personal_offer": false,
+          "product_name": "AH Pita broodjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "221858"
+        },
+        "polenta_droog": {
+          "eur_per_kg": 6.725,
+          "is_personal_offer": false,
+          "product_name": "Smaakt Polenta",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "227849"
+        },
+        "pompoenpitten": {
+          "eur_per_kg": 12.78,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Pompoenpitten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "470170"
+        },
+        "prei": {
+          "eur_per_kg": 5.725,
+          "is_personal_offer": false,
+          "product_name": "AH Prei",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "395959"
+        },
+        "proteine_drinkyoghurt": {
+          "eur_per_kg": 2.3942307692307696,
+          "is_personal_offer": false,
+          "product_name": "Optimel Drinkyoghurt protein bosbes vanille",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "585939"
+        },
+        "proteine_pudding": {
+          "eur_per_kg": 5.9750000000000005,
+          "is_personal_offer": false,
+          "product_name": "Alpro Protein pudding vanille smaak",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "556305"
+        },
+        "proteine_reep": {
+          "eur_per_kg": 49.833333333333336,
+          "is_personal_offer": false,
+          "product_name": "Fit Piggy Proteïnereep hazelnut heaven",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "594152"
+        },
+        "quinoa_droog": {
+          "eur_per_kg": 3.3,
+          "is_personal_offer": false,
+          "product_name": "Lassie Quinoa builtje",
+          "promo_text": "voor 0.99",
+          "required_quantity": 1,
+          "sku": "401343"
+        },
+        "rijst_wit_droog": {
+          "eur_per_kg": 1.79,
+          "is_personal_offer": false,
+          "product_name": "AH Basmatirijst",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "197585"
+        },
+        "rijst_zilvervlies_droog": {
+          "eur_per_kg": 1.15,
+          "is_personal_offer": false,
+          "product_name": "AH Zilvervliesrijst",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "162513"
+        },
+        "rijstwafels": {
+          "eur_per_kg": 9.916666666666666,
+          "is_personal_offer": false,
+          "product_name": "AH Dikke rijstwafels meergranen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "166806"
+        },
+        "rookworst": {
+          "eur_per_kg": 7.236363636363636,
+          "is_personal_offer": false,
+          "product_name": "AH Gelderse rookworst",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "229797"
+        },
+        "rosbief_vleeswaren": {
+          "eur_per_kg": 36.900000000000006,
+          "is_personal_offer": false,
+          "product_name": "AH Greenfields Rosbief",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "568387"
+        },
+        "runderbiefstuk_mager": {
+          "eur_per_kg": 33.781818181818174,
+          "is_personal_offer": false,
+          "product_name": "AH Biefstuk 2 stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "123833"
+        },
+        "rundergehakt": {
+          "eur_per_kg": 11.1,
+          "is_personal_offer": false,
+          "product_name": "AH Rundergehakt",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "4011"
+        },
+        "rundergehakt_mager": {
+          "eur_per_kg": 15.633333333333336,
+          "is_personal_offer": false,
+          "product_name": "AH Mager rundergehakt 300g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "199715"
+        },
+        "salami": {
+          "eur_per_kg": 6.875000000000001,
+          "is_personal_offer": false,
+          "product_name": "Bifi Chorizo sticks",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "556746"
+        },
+        "sardines_blik": {
+          "eur_per_kg": 22.51572327044025,
+          "is_personal_offer": false,
+          "product_name": "Brunswick Canadian style sardines",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "201956"
+        },
+        "seitan": {
+          "eur_per_kg": 19.933333333333334,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologische seitan flakes kebab",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "580506"
+        },
+        "sesamzaad": {
+          "eur_per_kg": 29.900000000000002,
+          "is_personal_offer": false,
+          "product_name": "AH Sesamzaad",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "164740"
+        },
+        "shoarmavlees": {
+          "eur_per_kg": 12.024096385542169,
+          "is_personal_offer": false,
+          "product_name": "Dr. Oetker Big Americans shoarma",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "561532"
+        },
+        "sinaasappel": {
+          "eur_per_kg": 1.645,
+          "is_personal_offer": false,
+          "product_name": "AH Handsinaasappelen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "67896"
+        },
+        "sinaasappelsap": {
+          "eur_per_kg": 2.298076923076923,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Sinaasappelsap",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "119839"
+        },
+        "skyr_fruit": {
+          "eur_per_kg": 3.78,
+          "is_personal_offer": false,
+          "product_name": "AH Skyr IJslandse stijl aardbei",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "585988"
+        },
+        "skyr_naturel": {
+          "eur_per_kg": 2.99,
+          "is_personal_offer": false,
+          "product_name": "AH Skyr IJslandse stijl",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "620846"
+        },
+        "sla": {
+          "eur_per_kg": 4.949999999999999,
+          "is_personal_offer": false,
+          "product_name": "AH IJsbergsla",
+          "promo_text": "voor 0.99",
+          "required_quantity": 1,
+          "sku": "129684"
+        },
+        "sojadrink_ongezoet": {
+          "eur_per_kg": 1.9320388349514563,
+          "is_personal_offer": false,
+          "product_name": "Alpro Sojadrink original",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "188227"
+        },
+        "spareribs": {
+          "eur_per_kg": 14.38888888888889,
+          "is_personal_offer": false,
+          "product_name": "AH BBQ spareribs zoet",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "412503"
+        },
+        "sperziebonen": {
+          "eur_per_kg": 2.98,
+          "is_personal_offer": false,
+          "product_name": "AH Sperziebonen",
+          "promo_text": "voor 1.49",
+          "required_quantity": 1,
+          "sku": "4102"
+        },
+        "spinazie": {
+          "eur_per_kg": 6.644444444444445,
+          "is_personal_offer": false,
+          "product_name": "Iglo Biologische spinazie à la crème",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "474803"
+        },
+        "spliterwten_droog": {
+          "eur_per_kg": 2.766666666666667,
+          "is_personal_offer": false,
+          "product_name": "Valle del sole Groene spliterwten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "198415"
+        },
+        "spruitjes": {
+          "eur_per_kg": 2.98,
+          "is_personal_offer": false,
+          "product_name": "AH Spruitjes",
+          "promo_text": "voor 1.49",
+          "required_quantity": 1,
+          "sku": "4095"
+        },
+        "stokbrood": {
+          "eur_per_kg": 2.9666666666666663,
+          "is_personal_offer": false,
+          "product_name": "AH Ciabatta",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "627079"
+        },
+        "surimi": {
+          "eur_per_kg": 5.56,
+          "is_personal_offer": false,
+          "product_name": "AH Surimi sticks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "197716"
+        },
+        "tahin": {
+          "eur_per_kg": 13.3,
+          "is_personal_offer": false,
+          "product_name": "Suntat Tahin sesampasta",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "606681"
+        },
+        "tempeh": {
+          "eur_per_kg": 6.36,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Tempeh",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564894"
+        },
+        "tilapia": {
+          "eur_per_kg": 13.28888888888889,
+          "is_personal_offer": false,
+          "product_name": "AH Tilapiafilet graatvrij",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "396815"
+        },
+        "tofu_gerookt": {
+          "eur_per_kg": 9.950000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologische gerookte tofu",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "572430"
+        },
+        "tofu_naturel": {
+          "eur_per_kg": 4.524886877828055,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Biologische tofu",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564897"
+        },
+        "tomaat": {
+          "eur_per_kg": 1.38,
+          "is_personal_offer": false,
+          "product_name": "AH Tomaten passata gezeefd",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "481844"
+        },
+        "tomatenblokjes_blik": {
+          "eur_per_kg": 3.4615384615384617,
+          "is_personal_offer": false,
+          "product_name": "Heinz Tomaten blokjes naturel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "378626"
+        },
+        "tonijn_blik_olie": {
+          "eur_per_kg": 4.583333333333333,
+          "is_personal_offer": false,
+          "product_name": "Princes Tonijnmoot in extra vierge olijfolie",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "476980"
+        },
+        "tonijn_blik_water": {
+          "eur_per_kg": 4.583333333333333,
+          "is_personal_offer": false,
+          "product_name": "Rio Mare Tonijn in water",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "163354"
+        },
+        "tuinbonen": {
+          "eur_per_kg": 3.7555555555555555,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Tuinbonen fijn",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "217013"
+        },
+        "ui": {
+          "eur_per_kg": 0.95,
+          "is_personal_offer": false,
+          "product_name": "AH Gele uien",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "4083"
+        },
+        "vanille_extract": {
+          "eur_per_kg": 149.025974025974,
+          "is_personal_offer": false,
+          "product_name": "Dr. Oetker Bourbon vanille Extract",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "483457"
+        },
+        "varkenshaas": {
+          "eur_per_kg": 12.5,
+          "is_personal_offer": false,
+          "product_name": "AH Varkenshaas",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "232208"
+        },
+        "vega_burger": {
+          "eur_per_kg": 13.171806167400883,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Plantaardige burger",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564862"
+        },
+        "vega_gehakt": {
+          "eur_per_kg": 11.96,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Plantaardig gehakt",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564795"
+        },
+        "vega_kipstukjes": {
+          "eur_per_kg": 13.0625,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Plantaardige kipstukjes",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "580544"
+        },
+        "vega_schnitzel": {
+          "eur_per_kg": 9.250000000000002,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Plantaardige schnitzel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "564865"
+        },
+        "vla_vanille": {
+          "eur_per_kg": 2.2761904761904765,
+          "is_personal_offer": false,
+          "product_name": "Campina Vla slagroom vanille smaak",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "68022"
+        },
+        "walnoten": {
+          "eur_per_kg": 12.95,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Walnoten ongebrand",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "397907"
+        },
+        "whey_poeder": {
+          "eur_per_kg": 39.95,
+          "is_personal_offer": false,
+          "product_name": "AH Clear whey protein poeder citroen limoen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "594163"
+        },
+        "witte_bonen_blik": {
+          "eur_per_kg": 3.7083333333333335,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Witte bonen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "585656"
+        },
+        "wortel": {
+          "eur_per_kg": 0.99,
+          "is_personal_offer": false,
+          "product_name": "AH Winterpeen",
+          "promo_text": "voor 0.99",
+          "required_quantity": 1,
+          "sku": "4076"
+        },
+        "wrap_proteine": {
+          "eur_per_kg": 10.10126582278481,
+          "is_personal_offer": false,
+          "product_name": "Body & Fit Protein wraps",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "582862"
+        },
+        "wrap_tortilla": {
+          "eur_per_kg": 5.5122950819672125,
+          "is_personal_offer": false,
+          "product_name": "Santa Maria Extra thin tortilla wheat medium",
+          "promo_text": "50% korting",
+          "required_quantity": 1,
+          "sku": "611882"
+        },
+        "wrap_volkoren": {
+          "eur_per_kg": 9.031250000000002,
+          "is_personal_offer": false,
+          "product_name": "La Morena Volkoren tortilla's medium",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "449861"
+        },
+        "zalm_gerookt": {
+          "eur_per_kg": 45.9,
+          "is_personal_offer": false,
+          "product_name": "AH Gerookte zalm",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "130191"
+        },
+        "zalm_vers": {
+          "eur_per_kg": 6.470588235294119,
+          "is_personal_offer": false,
+          "product_name": "John West Twist zalm met citroen & tijm",
+          "promo_text": "voor 0.55",
+          "required_quantity": 1,
+          "sku": "496462"
+        },
+        "zoete_aardappel": {
+          "eur_per_kg": 3.49,
+          "is_personal_offer": false,
+          "product_name": "AH Oranje zoete aardappel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "164358"
+        },
+        "zoetstof": {
+          "eur_per_kg": 17.45,
+          "is_personal_offer": false,
+          "product_name": "Rio Stevia zoetstof",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "550382"
+        },
+        "zongedroogde_tomaten": {
+          "eur_per_kg": 9.975000000000001,
+          "is_personal_offer": false,
+          "product_name": "Grand' Italia Toscana zongedroogde tomaten",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "106229"
+        },
+        "zonnebloempitten": {
+          "eur_per_kg": 7.980000000000001,
+          "is_personal_offer": false,
+          "product_name": "AH Biologisch Zonnebloempitten",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "470172"
+        },
+        "zwarte_bonen_blik": {
+          "eur_per_kg": 4.375,
+          "is_personal_offer": false,
+          "product_name": "AH Terra Zwarte bonen",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "188265"
+        }
+      },
       "offers": [
         {
           "brand": "AH",
@@ -14191,6 +15649,160 @@
           }
         }
       ],
+      "food_type_prices": {
+        "aardappelen": {
+          "eur_per_kg": 1.3266666666666667,
+          "is_personal_offer": false,
+          "product_name": "Zoete aardappelen",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "1239823"
+        },
+        "aardbeien": {
+          "eur_per_kg": 6.725,
+          "is_personal_offer": false,
+          "product_name": "Nederlandse aardbeien",
+          "promo_text": "voor 2,69",
+          "required_quantity": 1,
+          "sku": "1219201"
+        },
+        "appel": {
+          "eur_per_kg": 1.1933333333333334,
+          "is_personal_offer": false,
+          "product_name": "Elstar appels",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "1219892"
+        },
+        "feta": {
+          "eur_per_kg": 6.45,
+          "is_personal_offer": false,
+          "product_name": "Witte kaas",
+          "promo_text": "voor 1,29",
+          "required_quantity": 1,
+          "sku": "1226371"
+        },
+        "haverdrink": {
+          "eur_per_kg": 0.9611650485436893,
+          "is_personal_offer": false,
+          "product_name": "Barista haverdrink",
+          "promo_text": "voor 0,99",
+          "required_quantity": 1,
+          "sku": "1212079"
+        },
+        "kaas_jong_48": {
+          "eur_per_kg": 6.2250000000000005,
+          "is_personal_offer": false,
+          "product_name": "Goudse kaas jong 48+ plakken",
+          "promo_text": "voor 2,49",
+          "required_quantity": 1,
+          "sku": "1226121"
+        },
+        "kiwi": {
+          "eur_per_kg": 6.98,
+          "is_personal_offer": false,
+          "product_name": "Kiwi's gold",
+          "promo_text": "voor 3,49",
+          "required_quantity": 1,
+          "sku": "1219564"
+        },
+        "mandarijn": {
+          "eur_per_kg": 1.99,
+          "is_personal_offer": false,
+          "product_name": "Mandarijnen",
+          "promo_text": "voor 1,99",
+          "required_quantity": 1,
+          "sku": "1219324"
+        },
+        "mango": {
+          "eur_per_kg": 4.633333333333333,
+          "is_personal_offer": false,
+          "product_name": "Mango",
+          "promo_text": "voor 1,39",
+          "required_quantity": 1,
+          "sku": "1219722"
+        },
+        "melk_halfvol": {
+          "eur_per_kg": 0.6601941747572816,
+          "is_personal_offer": false,
+          "product_name": "Houdbare halfvolle melk",
+          "promo_text": "voor 0,68",
+          "required_quantity": 1,
+          "sku": "1225274"
+        },
+        "mosselen": {
+          "eur_per_kg": 2.975,
+          "is_personal_offer": false,
+          "product_name": "Verse Zeeuwse mosselen",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "1220435"
+        },
+        "olijven": {
+          "eur_per_kg": 19.909090909090907,
+          "is_personal_offer": false,
+          "product_name": "Verse olijven",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "91200167"
+        },
+        "paprika_groente": {
+          "eur_per_kg": 2.78,
+          "is_personal_offer": false,
+          "product_name": "Rode paprika's",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "1243832"
+        },
+        "pindakaas": {
+          "eur_per_kg": 7.114285714285715,
+          "is_personal_offer": false,
+          "product_name": "Pindakaas",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "91200042"
+        },
+        "proteine_drinkyoghurt": {
+          "eur_per_kg": 2.8846153846153846,
+          "is_personal_offer": false,
+          "product_name": "High protein skyr drink",
+          "promo_text": "voor 0,99",
+          "required_quantity": 1,
+          "sku": "1241210"
+        },
+        "runderbiefstuk_mager": {
+          "eur_per_kg": 19.96,
+          "is_personal_offer": false,
+          "product_name": "Kogelbiefstuk",
+          "promo_text": "voor 4,99",
+          "required_quantity": 1,
+          "sku": "1203369"
+        },
+        "spruitjes": {
+          "eur_per_kg": 2.2533333333333334,
+          "is_personal_offer": false,
+          "product_name": "Spruiten",
+          "promo_text": "voor 1,69",
+          "required_quantity": 1,
+          "sku": "1219371"
+        },
+        "vega_schnitzel": {
+          "eur_per_kg": 7.45,
+          "is_personal_offer": false,
+          "product_name": "Vegan schnitzels",
+          "promo_text": "voor 1,49",
+          "required_quantity": 1,
+          "sku": "1200158"
+        },
+        "wrap_tortilla": {
+          "eur_per_kg": 5.816666666666667,
+          "is_personal_offer": false,
+          "product_name": "Tortilla Spaanse stijl",
+          "promo_text": "elke dag lage prijs",
+          "required_quantity": 1,
+          "sku": "1234083"
+        }
+      },
       "offers": [
         {
           "brand": "MY VAY",
@@ -16235,6 +17847,1400 @@
           }
         }
       ],
+      "food_type_prices": {
+        "aardappelen": {
+          "eur_per_kg": 1.33,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Aardappelen Kruimig Extra Groot 3 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "383171ZK"
+        },
+        "aardbeien": {
+          "eur_per_kg": 5.375,
+          "is_personal_offer": false,
+          "product_name": "Zuivelhoeve Boer'n Toet Aardbei 120g",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "735990CUP"
+        },
+        "achterham": {
+          "eur_per_kg": 19.928571428571427,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Achterham 140 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "653711STK"
+        },
+        "amandeldrink_ongezoet": {
+          "eur_per_kg": 1.4607843137254901,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Amandeldrink Ongezoet 1L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "380602PAK"
+        },
+        "amandelen": {
+          "eur_per_kg": 8.557142857142857,
+          "is_personal_offer": false,
+          "product_name": "Holie's Granola Nuts & Seeds Hazelnuts, Almonds & Pecans 350g",
+          "promo_text": "2 voor 5,99",
+          "required_quantity": 2,
+          "sku": "493508ZK"
+        },
+        "amandelpasta": {
+          "eur_per_kg": 22.166666666666668,
+          "is_personal_offer": false,
+          "product_name": "Jumbo's 100% Amandelpasta 180 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "715827POT"
+        },
+        "ananas": {
+          "eur_per_kg": 9.375,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Ananas Voordeelverpakking 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "688209BAK"
+        },
+        "andijvie": {
+          "eur_per_kg": 5.78,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Fijngesneden Andijvie 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "532722ZK"
+        },
+        "appel": {
+          "eur_per_kg": 1.3266666666666667,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Jonagold Appels 1,5 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "772466ZK"
+        },
+        "aubergine": {
+          "eur_per_kg": 4.292307692307692,
+          "is_personal_offer": false,
+          "product_name": "Sera Geroosterde Aubergine 650g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "704671POT"
+        },
+        "augurken": {
+          "eur_per_kg": 3.229308005427408,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zoetzuur Fijne Augurk 670 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "213664STK"
+        },
+        "avocado": {
+          "eur_per_kg": 7.975,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Avocado Eetrijp 2 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "697253STK"
+        },
+        "bacon": {
+          "eur_per_kg": 25.130434782608695,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Bacon 115 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "710896TRA"
+        },
+        "banaan": {
+          "eur_per_kg": 2.8166666666666664,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Dole Bananen 5 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "532148ZK"
+        },
+        "beschuit": {
+          "eur_per_kg": 3.8461538461538463,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Beschuit Naturel 13 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "507285STK"
+        },
+        "blauwaderkaas": {
+          "eur_per_kg": 12.75,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gorgonzola Dolce 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "497044STK"
+        },
+        "blauwe_bessen": {
+          "eur_per_kg": 11.633333333333335,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Blauwe Bessen 300 g",
+          "promo_text": "voor 3,49",
+          "required_quantity": 1,
+          "sku": "774264DS"
+        },
+        "bloemkool": {
+          "eur_per_kg": 2.466666666666667,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Bloemkool Roosjes Voordeelverpakking 750 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "688102ZK"
+        },
+        "boerenkool": {
+          "eur_per_kg": 2.1999999999999997,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Boerenkool Voordeelverpakking 750 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "673001DS"
+        },
+        "boter": {
+          "eur_per_kg": 11.16,
+          "is_personal_offer": false,
+          "product_name": "Becel met Roomboter 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "696352STK"
+        },
+        "brie": {
+          "eur_per_kg": 9.950000000000001,
+          "is_personal_offer": false,
+          "product_name": "Jumbo C'est la Brie Roombrie 60+ 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "757686STK"
+        },
+        "broccoli": {
+          "eur_per_kg": 2.5,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Broccoli 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "479521STK"
+        },
+        "brood_wit": {
+          "eur_per_kg": 3.888888888888889,
+          "is_personal_offer": false,
+          "product_name": "Koopmans Broodmix Wit Brood 450 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "441269PAK"
+        },
+        "broodje_bruin": {
+          "eur_per_kg": 2.8452380952380953,
+          "is_personal_offer": false,
+          "product_name": "Jumbo - Bruine Bollen - 12 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "445330STK"
+        },
+        "bruine_bonen_blik": {
+          "eur_per_kg": 3.1041666666666665,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Hollandse Bruine Bonen 800 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "232228STK"
+        },
+        "bulgur_droog": {
+          "eur_per_kg": 4.500000000000001,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Bulgur 300 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "391711ZK"
+        },
+        "cacaopoeder": {
+          "eur_per_kg": 8.557142857142857,
+          "is_personal_offer": false,
+          "product_name": "Holie's Granola Low Carb Cacao Nuts & Seeds 350 g",
+          "promo_text": "2 voor 5,99",
+          "required_quantity": 2,
+          "sku": "734109ZK"
+        },
+        "cashewnoten": {
+          "eur_per_kg": 11.98,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Cashewnoten Ongezouten Voordeelverpakking 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "596212ZK"
+        },
+        "champignons": {
+          "eur_per_kg": 4.225,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Middelgrote Champignons 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "304661BAK"
+        },
+        "chiazaad": {
+          "eur_per_kg": 14.509090909090911,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Chiazaad Biologisch 275 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "483735ZK"
+        },
+        "cornflakes": {
+          "eur_per_kg": 2.5,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Cornflakes 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "687062DS"
+        },
+        "couscous_droog": {
+          "eur_per_kg": 8.36,
+          "is_personal_offer": false,
+          "product_name": "Little Maryam Bio Crazy Couscous Couscous met Kip 15+ Maanden 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "561688POT"
+        },
+        "crackers_volkoren": {
+          "eur_per_kg": 9.712499999999999,
+          "is_personal_offer": false,
+          "product_name": "Leksands Origineel Zweeds Rogge Knäckebröd 200g",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "691892PAK"
+        },
+        "creme_fraiche": {
+          "eur_per_kg": 9.52,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Verse Zure Room 125 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "332408CUP"
+        },
+        "doperwten_blik": {
+          "eur_per_kg": 3.769230769230769,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Doperwten 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "208894STK"
+        },
+        "druiven": {
+          "eur_per_kg": 5.38,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Druiven Rood/Blauw Pitloos 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "306020BAK"
+        },
+        "edamame": {
+          "eur_per_kg": 5.533333333333334,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Edamame Boontjes Gepeld 450 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "658961ZK"
+        },
+        "ei_gekookt": {
+          "eur_per_kg": 42.931034482758626,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gekookte Gekleurde Scharrel Eieren 6 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "671330DS"
+        },
+        "ei_rauw": {
+          "eur_per_kg": 68.79310344827587,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Vrije Uitloop Eieren M/L 10 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "602670DS"
+        },
+        "eiwit_vloeibaar": {
+          "eur_per_kg": 5.98,
+          "is_personal_offer": false,
+          "product_name": "Coco Vite Eiwit 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "624271PAK"
+        },
+        "eiwitshake_kant_en_klaar": {
+          "eur_per_kg": 6.25,
+          "is_personal_offer": false,
+          "product_name": "NXT Level Vanilla Flavor Protein Shake 500 ml",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "572979FLS"
+        },
+        "falafel": {
+          "eur_per_kg": 7.194444444444445,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Falafel Naturel Voordeelverpakking 360 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "681276TRA"
+        },
+        "feta": {
+          "eur_per_kg": 27.416666666666664,
+          "is_personal_offer": false,
+          "product_name": "Salakis Feta Bio 150 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "282954STK"
+        },
+        "frambozen": {
+          "eur_per_kg": 19.96,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Frambozen 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "306027DS"
+        },
+        "fricandeau": {
+          "eur_per_kg": 29.900000000000002,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Fricandeau Naturel ca. 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "645763KGR"
+        },
+        "friet_diepvries": {
+          "eur_per_kg": 1.276,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Patat Frites 2,5 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "741528PAK"
+        },
+        "garnalen": {
+          "eur_per_kg": 34.95,
+          "is_personal_offer": false,
+          "product_name": "Iglo Viskraam Garnalen Krokant Gepaneerd 200g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "705370DS"
+        },
+        "gehaktbal": {
+          "eur_per_kg": 16.633333333333333,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gehaktbal Gebraden Varken 3 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "636899BAK"
+        },
+        "geitenkaas": {
+          "eur_per_kg": 10.95,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Geitenkaas Schijfjes Naturel Voordeelverpakking 2 x 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "712029DS"
+        },
+        "haring": {
+          "eur_per_kg": 9.549295774647886,
+          "is_personal_offer": false,
+          "product_name": "Ouwehand Sea You Fish Bites Zure Haring 355 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "683355POT"
+        },
+        "haverdrink": {
+          "eur_per_kg": 1.3106796116504855,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Haverdrink Ongezoet 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "568357PAK"
+        },
+        "havermout": {
+          "eur_per_kg": 4.483333333333333,
+          "is_personal_offer": false,
+          "product_name": "Quaker Havermout 600 gr",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "187774DS"
+        },
+        "hazelnoten": {
+          "eur_per_kg": 9.621428571428572,
+          "is_personal_offer": false,
+          "product_name": "Amorelli Hazelnoot 350 g",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "766533FLS"
+        },
+        "honing": {
+          "eur_per_kg": 11.98,
+          "is_personal_offer": false,
+          "product_name": "Langnese Bee Easy Wilde Bloemenhoning 500g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "177658FLS"
+        },
+        "hummus": {
+          "eur_per_kg": 6.45,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Houmous Naturel 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "426812CUP"
+        },
+        "huttenkase": {
+          "eur_per_kg": 9.950000000000001,
+          "is_personal_offer": false,
+          "product_name": "Danone Hüttenkäse 200g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "789380STK"
+        },
+        "kaas_belegen_48": {
+          "eur_per_kg": 6.4655172413793105,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Goudse Kaas 48+ Belegen Stuk ca. 580 g",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "723784STK"
+        },
+        "kaas_geraspt_30": {
+          "eur_per_kg": 10.92,
+          "is_personal_offer": false,
+          "product_name": "Rasp Mild 30+ Kaas 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "746538DS"
+        },
+        "kaas_jong_48": {
+          "eur_per_kg": 5.859375,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Goudse Kaas 48+ Stuks Jong 640 g",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "723803STK"
+        },
+        "kabeljauw": {
+          "eur_per_kg": 33.96153846153846,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Kabeljauwfilet Naturel 2 Stuks ca. 260 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "681341KGR"
+        },
+        "kalkoenfilet_rauw": {
+          "eur_per_kg": 29.900000000000002,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Kalkoenfilet 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "626877STK"
+        },
+        "kapucijners_blik": {
+          "eur_per_kg": 12.416666666666666,
+          "is_personal_offer": false,
+          "product_name": "Bonduelle Jonge kapucijners 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "104663BLK"
+        },
+        "karnemelk": {
+          "eur_per_kg": 1.6407766990291262,
+          "is_personal_offer": false,
+          "product_name": "Arla Bio Karnemelk 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "47870PAK"
+        },
+        "kidneybonen_blik": {
+          "eur_per_kg": 6.229166666666667,
+          "is_personal_offer": false,
+          "product_name": "Bonduelle Groene Kidneybonen 400 g",
+          "promo_text": "2 voor 2,99",
+          "required_quantity": 2,
+          "sku": "18745BLK"
+        },
+        "kikkererwten_blik": {
+          "eur_per_kg": 8.03763440860215,
+          "is_personal_offer": false,
+          "product_name": "Bonduelle Kikkererwten Bio 310g",
+          "promo_text": "2 voor 2,99",
+          "required_quantity": 2,
+          "sku": "163502BLK"
+        },
+        "kikkererwten_droog": {
+          "eur_per_kg": 3.98,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gedroogde Kikkererwten 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "711092ZK"
+        },
+        "kipdijfilet": {
+          "eur_per_kg": 11.493333333333332,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Scharrelkip Kippendijfilet 750 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "515052TRA"
+        },
+        "kipfilet_rauw": {
+          "eur_per_kg": 25.925925925925924,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Scharrel Kipfilet Naturel ca. 135 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "640583KGR"
+        },
+        "kipfilet_vleeswaren": {
+          "eur_per_kg": 14.36,
+          "is_personal_offer": false,
+          "product_name": "Zandvliet Gerookte Kipfilet 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "656958STK"
+        },
+        "kipgehakt": {
+          "eur_per_kg": 12.98,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Kipgehakt 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "624545BAK"
+        },
+        "kipnuggets": {
+          "eur_per_kg": 5.18,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Kip Nuggets 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "477239DS"
+        },
+        "kippenpoten": {
+          "eur_per_kg": 6.98,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Drumsticks Gekruid Kip ca. 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "515511KGR"
+        },
+        "knakworst": {
+          "eur_per_kg": 6.625,
+          "is_personal_offer": false,
+          "product_name": "Unox Knakworst Knaks 3 x 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "480479STK"
+        },
+        "knoflook": {
+          "eur_per_kg": 13.899999999999999,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Knoflook 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "82080NET"
+        },
+        "kokosmelk": {
+          "eur_per_kg": 6.45,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Kokosmelk Romig 200 ml",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "224389PAK"
+        },
+        "komkommer": {
+          "eur_per_kg": 6.725,
+          "is_personal_offer": false,
+          "product_name": "Komkommer Rauwkost in Romige Dressing 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "656149CUP"
+        },
+        "koolvis": {
+          "eur_per_kg": 7.777777777777778,
+          "is_personal_offer": false,
+          "product_name": "Seacon Alaska Koolvisfilet 675g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "706749ZK"
+        },
+        "krentenbol": {
+          "eur_per_kg": 3.547619047619048,
+          "is_personal_offer": false,
+          "product_name": "Jumbo - Rozijnen Krentenbollen - 6 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "300206STK"
+        },
+        "kruiden_gedroogd": {
+          "eur_per_kg": 142.14285714285717,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Italiaanse Kruiden 14 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "718304BUS"
+        },
+        "kwark_halfvol": {
+          "eur_per_kg": 3.38,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Franse Kwark Halfvol 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "394226CUP"
+        },
+        "kwark_mager": {
+          "eur_per_kg": 1.75,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Franse Kwark Mager 1000 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "394270CUP"
+        },
+        "kwark_mager_fruit": {
+          "eur_per_kg": 4.4222222222222225,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Romige Kwark Aardbei 450 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "721440POT"
+        },
+        "kwark_plantaardig": {
+          "eur_per_kg": 6.2250000000000005,
+          "is_personal_offer": false,
+          "product_name": "Alpro Plantaardige Variatie Op Kwark Zonder Suikers 400g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "391122CUP"
+        },
+        "kwark_vol": {
+          "eur_per_kg": 4.58,
+          "is_personal_offer": false,
+          "product_name": "Campina Volle Milde Kwark Naturel 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "183639STK"
+        },
+        "leverworst": {
+          "eur_per_kg": 9.521739130434783,
+          "is_personal_offer": false,
+          "product_name": "Kips Originele Leverworst 230 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "657155STK"
+        },
+        "lijnzaad": {
+          "eur_per_kg": 5.98,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Lijnzaad Heel Biologisch 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "485375ZK"
+        },
+        "linzen_droog": {
+          "eur_per_kg": 3.18,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gedroogde Rode Linzen 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "711097ZK"
+        },
+        "makreel_gerookt": {
+          "eur_per_kg": 33.2,
+          "is_personal_offer": false,
+          "product_name": "Minerva Makreel Pate 75 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "566749BLK"
+        },
+        "mandarijn": {
+          "eur_per_kg": 2.35,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Mandarijnen 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "752487NET"
+        },
+        "mango": {
+          "eur_per_kg": 4.444444444444445,
+          "is_personal_offer": false,
+          "product_name": "Danio Mango/Passievrucht 450gr",
+          "promo_text": "2 voor 4,00",
+          "required_quantity": 2,
+          "sku": "640112CUP"
+        },
+        "melk_halfvol": {
+          "eur_per_kg": 0.9793689320388348,
+          "is_personal_offer": false,
+          "product_name": "Campina Halfvolle Melk Voordeelpack 4 x 2.4 L",
+          "promo_text": "10% korting",
+          "required_quantity": 1,
+          "sku": "74004DSL"
+        },
+        "melk_mager": {
+          "eur_per_kg": 0.766990291262136,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Houdbare Magere Melk 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "49607STK"
+        },
+        "melk_vol": {
+          "eur_per_kg": 1.349514563106796,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Verse Volle Melk 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "498983PAK"
+        },
+        "mosselen": {
+          "eur_per_kg": 4.995,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Mosselen Super 2KG",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "683341BAK"
+        },
+        "mozzarella": {
+          "eur_per_kg": 6.153846153846154,
+          "is_personal_offer": false,
+          "product_name": "Goldsteig Mozzarella Classic 220 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "167680STK"
+        },
+        "muesli": {
+          "eur_per_kg": 2.65,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Muesli Naturel 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "626904ZK"
+        },
+        "naanbrood": {
+          "eur_per_kg": 6.884615384615385,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Naan Naturel 2 Stuks 260 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "703792PAK"
+        },
+        "noedels_droog": {
+          "eur_per_kg": 7.45,
+          "is_personal_offer": false,
+          "product_name": "Samlip Udon Noedels Vers 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "754543PAK"
+        },
+        "olijfolie": {
+          "eur_per_kg": 8.684782608695652,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Olijfolie Mild 1 L",
+          "promo_text": "2,00 korting",
+          "required_quantity": 1,
+          "sku": "418264FLS"
+        },
+        "olijven": {
+          "eur_per_kg": 10.641711229946521,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Groene Olijven Zonder Pit 340 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "449573POT"
+        },
+        "pangasius": {
+          "eur_per_kg": 3.9851851851851854,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Pangasiusfilet Vriesvers 675 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "494433ZK"
+        },
+        "paprika_groente": {
+          "eur_per_kg": 6.38,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zoete Puntpaprika 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "534332PAK"
+        },
+        "paranoten": {
+          "eur_per_kg": 24.933333333333334,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Ongebrande Paranoten 150 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "573338TAS"
+        },
+        "parmezaanse_kaas": {
+          "eur_per_kg": 27.92,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Parmigiano Reggiano Flakes 125 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "492902ZK"
+        },
+        "pasta_droog": {
+          "eur_per_kg": 4.725,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Speculoos Pasta Crunchy 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "600162POT"
+        },
+        "pasta_volkoren_droog": {
+          "eur_per_kg": 3.58,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Diertjes Pasta Volkoren 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "718002ZK"
+        },
+        "pecannoten": {
+          "eur_per_kg": 21.45,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Ongebrande Pecannoten 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "561764ZK"
+        },
+        "peer": {
+          "eur_per_kg": 1.85,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Conference Peren 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "376677STK"
+        },
+        "pindakaas": {
+          "eur_per_kg": 5.316666666666666,
+          "is_personal_offer": false,
+          "product_name": "Jumbo's 100% Pindakaas Naturel 600 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "668552POT"
+        },
+        "pindas": {
+          "eur_per_kg": 3.16,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Pinda's Gezouten 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "613995ZK"
+        },
+        "pistachenoten": {
+          "eur_per_kg": 8.75,
+          "is_personal_offer": false,
+          "product_name": "Hipro Pudding Pistache 200g",
+          "promo_text": "2 voor 3,50",
+          "required_quantity": 2,
+          "sku": "715943CUP"
+        },
+        "pitabrood": {
+          "eur_per_kg": 1.3166666666666667,
+          "is_personal_offer": false,
+          "product_name": "Jumbo - Pita Broodjes - 10 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "306323ZK"
+        },
+        "polenta_droog": {
+          "eur_per_kg": 7.96,
+          "is_personal_offer": false,
+          "product_name": "Naturalmente Polenta Gialla Italiana 100% Naturale 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "340976ZK"
+        },
+        "pompoenpitten": {
+          "eur_per_kg": 12.78,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Pompoenpitten Biologisch 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "483729ZK"
+        },
+        "prei": {
+          "eur_per_kg": 5.725,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gesneden Prei 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "329575ZK"
+        },
+        "proteine_drinkyoghurt": {
+          "eur_per_kg": 5.608974358974359,
+          "is_personal_offer": false,
+          "product_name": "HiPRO Protein Drink Framboos Aardbei 300ml",
+          "promo_text": "2 voor 3,50",
+          "required_quantity": 2,
+          "sku": "433886FLS"
+        },
+        "proteine_pudding": {
+          "eur_per_kg": 6.949999999999999,
+          "is_personal_offer": false,
+          "product_name": "Jumbo High Protein Pudding Chocoladesmaak 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "635510CUP"
+        },
+        "proteine_reep": {
+          "eur_per_kg": 14.958333333333332,
+          "is_personal_offer": false,
+          "product_name": "LiGA  Proteïne Reep Pinda (5 x 32g) 160g",
+          "promo_text": "2+1 gratis",
+          "required_quantity": 3,
+          "sku": "446637DS"
+        },
+        "quinoa_droog": {
+          "eur_per_kg": 7.490909090909091,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Biologisch Quinoa 275 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "288065STK"
+        },
+        "rijst_wit_droog": {
+          "eur_per_kg": 1.79,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Basmati Rijst Voordeelverpakking 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "186364ZK"
+        },
+        "rijst_zilvervlies_droog": {
+          "eur_per_kg": 1.15,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zilvervliesrijst Voordeelverpakking 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "409922DS"
+        },
+        "rijstwafels": {
+          "eur_per_kg": 5.0,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Rijstwafels Naturel 130 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "498734ROL"
+        },
+        "rookworst": {
+          "eur_per_kg": 10.0,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gelderse Rookworst 375 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "577731STK"
+        },
+        "rosbief_vleeswaren": {
+          "eur_per_kg": 36.5,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Ierse Rosbief ca. 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "414772KGR"
+        },
+        "runderbiefstuk_mager": {
+          "eur_per_kg": 33.73333333333333,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Biefstuk Rund 2 Stuks ca. 300 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "354418KGR"
+        },
+        "rundergehakt": {
+          "eur_per_kg": 4.99,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gemengd Gehakt 2 x 500g",
+          "promo_text": "voor 4,99",
+          "required_quantity": 1,
+          "sku": "649263TRA"
+        },
+        "salami": {
+          "eur_per_kg": 15.0,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Salami ca. 100 g",
+          "promo_text": "2 voor 3,00",
+          "required_quantity": 2,
+          "sku": "640519KGR"
+        },
+        "sardines_blik": {
+          "eur_per_kg": 22.51572327044025,
+          "is_personal_offer": false,
+          "product_name": "Brunswick Sardines in Sojaolie 106 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "753158BLK"
+        },
+        "schol": {
+          "eur_per_kg": 33.0,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Scholfilet Zonder Huid ca. 240 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "688126KGR"
+        },
+        "sesamzaad": {
+          "eur_per_kg": 29.900000000000002,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Sesamzaad 100 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "384698CUP"
+        },
+        "shoarmavlees": {
+          "eur_per_kg": 8.877777777777778,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Varken Shoarma 900 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "262023BAK"
+        },
+        "sinaasappel": {
+          "eur_per_kg": 1.475,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Handsinaasappelen 2 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "40589NET"
+        },
+        "sinaasappelsap": {
+          "eur_per_kg": 3.798076923076923,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Vers Geperste Sinaasappelsap 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "530937FLS"
+        },
+        "skyr_fruit": {
+          "eur_per_kg": 6.644444444444445,
+          "is_personal_offer": false,
+          "product_name": "HiPRO Protein Skyr Stijl Vanille 450g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "478256CUP"
+        },
+        "skyr_naturel": {
+          "eur_per_kg": 2.99,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Skyr IJslandse Stijl Naturel 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "629423CUP"
+        },
+        "sla": {
+          "eur_per_kg": 4.9750000000000005,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gesneden IJsbergsla 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "212589ZK"
+        },
+        "sojadrink_ongezoet": {
+          "eur_per_kg": 0.8446601941747572,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Sojadrink Ongezoet 1 L",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "380599PAK"
+        },
+        "spareribs": {
+          "eur_per_kg": 14.499999999999998,
+          "is_personal_offer": false,
+          "product_name": "Jumbo BBQ Spareribs Naturel ca. 300 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "642801KGR"
+        },
+        "sperziebonen": {
+          "eur_per_kg": 4.725,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gebroken Sperziebonen 400 g",
+          "promo_text": "voor 1,89",
+          "required_quantity": 1,
+          "sku": "583752ZK"
+        },
+        "spinazie": {
+          "eur_per_kg": 3.0533333333333332,
+          "is_personal_offer": false,
+          "product_name": "Iglo Spinazie à la crème 750 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "64554DS"
+        },
+        "spliterwten_droog": {
+          "eur_per_kg": 1.99,
+          "is_personal_offer": false,
+          "product_name": "Chan's Gele Spliterwten 1000 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "593262ZK"
+        },
+        "spruitjes": {
+          "eur_per_kg": 7.3999999999999995,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Geschoonde Spruitjes 350 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "591488ZK"
+        },
+        "stokbrood": {
+          "eur_per_kg": 8.514285714285714,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Stokbrood Knoflookboter 175 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "382546STK"
+        },
+        "surimi": {
+          "eur_per_kg": 5.56,
+          "is_personal_offer": false,
+          "product_name": "Surimi Sticks MSC 250 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "681340BAK"
+        },
+        "tahin": {
+          "eur_per_kg": 11.633333333333335,
+          "is_personal_offer": false,
+          "product_name": "Koska Sesampasta 300g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "705015POT"
+        },
+        "tempeh": {
+          "eur_per_kg": 5.79746835443038,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tempeh Naturel 395g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "680367BAK"
+        },
+        "tofu_gerookt": {
+          "eur_per_kg": 9.607142857142858,
+          "is_personal_offer": false,
+          "product_name": "Vivera Gerookte Tofu 280 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "763542TRA"
+        },
+        "tofu_naturel": {
+          "eur_per_kg": 4.517647058823529,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tofu Naturel 375g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "680366STK"
+        },
+        "tomaat": {
+          "eur_per_kg": 2.4749999999999996,
+          "is_personal_offer": false,
+          "product_name": "Heinz Tomaten Polpa 400g",
+          "promo_text": "voor 0,99",
+          "required_quantity": 1,
+          "sku": "753584BLK"
+        },
+        "tomatenblokjes_blik": {
+          "eur_per_kg": 1.05,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tomatenblokjes 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "218376DS"
+        },
+        "tonijn_blik_olie": {
+          "eur_per_kg": 19.916666666666668,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tonijnstukken in Olijfolie 160 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "373290BLK"
+        },
+        "tonijn_blik_water": {
+          "eur_per_kg": 17.416666666666668,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tonijnstukken in Water 160 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "373238BLK"
+        },
+        "tuinbonen": {
+          "eur_per_kg": 2.257575757575758,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tuinbonen 660 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "729983POT"
+        },
+        "ui": {
+          "eur_per_kg": 0.95,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gele Uien 1 kg",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "213007NET"
+        },
+        "vanille_extract": {
+          "eur_per_kg": 149.025974025974,
+          "is_personal_offer": false,
+          "product_name": "Dr. Oetker Natuurlijk Bourbon Vanille-Extract 35 ml",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "342555FLS"
+        },
+        "varkenshaas": {
+          "eur_per_kg": 16.483870967741936,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Varkenshaas ca. 310 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "626031KGR"
+        },
+        "vega_burger": {
+          "eur_per_kg": 20.5,
+          "is_personal_offer": false,
+          "product_name": "Valess Vegetarische Crispy Chik'n Burger 2 Stuks 180 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "477817STK"
+        },
+        "vega_gehakt": {
+          "eur_per_kg": 7.2250000000000005,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Plantaardig Gehakt Rul Gegaard 400 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "716783BAK"
+        },
+        "vega_kipstukjes": {
+          "eur_per_kg": 13.049999999999999,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Vegetarische Kipstukjes Naturel 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "696126STK"
+        },
+        "vega_schnitzel": {
+          "eur_per_kg": 21.933333333333334,
+          "is_personal_offer": false,
+          "product_name": "Vivera Vegetarische Kaasschnitzel 2 Stuks 150 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "676208TRA"
+        },
+        "vla_vanille": {
+          "eur_per_kg": 1.9933333333333334,
+          "is_personal_offer": false,
+          "product_name": "Zuivelhoeve Boer'n Vla Vanille 750g",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "736074EM"
+        },
+        "walnoten": {
+          "eur_per_kg": 12.95,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Ongebrande Walnoten 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "561767TAS"
+        },
+        "whey_poeder": {
+          "eur_per_kg": 42.199999999999996,
+          "is_personal_offer": false,
+          "product_name": "XXL Nutrition Whey Delicious Vanilla Flavor 450 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "586831POT"
+        },
+        "witte_bonen_blik": {
+          "eur_per_kg": 8.03763440860215,
+          "is_personal_offer": false,
+          "product_name": "Bonduelle Cannellini Bonen 310g",
+          "promo_text": "2 voor 2,99",
+          "required_quantity": 2,
+          "sku": "71495BLK"
+        },
+        "wortel": {
+          "eur_per_kg": 3.58,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Geschrapte Wortelen 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "212166STK"
+        },
+        "wrap_tortilla": {
+          "eur_per_kg": 1.9153225806451613,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Tortilla Naturel 8 Stuks",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "356627PAK"
+        },
+        "yoghurt_vol": {
+          "eur_per_kg": 2.19,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Volle Yoghurt Stracciatella 1 KG",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "579606EM"
+        },
+        "zalm_gerookt": {
+          "eur_per_kg": 29.95,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Gerookte Zalm 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "717752STK"
+        },
+        "zalm_vers": {
+          "eur_per_kg": 30.39130434782609,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zalmfilet Zonder Huid Naturel 230 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "715166STK"
+        },
+        "zoete_aardappel": {
+          "eur_per_kg": 6.171052631578948,
+          "is_personal_offer": false,
+          "product_name": "XXL Nutrition Protein Soup Zoete aardappel - Pompoen 570g",
+          "promo_text": "25% korting",
+          "required_quantity": 1,
+          "sku": "769814ZK"
+        },
+        "zoetstof": {
+          "eur_per_kg": 14.950000000000001,
+          "is_personal_offer": false,
+          "product_name": "Rio Sucralose Zoetstof 200 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "632282POT"
+        },
+        "zongedroogde_tomaten": {
+          "eur_per_kg": 13.5,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zongedroogde Tomaten Reepjes 280 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "197583POT"
+        },
+        "zonnebloempitten": {
+          "eur_per_kg": 7.980000000000001,
+          "is_personal_offer": false,
+          "product_name": "Jumbo Zonnebloempitten Biologisch 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "483730ZK"
+        },
+        "zwarte_bonen_blik": {
+          "eur_per_kg": 8.291666666666666,
+          "is_personal_offer": false,
+          "product_name": "Bonduelle Zwarte bonen 400g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "66730BLK"
+        }
+      },
       "offers": [
         {
           "brand": "Bonduelle",
@@ -28665,7 +31671,7 @@
       "name": "zwarte bonen uit blik"
     }
   ],
-  "generated_at": "2026-09-17T17:11:49+00:00",
+  "generated_at": "2026-09-17T19:16:49+00:00",
   "schema_version": 2,
   "templates": [
     {
