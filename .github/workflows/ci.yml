@@ -49,3 +49,23 @@ jobs:
       # between those and the (currently nonexistent) instrumentation tests.
       - name: Run unit tests
         run: gradle testDebugUnitTest
+
+      # Built in the same job as the tests so the Gradle setup and cache are
+      # paid for once. This is the only way to get a runnable app without
+      # installing the whole Android toolchain locally.
+      - name: Build debug APK
+        run: gradle assembleDebug
+
+      # DEBUG ONLY, and unsigned with the standard debug key. It is for
+      # sideloading onto your own phone to look at - it cannot go to a store,
+      # and it is not a release build. `isMinifyEnabled = false`, debuggable,
+      # no signing config of its own.
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: macrofinder-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          # Long enough to be useful, short enough not to hoard build output
+          # for a repo that pushes often.
+          retention-days: 14

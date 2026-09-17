@@ -82,6 +82,20 @@ code**, and everything that can run in CI does.
   and assume they run in CI - they won't, unless the workflow is updated to
   provision an emulator.
 
+## Getting a runnable app without installing anything
+
+Every push builds a debug APK in CI. To get it:
+
+1. Open the repo's **Actions** tab, click the most recent green run.
+2. Download the **`macrofinder-debug-apk`** artifact (it is a zip).
+3. Copy the `app-debug.apk` inside to your phone and tap it. Android will ask
+   you to allow installing from this source.
+
+That APK is **debug-only and signed with the standard debug key**. It cannot be
+published to a store, and it is not a release build - it is for looking at the
+app on a real device without installing the Android toolchain. Artifacts expire
+after 14 days.
+
 ## Building locally
 
 This repo does not commit a Gradle wrapper JAR (a binary file with nothing to
