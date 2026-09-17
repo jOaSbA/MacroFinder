@@ -1,0 +1,65 @@
+name: Refresh app data
+
+# Twice a day, not hourly: bonus prices change weekly per chain (CLAUDE.md
+# section 1's "bonus weeks do not align across chains" applies here too), and
+# CLAUDE.md's own politeness section is explicit that these are undocumented
+# endpoints "tolerable for one personal user... not tolerable as a deployed
+# service." Running this from a scheduled CI job already leans harder on that
+# line than a human running the CLI a few times a week - twice a day keeps
+# total request volume close to that same personal-use budget instead of
+# scraping every few hours. Change the cron below if you want a different
+# cadence, with that tradeoff in mind.
+on:
+  schedule:
+    - cron: "0 6,18 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Seed reference data
+        run: bonusrank seed
+
+      # A chain's endpoint moving or a transient scrape failure must not take
+      # down the other two - each ingest is independent and non-fatal.
+      - name: Ingest AH
+        run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"
+
+      - name: Ingest Jumbo
+        run: bonusrank ingest --chain jumbo || echo "Jumbo ingest failed, continuing"
+
+      - name: Ingest Aldi
+        run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
+
+      # Only AH and Jumbo have a product-search lane (CLAUDE.md section 4) -
+      # Aldi's site has no browsable catalogue to refresh a base price from.
+      - name: Refresh base prices (AH)
+        run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
+
+      - name: Refresh base prices (Jumbo)
+        run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
+
+      - name: Export snapshot for the app
+        run: bonusrank export --out docs/data/latest.json
+
+      - name: Commit and push if the snapshot changed
+        run: |
+          git config user.name "macrofinder-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data/latest.json
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "Refresh app data snapshot"
+          git push
