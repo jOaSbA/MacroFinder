@@ -28,6 +28,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 
@@ -77,14 +78,14 @@ class PriceStats:
 
 
 _PRICE_SQL = """
-SELECT p.sku, p.name, p.raw_unit_text,
+SELECT f.key AS food_type_key, p.sku, p.name, p.raw_unit_text,
        f.density_g_per_ml, f.g_per_unit, f.drained_fraction,
        o.effective_unit_price, o.shelf_price, o.promo_mechanic, o.promo_raw_text,
        o.required_quantity, o.is_personal_offer, o.valid_from, o.valid_to, o.observed_at
 FROM price_observations o
 JOIN products p ON p.id = o.product_id
 JOIN food_types f ON f.id = p.food_type_id
-WHERE f.key = ? AND p.chain = ?
+WHERE p.chain = ?{key_filter}
   AND o.id = (SELECT id FROM price_observations o2
               WHERE o2.product_id = p.id ORDER BY o2.observed_at DESC, o2.id DESC LIMIT 1)
 """
@@ -102,11 +103,49 @@ def food_type_price(
 
     None is a real answer and the caller must keep it as one: a composition with
     an unpriced item costs an unknown amount, not the sum of the rest.
+
+    A thin wrapper over `food_type_prices`, deliberately. Two independent
+    implementations of the validity-window and personal-offer filters would
+    drift, and the one that drifts is the one that forgets a filter.
+    """
+    prices = food_type_prices(
+        conn, [food_type_key], chain=chain, on=on, include_personal=include_personal
+    )
+    return prices.get(food_type_key)
+
+
+def food_type_prices(
+    conn: sqlite3.Connection,
+    keys: Sequence[str] | None = None,
+    *,
+    chain: str = "ah",
+    on: date | None = None,
+    include_personal: bool = False,
+) -> dict[str, FoodTypePrice]:
+    """Cheapest current euro-per-kilo for many food types, in one query.
+
+    `keys=None` prices every food type the chain has observations for. A key
+    with no usable price is ABSENT from the result rather than mapped to None -
+    the caller must treat a missing key as unknown, exactly as it treats
+    `food_type_price` returning None.
+
+    This is the primitive; `food_type_price` calls it. The customiser prices
+    four slots of candidates at once, which as separate calls was one
+    correlated-subquery scan each.
     """
     today = (on or date.today()).isoformat()
-    best: FoodTypePrice | None = None
+    params: list[object] = [chain]
+    key_filter = ""
+    if keys is not None:
+        keys = list(keys)
+        if not keys:
+            return {}
+        key_filter = f" AND f.key IN ({','.join('?' * len(keys))})"
+        params.extend(keys)
 
-    for row in conn.execute(_PRICE_SQL, (food_type_key, chain)).fetchall():
+    best: dict[str, FoodTypePrice] = {}
+    for row in conn.execute(_PRICE_SQL.format(key_filter=key_filter), params).fetchall():
+        food_type_key = row["food_type_key"]
         # Bonus weeks do not align across chains; always filter on the window.
         if row["valid_from"] and row["valid_from"] > today:
             continue
@@ -139,8 +178,9 @@ def food_type_price(
             observed_at=row["observed_at"],
             is_personal=bool(row["is_personal_offer"]),
         )
-        if best is None or candidate.eur_per_kg < best.eur_per_kg:
-            best = candidate
+        current = best.get(food_type_key)
+        if current is None or candidate.eur_per_kg < current.eur_per_kg:
+            best[food_type_key] = candidate
 
     return best
 

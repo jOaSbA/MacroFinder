@@ -47,12 +47,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "chocolade_proteine_pudding",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "chocolade_proteine_pudding",
+          "meal_kind": "snack",
           "name": "Chocolade proteine pudding",
           "optimised": {
             "reason": "the cheapest solve is essentially one ingredient (100% of the mass) - not a plausible meal",
@@ -124,12 +124,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "huttenkase_spread",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "lunch",
             "snack"
           ],
+          "key": "huttenkase_spread",
+          "meal_kind": "snack",
           "name": "Huttenkase spread",
           "optimised": {
             "reason": "the cheapest solve is essentially one ingredient (100% of the mass) - not a plausible meal",
@@ -199,11 +199,11 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "kip_wrap_lunch",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "lunch"
           ],
+          "key": "kip_wrap_lunch",
+          "meal_kind": "meal",
           "name": "Kip-wrap lunch",
           "optimised": {
             "reason": "no combination of these ingredients reaches 30 g protein without breaking the meal kcal/carb/fat floor",
@@ -284,11 +284,11 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "overnight_oats",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "breakfast"
           ],
+          "key": "overnight_oats",
+          "meal_kind": "meal",
           "name": "Overnight oats",
           "optimised": {
             "carbs_g": 19.9999999986,
@@ -382,12 +382,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_drinkyoghurt",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "proteine_drinkyoghurt",
+          "meal_kind": "drink",
           "name": "Proteine drinkyoghurt",
           "optimised": {
             "carbs_g": 22.6,
@@ -483,11 +483,11 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_reep",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "snack"
           ],
+          "key": "proteine_reep",
+          "meal_kind": "snack",
           "name": "Proteine reep",
           "optimised": {
             "carbs_g": 9.999999819999998,
@@ -607,13 +607,13 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_shake",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack",
             "post_workout"
           ],
+          "key": "proteine_shake",
+          "meal_kind": "drink",
           "name": "Proteine shake",
           "optimised": {
             "carbs_g": 25.1,
@@ -689,12 +689,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "skyr_met_fruit",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "skyr_met_fruit",
+          "meal_kind": "snack",
           "name": "Skyr met fruit",
           "optimised": {
             "reason": "the cheapest solve is essentially one ingredient (100% of the mass) - not a plausible meal",
@@ -754,6 +754,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 57.00000000000001
+        },
+        {
+          "brand": "AH Biologisch",
+          "eur_per_100g_protein": 35.04,
+          "food_type": "champignons",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 22.0,
+            "protein_g": 2.5
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Biologisch Kastanjechampignons",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.19,
+            "total_outlay_eur": 2.19,
+            "unit_price_eur": 2.19
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "101132",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 35.04
         },
         {
           "brand": "AH",
@@ -916,6 +948,38 @@
           "waste_adjusted_eur_per_100g_protein": null
         },
         {
+          "brand": "AH Biologisch",
+          "eur_per_100g_protein": 32.82967032967033,
+          "food_type": "sinaasappelsap",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 45.0,
+            "protein_g": 0.7
+          },
+          "meal_kind": "drink",
+          "name": "AH Biologisch Sinaasappelsap",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.39,
+            "total_outlay_eur": 2.39,
+            "unit_price_eur": 2.39
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "119839",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 32.82967032967033
+        },
+        {
           "brand": "AH",
           "eur_per_100g_protein": 16.086580086580085,
           "food_type": "runderbiefstuk_mager",
@@ -946,6 +1010,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 16.086580086580085
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 17.38095238095238,
+          "food_type": "biefstuk",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 4.0,
+            "kcal": 125.0,
+            "protein_g": 21.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Kogelbiefstuk",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 9.49,
+            "total_outlay_eur": 9.49,
+            "unit_price_eur": 9.49
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "123836",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 17.38095238095238
         },
         {
           "brand": "Blooker",
@@ -2325,7 +2421,7 @@
         },
         {
           "brand": "AH",
-          "eur_per_100g_protein": 82.5,
+          "eur_per_100g_protein": 124.58333333333336,
           "food_type": "sla",
           "is_personal_offer": false,
           "kcal_is_derived": false,
@@ -2335,6 +2431,38 @@
             "fat_g": null,
             "kcal": 15.0,
             "protein_g": 1.2
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Romaine sla",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "193245",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 124.58333333333336
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 141.42857142857144,
+          "food_type": "ijsbergsla",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 1.8,
+            "fat_g": 0.1,
+            "kcal": 14.0,
+            "protein_g": 0.7
           },
           "meal_kind": "ingredient",
           "name": "AH Fijngesneden ijsbergsla",
@@ -2353,7 +2481,7 @@
           "sku": "193247",
           "valid_from": null,
           "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 82.5
+          "waste_adjusted_eur_per_100g_protein": 141.42857142857144
         },
         {
           "brand": "AH",
@@ -2482,6 +2610,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 2.369047619047619
+        },
+        {
+          "brand": "De Zaanse Hoeve",
+          "eur_per_100g_protein": 3.9107142857142856,
+          "food_type": "kaas_geraspt_30",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 19.0,
+            "kcal": 290.0,
+            "protein_g": 28.0
+          },
+          "meal_kind": "ingredient",
+          "name": "De Zaanse Hoeve Mild 30+ geraspt",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.19,
+            "total_outlay_eur": 2.19,
+            "unit_price_eur": 2.19
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "197172",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 3.9107142857142856
         },
         {
           "brand": "AH",
@@ -3188,6 +3348,38 @@
           "waste_adjusted_eur_per_100g_protein": 111.11111111111111
         },
         {
+          "brand": "Verstegen",
+          "eur_per_100g_protein": 255.55555555555557,
+          "food_type": "kruiden_gedroogd",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 265.0,
+            "protein_g": 9.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Verstegen Italiaanse kruiden",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "216628",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 255.55555555555557
+        },
+        {
           "brand": "AH",
           "eur_per_100g_protein": 9.781818181818181,
           "food_type": "salami",
@@ -3634,6 +3826,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 117.5
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 5.566433566433567,
+          "food_type": "rookworst",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 26.0,
+            "kcal": 290.0,
+            "protein_g": 13.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Gelderse rookworst",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.99,
+            "total_outlay_eur": 1.99,
+            "unit_price_eur": 1.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "229797",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 5.566433566433567
         },
         {
           "brand": "AH",
@@ -4116,6 +4340,38 @@
           "waste_adjusted_eur_per_100g_protein": 5.270457697642164
         },
         {
+          "brand": "Almhof",
+          "eur_per_100g_protein": 9.200000000000001,
+          "food_type": "kwark_vol",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 3.5,
+            "fat_g": 6.0,
+            "kcal": 92.0,
+            "protein_g": 6.5
+          },
+          "meal_kind": "snack",
+          "name": "Almhof Volle kwark vanille",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "33721",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 9.200000000000001
+        },
+        {
           "brand": "Lassie",
           "eur_per_100g_protein": 3.09375,
           "food_type": "rijst_zilvervlies_droog",
@@ -4565,6 +4821,38 @@
         },
         {
           "brand": "AH",
+          "eur_per_100g_protein": 29.13793103448276,
+          "food_type": "spinazie",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 23.0,
+            "protein_g": 2.9
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Spinazie kleinverpakking",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.69,
+            "total_outlay_eur": 1.69,
+            "unit_price_eur": 1.69
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "395948",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 29.13793103448276
+        },
+        {
+          "brand": "AH",
           "eur_per_100g_protein": 27.06521739130435,
           "food_type": "bloemkool",
           "is_personal_offer": false,
@@ -4964,7 +5252,7 @@
           "name": "AH Rundergehakt",
           "perishable": false,
           "price": {
-            "cheapest_in_weeks": null,
+            "cheapest_in_weeks": 0,
             "is_promo": true,
             "promo_mechanic": "fixed_price",
             "promo_text": "voor 3.99",
@@ -4978,6 +5266,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 4.694117647058824
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 6.529411764705882,
+          "food_type": "rundergehakt",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 20.0,
+            "kcal": 250.0,
+            "protein_g": 17.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Rundergehakt",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": 0,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 5.55,
+            "total_outlay_eur": 5.55,
+            "unit_price_eur": 5.55
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "4011",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 6.529411764705882
         },
         {
           "brand": "Lassie",
@@ -5332,6 +5652,38 @@
           "waste_adjusted_eur_per_100g_protein": 7.993827160493828
         },
         {
+          "brand": "Mora",
+          "eur_per_100g_protein": 12.729591836734693,
+          "food_type": "kipnuggets",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 14.0,
+            "kcal": 250.0,
+            "protein_g": 14.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Mora Oven & airfryer kipnuggets",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 4.99,
+            "total_outlay_eur": 4.99,
+            "unit_price_eur": 4.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "412982",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 12.729591836734693
+        },
+        {
           "brand": "Quaker",
           "eur_per_100g_protein": 3.4487179487179485,
           "food_type": "havermout",
@@ -5397,6 +5749,70 @@
         },
         {
           "brand": "AH",
+          "eur_per_100g_protein": 20.76388888888889,
+          "food_type": "gesneden_groente_mix",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 4.5,
+            "fat_g": 0.4,
+            "kcal": 35.0,
+            "protein_g": 1.8
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Roerbakgroente Italiaans fijngesneden",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": 0,
+            "is_promo": true,
+            "promo_mechanic": "x_plus_y_free",
+            "promo_text": "1+1 gratis",
+            "required_quantity": 2,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 1.495
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "418283",
+          "valid_from": "2026-09-14",
+          "valid_to": "2026-09-20",
+          "waste_adjusted_eur_per_100g_protein": 41.52777777777778
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 41.52777777777778,
+          "food_type": "gesneden_groente_mix",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 4.5,
+            "fat_g": 0.4,
+            "kcal": 35.0,
+            "protein_g": 1.8
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Roerbakgroente Italiaans fijngesneden",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": 0,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "418283",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 41.52777777777778
+        },
+        {
+          "brand": "AH",
           "eur_per_100g_protein": null,
           "food_type": "bloemkool",
           "is_personal_offer": false,
@@ -5426,6 +5842,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": null
+        },
+        {
+          "brand": "Statesman",
+          "eur_per_100g_protein": 5.173611111111111,
+          "food_type": "tonijn_blik_water",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 0.0,
+            "fat_g": 1.0,
+            "kcal": 105.0,
+            "protein_g": 24.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Statesman Tonijn stukken in water",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.49,
+            "total_outlay_eur": 1.49,
+            "unit_price_eur": 1.49
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "420789",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 5.173611111111111
         },
         {
           "brand": "Bertolli",
@@ -5810,6 +6258,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 5.928571428571429
+        },
+        {
+          "brand": "La Morena",
+          "eur_per_100g_protein": 10.034722222222223,
+          "food_type": "wrap_volkoren",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 45.0,
+            "fat_g": 7.0,
+            "kcal": 300.0,
+            "protein_g": 9.0
+          },
+          "meal_kind": "ingredient",
+          "name": "La Morena Volkoren tortilla's medium",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.89,
+            "total_outlay_eur": 2.89,
+            "unit_price_eur": 2.89
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "449861",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 10.034722222222223
         },
         {
           "brand": "Souq",
@@ -6676,6 +7156,38 @@
           "waste_adjusted_eur_per_100g_protein": 48.10344827586207
         },
         {
+          "brand": "AH",
+          "eur_per_100g_protein": 15.333333333333332,
+          "food_type": "tomaat",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 20.0,
+            "protein_g": 0.9
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Tomaten passata gezeefd",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 0.69,
+            "total_outlay_eur": 0.69,
+            "unit_price_eur": 0.69
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "481844",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 15.333333333333332
+        },
+        {
           "brand": "Dr. Oetker",
           "eur_per_100g_protein": null,
           "food_type": "vanille_extract",
@@ -6996,6 +7508,38 @@
           "waste_adjusted_eur_per_100g_protein": 7.416666666666667
         },
         {
+          "brand": "AH Biologisch",
+          "eur_per_100g_protein": 15.416666666666664,
+          "food_type": "feta",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 21.0,
+            "kcal": 260.0,
+            "protein_g": 14.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Biologisch Griekse feta",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.59,
+            "total_outlay_eur": 2.59,
+            "unit_price_eur": 2.59
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "497552",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 15.416666666666664
+        },
+        {
           "brand": "AH",
           "eur_per_100g_protein": 3.948412698412698,
           "food_type": "krentenbol",
@@ -7250,6 +7794,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 41.25
+        },
+        {
+          "brand": "Bertolli",
+          "eur_per_100g_protein": 35.91591591591592,
+          "food_type": "pesto_groen",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 4.5,
+            "fat_g": 45.0,
+            "kcal": 450.0,
+            "protein_g": 4.5
+          },
+          "meal_kind": "ingredient",
+          "name": "Bertolli Pesto alla genovese",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "519105",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 35.91591591591592
         },
         {
           "brand": "AH",
@@ -7922,6 +8498,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 5.9750000000000005
+        },
+        {
+          "brand": "Paolo",
+          "eur_per_100g_protein": 3.7904761904761908,
+          "food_type": "parmezaanse_kaas",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 28.0,
+            "kcal": 400.0,
+            "protein_g": 35.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Paolo Mini grissini parmezaanse kaas zeezout",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.99,
+            "total_outlay_eur": 1.99,
+            "unit_price_eur": 1.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "556733",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 3.7904761904761908
         },
         {
           "brand": "Bifi",
@@ -9140,6 +9748,38 @@
           "waste_adjusted_eur_per_100g_protein": 33.22222222222223
         },
         {
+          "brand": "Body & Fit",
+          "eur_per_100g_protein": 5.050632911392405,
+          "food_type": "wrap_proteine",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 25.0,
+            "fat_g": 8.0,
+            "kcal": 280.0,
+            "protein_g": 20.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Body & Fit Protein wraps",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 3.99,
+            "total_outlay_eur": 3.99,
+            "unit_price_eur": 3.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "582862",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 5.050632911392405
+        },
+        {
           "brand": "AH",
           "eur_per_100g_protein": 6.111111111111111,
           "food_type": "cashewnoten",
@@ -9362,6 +10002,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": null
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 43.166666666666664,
+          "food_type": "pastasaus_tomaat",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 8.0,
+            "fat_g": 2.0,
+            "kcal": 60.0,
+            "protein_g": 1.5
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Pomodoro e mascarpone pastasaus",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.59,
+            "total_outlay_eur": 2.59,
+            "unit_price_eur": 2.59
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "591681",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 43.166666666666664
         },
         {
           "brand": "Aviko",
@@ -9650,6 +10322,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 0.9166666666666666
+        },
+        {
+          "brand": "Thomy",
+          "eur_per_100g_protein": 96.05263157894738,
+          "food_type": "ketchup",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 23.0,
+            "fat_g": 0.1,
+            "kcal": 100.0,
+            "protein_g": 1.2
+          },
+          "meal_kind": "ingredient",
+          "name": "Thomy Ketch & co mayonnaise ketchup",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.19,
+            "total_outlay_eur": 2.19,
+            "unit_price_eur": 2.19
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "602500",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 96.05263157894738
         },
         {
           "brand": "La Morena",
@@ -11220,6 +11924,38 @@
           "waste_adjusted_eur_per_100g_protein": 6.944444444444444
         },
         {
+          "brand": "Passage to Asia",
+          "eur_per_100g_protein": 83.0,
+          "food_type": "knoflooksaus",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 6.0,
+            "fat_g": 30.0,
+            "kcal": 300.0,
+            "protein_g": 1.5
+          },
+          "meal_kind": "ingredient",
+          "name": "Passage to Asia Hoisin garlic stir fry sauce",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.49,
+            "total_outlay_eur": 2.49,
+            "unit_price_eur": 2.49
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "613095",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 83.0
+        },
+        {
           "brand": "AH Excellent",
           "eur_per_100g_protein": 9.507936507936508,
           "food_type": "parmezaanse_kaas",
@@ -11506,6 +12242,38 @@
           "valid_from": "2026-09-14",
           "valid_to": "2026-09-20",
           "waste_adjusted_eur_per_100g_protein": 14.3125
+        },
+        {
+          "brand": "Hak",
+          "eur_per_100g_protein": 128.125,
+          "food_type": "mango",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 60.0,
+            "protein_g": 0.8
+          },
+          "meal_kind": "snack",
+          "name": "Hak Knijpfruit mango 0% 4-pack",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 3.69,
+            "total_outlay_eur": 3.69,
+            "unit_price_eur": 3.69
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "623976",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 128.125
         },
         {
           "brand": "Philadelphia",
@@ -12275,7 +13043,575 @@
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 6.416666666666666
         }
-      ]
+      ],
+      "template_prices": {
+        "pasta": {
+          "cheese": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.037904761904761906,
+              "eur_per_kg": 13.266666666666666,
+              "fat_g": 4.2,
+              "food_type": "parmezaanse_kaas",
+              "grams": 15.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "Parmezaanse kaas",
+              "price_eur": 0.199,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.25,
+              "required_quantity": 1,
+              "sku": "556733"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.039107142857142854,
+              "eur_per_kg": 10.95,
+              "fat_g": 4.75,
+              "food_type": "kaas_geraspt_30",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 72.5,
+              "name": "geraspte kaas 30+",
+              "price_eur": 0.27375,
+              "promo_text": "shelf price (search)",
+              "protein_g": 7.0,
+              "required_quantity": 1,
+              "sku": "197172"
+            }
+          ],
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.4124999999999999,
+              "eur_per_kg": 4.949999999999999,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 9.0,
+              "name": "sla",
+              "price_eur": 0.29699999999999993,
+              "promo_text": "voor 0.99",
+              "protein_g": 0.72,
+              "required_quantity": 1,
+              "sku": "129684"
+            },
+            {
+              "carbs_g": 4.5,
+              "eur_per_g_protein": 0.4152777777777778,
+              "eur_per_kg": 7.4750000000000005,
+              "fat_g": 0.4,
+              "food_type": "gesneden_groente_mix",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 35.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": 0.7475,
+              "promo_text": "shelf price (search)",
+              "protein_g": 1.8,
+              "required_quantity": 1,
+              "sku": "418283"
+            },
+            {
+              "carbs_g": 0.84,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.28,
+              "food_type": "rucola",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 10.0,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.04,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.06529411764705884,
+              "eur_per_kg": 11.1,
+              "fat_g": 22.0,
+              "food_type": "rundergehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 275.0,
+              "name": "rundergehakt",
+              "price_eur": 1.221,
+              "promo_text": "shelf price (search)",
+              "protein_g": 18.7,
+              "required_quantity": 1,
+              "sku": "4011"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07475,
+              "eur_per_kg": 11.96,
+              "fat_g": 7.7,
+              "food_type": "vega_gehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 165.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": 1.3156,
+              "promo_text": "shelf price (search)",
+              "protein_g": 17.6,
+              "required_quantity": 1,
+              "sku": "564795"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07,
+              "eur_per_kg": 13.3,
+              "fat_g": 7.7,
+              "food_type": "kipgehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 154.0,
+              "name": "kipgehakt",
+              "price_eur": 1.463,
+              "promo_text": "shelf price (search)",
+              "protein_g": 20.9,
+              "required_quantity": 1,
+              "sku": "436917"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07444444444444445,
+              "eur_per_kg": 15.633333333333336,
+              "fat_g": 5.5,
+              "food_type": "rundergehakt_mager",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 143.0,
+              "name": "mager rundergehakt",
+              "price_eur": 1.719666666666667,
+              "promo_text": "shelf price (search)",
+              "protein_g": 23.1,
+              "required_quantity": 1,
+              "sku": "199715"
+            },
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": 0.06803030303030304,
+              "eur_per_kg": 14.966666666666669,
+              "fat_g": 2.16,
+              "food_type": "kipfilet_rauw",
+              "grams": 120.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 126.0,
+              "name": "kipfilet rauw",
+              "price_eur": 1.7960000000000003,
+              "promo_text": "shelf price (search)",
+              "protein_g": 26.4,
+              "required_quantity": 1,
+              "sku": "533083"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.1738095238095238,
+              "eur_per_kg": 36.5,
+              "fat_g": 5.0,
+              "food_type": "biefstuk",
+              "grams": 125.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 156.25,
+              "name": "biefstuk (rauw)",
+              "price_eur": 4.5625,
+              "promo_text": "shelf price (search)",
+              "protein_g": 26.25,
+              "required_quantity": 1,
+              "sku": "123836"
+            }
+          ],
+          "pasta": [
+            {
+              "carbs_g": 72.0,
+              "eur_per_g_protein": 0.009166666666666668,
+              "eur_per_kg": 1.1,
+              "fat_g": null,
+              "food_type": "pasta_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 360.0,
+              "name": "pasta (droog)",
+              "price_eur": 0.11000000000000001,
+              "promo_text": "voor 0.55",
+              "protein_g": 12.0,
+              "required_quantity": 1,
+              "sku": "600218"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.010615384615384617,
+              "eur_per_kg": 1.38,
+              "fat_g": null,
+              "food_type": "pasta_volkoren_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 340.0,
+              "name": "volkoren pasta (droog)",
+              "price_eur": 0.138,
+              "promo_text": "shelf price (search)",
+              "protein_g": 13.0,
+              "required_quantity": 1,
+              "sku": "58169"
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": 1.8,
+              "eur_per_g_protein": 0.35915915915915914,
+              "eur_per_kg": 16.16216216216216,
+              "fat_g": 18.0,
+              "food_type": "pesto_groen",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 180.0,
+              "name": "groene pesto",
+              "price_eur": 0.6464864864864864,
+              "promo_text": "shelf price (search)",
+              "protein_g": 1.8,
+              "required_quantity": 1,
+              "sku": "519105"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.2884615384615385,
+              "eur_per_kg": 3.4615384615384617,
+              "fat_g": null,
+              "food_type": "tomatenblokjes_blik",
+              "grams": 200.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 50.0,
+              "name": "tomatenblokjes uit blik",
+              "price_eur": 0.6923076923076924,
+              "promo_text": "shelf price (search)",
+              "protein_g": 2.4,
+              "required_quantity": 1,
+              "sku": "378626"
+            },
+            {
+              "carbs_g": 14.4,
+              "eur_per_g_protein": 0.43166666666666664,
+              "eur_per_kg": 6.475,
+              "fat_g": 3.6,
+              "food_type": "pastasaus_tomaat",
+              "grams": 180.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 108.0,
+              "name": "pastasaus tomaat",
+              "price_eur": 1.1655,
+              "promo_text": "shelf price (search)",
+              "protein_g": 2.7,
+              "required_quantity": 1,
+              "sku": "591681"
+            }
+          ]
+        },
+        "wrap": {
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.4125,
+              "eur_per_kg": 4.949999999999999,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.0,
+              "name": "sla",
+              "price_eur": 0.19799999999999998,
+              "promo_text": "voor 0.99",
+              "protein_g": 0.48,
+              "required_quantity": 1,
+              "sku": "129684"
+            },
+            {
+              "carbs_g": 0.72,
+              "eur_per_g_protein": 1.414285714285714,
+              "eur_per_kg": 9.899999999999999,
+              "fat_g": 0.04,
+              "food_type": "ijsbergsla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 5.6,
+              "name": "ijsbergsla",
+              "price_eur": 0.39599999999999996,
+              "promo_text": "shelf price (search)",
+              "protein_g": 0.28,
+              "required_quantity": 1,
+              "sku": "193247"
+            },
+            {
+              "carbs_g": 2.7,
+              "eur_per_g_protein": 0.4152777777777778,
+              "eur_per_kg": 7.4750000000000005,
+              "fat_g": 0.24,
+              "food_type": "gesneden_groente_mix",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 21.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": 0.44850000000000007,
+              "promo_text": "shelf price (search)",
+              "protein_g": 1.08,
+              "required_quantity": 1,
+              "sku": "418283"
+            },
+            {
+              "carbs_g": 0.525,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.175,
+              "food_type": "rucola",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.25,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.65,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.08633333333333333,
+              "eur_per_kg": 17.266666666666666,
+              "fat_g": 1.5,
+              "food_type": "kipfilet_vleeswaren",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 66.0,
+              "name": "kipfilet (vleeswaren)",
+              "price_eur": 1.036,
+              "promo_text": "shelf price (search)",
+              "protein_g": 12.0,
+              "required_quantity": 1,
+              "sku": "543390"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07475,
+              "eur_per_kg": 11.96,
+              "fat_g": 7.0,
+              "food_type": "vega_gehakt",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 150.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": 1.196,
+              "promo_text": "shelf price (search)",
+              "protein_g": 16.0,
+              "required_quantity": 1,
+              "sku": "564795"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07444444444444447,
+              "eur_per_kg": 15.633333333333336,
+              "fat_g": 5.0,
+              "food_type": "rundergehakt_mager",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 130.0,
+              "name": "mager rundergehakt",
+              "price_eur": 1.5633333333333337,
+              "promo_text": "shelf price (search)",
+              "protein_g": 21.0,
+              "required_quantity": 1,
+              "sku": "199715"
+            },
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": 0.06803030303030304,
+              "eur_per_kg": 14.966666666666669,
+              "fat_g": 1.98,
+              "food_type": "kipfilet_rauw",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 115.5,
+              "name": "kipfilet rauw",
+              "price_eur": 1.6463333333333334,
+              "promo_text": "shelf price (search)",
+              "protein_g": 24.2,
+              "required_quantity": 1,
+              "sku": "533083"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.17380952380952377,
+              "eur_per_kg": 36.5,
+              "fat_g": 4.4,
+              "food_type": "biefstuk",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 137.5,
+              "name": "biefstuk (rauw)",
+              "price_eur": 4.015,
+              "promo_text": "shelf price (search)",
+              "protein_g": 23.1,
+              "required_quantity": 1,
+              "sku": "123836"
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": 4.6,
+              "eur_per_g_protein": 0.9605263157894737,
+              "eur_per_kg": 11.526315789473683,
+              "fat_g": 0.02,
+              "food_type": "ketchup",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 20.0,
+              "name": "tomatenketchup",
+              "price_eur": 0.23052631578947366,
+              "promo_text": "shelf price (search)",
+              "protein_g": 0.24,
+              "required_quantity": 1,
+              "sku": "602500"
+            },
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": 0.8300000000000001,
+              "eur_per_kg": 12.450000000000001,
+              "fat_g": 6.0,
+              "food_type": "knoflooksaus",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "knoflooksaus",
+              "price_eur": 0.24900000000000003,
+              "promo_text": "shelf price (search)",
+              "protein_g": 0.3,
+              "required_quantity": 1,
+              "sku": "613095"
+            },
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": 0.0758,
+              "eur_per_kg": 9.475000000000001,
+              "fat_g": 1.6,
+              "food_type": "huttenkase",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 39.2,
+              "name": "hüttenkäse",
+              "price_eur": 0.37900000000000006,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.0,
+              "required_quantity": 1,
+              "sku": "67552"
+            },
+            {
+              "carbs_g": 1.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 2.7,
+              "food_type": "yoghurtsaus_knoflook",
+              "grams": 30.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 36.0,
+              "name": "yoghurt-knoflooksaus",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.9,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "wrap": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.061247723132969036,
+              "eur_per_kg": 5.5122950819672125,
+              "fat_g": null,
+              "food_type": "wrap_tortilla",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "wrap / tortilla",
+              "price_eur": 0.3417622950819672,
+              "promo_text": "50% korting",
+              "protein_g": 5.58,
+              "required_quantity": 1,
+              "sku": "611882"
+            },
+            {
+              "carbs_g": 27.9,
+              "eur_per_g_protein": 0.10034722222222224,
+              "eur_per_kg": 9.031250000000002,
+              "fat_g": 4.34,
+              "food_type": "wrap_volkoren",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "volkoren wrap",
+              "price_eur": 0.5599375000000001,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.58,
+              "required_quantity": 1,
+              "sku": "449861"
+            },
+            {
+              "carbs_g": 15.5,
+              "eur_per_g_protein": 0.05050632911392405,
+              "eur_per_kg": 10.10126582278481,
+              "fat_g": 4.96,
+              "food_type": "wrap_proteine",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 173.6,
+              "name": "proteine wrap",
+              "price_eur": 0.6262784810126583,
+              "promo_text": "shelf price (search)",
+              "protein_g": 12.4,
+              "required_quantity": 1,
+              "sku": "582862"
+            }
+          ]
+        }
+      }
     },
     "aldi": {
       "archetypes": [
@@ -12327,12 +13663,12 @@
               ]
             }
           ],
-          "key": "chocolade_proteine_pudding",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "chocolade_proteine_pudding",
+          "meal_kind": "snack",
           "name": "Chocolade proteine pudding",
           "optimised": null,
           "ready_made": null,
@@ -12393,12 +13729,12 @@
               ]
             }
           ],
-          "key": "huttenkase_spread",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "lunch",
             "snack"
           ],
+          "key": "huttenkase_spread",
+          "meal_kind": "snack",
           "name": "Huttenkase spread",
           "optimised": null,
           "ready_made": null,
@@ -12469,11 +13805,11 @@
               ]
             }
           ],
-          "key": "kip_wrap_lunch",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "lunch"
           ],
+          "key": "kip_wrap_lunch",
+          "meal_kind": "meal",
           "name": "Kip-wrap lunch",
           "optimised": null,
           "ready_made": null,
@@ -12544,11 +13880,11 @@
               ]
             }
           ],
-          "key": "overnight_oats",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "breakfast"
           ],
+          "key": "overnight_oats",
+          "meal_kind": "meal",
           "name": "Overnight oats",
           "optimised": {
             "reason": "no combination of these ingredients reaches 20 g protein without breaking the meal kcal/carb/fat floor",
@@ -12611,12 +13947,12 @@
               ]
             }
           ],
-          "key": "proteine_drinkyoghurt",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "proteine_drinkyoghurt",
+          "meal_kind": "drink",
           "name": "Proteine drinkyoghurt",
           "optimised": null,
           "ready_made": {
@@ -12688,11 +14024,11 @@
               ]
             }
           ],
-          "key": "proteine_reep",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "snack"
           ],
+          "key": "proteine_reep",
+          "meal_kind": "snack",
           "name": "Proteine reep",
           "optimised": null,
           "ready_made": null,
@@ -12778,13 +14114,13 @@
               ]
             }
           ],
-          "key": "proteine_shake",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack",
             "post_workout"
           ],
+          "key": "proteine_shake",
+          "meal_kind": "drink",
           "name": "Proteine shake",
           "optimised": null,
           "ready_made": null,
@@ -12836,12 +14172,12 @@
               ]
             }
           ],
-          "key": "skyr_met_fruit",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "skyr_met_fruit",
+          "meal_kind": "snack",
           "name": "Skyr met fruit",
           "optimised": null,
           "ready_made": null,
@@ -13624,7 +14960,575 @@
           "valid_to": "2026-09-17",
           "waste_adjusted_eur_per_100g_protein": null
         }
-      ]
+      ],
+      "template_prices": {
+        "pasta": {
+          "cheese": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.75,
+              "food_type": "kaas_geraspt_30",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 72.5,
+              "name": "geraspte kaas 30+",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 7.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.2,
+              "food_type": "parmezaanse_kaas",
+              "grams": 15.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "Parmezaanse kaas",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 5.25,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 9.0,
+              "name": "sla",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.72,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 0.84,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.28,
+              "food_type": "rucola",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 10.0,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.04,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 4.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.4,
+              "food_type": "gesneden_groente_mix",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 35.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.8,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 2.16,
+              "food_type": "kipfilet_rauw",
+              "grams": 120.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 126.0,
+              "name": "kipfilet rauw",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 26.4,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 7.7,
+              "food_type": "kipgehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 154.0,
+              "name": "kipgehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 20.9,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.5,
+              "food_type": "rundergehakt_mager",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 143.0,
+              "name": "mager rundergehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 23.1,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 22.0,
+              "food_type": "rundergehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 275.0,
+              "name": "rundergehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 18.7,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 7.7,
+              "food_type": "vega_gehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 165.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 17.6,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.0,
+              "food_type": "biefstuk",
+              "grams": 125.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 156.25,
+              "name": "biefstuk (rauw)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 26.25,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "pasta": [
+            {
+              "carbs_g": 72.0,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": null,
+              "food_type": "pasta_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 360.0,
+              "name": "pasta (droog)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 12.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": null,
+              "food_type": "pasta_volkoren_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 340.0,
+              "name": "volkoren pasta (droog)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 13.0,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": null,
+              "food_type": "tomatenblokjes_blik",
+              "grams": 200.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 50.0,
+              "name": "tomatenblokjes uit blik",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 2.4,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 1.8,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 18.0,
+              "food_type": "pesto_groen",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 180.0,
+              "name": "groene pesto",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.8,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 14.4,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 3.6,
+              "food_type": "pastasaus_tomaat",
+              "grams": 180.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 108.0,
+              "name": "pastasaus tomaat",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 2.7,
+              "required_quantity": null,
+              "sku": null
+            }
+          ]
+        },
+        "wrap": {
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.0,
+              "name": "sla",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.48,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 0.525,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.175,
+              "food_type": "rucola",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.25,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.65,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 0.72,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.04,
+              "food_type": "ijsbergsla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 5.6,
+              "name": "ijsbergsla",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.28,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 2.7,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.24,
+              "food_type": "gesneden_groente_mix",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 21.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.08,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 1.98,
+              "food_type": "kipfilet_rauw",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 115.5,
+              "name": "kipfilet rauw",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 24.2,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.0,
+              "food_type": "rundergehakt_mager",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 130.0,
+              "name": "mager rundergehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 21.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 1.5,
+              "food_type": "kipfilet_vleeswaren",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 66.0,
+              "name": "kipfilet (vleeswaren)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 12.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 7.0,
+              "food_type": "vega_gehakt",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 150.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 16.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.4,
+              "food_type": "biefstuk",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 137.5,
+              "name": "biefstuk (rauw)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 23.1,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 1.6,
+              "food_type": "huttenkase",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 39.2,
+              "name": "hüttenkäse",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 5.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 4.6,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.02,
+              "food_type": "ketchup",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 20.0,
+              "name": "tomatenketchup",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.24,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 6.0,
+              "food_type": "knoflooksaus",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "knoflooksaus",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.3,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 1.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 2.7,
+              "food_type": "yoghurtsaus_knoflook",
+              "grams": 30.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 36.0,
+              "name": "yoghurt-knoflooksaus",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.9,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "wrap": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.06462962962962963,
+              "eur_per_kg": 5.816666666666667,
+              "fat_g": null,
+              "food_type": "wrap_tortilla",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "wrap / tortilla",
+              "price_eur": 0.36063333333333336,
+              "promo_text": "elke dag lage prijs",
+              "protein_g": 5.58,
+              "required_quantity": 1,
+              "sku": "1234083"
+            },
+            {
+              "carbs_g": 27.9,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.34,
+              "food_type": "wrap_volkoren",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "volkoren wrap",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 5.58,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 15.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.96,
+              "food_type": "wrap_proteine",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 173.6,
+              "name": "proteine wrap",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 12.4,
+              "required_quantity": null,
+              "sku": null
+            }
+          ]
+        }
+      }
     },
     "jumbo": {
       "archetypes": [
@@ -13673,12 +15577,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "chocolade_proteine_pudding",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "chocolade_proteine_pudding",
+          "meal_kind": "snack",
           "name": "Chocolade proteine pudding",
           "optimised": {
             "reason": "the cheapest solve is essentially one ingredient (100% of the mass) - not a plausible meal",
@@ -13750,12 +15654,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "huttenkase_spread",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "lunch",
             "snack"
           ],
+          "key": "huttenkase_spread",
+          "meal_kind": "snack",
           "name": "Huttenkase spread",
           "optimised": {
             "reason": "the cheapest solve is essentially one ingredient (100% of the mass) - not a plausible meal",
@@ -13825,11 +15729,11 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "kip_wrap_lunch",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "lunch"
           ],
+          "key": "kip_wrap_lunch",
+          "meal_kind": "meal",
           "name": "Kip-wrap lunch",
           "optimised": {
             "reason": "no combination of these ingredients reaches 30 g protein without breaking the meal kcal/carb/fat floor",
@@ -13901,11 +15805,11 @@
               ]
             }
           ],
-          "key": "overnight_oats",
-          "meal_kind": "meal",
-          "meal_slots": [
+          "day_parts": [
             "breakfast"
           ],
+          "key": "overnight_oats",
+          "meal_kind": "meal",
           "name": "Overnight oats",
           "optimised": {
             "carbs_g": 19.99999974,
@@ -13999,12 +15903,12 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_drinkyoghurt",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "proteine_drinkyoghurt",
+          "meal_kind": "drink",
           "name": "Proteine drinkyoghurt",
           "optimised": {
             "carbs_g": 10.0,
@@ -14091,11 +15995,11 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_reep",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "snack"
           ],
+          "key": "proteine_reep",
+          "meal_kind": "snack",
           "name": "Proteine reep",
           "optimised": {
             "carbs_g": 9.999999819999998,
@@ -14215,13 +16119,13 @@
               "unpriced_food_types": []
             }
           ],
-          "key": "proteine_shake",
-          "meal_kind": "drink",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack",
             "post_workout"
           ],
+          "key": "proteine_shake",
+          "meal_kind": "drink",
           "name": "Proteine shake",
           "optimised": {
             "carbs_g": 12.5,
@@ -14301,12 +16205,12 @@
               ]
             }
           ],
-          "key": "skyr_met_fruit",
-          "meal_kind": "snack",
-          "meal_slots": [
+          "day_parts": [
             "breakfast",
             "snack"
           ],
+          "key": "skyr_met_fruit",
+          "meal_kind": "snack",
           "name": "Skyr met fruit",
           "optimised": null,
           "ready_made": {
@@ -23740,9 +25644,3251 @@
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 21.718749999999996
         }
-      ]
+      ],
+      "template_prices": {
+        "pasta": {
+          "cheese": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.039,
+              "eur_per_kg": 10.92,
+              "fat_g": 4.75,
+              "food_type": "kaas_geraspt_30",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 72.5,
+              "name": "geraspte kaas 30+",
+              "price_eur": 0.273,
+              "promo_text": "shelf price (search)",
+              "protein_g": 7.0,
+              "required_quantity": 1,
+              "sku": "746538DS"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07977142857142858,
+              "eur_per_kg": 27.92,
+              "fat_g": 4.2,
+              "food_type": "parmezaanse_kaas",
+              "grams": 15.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "Parmezaanse kaas",
+              "price_eur": 0.4188,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.25,
+              "required_quantity": 1,
+              "sku": "492902ZK"
+            }
+          ],
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.4145833333333334,
+              "eur_per_kg": 4.9750000000000005,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 9.0,
+              "name": "sla",
+              "price_eur": 0.29850000000000004,
+              "promo_text": "shelf price (search)",
+              "protein_g": 0.72,
+              "required_quantity": 1,
+              "sku": "212589ZK"
+            },
+            {
+              "carbs_g": 0.84,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.28,
+              "food_type": "rucola",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 10.0,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.04,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 4.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.4,
+              "food_type": "gesneden_groente_mix",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 35.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.8,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.029352941176470585,
+              "eur_per_kg": 4.99,
+              "fat_g": 22.0,
+              "food_type": "rundergehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 275.0,
+              "name": "rundergehakt",
+              "price_eur": 0.5488999999999999,
+              "promo_text": "voor 4,99",
+              "protein_g": 18.7,
+              "required_quantity": 1,
+              "sku": "649263TRA"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.04515625,
+              "eur_per_kg": 7.2250000000000005,
+              "fat_g": 7.7,
+              "food_type": "vega_gehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 165.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": 0.7947500000000001,
+              "promo_text": "shelf price (search)",
+              "protein_g": 17.6,
+              "required_quantity": 1,
+              "sku": "716783BAK"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.06831578947368422,
+              "eur_per_kg": 12.98,
+              "fat_g": 7.7,
+              "food_type": "kipgehakt",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 154.0,
+              "name": "kipgehakt",
+              "price_eur": 1.4278,
+              "promo_text": "shelf price (search)",
+              "protein_g": 20.9,
+              "required_quantity": 1,
+              "sku": "624545BAK"
+            },
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": 0.11784511784511784,
+              "eur_per_kg": 25.925925925925924,
+              "fat_g": 2.16,
+              "food_type": "kipfilet_rauw",
+              "grams": 120.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 126.0,
+              "name": "kipfilet rauw",
+              "price_eur": 3.1111111111111107,
+              "promo_text": "shelf price (search)",
+              "protein_g": 26.4,
+              "required_quantity": 1,
+              "sku": "640583KGR"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.5,
+              "food_type": "rundergehakt_mager",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 143.0,
+              "name": "mager rundergehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 23.1,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.0,
+              "food_type": "biefstuk",
+              "grams": 125.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 156.25,
+              "name": "biefstuk (rauw)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 26.25,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "pasta": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.027538461538461536,
+              "eur_per_kg": 3.58,
+              "fat_g": null,
+              "food_type": "pasta_volkoren_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 340.0,
+              "name": "volkoren pasta (droog)",
+              "price_eur": 0.358,
+              "promo_text": "shelf price (search)",
+              "protein_g": 13.0,
+              "required_quantity": 1,
+              "sku": "718002ZK"
+            },
+            {
+              "carbs_g": 72.0,
+              "eur_per_g_protein": 0.03937499999999999,
+              "eur_per_kg": 4.725,
+              "fat_g": null,
+              "food_type": "pasta_droog",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 360.0,
+              "name": "pasta (droog)",
+              "price_eur": 0.4724999999999999,
+              "promo_text": "shelf price (search)",
+              "protein_g": 12.0,
+              "required_quantity": 1,
+              "sku": "600162POT"
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.0875,
+              "eur_per_kg": 1.05,
+              "fat_g": null,
+              "food_type": "tomatenblokjes_blik",
+              "grams": 200.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 50.0,
+              "name": "tomatenblokjes uit blik",
+              "price_eur": 0.21,
+              "promo_text": "shelf price (search)",
+              "protein_g": 2.4,
+              "required_quantity": 1,
+              "sku": "218376DS"
+            },
+            {
+              "carbs_g": 1.8,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 18.0,
+              "food_type": "pesto_groen",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 180.0,
+              "name": "groene pesto",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.8,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 14.4,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 3.6,
+              "food_type": "pastasaus_tomaat",
+              "grams": 180.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 108.0,
+              "name": "pastasaus tomaat",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 2.7,
+              "required_quantity": null,
+              "sku": null
+            }
+          ]
+        },
+        "wrap": {
+          "greens": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.4145833333333334,
+              "eur_per_kg": 4.9750000000000005,
+              "fat_g": null,
+              "food_type": "sla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.0,
+              "name": "sla",
+              "price_eur": 0.19900000000000004,
+              "promo_text": "shelf price (search)",
+              "protein_g": 0.48,
+              "required_quantity": 1,
+              "sku": "212589ZK"
+            },
+            {
+              "carbs_g": 0.525,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.175,
+              "food_type": "rucola",
+              "grams": 25.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 6.25,
+              "name": "rucola",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.65,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 0.72,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.04,
+              "food_type": "ijsbergsla",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 5.6,
+              "name": "ijsbergsla",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.28,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 2.7,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.24,
+              "food_type": "gesneden_groente_mix",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 21.0,
+              "name": "gesneden groentemix (zak)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 1.08,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "meat": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.04515625,
+              "eur_per_kg": 7.2250000000000005,
+              "fat_g": 7.0,
+              "food_type": "vega_gehakt",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 150.0,
+              "name": "vegetarisch gehakt",
+              "price_eur": 0.7225,
+              "promo_text": "shelf price (search)",
+              "protein_g": 16.0,
+              "required_quantity": 1,
+              "sku": "716783BAK"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.07179999999999999,
+              "eur_per_kg": 14.36,
+              "fat_g": 1.5,
+              "food_type": "kipfilet_vleeswaren",
+              "grams": 60.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 66.0,
+              "name": "kipfilet (vleeswaren)",
+              "price_eur": 0.8615999999999999,
+              "promo_text": "shelf price (search)",
+              "protein_g": 12.0,
+              "required_quantity": 1,
+              "sku": "656958STK"
+            },
+            {
+              "carbs_g": 0.0,
+              "eur_per_g_protein": 0.11784511784511784,
+              "eur_per_kg": 25.925925925925924,
+              "fat_g": 1.98,
+              "food_type": "kipfilet_rauw",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 115.5,
+              "name": "kipfilet rauw",
+              "price_eur": 2.8518518518518516,
+              "promo_text": "shelf price (search)",
+              "protein_g": 24.2,
+              "required_quantity": 1,
+              "sku": "640583KGR"
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 5.0,
+              "food_type": "rundergehakt_mager",
+              "grams": 100.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 130.0,
+              "name": "mager rundergehakt",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 21.0,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.4,
+              "food_type": "biefstuk",
+              "grams": 110.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 137.5,
+              "name": "biefstuk (rauw)",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 23.1,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "sauce": [
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": 0.07960000000000002,
+              "eur_per_kg": 9.950000000000001,
+              "fat_g": 1.6,
+              "food_type": "huttenkase",
+              "grams": 40.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 39.2,
+              "name": "hüttenkäse",
+              "price_eur": 0.3980000000000001,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.0,
+              "required_quantity": 1,
+              "sku": "789380STK"
+            },
+            {
+              "carbs_g": 4.6,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 0.02,
+              "food_type": "ketchup",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 20.0,
+              "name": "tomatenketchup",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.24,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 1.2,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 6.0,
+              "food_type": "knoflooksaus",
+              "grams": 20.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 60.0,
+              "name": "knoflooksaus",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.3,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 1.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 2.7,
+              "food_type": "yoghurtsaus_knoflook",
+              "grams": 30.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 36.0,
+              "name": "yoghurt-knoflooksaus",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 0.9,
+              "required_quantity": null,
+              "sku": null
+            }
+          ],
+          "wrap": [
+            {
+              "carbs_g": null,
+              "eur_per_g_protein": 0.02128136200716846,
+              "eur_per_kg": 1.9153225806451613,
+              "fat_g": null,
+              "food_type": "wrap_tortilla",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "wrap / tortilla",
+              "price_eur": 0.11875,
+              "promo_text": "shelf price (search)",
+              "protein_g": 5.58,
+              "required_quantity": 1,
+              "sku": "356627PAK"
+            },
+            {
+              "carbs_g": 27.9,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.34,
+              "food_type": "wrap_volkoren",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 186.0,
+              "name": "volkoren wrap",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 5.58,
+              "required_quantity": null,
+              "sku": null
+            },
+            {
+              "carbs_g": 15.5,
+              "eur_per_g_protein": null,
+              "eur_per_kg": null,
+              "fat_g": 4.96,
+              "food_type": "wrap_proteine",
+              "grams": 62.0,
+              "is_pantry": false,
+              "is_personal_offer": false,
+              "kcal": 173.6,
+              "name": "proteine wrap",
+              "price_eur": null,
+              "promo_text": null,
+              "protein_g": 12.4,
+              "required_quantity": null,
+              "sku": null
+            }
+          ]
+        }
+      }
     }
   },
-  "generated_at": "2026-09-17T13:58:44+00:00",
-  "schema_version": 1
+  "food_types": [
+    {
+      "g_per_unit": null,
+      "key": "aardappelen",
+      "macros_per_100g": {
+        "carbs_g": 17.0,
+        "fat_g": null,
+        "kcal": 77.0,
+        "protein_g": 2.0
+      },
+      "meal_kind": "ingredient",
+      "name": "aardappelen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "aardbeien",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 32.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "snack",
+      "name": "aardbeien"
+    },
+    {
+      "g_per_unit": null,
+      "key": "achterham",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 3.0,
+        "kcal": 105.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "achterham"
+    },
+    {
+      "g_per_unit": null,
+      "key": "amandeldrink_ongezoet",
+      "macros_per_100g": {
+        "carbs_g": 0.1,
+        "fat_g": 1.1,
+        "kcal": 13.0,
+        "protein_g": 0.5
+      },
+      "meal_kind": "drink",
+      "name": "amandeldrink ongezoet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "amandelen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 50.0,
+        "kcal": 580.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "snack",
+      "name": "amandelen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "amandelpasta",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 55.0,
+        "kcal": 615.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "amandelpasta"
+    },
+    {
+      "g_per_unit": null,
+      "key": "ananas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 50.0,
+        "protein_g": 0.5
+      },
+      "meal_kind": "snack",
+      "name": "ananas"
+    },
+    {
+      "g_per_unit": null,
+      "key": "andijvie",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 20.0,
+        "protein_g": 1.8
+      },
+      "meal_kind": "ingredient",
+      "name": "andijvie"
+    },
+    {
+      "g_per_unit": 150.0,
+      "key": "appel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 52.0,
+        "protein_g": 0.3
+      },
+      "meal_kind": "snack",
+      "name": "appel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "aubergine",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 25.0,
+        "protein_g": 1.0
+      },
+      "meal_kind": "ingredient",
+      "name": "aubergine"
+    },
+    {
+      "g_per_unit": null,
+      "key": "augurken",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 15.0,
+        "protein_g": 0.6
+      },
+      "meal_kind": "ingredient",
+      "name": "augurken"
+    },
+    {
+      "g_per_unit": 200.0,
+      "key": "avocado",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 15.0,
+        "kcal": 160.0,
+        "protein_g": 2.0
+      },
+      "meal_kind": "ingredient",
+      "name": "avocado"
+    },
+    {
+      "g_per_unit": null,
+      "key": "bacon",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 26.0,
+        "kcal": 300.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "ingredient",
+      "name": "bacon"
+    },
+    {
+      "g_per_unit": 120.0,
+      "key": "banaan",
+      "macros_per_100g": {
+        "carbs_g": 20.0,
+        "fat_g": null,
+        "kcal": 89.0,
+        "protein_g": 1.1
+      },
+      "meal_kind": "snack",
+      "name": "banaan"
+    },
+    {
+      "g_per_unit": 10.0,
+      "key": "beschuit",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 390.0,
+        "protein_g": 10.0
+      },
+      "meal_kind": "snack",
+      "name": "beschuit"
+    },
+    {
+      "g_per_unit": null,
+      "key": "biefstuk",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 4.0,
+        "kcal": 125.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "biefstuk (rauw)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "blauwaderkaas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 29.0,
+        "kcal": 350.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "blauwaderkaas"
+    },
+    {
+      "g_per_unit": null,
+      "key": "blauwe_bessen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 57.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "snack",
+      "name": "blauwe bessen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "bloemkool",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 28.0,
+        "protein_g": 2.3
+      },
+      "meal_kind": "ingredient",
+      "name": "bloemkool"
+    },
+    {
+      "g_per_unit": null,
+      "key": "boerenkool",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 45.0,
+        "protein_g": 3.3
+      },
+      "meal_kind": "ingredient",
+      "name": "boerenkool"
+    },
+    {
+      "g_per_unit": null,
+      "key": "boter",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 82.0,
+        "kcal": 740.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "ingredient",
+      "name": "roomboter"
+    },
+    {
+      "g_per_unit": null,
+      "key": "brie",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 27.0,
+        "kcal": 330.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "brie"
+    },
+    {
+      "g_per_unit": null,
+      "key": "broccoli",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": null,
+        "kcal": 34.0,
+        "protein_g": 3.0
+      },
+      "meal_kind": "ingredient",
+      "name": "broccoli"
+    },
+    {
+      "g_per_unit": 35.0,
+      "key": "brood_volkoren",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 230.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "volkorenbrood"
+    },
+    {
+      "g_per_unit": 35.0,
+      "key": "brood_wit",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 250.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "witbrood"
+    },
+    {
+      "g_per_unit": 70.0,
+      "key": "broodje_bruin",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 240.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "bruine broodjes"
+    },
+    {
+      "g_per_unit": null,
+      "key": "bruine_bonen_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 110.0,
+        "protein_g": 6.0
+      },
+      "meal_kind": "ingredient",
+      "name": "bruine bonen uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "bulgur_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 350.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "bulgur (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "cacaopoeder",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 350.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "cacaopoeder"
+    },
+    {
+      "g_per_unit": null,
+      "key": "caseine_poeder",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 370.0,
+        "protein_g": 75.0
+      },
+      "meal_kind": "ingredient",
+      "name": "caseïne proteïnepoeder"
+    },
+    {
+      "g_per_unit": null,
+      "key": "cashewnoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 44.0,
+        "kcal": 550.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "snack",
+      "name": "cashewnoten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "champignons",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 22.0,
+        "protein_g": 2.5
+      },
+      "meal_kind": "ingredient",
+      "name": "champignons"
+    },
+    {
+      "g_per_unit": null,
+      "key": "chiazaad",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 480.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "chiazaad"
+    },
+    {
+      "g_per_unit": null,
+      "key": "cornflakes",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 380.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "snack",
+      "name": "cornflakes"
+    },
+    {
+      "g_per_unit": null,
+      "key": "courgette",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 19.0,
+        "protein_g": 1.6
+      },
+      "meal_kind": "ingredient",
+      "name": "courgette"
+    },
+    {
+      "g_per_unit": null,
+      "key": "couscous_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 360.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "couscous (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "crackers_volkoren",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 380.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "snack",
+      "name": "volkoren crackers"
+    },
+    {
+      "g_per_unit": null,
+      "key": "creme_fraiche",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 30.0,
+        "kcal": 300.0,
+        "protein_g": 2.4
+      },
+      "meal_kind": "ingredient",
+      "name": "creme fraiche"
+    },
+    {
+      "g_per_unit": null,
+      "key": "diepvriesfruit",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 50.0,
+        "protein_g": 0.8
+      },
+      "meal_kind": "ingredient",
+      "name": "diepvriesfruit"
+    },
+    {
+      "g_per_unit": null,
+      "key": "doperwten_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 70.0,
+        "protein_g": 5.0
+      },
+      "meal_kind": "ingredient",
+      "name": "doperwten uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "druiven",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 69.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "snack",
+      "name": "druiven"
+    },
+    {
+      "g_per_unit": null,
+      "key": "edamame",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 120.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "snack",
+      "name": "edamame (sojabonen)"
+    },
+    {
+      "g_per_unit": 58.0,
+      "key": "ei_gekookt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 143.0,
+        "protein_g": 12.6
+      },
+      "meal_kind": "snack",
+      "name": "gekookt ei"
+    },
+    {
+      "g_per_unit": 58.0,
+      "key": "ei_rauw",
+      "macros_per_100g": {
+        "carbs_g": 0.7,
+        "fat_g": 9.9,
+        "kcal": 143.0,
+        "protein_g": 12.6
+      },
+      "meal_kind": "ingredient",
+      "name": "ei (rauw, heel)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "eiwit_vloeibaar",
+      "macros_per_100g": {
+        "carbs_g": 0.7,
+        "fat_g": 0.2,
+        "kcal": 52.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vloeibaar eiwit"
+    },
+    {
+      "g_per_unit": null,
+      "key": "eiwitshake_kant_en_klaar",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 50.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "drink",
+      "name": "kant-en-klare eiwitshake"
+    },
+    {
+      "g_per_unit": null,
+      "key": "falafel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 15.0,
+        "kcal": 250.0,
+        "protein_g": 13.0
+      },
+      "meal_kind": "ingredient",
+      "name": "falafel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "feta",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 21.0,
+        "kcal": 260.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "ingredient",
+      "name": "feta"
+    },
+    {
+      "g_per_unit": null,
+      "key": "forel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 6.0,
+        "kcal": 140.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "forel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "frambozen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 52.0,
+        "protein_g": 1.2
+      },
+      "meal_kind": "snack",
+      "name": "frambozen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "fricandeau",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 3.0,
+        "kcal": 115.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "fricandeau"
+    },
+    {
+      "g_per_unit": null,
+      "key": "friet_diepvries",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 5.0,
+        "kcal": 160.0,
+        "protein_g": 3.0
+      },
+      "meal_kind": "ingredient",
+      "name": "diepvriesfriet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "garnalen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 1.0,
+        "kcal": 85.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "garnalen"
+    },
+    {
+      "g_per_unit": 100.0,
+      "key": "gehaktbal",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 250.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "ingredient",
+      "name": "gehaktbal"
+    },
+    {
+      "g_per_unit": null,
+      "key": "geitenkaas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 24.0,
+        "kcal": 300.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "geitenkaas"
+    },
+    {
+      "g_per_unit": null,
+      "key": "gesneden_groente_mix",
+      "macros_per_100g": {
+        "carbs_g": 4.5,
+        "fat_g": 0.4,
+        "kcal": 35.0,
+        "protein_g": 1.8
+      },
+      "meal_kind": "ingredient",
+      "name": "gesneden groentemix (zak)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "griekse_yoghurt_0",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": 0.2,
+        "kcal": 57.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "snack",
+      "name": "Griekse yoghurt 0%"
+    },
+    {
+      "g_per_unit": null,
+      "key": "griekse_yoghurt_vol",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": 10.0,
+        "kcal": 120.0,
+        "protein_g": 4.5
+      },
+      "meal_kind": "snack",
+      "name": "Griekse yoghurt vol"
+    },
+    {
+      "g_per_unit": null,
+      "key": "haring",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 14.0,
+        "kcal": 200.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "haring"
+    },
+    {
+      "g_per_unit": null,
+      "key": "haverdrink",
+      "macros_per_100g": {
+        "carbs_g": 6.6,
+        "fat_g": 1.5,
+        "kcal": 45.0,
+        "protein_g": 1.0
+      },
+      "meal_kind": "drink",
+      "name": "haverdrink"
+    },
+    {
+      "g_per_unit": null,
+      "key": "havermout",
+      "macros_per_100g": {
+        "carbs_g": 58.0,
+        "fat_g": 7.0,
+        "kcal": 370.0,
+        "protein_g": 13.0
+      },
+      "meal_kind": "ingredient",
+      "name": "havermout"
+    },
+    {
+      "g_per_unit": null,
+      "key": "hazelnoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 61.0,
+        "kcal": 630.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "snack",
+      "name": "hazelnoten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "honing",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 320.0,
+        "protein_g": 0.3
+      },
+      "meal_kind": "ingredient",
+      "name": "honing"
+    },
+    {
+      "g_per_unit": null,
+      "key": "hummus",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 19.0,
+        "kcal": 250.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "snack",
+      "name": "hummus"
+    },
+    {
+      "g_per_unit": null,
+      "key": "huttenkase",
+      "macros_per_100g": {
+        "carbs_g": 3.0,
+        "fat_g": 4.0,
+        "kcal": 98.0,
+        "protein_g": 12.5
+      },
+      "meal_kind": "snack",
+      "name": "hüttenkäse"
+    },
+    {
+      "g_per_unit": null,
+      "key": "ijsbergsla",
+      "macros_per_100g": {
+        "carbs_g": 1.8,
+        "fat_g": 0.1,
+        "kcal": 14.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "ingredient",
+      "name": "ijsbergsla"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kaas_belegen_48",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 32.0,
+        "kcal": 390.0,
+        "protein_g": 25.0
+      },
+      "meal_kind": "ingredient",
+      "name": "belegen kaas 48+"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kaas_geraspt_30",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 19.0,
+        "kcal": 290.0,
+        "protein_g": 28.0
+      },
+      "meal_kind": "ingredient",
+      "name": "geraspte kaas 30+"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kaas_jong_30",
+      "macros_per_100g": {
+        "carbs_g": 0.0,
+        "fat_g": 19.0,
+        "kcal": 290.0,
+        "protein_g": 28.0
+      },
+      "meal_kind": "ingredient",
+      "name": "jonge kaas 30+"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kaas_jong_48",
+      "macros_per_100g": {
+        "carbs_g": 0.0,
+        "fat_g": 31.0,
+        "kcal": 380.0,
+        "protein_g": 25.0
+      },
+      "meal_kind": "ingredient",
+      "name": "jonge kaas 48+"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kabeljauw",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 0.7,
+        "kcal": 80.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kabeljauwfilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kalkoenfilet_rauw",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 1.5,
+        "kcal": 105.0,
+        "protein_g": 22.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kalkoenfilet rauw"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kapucijners_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 100.0,
+        "protein_g": 6.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kapucijners uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "karnemelk",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": 0.5,
+        "kcal": 33.0,
+        "protein_g": 3.3
+      },
+      "meal_kind": "drink",
+      "name": "karnemelk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "ketchup",
+      "macros_per_100g": {
+        "carbs_g": 23.0,
+        "fat_g": 0.1,
+        "kcal": 100.0,
+        "protein_g": 1.2
+      },
+      "meal_kind": "ingredient",
+      "name": "tomatenketchup"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kidneybonen_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 115.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kidneybonen uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kikkererwten_blik",
+      "macros_per_100g": {
+        "carbs_g": 15.0,
+        "fat_g": null,
+        "kcal": 120.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kikkererwten uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kikkererwten_droog",
+      "macros_per_100g": {
+        "carbs_g": 50.0,
+        "fat_g": null,
+        "kcal": 350.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kikkererwten gedroogd"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kipdijfilet",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 8.0,
+        "kcal": 145.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kipdijfilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kipfilet_rauw",
+      "macros_per_100g": {
+        "carbs_g": 0.0,
+        "fat_g": 1.8,
+        "kcal": 105.0,
+        "protein_g": 22.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kipfilet rauw"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kipfilet_vleeswaren",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 2.5,
+        "kcal": 110.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kipfilet (vleeswaren)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kipgehakt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 7.0,
+        "kcal": 140.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kipgehakt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kipnuggets",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 14.0,
+        "kcal": 250.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kipnuggets"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kippenpoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 170.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kippenpoten"
+    },
+    {
+      "g_per_unit": 90.0,
+      "key": "kiwi",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 61.0,
+        "protein_g": 1.1
+      },
+      "meal_kind": "snack",
+      "name": "kiwi"
+    },
+    {
+      "g_per_unit": null,
+      "key": "knakworst",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 24.0,
+        "kcal": 270.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "ingredient",
+      "name": "knakworst"
+    },
+    {
+      "g_per_unit": null,
+      "key": "knoflook",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 149.0,
+        "protein_g": 6.4
+      },
+      "meal_kind": "ingredient",
+      "name": "knoflook"
+    },
+    {
+      "g_per_unit": null,
+      "key": "knoflooksaus",
+      "macros_per_100g": {
+        "carbs_g": 6.0,
+        "fat_g": 30.0,
+        "kcal": 300.0,
+        "protein_g": 1.5
+      },
+      "meal_kind": "ingredient",
+      "name": "knoflooksaus"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kokosmelk",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 19.0,
+        "kcal": 190.0,
+        "protein_g": 2.0
+      },
+      "meal_kind": "ingredient",
+      "name": "kokosmelk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "komkommer",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 14.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "ingredient",
+      "name": "komkommer"
+    },
+    {
+      "g_per_unit": null,
+      "key": "koolvis",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 0.9,
+        "kcal": 80.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "koolvisfilet"
+    },
+    {
+      "g_per_unit": 70.0,
+      "key": "krentenbol",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 280.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "snack",
+      "name": "krentenbollen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kruiden_gedroogd",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 265.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "gedroogde kruiden"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kwark_halfvol",
+      "macros_per_100g": {
+        "carbs_g": 3.8,
+        "fat_g": 2.5,
+        "kcal": 65.0,
+        "protein_g": 7.5
+      },
+      "meal_kind": "snack",
+      "name": "halfvolle kwark"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kwark_mager",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": 0.3,
+        "kcal": 47.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "snack",
+      "name": "magere kwark"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kwark_mager_fruit",
+      "macros_per_100g": {
+        "carbs_g": 11.0,
+        "fat_g": 0.3,
+        "kcal": 75.0,
+        "protein_g": 6.0
+      },
+      "meal_kind": "snack",
+      "name": "magere kwark met fruit"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kwark_plantaardig",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 68.0,
+        "protein_g": 6.0
+      },
+      "meal_kind": "snack",
+      "name": "plantaardige variatie op kwark"
+    },
+    {
+      "g_per_unit": null,
+      "key": "kwark_vol",
+      "macros_per_100g": {
+        "carbs_g": 3.5,
+        "fat_g": 6.0,
+        "kcal": 92.0,
+        "protein_g": 6.5
+      },
+      "meal_kind": "snack",
+      "name": "volle kwark"
+    },
+    {
+      "g_per_unit": null,
+      "key": "leverworst",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 28.0,
+        "kcal": 320.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "ingredient",
+      "name": "leverworst"
+    },
+    {
+      "g_per_unit": null,
+      "key": "lijnzaad",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 530.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "lijnzaad"
+    },
+    {
+      "g_per_unit": null,
+      "key": "linzen_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 110.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "ingredient",
+      "name": "linzen uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "linzen_droog",
+      "macros_per_100g": {
+        "carbs_g": 50.0,
+        "fat_g": null,
+        "kcal": 340.0,
+        "protein_g": 24.0
+      },
+      "meal_kind": "ingredient",
+      "name": "linzen gedroogd"
+    },
+    {
+      "g_per_unit": null,
+      "key": "makreel_gerookt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 18.0,
+        "kcal": 250.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "gerookte makreel"
+    },
+    {
+      "g_per_unit": 80.0,
+      "key": "mandarijn",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 53.0,
+        "protein_g": 0.8
+      },
+      "meal_kind": "snack",
+      "name": "mandarijn"
+    },
+    {
+      "g_per_unit": 300.0,
+      "key": "mango",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 60.0,
+        "protein_g": 0.8
+      },
+      "meal_kind": "snack",
+      "name": "mango"
+    },
+    {
+      "g_per_unit": null,
+      "key": "melk_halfvol",
+      "macros_per_100g": {
+        "carbs_g": 4.9,
+        "fat_g": 1.5,
+        "kcal": 46.0,
+        "protein_g": 3.5
+      },
+      "meal_kind": "drink",
+      "name": "halfvolle melk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "melk_mager",
+      "macros_per_100g": {
+        "carbs_g": 4.9,
+        "fat_g": 0.1,
+        "kcal": 33.0,
+        "protein_g": 3.5
+      },
+      "meal_kind": "drink",
+      "name": "magere melk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "melk_vol",
+      "macros_per_100g": {
+        "carbs_g": 4.6,
+        "fat_g": 3.5,
+        "kcal": 64.0,
+        "protein_g": 3.5
+      },
+      "meal_kind": "drink",
+      "name": "volle melk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "melkpoeder_mager",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 355.0,
+        "protein_g": 35.0
+      },
+      "meal_kind": "ingredient",
+      "name": "magere melkpoeder"
+    },
+    {
+      "g_per_unit": null,
+      "key": "mosselen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 70.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "mosselen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "mozzarella",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 19.0,
+        "kcal": 250.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "mozzarella"
+    },
+    {
+      "g_per_unit": null,
+      "key": "muesli",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 360.0,
+        "protein_g": 10.0
+      },
+      "meal_kind": "snack",
+      "name": "muesli"
+    },
+    {
+      "g_per_unit": 90.0,
+      "key": "naanbrood",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 290.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "naanbrood"
+    },
+    {
+      "g_per_unit": null,
+      "key": "noedels_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 355.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "ingredient",
+      "name": "noedels (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "olijfolie",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 91.0,
+        "kcal": 820.0,
+        "protein_g": 0.0
+      },
+      "meal_kind": "ingredient",
+      "name": "olijfolie"
+    },
+    {
+      "g_per_unit": null,
+      "key": "olijven",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 15.0,
+        "kcal": 145.0,
+        "protein_g": 1.0
+      },
+      "meal_kind": "snack",
+      "name": "olijven"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pangasius",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 3.0,
+        "kcal": 90.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "ingredient",
+      "name": "pangasiusfilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "paprika_groente",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 28.0,
+        "protein_g": 1.0
+      },
+      "meal_kind": "ingredient",
+      "name": "paprika"
+    },
+    {
+      "g_per_unit": null,
+      "key": "paranoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 66.0,
+        "kcal": 660.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "snack",
+      "name": "paranoten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "parmezaanse_kaas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 28.0,
+        "kcal": 400.0,
+        "protein_g": 35.0
+      },
+      "meal_kind": "ingredient",
+      "name": "Parmezaanse kaas"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pasta_droog",
+      "macros_per_100g": {
+        "carbs_g": 72.0,
+        "fat_g": null,
+        "kcal": 360.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "pasta (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pasta_volkoren_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 340.0,
+        "protein_g": 13.0
+      },
+      "meal_kind": "ingredient",
+      "name": "volkoren pasta (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pastasaus_tomaat",
+      "macros_per_100g": {
+        "carbs_g": 8.0,
+        "fat_g": 2.0,
+        "kcal": 60.0,
+        "protein_g": 1.5
+      },
+      "meal_kind": "ingredient",
+      "name": "pastasaus tomaat"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pecannoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 72.0,
+        "kcal": 690.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "snack",
+      "name": "pecannoten"
+    },
+    {
+      "g_per_unit": 170.0,
+      "key": "peer",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 57.0,
+        "protein_g": 0.4
+      },
+      "meal_kind": "snack",
+      "name": "peer"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pesto_groen",
+      "macros_per_100g": {
+        "carbs_g": 4.5,
+        "fat_g": 45.0,
+        "kcal": 450.0,
+        "protein_g": 4.5
+      },
+      "meal_kind": "ingredient",
+      "name": "groene pesto"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pindakaas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 50.0,
+        "kcal": 600.0,
+        "protein_g": 25.0
+      },
+      "meal_kind": "ingredient",
+      "name": "pindakaas"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pindas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 49.0,
+        "kcal": 570.0,
+        "protein_g": 26.0
+      },
+      "meal_kind": "snack",
+      "name": "pinda's"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pistachenoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 45.0,
+        "kcal": 560.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "snack",
+      "name": "pistachenoten"
+    },
+    {
+      "g_per_unit": 60.0,
+      "key": "pitabrood",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 275.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "pitabrood"
+    },
+    {
+      "g_per_unit": null,
+      "key": "polenta_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 360.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "polenta (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "pompoenpitten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 49.0,
+        "kcal": 560.0,
+        "protein_g": 30.0
+      },
+      "meal_kind": "ingredient",
+      "name": "pompoenpitten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "prei",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 36.0,
+        "protein_g": 1.5
+      },
+      "meal_kind": "ingredient",
+      "name": "prei"
+    },
+    {
+      "g_per_unit": null,
+      "key": "proteine_drinkyoghurt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 60.0,
+        "protein_g": 10.0
+      },
+      "meal_kind": "drink",
+      "name": "proteïne drinkyoghurt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "proteine_pudding",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 95.0,
+        "protein_g": 10.0
+      },
+      "meal_kind": "snack",
+      "name": "proteïne pudding"
+    },
+    {
+      "g_per_unit": 55.0,
+      "key": "proteine_reep",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 350.0,
+        "protein_g": 30.0
+      },
+      "meal_kind": "snack",
+      "name": "proteïnereep"
+    },
+    {
+      "g_per_unit": null,
+      "key": "quinoa_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 370.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "ingredient",
+      "name": "quinoa (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rijst_wit_droog",
+      "macros_per_100g": {
+        "carbs_g": 78.0,
+        "fat_g": null,
+        "kcal": 355.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "ingredient",
+      "name": "witte rijst (droog)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rijst_zilvervlies_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 350.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zilvervliesrijst (droog)"
+    },
+    {
+      "g_per_unit": 8.0,
+      "key": "rijstwafels",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 380.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "snack",
+      "name": "rijstwafels"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rookworst",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 26.0,
+        "kcal": 290.0,
+        "protein_g": 13.0
+      },
+      "meal_kind": "ingredient",
+      "name": "rookworst"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rosbief_vleeswaren",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 3.0,
+        "kcal": 120.0,
+        "protein_g": 22.0
+      },
+      "meal_kind": "ingredient",
+      "name": "rosbief (vleeswaren)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rucola",
+      "macros_per_100g": {
+        "carbs_g": 2.1,
+        "fat_g": 0.7,
+        "kcal": 25.0,
+        "protein_g": 2.6
+      },
+      "meal_kind": "ingredient",
+      "name": "rucola"
+    },
+    {
+      "g_per_unit": null,
+      "key": "runderbiefstuk_mager",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 4.0,
+        "kcal": 125.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "magere runderbiefstuk"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rundergehakt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 20.0,
+        "kcal": 250.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "rundergehakt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "rundergehakt_mager",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 5.0,
+        "kcal": 130.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "mager rundergehakt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "salami",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 33.0,
+        "kcal": 400.0,
+        "protein_g": 22.0
+      },
+      "meal_kind": "ingredient",
+      "name": "salami"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sardines_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 15.0,
+        "kcal": 220.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "sardines in olie (blik)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "schol",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 85.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "scholfilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "seitan",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 2.0,
+        "kcal": 140.0,
+        "protein_g": 25.0
+      },
+      "meal_kind": "ingredient",
+      "name": "seitan"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sesamzaad",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 50.0,
+        "kcal": 570.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "sesamzaad"
+    },
+    {
+      "g_per_unit": null,
+      "key": "shoarmavlees",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 11.0,
+        "kcal": 180.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "shoarmavlees"
+    },
+    {
+      "g_per_unit": 180.0,
+      "key": "sinaasappel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 47.0,
+        "protein_g": 0.9
+      },
+      "meal_kind": "snack",
+      "name": "sinaasappel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sinaasappelsap",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 45.0,
+        "protein_g": 0.7
+      },
+      "meal_kind": "drink",
+      "name": "sinaasappelsap"
+    },
+    {
+      "g_per_unit": null,
+      "key": "skyr_fruit",
+      "macros_per_100g": {
+        "carbs_g": 10.0,
+        "fat_g": 0.2,
+        "kcal": 80.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "snack",
+      "name": "skyr met fruit"
+    },
+    {
+      "g_per_unit": null,
+      "key": "skyr_naturel",
+      "macros_per_100g": {
+        "carbs_g": 4.0,
+        "fat_g": 0.2,
+        "kcal": 63.0,
+        "protein_g": 11.0
+      },
+      "meal_kind": "snack",
+      "name": "skyr naturel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sla",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 15.0,
+        "protein_g": 1.2
+      },
+      "meal_kind": "ingredient",
+      "name": "sla"
+    },
+    {
+      "g_per_unit": null,
+      "key": "smeerkaas_light",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 11.0,
+        "kcal": 170.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "smeerkaas light"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sojabrokken_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 340.0,
+        "protein_g": 50.0
+      },
+      "meal_kind": "ingredient",
+      "name": "sojabrokken gedroogd"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sojadrink_ongezoet",
+      "macros_per_100g": {
+        "carbs_g": 0.5,
+        "fat_g": 1.8,
+        "kcal": 33.0,
+        "protein_g": 3.3
+      },
+      "meal_kind": "drink",
+      "name": "sojadrink ongezoet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "spareribs",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 22.0,
+        "kcal": 280.0,
+        "protein_g": 18.0
+      },
+      "meal_kind": "ingredient",
+      "name": "spareribs"
+    },
+    {
+      "g_per_unit": null,
+      "key": "sperziebonen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 31.0,
+        "protein_g": 2.0
+      },
+      "meal_kind": "ingredient",
+      "name": "sperziebonen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "spinazie",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 23.0,
+        "protein_g": 2.9
+      },
+      "meal_kind": "ingredient",
+      "name": "spinazie"
+    },
+    {
+      "g_per_unit": null,
+      "key": "spliterwten_droog",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 340.0,
+        "protein_g": 24.0
+      },
+      "meal_kind": "ingredient",
+      "name": "spliterwten gedroogd"
+    },
+    {
+      "g_per_unit": null,
+      "key": "spruitjes",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 43.0,
+        "protein_g": 3.4
+      },
+      "meal_kind": "ingredient",
+      "name": "spruitjes"
+    },
+    {
+      "g_per_unit": null,
+      "key": "stokbrood",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 270.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "stokbrood"
+    },
+    {
+      "g_per_unit": null,
+      "key": "surimi",
+      "macros_per_100g": {
+        "carbs_g": 13.0,
+        "fat_g": null,
+        "kcal": 95.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "surimi"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tahin",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 54.0,
+        "kcal": 600.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tahin"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tempeh",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 9.0,
+        "kcal": 190.0,
+        "protein_g": 19.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tempeh"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tilapia",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 1.7,
+        "kcal": 96.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tilapiafilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tofu_gerookt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 10.0,
+        "kcal": 160.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "gerookte tofu"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tofu_naturel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 7.0,
+        "kcal": 120.0,
+        "protein_g": 12.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tofu naturel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tomaat",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 20.0,
+        "protein_g": 0.9
+      },
+      "meal_kind": "ingredient",
+      "name": "tomaat"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tomatenblokjes_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 25.0,
+        "protein_g": 1.2
+      },
+      "meal_kind": "ingredient",
+      "name": "tomatenblokjes uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tonijn_blik_olie",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 11.0,
+        "kcal": 190.0,
+        "protein_g": 23.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tonijn in olie (blik)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tonijn_blik_water",
+      "macros_per_100g": {
+        "carbs_g": 0.0,
+        "fat_g": 1.0,
+        "kcal": 105.0,
+        "protein_g": 24.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tonijn in water (blik)"
+    },
+    {
+      "g_per_unit": null,
+      "key": "tuinbonen",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 110.0,
+        "protein_g": 8.0
+      },
+      "meal_kind": "ingredient",
+      "name": "tuinbonen"
+    },
+    {
+      "g_per_unit": null,
+      "key": "ui",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 40.0,
+        "protein_g": 1.2
+      },
+      "meal_kind": "ingredient",
+      "name": "ui"
+    },
+    {
+      "g_per_unit": null,
+      "key": "vanille_extract",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 288.0,
+        "protein_g": 0.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vanille-extract"
+    },
+    {
+      "g_per_unit": null,
+      "key": "varkensfilet",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 4.0,
+        "kcal": 120.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "varkensfilet"
+    },
+    {
+      "g_per_unit": null,
+      "key": "varkenshaas",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 2.5,
+        "kcal": 110.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "varkenshaas"
+    },
+    {
+      "g_per_unit": 90.0,
+      "key": "vega_burger",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 180.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vegetarische burger"
+    },
+    {
+      "g_per_unit": null,
+      "key": "vega_gehakt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 7.0,
+        "kcal": 150.0,
+        "protein_g": 16.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vegetarisch gehakt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "vega_kipstukjes",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 160.0,
+        "protein_g": 17.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vegetarische kipstukjes"
+    },
+    {
+      "g_per_unit": 100.0,
+      "key": "vega_schnitzel",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 220.0,
+        "protein_g": 14.0
+      },
+      "meal_kind": "ingredient",
+      "name": "vegetarische schnitzel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "vla_vanille",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 95.0,
+        "protein_g": 3.3
+      },
+      "meal_kind": "snack",
+      "name": "vanillevla"
+    },
+    {
+      "g_per_unit": null,
+      "key": "walnoten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 65.0,
+        "kcal": 650.0,
+        "protein_g": 15.0
+      },
+      "meal_kind": "snack",
+      "name": "walnoten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "whey_poeder",
+      "macros_per_100g": {
+        "carbs_g": 8.0,
+        "fat_g": 5.0,
+        "kcal": 380.0,
+        "protein_g": 75.0
+      },
+      "meal_kind": "ingredient",
+      "name": "whey proteïnepoeder"
+    },
+    {
+      "g_per_unit": null,
+      "key": "witte_bonen_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 105.0,
+        "protein_g": 6.0
+      },
+      "meal_kind": "ingredient",
+      "name": "witte bonen uit blik"
+    },
+    {
+      "g_per_unit": null,
+      "key": "wortel",
+      "macros_per_100g": {
+        "carbs_g": 7.0,
+        "fat_g": null,
+        "kcal": 36.0,
+        "protein_g": 0.9
+      },
+      "meal_kind": "ingredient",
+      "name": "wortel"
+    },
+    {
+      "g_per_unit": 62.0,
+      "key": "wrap_proteine",
+      "macros_per_100g": {
+        "carbs_g": 25.0,
+        "fat_g": 8.0,
+        "kcal": 280.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "proteine wrap"
+    },
+    {
+      "g_per_unit": 62.0,
+      "key": "wrap_tortilla",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 300.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "wrap / tortilla"
+    },
+    {
+      "g_per_unit": 62.0,
+      "key": "wrap_volkoren",
+      "macros_per_100g": {
+        "carbs_g": 45.0,
+        "fat_g": 7.0,
+        "kcal": 300.0,
+        "protein_g": 9.0
+      },
+      "meal_kind": "ingredient",
+      "name": "volkoren wrap"
+    },
+    {
+      "g_per_unit": null,
+      "key": "yoghurt_halfvol",
+      "macros_per_100g": {
+        "carbs_g": 5.0,
+        "fat_g": 1.5,
+        "kcal": 47.0,
+        "protein_g": 4.0
+      },
+      "meal_kind": "snack",
+      "name": "halfvolle yoghurt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "yoghurt_mager",
+      "macros_per_100g": {
+        "carbs_g": 5.0,
+        "fat_g": 0.1,
+        "kcal": 38.0,
+        "protein_g": 4.3
+      },
+      "meal_kind": "snack",
+      "name": "magere yoghurt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "yoghurt_vol",
+      "macros_per_100g": {
+        "carbs_g": 4.5,
+        "fat_g": 3.5,
+        "kcal": 62.0,
+        "protein_g": 3.5
+      },
+      "meal_kind": "snack",
+      "name": "volle yoghurt"
+    },
+    {
+      "g_per_unit": null,
+      "key": "yoghurtsaus_knoflook",
+      "macros_per_100g": {
+        "carbs_g": 5.0,
+        "fat_g": 9.0,
+        "kcal": 120.0,
+        "protein_g": 3.0
+      },
+      "meal_kind": "ingredient",
+      "name": "yoghurt-knoflooksaus"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zalm_gerookt",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 10.0,
+        "kcal": 180.0,
+        "protein_g": 22.0
+      },
+      "meal_kind": "ingredient",
+      "name": "gerookte zalm"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zalm_vers",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 13.0,
+        "kcal": 200.0,
+        "protein_g": 20.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zalmfilet vers"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zoete_aardappel",
+      "macros_per_100g": {
+        "carbs_g": 20.0,
+        "fat_g": null,
+        "kcal": 86.0,
+        "protein_g": 1.6
+      },
+      "meal_kind": "ingredient",
+      "name": "zoete aardappel"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zoetstof",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 0.0,
+        "protein_g": 0.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zoetstof"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zongedroogde_tomaten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 15.0,
+        "kcal": 210.0,
+        "protein_g": 4.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zongedroogde tomaten in olie"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zonnebloempitten",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": 51.0,
+        "kcal": 580.0,
+        "protein_g": 21.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zonnebloempitten"
+    },
+    {
+      "g_per_unit": null,
+      "key": "zwarte_bonen_blik",
+      "macros_per_100g": {
+        "carbs_g": null,
+        "fat_g": null,
+        "kcal": 115.0,
+        "protein_g": 7.0
+      },
+      "meal_kind": "ingredient",
+      "name": "zwarte bonen uit blik"
+    }
+  ],
+  "generated_at": "2026-09-17T17:11:49+00:00",
+  "schema_version": 2,
+  "templates": [
+    {
+      "base_prep_minutes": 15,
+      "key": "pasta",
+      "meal_kind": "meal",
+      "name": "Pasta",
+      "rules": [
+        {
+          "kind": "requirement",
+          "min_satisfied": 1,
+          "note": "Pesto alleen op pasta is droog en eenzijdig vet. Er hoort kaas of groente bij voordat dit een bord eten is.",
+          "requires": [
+            {
+              "slot": "cheese"
+            },
+            {
+              "slot": "greens"
+            }
+          ],
+          "severity": "incomplete",
+          "when": {
+            "food_types": [
+              "pesto_groen"
+            ],
+            "slot": "sauce"
+          }
+        },
+        {
+          "kind": "requirement",
+          "min_satisfied": 1,
+          "note": "Tomatensaus met vlees is af zoals het is - meer hoeft niet. Zonder vlees blijft het een bord pasta met saus.",
+          "requires": [
+            {
+              "slot": "meat"
+            }
+          ],
+          "severity": "incomplete",
+          "when": {
+            "food_types": [
+              "pastasaus_tomaat",
+              "tomatenblokjes_blik"
+            ],
+            "slot": "sauce"
+          }
+        },
+        {
+          "kind": "incompatible",
+          "min_satisfied": 1,
+          "note": "Pesto zit al vol kaas en olie; er geraspte jonge kaas overheen maakt het vettig en smakeloos. Neem parmezaan, of laat de kaas weg.",
+          "requires": [
+            {
+              "food_types": [
+                "kaas_geraspt_30"
+              ],
+              "slot": "cheese"
+            }
+          ],
+          "severity": "wrong",
+          "when": {
+            "food_types": [
+              "pesto_groen"
+            ],
+            "slot": "sauce"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "candidates": [
+            "pasta_droog",
+            "pasta_volkoren_droog"
+          ],
+          "default_grams": 100.0,
+          "key": "pasta",
+          "name": "Soort pasta",
+          "required": true
+        },
+        {
+          "candidates": [
+            "rundergehakt",
+            "vega_gehakt",
+            "kipgehakt",
+            "rundergehakt_mager",
+            "kipfilet_rauw",
+            "biefstuk"
+          ],
+          "default_grams": 110.0,
+          "key": "meat",
+          "name": "Soort vlees",
+          "required": true
+        },
+        {
+          "candidates": [
+            "pesto_groen",
+            "tomatenblokjes_blik",
+            "pastasaus_tomaat"
+          ],
+          "default_grams": 150.0,
+          "key": "sauce",
+          "name": "Saus",
+          "required": true
+        },
+        {
+          "candidates": [
+            "parmezaanse_kaas",
+            "kaas_geraspt_30"
+          ],
+          "default_grams": 25.0,
+          "key": "cheese",
+          "name": "Kaas",
+          "required": false
+        },
+        {
+          "candidates": [
+            "sla",
+            "gesneden_groente_mix",
+            "rucola"
+          ],
+          "default_grams": 80.0,
+          "key": "greens",
+          "name": "Groente",
+          "required": false
+        }
+      ]
+    },
+    {
+      "base_prep_minutes": 10,
+      "key": "wrap",
+      "meal_kind": "meal",
+      "name": "Wrap",
+      "rules": [
+        {
+          "kind": "requirement",
+          "min_satisfied": 2,
+          "note": "Kipfilet uit een pakje is droog en smaakt nergens naar zonder saus en iets knapperigs erbij. Met allebei erin is het een prima snelle lunch.",
+          "requires": [
+            {
+              "slot": "sauce"
+            },
+            {
+              "slot": "greens"
+            }
+          ],
+          "severity": "incomplete",
+          "when": {
+            "food_types": [
+              "kipfilet_vleeswaren"
+            ],
+            "slot": "meat"
+          }
+        },
+        {
+          "kind": "incompatible",
+          "min_satisfied": 1,
+          "note": "Ketchup op biefstuk kan, maar je betaalt voor het vlees en proeft de ketchup. Een yoghurtsaus laat de biefstuk beter tot zijn recht komen.",
+          "requires": [
+            {
+              "food_types": [
+                "biefstuk"
+              ],
+              "slot": "meat"
+            }
+          ],
+          "severity": "note",
+          "when": {
+            "food_types": [
+              "ketchup"
+            ],
+            "slot": "sauce"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "candidates": [
+            "wrap_tortilla",
+            "wrap_volkoren",
+            "wrap_proteine"
+          ],
+          "default_grams": 62.0,
+          "key": "wrap",
+          "name": "Soort wrap",
+          "required": true
+        },
+        {
+          "candidates": [
+            "kipfilet_vleeswaren",
+            "vega_gehakt",
+            "rundergehakt_mager",
+            "kipfilet_rauw",
+            "biefstuk"
+          ],
+          "default_grams": 100.0,
+          "key": "meat",
+          "name": "Soort vlees",
+          "required": true
+        },
+        {
+          "candidates": [
+            "ketchup",
+            "knoflooksaus",
+            "huttenkase",
+            "yoghurtsaus_knoflook"
+          ],
+          "default_grams": 30.0,
+          "key": "sauce",
+          "name": "Saus",
+          "required": true
+        },
+        {
+          "candidates": [
+            "sla",
+            "ijsbergsla",
+            "gesneden_groente_mix",
+            "rucola"
+          ],
+          "default_grams": 40.0,
+          "key": "greens",
+          "name": "Groente",
+          "required": true
+        }
+      ]
+    }
+  ]
 }

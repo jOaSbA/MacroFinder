@@ -47,7 +47,7 @@ class Archetype:
     target_protein_g: float | None
     texture: str | None
     temperature: str | None
-    meal_slots: tuple[str, ...]
+    day_parts: tuple[str, ...]
     max_prep_minutes: int | None
     meal_kind: str
 
@@ -397,7 +397,7 @@ def _archetype(row: sqlite3.Row) -> Archetype:
         target_protein_g=row["target_protein_g"],
         texture=row["texture"],
         temperature=row["temperature"],
-        meal_slots=tuple(json.loads(row["meal_slots"])) if row["meal_slots"] else (),
+        day_parts=tuple(json.loads(row["day_parts"])) if row["day_parts"] else (),
         max_prep_minutes=row["max_prep_minutes"],
         meal_kind=row["meal_kind"],
     )

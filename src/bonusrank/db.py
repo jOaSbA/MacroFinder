@@ -167,11 +167,16 @@ CREATE TABLE IF NOT EXISTS archetypes (
     target_protein_g  REAL,
     texture           TEXT,
     temperature       TEXT,
-    -- JSON list. Bare TEXT with no stated convention is how you get two.
-    meal_slots        TEXT,
+    -- JSON list of times of day (breakfast/lunch/snack/post_workout). Bare TEXT
+    -- with no stated convention is how you get two.
+    --
+    -- Renamed from `meal_slots` at milestone 12: "slot" is now the customiser's
+    -- word for a COMPONENT of a dish (the pasta, the sauce), which is a wholly
+    -- different concept and will outnumber this one. See meal_templates below.
+    day_parts         TEXT,
     max_prep_minutes  INTEGER,
     -- Milestone 9: what KIND of thing this is, not when you'd eat it (that's
-    -- meal_slots). Drives which macro-floor profile the optimiser applies -
+    -- day_parts). Drives which macro-floor profile the optimiser applies -
     -- a drink is allowed to stay protein-forward; a meal is not. Authored
     -- judgement, same status as taste_delta_note - never derived.
     meal_kind         TEXT NOT NULL DEFAULT 'meal'
@@ -230,6 +235,80 @@ CREATE TABLE IF NOT EXISTS archetype_optimise_extras (
     food_type_id  INTEGER NOT NULL REFERENCES food_types(id),
     PRIMARY KEY (archetype_id, food_type_id)
 );
+
+-- Milestone 12: the meal customiser. An archetype is a whole dish somebody
+-- wrote down; a TEMPLATE is a shape with holes in it, and the holes are filled
+-- from whatever is cheap this week. "Slot" here means a COMPONENT of the dish
+-- (the pasta, the sauce), never a time of day - that is archetypes.day_parts.
+CREATE TABLE IF NOT EXISTS meal_templates (
+    id                 INTEGER PRIMARY KEY,
+    key                TEXT NOT NULL UNIQUE,
+    name               TEXT NOT NULL UNIQUE,
+    -- Same three kinds, same meaning, as archetypes.meal_kind - so a template
+    -- can reuse the optimiser's macro-floor profile rather than inventing a
+    -- second floor vocabulary in YAML.
+    meal_kind          TEXT NOT NULL CHECK (meal_kind IN ('meal','snack','drink')),
+    base_prep_minutes  INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS template_slots (
+    id           INTEGER PRIMARY KEY,
+    template_id  INTEGER NOT NULL REFERENCES meal_templates(id) ON DELETE CASCADE,
+    key          TEXT NOT NULL,
+    name         TEXT NOT NULL,
+    required     INTEGER NOT NULL DEFAULT 1,
+    sort_order   INTEGER NOT NULL,
+    -- Every slot must state a serving size, so no candidate can ever end up
+    -- without one. A candidate overrides it where the judgement differs
+    -- (200 g chopped tomatoes vs 40 g pesto are the same slot).
+    default_grams  REAL NOT NULL,
+    UNIQUE (template_id, key)
+);
+
+-- Deliberately NOT the composite-key shape composition_items uses: the same
+-- food type may legitimately appear in two slots of one template.
+CREATE TABLE IF NOT EXISTS template_slot_candidates (
+    slot_id                  INTEGER NOT NULL REFERENCES template_slots(id) ON DELETE CASCADE,
+    food_type_id             INTEGER NOT NULL REFERENCES food_types(id),
+    -- Per serving, like composition_items.grams. The loader resolves this from
+    -- the candidate's own override, or the slot's default_grams when absent.
+    grams                    REAL NOT NULL,
+    -- Same meaning as composition_items.pantry_price_eur_per_kg, and kept here
+    -- rather than on food_types for the same reason: it is a property of "a
+    -- pinch of this in this recipe", not of the food.
+    pantry_price_eur_per_kg  REAL,
+    -- 'seed' today. Reserved for a future tag-derived lane, so that lane can
+    -- arrive through _add_column_if_missing instead of a rebuild.
+    source                   TEXT,
+    PRIMARY KEY (slot_id, food_type_id)
+);
+
+-- Does this combination actually make a dish? Authored judgement, same status
+-- as taste_delta_note - never derived from macros, never inferred.
+--
+-- `template_id` is nullable, reserved for a global rule applying to every
+-- template ("a dry sauce needs a fat"). The loader does not emit one yet; when
+-- it does, the seed must say so explicitly so it is never accidental.
+CREATE TABLE IF NOT EXISTS template_rules (
+    id                INTEGER PRIMARY KEY,
+    template_id       INTEGER REFERENCES meal_templates(id) ON DELETE CASCADE,
+    kind              TEXT NOT NULL CHECK (kind IN ('requirement','incompatible')),
+    -- JSON predicates: {"slot": key?, "food_types": [...]?}
+    when_predicate    TEXT NOT NULL,
+    -- JSON list of predicates. At least `min_satisfied` of them must hold.
+    -- One predicate with min_satisfied 1 is the plain "slot X must be filled"
+    -- case; several is "needs meat OR greens OR cheese", which is the shape
+    -- the pesto rule actually needs and a single target slot cannot express.
+    requires          TEXT,
+    min_satisfied     INTEGER NOT NULL DEFAULT 1,
+    -- 'incomplete' (unfinished dish) and 'wrong' (these do not go together)
+    -- are different messages and must not render the same; 'note' is an
+    -- observation that blocks nothing. NOT NULL + CHECK, so it cannot be
+    -- added later by _add_column_if_missing - see its docstring.
+    severity          TEXT NOT NULL CHECK (severity IN ('incomplete','wrong','note')),
+    -- Why, in the author's own words. Non-empty, like taste_delta_note.
+    note              TEXT NOT NULL CHECK (trim(note) <> '')
+);
 """
 
 
@@ -243,6 +322,14 @@ _MILESTONE_8_TABLES = (
     "sku_archetype_map", "archetype_optimise_extras", "archetypes",
 )
 
+# Same reasoning, its own probe. Kept separate from _MILESTONE_8_TABLES on
+# purpose: conflating them would make a pre-milestone-8 database needlessly
+# drop templates, and a template schema change needlessly drop archetypes.
+# Each probe stays honest about which change it detects. Children first.
+_MILESTONE_12_TABLES = (
+    "template_rules", "template_slot_candidates", "template_slots", "meal_templates",
+)
+
 
 def connect(path: Path | None = None) -> sqlite3.Connection:
     """Open the database, creating the schema if needed."""
@@ -254,6 +341,11 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     conn.executescript(SCHEMA)
     if _needs_archetype_rebuild(conn):
         for table in _MILESTONE_8_TABLES:
+            conn.execute(f"DROP TABLE IF EXISTS {table}")
+        conn.executescript(SCHEMA)
+        conn.commit()
+    if _needs_template_rebuild(conn):
+        for table in _MILESTONE_12_TABLES:
             conn.execute(f"DROP TABLE IF EXISTS {table}")
         conn.executescript(SCHEMA)
         conn.commit()
@@ -275,9 +367,24 @@ def _add_column_if_missing(conn: sqlite3.Connection, table: str, column: str, de
 
 
 def _needs_archetype_rebuild(conn: sqlite3.Connection) -> bool:
-    """True when `archetypes` predates the `key` or `meal_kind` column."""
+    """True when `archetypes` predates the `key`, `meal_kind` or `day_parts` column."""
     columns = {row["name"] for row in conn.execute("PRAGMA table_info(archetypes)")}
-    return bool(columns) and ("key" not in columns or "meal_kind" not in columns)
+    return bool(columns) and not {"key", "meal_kind", "day_parts"} <= columns
+
+
+def _needs_template_rebuild(conn: sqlite3.Connection) -> bool:
+    """True when the milestone-12 template tables predate their newest columns.
+
+    False when they do not exist yet - `CREATE TABLE IF NOT EXISTS` handles
+    that case, and dropping nothing is not a rebuild. Probe the most recently
+    added column of each table here when the schema grows again.
+    """
+    templates = {row["name"] for row in conn.execute("PRAGMA table_info(meal_templates)")}
+    if not templates:
+        return False
+    slots = {row["name"] for row in conn.execute("PRAGMA table_info(template_slots)")}
+    rules = {row["name"] for row in conn.execute("PRAGMA table_info(template_rules)")}
+    return "default_grams" not in slots or "severity" not in rules
 
 
 def record_review(

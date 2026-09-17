@@ -25,7 +25,7 @@
   target_protein_g: 20
   texture: creamy_spoonable
   temperature: cold
-  meal_slots: [breakfast, snack]
+  day_parts: [breakfast, snack]
   max_prep_minutes: 5
   # A spoonable pudding, not a plate of food - snack profile (lower kcal floor,
   # no fat floor). Its own recipe is pure protein, so a carb companion is added
@@ -57,7 +57,7 @@
   target_protein_g: 20
   texture: drinkable
   temperature: cold
-  meal_slots: [breakfast, snack]
+  day_parts: [breakfast, snack]
   max_prep_minutes: 3
   # A drink is allowed to stay protein-forward - no carb/fat floor applies.
   # Milestone 9, CLAUDE.md.
@@ -87,7 +87,7 @@
   target_protein_g: 20
   texture: chewy_bar
   temperature: ambient
-  meal_slots: [snack]
+  day_parts: [snack]
   max_prep_minutes: 15
   # Already has both a carb source (havermout) and a fat source (pindakaas) in
   # its own recipe - no extras needed. Milestone 9, CLAUDE.md.
@@ -116,7 +116,7 @@
   target_protein_g: 25
   texture: drinkable
   temperature: cold
-  meal_slots: [breakfast, snack, post_workout]
+  day_parts: [breakfast, snack, post_workout]
   max_prep_minutes: 3
   # A shake, by definition - protein-forward is the point. Milestone 9,
   # CLAUDE.md.
@@ -154,7 +154,7 @@
   target_protein_g: 20
   texture: creamy_spoonable
   temperature: cold
-  meal_slots: [breakfast, snack]
+  day_parts: [breakfast, snack]
   max_prep_minutes: 3
   # A fruit-yogurt bowl, not a full plate - snack profile. Its own recipe
   # already has a carb source (diepvriesfruit); no fat floor applies at
@@ -184,7 +184,7 @@
   target_protein_g: 12
   texture: spreadable
   temperature: cold
-  meal_slots: [lunch, snack]
+  day_parts: [lunch, snack]
   max_prep_minutes: 5
   # A 100 g spread portion, not a plate - snack profile. Its own recipe has
   # essentially no carbs; a companion is added so a small carb floor can be
@@ -216,7 +216,7 @@
   target_protein_g: 30
   texture: handheld
   temperature: cold
-  meal_slots: [lunch]
+  day_parts: [lunch]
   max_prep_minutes: 10
   # A real lunch plate - meal profile (kcal, carb and fat floors all apply).
   # Its own recipe already has a carb source (wrap_tortilla); a fat companion
@@ -248,7 +248,7 @@
   target_protein_g: 20
   texture: creamy_spoonable
   temperature: cold
-  meal_slots: [breakfast]
+  day_parts: [breakfast]
   max_prep_minutes: 5
   # A full breakfast, not a snack - meal profile. Its own recipe already has
   # carbs (havermout, diepvriesfruit); a fat companion is added so the fat

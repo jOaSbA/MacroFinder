@@ -16,12 +16,18 @@ data class ExportSnapshot(
     val generated_at: String,
     val schema_version: Int,
     val chains: Map<String, ChainData>,
+    /** Milestone 12. Chain-independent, so shipped once rather than per chain. */
+    val templates: List<TemplateEntry> = emptyList(),
+    /** Every seeded food type, so an arbitrary extra can be priced on-device. */
+    val food_types: List<FoodTypeEntry> = emptyList(),
 )
 
 @Serializable
 data class ChainData(
     val archetypes: List<ArchetypeEntry> = emptyList(),
     val offers: List<OfferEntry> = emptyList(),
+    /** template key -> slot key -> that slot's candidates, ranked, at this chain. */
+    val template_prices: Map<String, Map<String, List<SlotCandidate>>> = emptyMap(),
 )
 
 @Serializable
@@ -73,7 +79,7 @@ data class ArchetypeEntry(
     val name: String,
     // "meal" | "snack" | "drink" - see CLAUDE.md milestone 9 in the Python repo.
     val meal_kind: String,
-    val meal_slots: List<String> = emptyList(),
+    val day_parts: List<String> = emptyList(),
     val serving_g: Double? = null,
     val target_protein_g: Double? = null,
     val ready_made: ReadyMade? = null,
@@ -142,4 +148,90 @@ data class Verdict(
     val cheaper_pct: Double? = null,
     val protein_delta_g: Double? = null,
     val text: String,
+)
+
+// --- meal templates (milestone 12) ------------------------------------------
+//
+// A template is a shape with holes in it: a pasta, a meat, a sauce. The body
+// below is authored in data/seed/templates.yaml and never computed. Prices for
+// each slot's candidates arrive separately, per chain, in ChainData.
+
+@Serializable
+data class TemplateEntry(
+    val key: String,
+    val name: String,
+    val meal_kind: String,
+    val base_prep_minutes: Int? = null,
+    val slots: List<TemplateSlot> = emptyList(),
+    val rules: List<TemplateRule> = emptyList(),
+)
+
+@Serializable
+data class TemplateSlot(
+    val key: String,
+    val name: String,
+    val required: Boolean,
+    val default_grams: Double,
+    /** Food type keys. The priced, ranked versions live in `template_prices`. */
+    val candidates: List<String> = emptyList(),
+)
+
+/**
+ * An authored judgement about whether a combination is a real dish.
+ *
+ * `severity` is the difference between an unfinished dish ("incomplete") and
+ * one that is actually wrong ("wrong"), with "note" for an observation that
+ * blocks nothing. They must not render the same way. A rule never blocks a
+ * choice - it explains, using [note], which is the only text the user sees.
+ */
+@Serializable
+data class TemplateRule(
+    val kind: String,
+    val `when`: Predicate,
+    val requires: List<Predicate> = emptyList(),
+    val min_satisfied: Int = 1,
+    val severity: String,
+    val note: String,
+)
+
+/** Names a slot, a set of food types, or both. An empty predicate is invalid. */
+@Serializable
+data class Predicate(
+    val slot: String? = null,
+    val food_types: List<String> = emptyList(),
+)
+
+@Serializable
+data class SlotCandidate(
+    val food_type: String,
+    val name: String,
+    val grams: Double,
+    val price_eur: Double? = null,
+    /**
+     * The per-kilo rate, kept as its own field rather than divided back out of
+     * [price_eur]. Local re-pricing multiplies this when the user changes the
+     * quantity, and a null rate must stay null through that - never 0.0.
+     */
+    val eur_per_kg: Double? = null,
+    val protein_g: Double? = null,
+    val kcal: Double? = null,
+    val carbs_g: Double? = null,
+    val fat_g: Double? = null,
+    val eur_per_g_protein: Double? = null,
+    val is_pantry: Boolean = false,
+    val promo_text: String? = null,
+    /** Copy rule 3: a 2-for deal means two of them in the fridge. Show it. */
+    val required_quantity: Int? = null,
+    val is_personal_offer: Boolean = false,
+    val sku: String? = null,
+)
+
+@Serializable
+data class FoodTypeEntry(
+    val key: String,
+    val name: String,
+    val meal_kind: String? = null,
+    /** "4 boiled eggs" is this times four. Null where a unit makes no sense. */
+    val g_per_unit: Double? = null,
+    val macros_per_100g: Macros = Macros(),
 )

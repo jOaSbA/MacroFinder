@@ -50,7 +50,7 @@ class JsonTest {
               "key": "test_pudding",
               "name": "Test pudding",
               "meal_kind": "snack",
-              "meal_slots": ["breakfast"],
+              "day_parts": ["breakfast"],
               "serving_g": 200,
               "target_protein_g": 20,
               "ready_made": null,
@@ -98,5 +98,90 @@ class JsonTest {
         val aldi = snapshot.chains.getValue("aldi")
         assertEquals(emptyList<OfferEntry>(), aldi.offers)
         assertEquals(emptyList<ArchetypeEntry>(), aldi.archetypes)
+    }
+
+    // -- meal templates (milestone 12) ------------------------------------
+
+    private val withTemplates = """
+      {
+        "generated_at": "2026-09-17T13:58:44+00:00",
+        "schema_version": 2,
+        "chains": {
+          "ah": {
+            "template_prices": {
+              "pasta": {
+                "sauce": [
+                  {"food_type": "pesto_groen", "name": "groene pesto", "grams": 40.0,
+                   "price_eur": 0.65, "eur_per_kg": 16.25, "protein_g": 1.8,
+                   "is_pantry": false, "required_quantity": 1,
+                   "is_personal_offer": false, "sku": "wi9"},
+                  {"food_type": "rucola", "name": "rucola", "grams": 40.0,
+                   "price_eur": null, "eur_per_kg": null, "protein_g": 1.0,
+                   "is_pantry": false}
+                ]
+              }
+            }
+          }
+        },
+        "templates": [
+          {
+            "key": "pasta", "name": "Pasta", "meal_kind": "meal",
+            "base_prep_minutes": 15,
+            "slots": [
+              {"key": "sauce", "name": "Saus", "required": true,
+               "default_grams": 150.0, "candidates": ["pesto_groen", "rucola"]}
+            ],
+            "rules": [
+              {"kind": "requirement", "when": {"slot": "sauce", "food_types": ["pesto_groen"]},
+               "requires": [{"slot": "cheese"}, {"slot": "greens"}],
+               "min_satisfied": 1, "severity": "incomplete",
+               "note": "Pesto alleen op pasta is droog."}
+            ]
+          }
+        ],
+        "food_types": [
+          {"key": "ei_gekookt", "name": "gekookt ei", "meal_kind": "snack",
+           "g_per_unit": 50.0, "macros_per_100g": {"protein_g": 13.0, "kcal": 143.0}}
+        ]
+      }
+    """.trimIndent()
+
+    @Test
+    fun `a template decodes with its slots and authored rules`() {
+        val template = parseSnapshot(withTemplates).templates.single()
+        assertEquals("pasta", template.key)
+        assertEquals(listOf("pesto_groen", "rucola"), template.slots.single().candidates)
+
+        val rule = template.rules.single()
+        assertEquals("incomplete", rule.severity)
+        assertEquals(1, rule.min_satisfied)
+        assertEquals("sauce", rule.`when`.slot)
+        assertEquals(listOf("cheese", "greens"), rule.requires.map { it.slot })
+    }
+
+    @Test
+    fun `an unpriced slot candidate decodes to nulls, not zeroes`() {
+        val candidates = parseSnapshot(withTemplates)
+            .chains.getValue("ah").template_prices.getValue("pasta").getValue("sauce")
+
+        assertEquals(2, candidates.size)
+        assertEquals(null, candidates[1].price_eur)
+        // The rate local re-pricing multiplies. A 0.0 here would silently
+        // price rucola as free the moment the user changed the quantity.
+        assertEquals(null, candidates[1].eur_per_kg)
+    }
+
+    @Test
+    fun `the food type catalogue carries g_per_unit for countable extras`() {
+        val egg = parseSnapshot(withTemplates).food_types.single()
+        assertEquals(50.0, egg.g_per_unit!!, 1e-9)
+        assertEquals(13.0, egg.macros_per_100g.protein_g!!, 1e-9)
+    }
+
+    @Test
+    fun `an older snapshot without templates still decodes`() {
+        val snapshot = parseSnapshot(sample)
+        assertEquals(emptyList<TemplateEntry>(), snapshot.templates)
+        assertEquals(emptyList<FoodTypeEntry>(), snapshot.food_types)
     }
 }

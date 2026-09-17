@@ -1,0 +1,163 @@
+# Meal templates (milestone 12) - the customiser's shapes.
+#
+# An archetype (archetypes.yaml) is a whole dish somebody wrote down. A TEMPLATE
+# is a shape with holes in it, and the holes are filled from whatever is cheap
+# this week. "Slot" here means a COMPONENT of the dish - the pasta, the sauce -
+# never a time of day; that is archetypes.day_parts.
+#
+# Conventions, all enforced by seed.py::_validate_template:
+#
+#   * `default_grams` on a slot is per serving and required. A candidate may
+#     override it where the judgement differs - 200 g chopped tomatoes and
+#     40 g pesto are the same slot but not the same portion.
+#   * A rule's `note` is required, non-empty, and is the ONLY thing the app
+#     shows the user about that rule. Write it as you would say it.
+#   * `severity` distinguishes an unfinished dish ('incomplete') from a
+#     combination that is actually wrong ('wrong') from an observation that
+#     blocks nothing ('note'). They must not read the same.
+#   * A rule may only name food types some slot of this template offers.
+#     A rule that can never fire is rejected at load time, not left to rot.
+#   * Rules are authored judgement, same status as taste_delta_note. Nothing
+#     here is derived from macros or prices.
+
+- key: pasta
+  name: Pasta
+  meal_kind: meal
+  base_prep_minutes: 15
+  slots:
+    - key: pasta
+      name: Soort pasta
+      required: true
+      default_grams: 100
+      candidates:
+        - {food_type: pasta_droog}
+        - {food_type: pasta_volkoren_droog}
+    - key: meat
+      name: Soort vlees
+      required: true
+      default_grams: 110
+      candidates:
+        - {food_type: kipfilet_rauw, grams: 120}
+        - {food_type: kipgehakt}
+        - {food_type: rundergehakt_mager}
+        - {food_type: rundergehakt}
+        - {food_type: biefstuk, grams: 125}
+        - {food_type: vega_gehakt}
+    - key: sauce
+      name: Saus
+      required: true
+      default_grams: 150
+      candidates:
+        - {food_type: pastasaus_tomaat, grams: 180}
+        - {food_type: tomatenblokjes_blik, grams: 200}
+        - {food_type: pesto_groen, grams: 40}
+    - key: cheese
+      name: Kaas
+      required: false
+      default_grams: 25
+      candidates:
+        - {food_type: kaas_geraspt_30}
+        - {food_type: parmezaanse_kaas, grams: 15}
+    - key: greens
+      name: Groente
+      required: false
+      default_grams: 80
+      candidates:
+        - {food_type: gesneden_groente_mix, grams: 100}
+        - {food_type: rucola, grams: 40}
+        - {food_type: sla, grams: 60}
+  rules:
+    # The user's own example: "pasta pesto needs some more ingredients to make
+    # it good". Pesto is a condiment, not a sauce that carries a plate on its
+    # own - so it needs a body, and more than one thing can provide it.
+    - kind: requirement
+      severity: incomplete
+      when: {slot: sauce, food_types: [pesto_groen]}
+      requires:
+        - {slot: cheese}
+        - {slot: greens}
+      min_satisfied: 1
+      note: >
+        Pesto alleen op pasta is droog en eenzijdig vet. Er hoort kaas of
+        groente bij voordat dit een bord eten is.
+    # The other half of the same example: "tomato pasta only needs some meat
+    # and it can be eaten." Stated as a rule so the app can say so, rather
+    # than leaving the user guessing whether it is missing something.
+    - kind: requirement
+      severity: incomplete
+      when: {slot: sauce, food_types: [pastasaus_tomaat, tomatenblokjes_blik]}
+      requires:
+        - {slot: meat}
+      min_satisfied: 1
+      note: >
+        Tomatensaus met vlees is af zoals het is - meer hoeft niet. Zonder
+        vlees blijft het een bord pasta met saus.
+    - kind: incompatible
+      severity: wrong
+      when: {slot: sauce, food_types: [pesto_groen]}
+      requires:
+        - {slot: cheese, food_types: [kaas_geraspt_30]}
+      note: >
+        Pesto zit al vol kaas en olie; er geraspte jonge kaas overheen maakt
+        het vettig en smakeloos. Neem parmezaan, of laat de kaas weg.
+
+- key: wrap
+  name: Wrap
+  meal_kind: meal
+  base_prep_minutes: 10
+  slots:
+    - key: wrap
+      name: Soort wrap
+      required: true
+      default_grams: 62
+      candidates:
+        - {food_type: wrap_tortilla}
+        - {food_type: wrap_volkoren}
+        - {food_type: wrap_proteine}
+    - key: meat
+      name: Soort vlees
+      required: true
+      default_grams: 100
+      candidates:
+        - {food_type: kipfilet_rauw, grams: 110}
+        - {food_type: rundergehakt_mager}
+        - {food_type: biefstuk, grams: 110}
+        - {food_type: kipfilet_vleeswaren, grams: 60}
+        - {food_type: vega_gehakt}
+    - key: sauce
+      name: Saus
+      required: true
+      default_grams: 30
+      candidates:
+        - {food_type: yoghurtsaus_knoflook}
+        - {food_type: knoflooksaus, grams: 20}
+        - {food_type: ketchup, grams: 20}
+        - {food_type: huttenkase, grams: 40}
+    - key: greens
+      name: Groente
+      required: true
+      default_grams: 40
+      candidates:
+        - {food_type: ijsbergsla}
+        - {food_type: rucola, grams: 25}
+        - {food_type: sla}
+        - {food_type: gesneden_groente_mix, grams: 60}
+  rules:
+    - kind: requirement
+      severity: incomplete
+      when: {slot: meat, food_types: [kipfilet_vleeswaren]}
+      requires:
+        - {slot: sauce}
+        - {slot: greens}
+      min_satisfied: 2
+      note: >
+        Kipfilet uit een pakje is droog en smaakt nergens naar zonder saus en
+        iets knapperigs erbij. Met allebei erin is het een prima snelle lunch.
+    - kind: incompatible
+      severity: note
+      when: {slot: sauce, food_types: [ketchup]}
+      requires:
+        - {slot: meat, food_types: [biefstuk]}
+      note: >
+        Ketchup op biefstuk kan, maar je betaalt voor het vlees en proeft de
+        ketchup. Een yoghurtsaus laat de biefstuk beter tot zijn recht komen.

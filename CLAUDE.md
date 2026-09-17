@@ -648,11 +648,15 @@ src/bonusrank/
   adapters/aldi.py    Aldi NL (Next.js data route + algoliaDataMap)
   parsers/devalue.py  generic Nuxt __NUXT_DATA__ resolver (Jumbo)
   ingest.py           ingest_ah (AH's segments) + ingest_flat (Jumbo/Aldi, generic)
-  prices.py           food_type -> cheapest current EUR/kg; the base price catalogue
+  prices.py           food_type -> cheapest current EUR/kg; the base price catalogue.
+                       food_type_prices (batch) is the primitive; the singular wraps it
   archetypes.py       ready-made vs DIY; the substitution engine (brief section 4)
   optimiser.py        per-meal LP: cheapest normal-shaped mix hitting an archetype's
                        protein target, bound by a meal/snack/drink macro-floor profile
+  templates.py        the customiser: a template's slots, each with its candidates
+                       priced and ranked for this week (milestone 12)
 data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
+data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
 docs/BRIEF.md         the full dossier — source of truth
 data/raw/             persisted responses (replay source; keep)
@@ -773,11 +777,83 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     designed and built - that is a separate, much larger milestone, not yet
     started.
 
-Current position: **milestones 1-11 complete.** 608 Python tests, plus the
+12. ~~Meal templates: slots, ranked candidates, compatibility rules.~~ **Done,
+    Python side only - the app work is milestone 13 and has not started.** The
+    Meals tab could only ever show 8 hand-authored archetypes, two of which are
+    the only `meal_kind: meal` entries in the seed. A TEMPLATE
+    (`data/seed/templates.yaml`, `templates.py`, `bonusrank templates`) is a
+    shape with holes in it instead: Pasta = a pasta, a meat, a sauce, optional
+    cheese and greens, each hole offering a ranked list of real candidates
+    priced from this week's data. Measured 2026-09-17, the AH pasta sauce slot
+    ranks pesto first and Jumbo's ranks tinned tomatoes first - the ranking is
+    genuinely price-driven, which is the whole point.
+
+    **"Slot" now means a component of a dish.** `archetypes.meal_slots` (a time
+    of day) was renamed `day_parts` in this milestone for exactly that reason -
+    12 call sites, done while nothing depended on the new meaning.
+
+    Four decisions the user made, recorded so they are not re-litigated:
+    compatibility is **authored in the seed**, never derived; saved meals will
+    live **on-device only**; the catalogue will eventually cover **every scraped
+    SKU**; and ranking is **split** - Python ranks candidates, Kotlin re-prices
+    totals locally.
+
+    The rule language is one predicate vocabulary (`{slot?, food_types?}`) with
+    two kinds. A `requirement` holds when at least `min_satisfied` of its
+    `requires` predicates are present - a disjunction, because the user's own
+    example ("pasta pesto needs some more ingredients") means "needs cheese OR
+    greens", which a single target slot cannot express. `severity`
+    (`incomplete`/`wrong`/`note`) keeps "this dish is unfinished" from reading
+    like "these two do not go together". Every rule carries a required, non-empty
+    `note` - the only text the app will ever show about it - with the same
+    authored status as `taste_delta_note`. A rule naming a food type no slot
+    offers could never fire and is **rejected at load time**, not left to rot.
+
+    Two rules carried over from `archetypes.py` because they are what keeps the
+    output honest: an unpriced candidate stays in its slot with `eur=None`
+    **ranked last, never dropped** (a slot that silently loses options presents a
+    shorter menu than the seed says it has), and a missing macro stays `None`
+    rather than becoming zero. Candidates rank by **serving cost**, not by
+    €/kg - the grams differ within a slot on purpose (40 g pesto vs 200 g tinned
+    tomatoes) and per-kilo would rank the small portion last for a reason that
+    has nothing to do with what the meal costs.
+
+    `prices.food_type_prices` (batch, `f.key IN (...)`) was added and
+    `food_type_price` **reimplemented as a wrapper over it** - two independent
+    copies of the validity-window and personal-offer filters would drift, and the
+    one that drifts is the one that forgets a filter.
+
+    11 new food types were seeded for the two templates. The first live price
+    sweep queued 5 of them as `unmatched_sku`/`unparsed_unit_size`, which is the
+    review lane working: 4 were fixed with `contains:` rules in
+    `match_overrides.yaml` (the designed lever, never a lower threshold), and
+    `rucola`'s English alias `rocket` was removed after it matched "Nestle Pirulo
+    smarties rocket" - the same lesson the `extra` chewing-gum entry already
+    taught. `rucola` still has no usable price and honestly shows as `?`.
+
+    Export is `schema_version: 2`. Template bodies ship **once at top level**,
+    not per chain: the slots, candidates and above all the authored rules are
+    chain-independent, and three copies in one file is three chances to drift.
+    Prices ship per chain under `chains.{chain}.template_prices`, and a new
+    top-level `food_types` catalogue (204 entries, ~36 KB) carries macros and
+    `g_per_unit` so the app can price "100 g ketchup" or "4 boiled eggs"
+    locally. `eur_per_kg` ships as its own field rather than something to divide
+    back out of `price_eur`, so a null rate stays null through a local recompute
+    instead of becoming 0.0.
+
+    **Not done, deliberately:** the Android customiser screen, local re-pricing,
+    saved meals, arbitrary extras and full-catalogue browsing. Also deferred:
+    tag-derived slot candidates (`template_slot_candidates.source` exists now so
+    that lane can arrive through `_add_column_if_missing` rather than a rebuild)
+    and global, template-independent rules (`template_rules.template_id` is
+    already nullable for it).
+
+Current position: **milestones 1-12 complete.** 667 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`).
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /
+`bonusrank templates --chain ah|jumbo|aldi [--template pasta]` /
 `bonusrank list --chain ah|jumbo|aldi --sort protein-per-euro` / `bonusrank prices` /
 `bonusrank matches` / `bonusrank review`.
 

@@ -27,6 +27,19 @@ contains:
   # spelling Jumbo actually prints ("LiGA Proteïne Reep Pinda").
   "proteïne reep": proteine_reep
   "fusion peanuts": pindas
+  # Milestone 12, the customiser's own slot candidates. Each of these was
+  # queued as unmatched_sku on the first live price sweep with a results list
+  # full of the obviously-right product, which is exactly what this lane is
+  # for. The alternative - widening the aliases until the fuzzy lane catches
+  # them - is the thing CLAUDE.md says never to do.
+  "pesto alla genovese": pesto_groen
+  "genovese pesto": pesto_groen
+  "pomodoro e mascarpone pastasaus": pastasaus_tomaat
+  "roerbakgroente": gesneden_groente_mix
+  "wokgroente": gesneden_groente_mix
+  # 30+ specifically: the variant guard correctly refuses to cost a 45+ or 48+
+  # grated cheese as a 30+ one, and it should keep refusing.
+  "30+ geraspt": kaas_geraspt_30
 
 # Not food, or not rankable. Suppressed from needs_review so the queue stays
 # worth reading - a queue full of crockery is a queue nobody opens.

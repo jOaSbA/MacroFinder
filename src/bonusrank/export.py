@@ -30,6 +30,7 @@ from typing import Any
 from .archetypes import Comparison, PricedComposition, PricedReadyMade, compare
 from .optimiser import OptimisedComposition, RejectedPlan
 from .ranking import RankedOffer, rank
+from .templates import PricedCandidate, PricedTemplate, price_templates
 
 DEFAULT_CHAINS = ("ah", "jumbo", "aldi")
 
@@ -60,13 +61,122 @@ def build_export(
             # would never display anyway - most of a chain's weekly offers
             # never match a food type at all.
             "offers": [_offer_json(o) for o in rank(conn, chain=chain, on=today) if o.food_type],
+            # Milestone 12: what each template's slot candidates cost at THIS
+            # chain. The template bodies themselves ship once, below.
+            "template_prices": {
+                t.key: _template_prices_json(t)
+                for t in price_templates(conn, chain=chain, on=today)
+            },
         }
 
     return {
         "generated_at": generated_at,
-        "schema_version": 1,
+        "schema_version": 2,
         "chains": chain_payloads,
+        # Chain-independent, so shipped once. Putting the slots, the candidate
+        # lists and above all the authored rules under each of three chains
+        # would mean three copies of the same judgement in one file, and three
+        # chances for them to drift apart.
+        "templates": [_template_json(t) for t in price_templates(conn, on=today)],
+        # The food-type catalogue. The app needs macros and a per-kilo rate to
+        # re-price locally when the user changes a quantity or adds an extra
+        # ("100 g ketchup", "4 boiled eggs" - which is what g_per_unit is for).
+        "food_types": _food_types_json(conn),
     }
+
+
+def _template_json(template: PricedTemplate) -> dict[str, Any]:
+    """The authored body of a template: shape and rules, no prices."""
+    return {
+        "key": template.key,
+        "name": template.name,
+        "meal_kind": template.meal_kind,
+        "base_prep_minutes": template.base_prep_minutes,
+        "slots": [
+            {
+                "key": slot.key,
+                "name": slot.name,
+                "required": slot.required,
+                "default_grams": slot.default_grams,
+                "candidates": [c.food_type_key for c in slot.candidates],
+            }
+            for slot in template.slots
+        ],
+        "rules": [
+            {
+                "kind": rule.kind,
+                "when": rule.when,
+                "requires": list(rule.requires),
+                "min_satisfied": rule.min_satisfied,
+                "severity": rule.severity,
+                "note": rule.note,
+            }
+            for rule in template.rules
+        ],
+    }
+
+
+def _template_prices_json(template: PricedTemplate) -> dict[str, Any]:
+    """Per-chain: each slot's candidates, ranked, with what they cost here."""
+    return {
+        slot.key: [_candidate_json(c) for c in slot.candidates]
+        for slot in template.slots
+    }
+
+
+def _candidate_json(candidate: PricedCandidate) -> dict[str, Any]:
+    price = candidate.price
+    return {
+        "food_type": candidate.food_type_key,
+        "name": candidate.name_nl,
+        "grams": candidate.grams,
+        "price_eur": candidate.eur,
+        # The primitive the app multiplies when the user changes the quantity.
+        # Null stays null through that arithmetic; it never becomes 0.0.
+        "eur_per_kg": candidate.eur_per_kg,
+        "protein_g": candidate.protein_g,
+        "kcal": candidate.kcal,
+        "carbs_g": candidate.carbs_g,
+        "fat_g": candidate.fat_g,
+        "eur_per_g_protein": candidate.eur_per_g_protein,
+        "is_pantry": candidate.is_pantry,
+        # Copy rule 3 and the PERSONAL corollary apply to a ranked candidate
+        # exactly as they do to a ranked offer.
+        "promo_text": price.promo_raw_text if price else None,
+        "required_quantity": price.required_quantity if price else None,
+        "is_personal_offer": price.is_personal if price else False,
+        "sku": price.sku if price else None,
+    }
+
+
+def _food_types_json(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Every seeded food type, so the app can price an arbitrary extra.
+
+    No prices here - those are per chain and live in `template_prices`, and a
+    food type with no current price simply has no entry there. Absent means
+    unknown, exactly as `food_type_prices` returning no key does.
+    """
+    rows = conn.execute(
+        "SELECT key, name_nl, meal_kind, g_per_unit, protein_per_100g, "
+        "kcal_per_100g, carbs_per_100g, fat_per_100g FROM food_types ORDER BY key"
+    ).fetchall()
+    return [
+        {
+            "key": row["key"],
+            "name": row["name_nl"],
+            "meal_kind": row["meal_kind"],
+            # "4 boiled eggs" is this field times four. Null where a food has
+            # no sensible unit (you do not buy rice by the unit).
+            "g_per_unit": row["g_per_unit"],
+            "macros_per_100g": {
+                "protein_g": row["protein_per_100g"],
+                "kcal": row["kcal_per_100g"],
+                "carbs_g": row["carbs_per_100g"],
+                "fat_g": row["fat_per_100g"],
+            },
+        }
+        for row in rows
+    ]
 
 
 def write_export(conn: sqlite3.Connection, out: Path, **kwargs) -> dict[str, Any]:
@@ -138,7 +248,7 @@ def _comparison_json(comparison: Comparison) -> dict[str, Any]:
         "key": archetype.key,
         "name": archetype.name,
         "meal_kind": archetype.meal_kind,
-        "meal_slots": list(archetype.meal_slots),
+        "day_parts": list(archetype.day_parts),
         "serving_g": archetype.serving_g,
         "target_protein_g": archetype.target_protein_g,
         "ready_made": _ready_made_json(comparison.ready_made),

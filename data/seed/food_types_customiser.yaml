@@ -1,0 +1,173 @@
+# Food types the meal customiser's templates need and the existing seed did not
+# have (milestone 12). Same rules as every other food_types*.yaml: the loader
+# globs them all, a duplicate key across files raises, and every row is
+# source='manual' / confidence='seed' until a NEVO code replaces it.
+#
+# Figures are generic supermarket own-brand label values. Where a variant
+# genuinely changes the protein, it gets its own key rather than an averaged
+# one - the same reason kwark is split magere/halfvolle/volle.
+
+# --- sauzen ---------------------------------------------------------------
+
+- key: pesto_groen
+  meal_kind: ingredient
+  name_nl: groene pesto
+  state: solid
+  protein_per_100g: 4.5
+  kcal_per_100g: 450
+  carbs_per_100g: 4.5
+  fat_per_100g: 45.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 5
+  freezable: false
+  aliases: [pesto, pesto genovese, basilicum pesto, pesto verde]
+
+- key: pastasaus_tomaat
+  meal_kind: ingredient
+  name_nl: pastasaus tomaat
+  state: solid
+  protein_per_100g: 1.5
+  kcal_per_100g: 60
+  carbs_per_100g: 8.0
+  fat_per_100g: 2.0
+  shelf_life_days_unopened: 540
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [pastasaus, tomatensaus, pomodoro saus, saus voor pasta]
+
+- key: ketchup
+  meal_kind: ingredient
+  name_nl: tomatenketchup
+  state: solid
+  protein_per_100g: 1.2
+  kcal_per_100g: 100
+  carbs_per_100g: 23.0
+  fat_per_100g: 0.1
+  shelf_life_days_unopened: 540
+  shelf_life_days_opened: 60
+  freezable: false
+  aliases: [ketchup, tomatenketchup, curry ketchup]
+
+- key: knoflooksaus
+  meal_kind: ingredient
+  name_nl: knoflooksaus
+  state: solid
+  protein_per_100g: 1.5
+  kcal_per_100g: 300
+  carbs_per_100g: 6.0
+  fat_per_100g: 30.0
+  shelf_life_days_unopened: 180
+  shelf_life_days_opened: 30
+  freezable: false
+  aliases: [knoflooksaus, garlic sauce, knoflook dressing]
+
+- key: yoghurtsaus_knoflook
+  meal_kind: ingredient
+  name_nl: yoghurt-knoflooksaus
+  state: solid
+  protein_per_100g: 3.0
+  kcal_per_100g: 120
+  carbs_per_100g: 5.0
+  fat_per_100g: 9.0
+  shelf_life_days_unopened: 60
+  shelf_life_days_opened: 7
+  freezable: false
+  aliases: [yoghurtsaus, yoghurt knoflooksaus, tzatziki]
+
+# --- groente --------------------------------------------------------------
+
+- key: rucola
+  meal_kind: ingredient
+  name_nl: rucola
+  state: solid
+  protein_per_100g: 2.6
+  kcal_per_100g: 25
+  carbs_per_100g: 2.1
+  fat_per_100g: 0.7
+  fiber_per_100g: 1.6
+  shelf_life_days_unopened: 5
+  shelf_life_days_opened: 3
+  freezable: false
+  # NOT "rocket": the English word matched "Nestle Pirulo smarties rocket" and
+  # "Little Rocket Knijpfruit" on the first live price sweep. Same lesson the
+  # `extra` chewing-gum entry already taught - a generic English word is never
+  # safe as an alias on its own.
+  aliases: [rucola, rucolasla, rucola sla]
+
+- key: ijsbergsla
+  meal_kind: ingredient
+  name_nl: ijsbergsla
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 14
+  carbs_per_100g: 1.8
+  fat_per_100g: 0.1
+  fiber_per_100g: 1.2
+  shelf_life_days_unopened: 10
+  shelf_life_days_opened: 4
+  freezable: false
+  aliases: [ijsbergsla, ijsberg sla, iceberg sla]
+
+# The ready-cut packet, kept as its own food type rather than an alias of the
+# whole vegetable: it is priced per kilo quite differently, and choosing
+# between cutting your own and buying it cut is exactly the tradeoff the
+# customiser is meant to surface.
+- key: gesneden_groente_mix
+  meal_kind: ingredient
+  name_nl: gesneden groentemix (zak)
+  state: solid
+  protein_per_100g: 1.8
+  kcal_per_100g: 35
+  carbs_per_100g: 4.5
+  fat_per_100g: 0.4
+  fiber_per_100g: 2.2
+  shelf_life_days_unopened: 6
+  shelf_life_days_opened: 2
+  freezable: false
+  aliases: [roerbakmix, wokgroente, gesneden groente, groentemix, slamix]
+
+# --- wraps ----------------------------------------------------------------
+
+- key: wrap_volkoren
+  meal_kind: ingredient
+  name_nl: volkoren wrap
+  state: solid
+  g_per_unit: 62
+  protein_per_100g: 9.0
+  kcal_per_100g: 300
+  carbs_per_100g: 45.0
+  fat_per_100g: 7.0
+  fiber_per_100g: 6.0
+  shelf_life_days_unopened: 90
+  shelf_life_days_opened: 5
+  freezable: true
+  aliases: [volkoren wrap, volkoren tortilla, bruine wrap]
+
+- key: wrap_proteine
+  meal_kind: ingredient
+  name_nl: proteine wrap
+  state: solid
+  g_per_unit: 62
+  protein_per_100g: 20.0
+  kcal_per_100g: 280
+  carbs_per_100g: 25.0
+  fat_per_100g: 8.0
+  fiber_per_100g: 10.0
+  shelf_life_days_unopened: 90
+  shelf_life_days_opened: 5
+  freezable: true
+  aliases: [proteine wrap, protein wrap, eiwitwrap, high protein wrap]
+
+# --- vlees ----------------------------------------------------------------
+
+- key: biefstuk
+  meal_kind: ingredient
+  name_nl: biefstuk (rauw)
+  state: solid
+  protein_per_100g: 21.0
+  kcal_per_100g: 125
+  fat_per_100g: 4.0
+  shelf_life_days_unopened: 5
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [biefstuk, kogelbiefstuk, steak, runderbiefstuk]

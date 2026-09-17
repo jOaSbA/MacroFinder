@@ -165,7 +165,7 @@ ARCHETYPE_GLOB = "archetypes*.yaml"
 
 _ARCHETYPE_COLUMNS = (
     "key", "name", "serving_g", "target_protein_g", "texture", "temperature",
-    "meal_slots", "max_prep_minutes", "meal_kind",
+    "day_parts", "max_prep_minutes", "meal_kind",
 )
 _COMPOSITION_COLUMNS = (
     "name", "effort_minutes", "equipment", "similarity_confidence",
@@ -217,9 +217,9 @@ def load_archetypes(conn: sqlite3.Connection, path: Path | None = None) -> dict[
     for row in rows:
         _validate_archetype(row, known_food_types)
         values = [row.get(c) for c in _ARCHETYPE_COLUMNS]
-        # meal_slots is a JSON list in the column; the seed writes a YAML list.
-        values[_ARCHETYPE_COLUMNS.index("meal_slots")] = (
-            json.dumps(row["meal_slots"]) if row.get("meal_slots") else None
+        # day_parts is a JSON list in the column; the seed writes a YAML list.
+        values[_ARCHETYPE_COLUMNS.index("day_parts")] = (
+            json.dumps(row["day_parts"]) if row.get("day_parts") else None
         )
         conn.execute(
             f"INSERT INTO archetypes ({','.join(_ARCHETYPE_COLUMNS)}) "
@@ -332,3 +332,215 @@ def _validate_archetype(row: dict, known_food_types: dict[str, int]) -> None:
                 )
             if not item.get("grams", 0) > 0:
                 raise ValueError(f"{label}: {food_type} needs positive grams")
+
+
+# --- meal templates (milestone 12) ---------------------------------------
+
+TEMPLATE_GLOB = "templates*.yaml"
+
+_SEVERITIES = ("incomplete", "wrong", "note")
+_RULE_KINDS = ("requirement", "incompatible")
+
+
+def template_files(directory: Path | None = None) -> list[Path]:
+    """Every meal-template seed file. Its own glob, like `archetype_files`."""
+    return sorted((directory or SEED_DIR).glob(TEMPLATE_GLOB))
+
+
+def load_templates(conn: sqlite3.Connection, path: Path | None = None) -> dict[str, int]:
+    """Load meal templates, their slots, candidates and compatibility rules.
+
+    A template is a shape with holes in it; an archetype is a whole dish
+    somebody wrote down. Both are authored, and this loader validates with the
+    same discipline `load_archetypes` uses: a bad row fails with the template's
+    key in the message rather than as a bare CHECK violation.
+
+    Re-runnable, and slots/candidates/rules are replaced wholesale per template
+    for the same reason compositions are - an edited template drops candidates,
+    and an upsert would keep the removed ones.
+
+    Note that this means `template_slots.id` changes on every run. Nothing
+    outside this database may key on it; saved meals on the phone key on
+    (template_key, slot_key, food_type_key) strings for exactly that reason.
+    """
+    paths = [path] if path else template_files()
+    rows: list[dict] = []
+    seen: dict[str, Path] = {}
+    for file in paths:
+        for row in yaml.safe_load(file.read_text(encoding="utf-8")) or []:
+            key = row["key"]
+            if key in seen:
+                raise ValueError(
+                    f"duplicate template key {key!r} in {file.name} "
+                    f"(already defined in {seen[key].name})"
+                )
+            seen[key] = file
+            rows.append(row)
+
+    known_food_types = {
+        r["key"]: r["id"] for r in conn.execute("SELECT id, key FROM food_types")
+    }
+    counts = {"templates": 0, "slots": 0, "candidates": 0, "rules": 0}
+
+    for row in rows:
+        _validate_template(row, known_food_types)
+        conn.execute(
+            "INSERT INTO meal_templates (key, name, meal_kind, base_prep_minutes) "
+            "VALUES (?,?,?,?) ON CONFLICT(key) DO UPDATE SET "
+            "name=excluded.name, meal_kind=excluded.meal_kind, "
+            "base_prep_minutes=excluded.base_prep_minutes",
+            (row["key"], row["name"], row["meal_kind"], row.get("base_prep_minutes")),
+        )
+        template_id = conn.execute(
+            "SELECT id FROM meal_templates WHERE key=?", (row["key"],)
+        ).fetchone()[0]
+        counts["templates"] += 1
+
+        conn.execute("DELETE FROM template_slots WHERE template_id=?", (template_id,))
+        conn.execute("DELETE FROM template_rules WHERE template_id=?", (template_id,))
+
+        for order, slot in enumerate(row["slots"]):
+            default_grams = slot["default_grams"]
+            conn.execute(
+                "INSERT INTO template_slots "
+                "(template_id, key, name, required, sort_order, default_grams) "
+                "VALUES (?,?,?,?,?,?)",
+                (template_id, slot["key"], slot["name"],
+                 int(slot.get("required", True)), order, default_grams),
+            )
+            slot_id = conn.execute("SELECT last_insert_rowid()").fetchone()[0]
+            counts["slots"] += 1
+
+            for candidate in slot["candidates"]:
+                conn.execute(
+                    "INSERT INTO template_slot_candidates "
+                    "(slot_id, food_type_id, grams, pantry_price_eur_per_kg, source) "
+                    "VALUES (?,?,?,?,'seed')",
+                    (slot_id, known_food_types[candidate["food_type"]],
+                     candidate.get("grams", default_grams),
+                     candidate.get("pantry_price_eur_per_kg")),
+                )
+                counts["candidates"] += 1
+
+        for rule in row.get("rules") or []:
+            conn.execute(
+                "INSERT INTO template_rules (template_id, kind, when_predicate, "
+                "requires, min_satisfied, severity, note) VALUES (?,?,?,?,?,?,?)",
+                (template_id, rule["kind"], json.dumps(rule["when"]),
+                 json.dumps(rule.get("requires")) if rule.get("requires") else None,
+                 rule.get("min_satisfied", 1), rule["severity"], rule["note"]),
+            )
+            counts["rules"] += 1
+
+    conn.commit()
+    return counts
+
+
+def _validate_template(row: dict, known_food_types: dict[str, int]) -> None:
+    key = row.get("key")
+    if not key or not row.get("name"):
+        raise ValueError(f"template needs both a key and a name: {row!r}")
+
+    meal_kind = row.get("meal_kind")
+    if meal_kind not in ("meal", "snack", "drink"):
+        raise ValueError(
+            f"{key}: meal_kind must be meal/snack/drink, got {meal_kind!r}. "
+            "It decides which macro-floor profile a composed meal is judged against."
+        )
+
+    slots = row.get("slots") or []
+    if not slots:
+        raise ValueError(f"{key}: a template with no slots has nothing to customise")
+
+    slot_keys: set[str] = set()
+    # Every food type offered anywhere in this template. A rule may only speak
+    # about these - see the rule loop below for why that matters.
+    offered: set[str] = set()
+    for slot in slots:
+        slot_key = slot.get("key")
+        label = f"{key}/{slot_key}"
+        if not slot_key or not slot.get("name"):
+            raise ValueError(f"{key}: every slot needs both a key and a name: {slot!r}")
+        if slot_key in slot_keys:
+            raise ValueError(f"{key}: duplicate slot key {slot_key!r}")
+        slot_keys.add(slot_key)
+
+        if not slot.get("default_grams", 0) > 0:
+            raise ValueError(
+                f"{label}: default_grams must be positive. Every slot states a "
+                "serving size so no candidate can end up without one."
+            )
+
+        candidates = slot.get("candidates") or []
+        if not candidates:
+            raise ValueError(f"{label}: a slot with no candidates cannot be filled")
+
+        in_this_slot: set[str] = set()
+        for candidate in candidates:
+            food_type = candidate.get("food_type")
+            if food_type not in known_food_types:
+                raise ValueError(
+                    f"{label}: unknown food_type {food_type!r}. Add it to a "
+                    "food_types seed file, or fix the typo."
+                )
+            # Across slots is fine and intended; twice in ONE slot would hit
+            # template_slot_candidates' primary key as a bare IntegrityError.
+            if food_type in in_this_slot:
+                raise ValueError(f"{label}: {food_type} listed twice in one slot")
+            in_this_slot.add(food_type)
+            if not candidate.get("grams", slot["default_grams"]) > 0:
+                raise ValueError(f"{label}: {food_type} needs positive grams")
+            offered.add(food_type)
+
+    for index, rule in enumerate(row.get("rules") or []):
+        label = f"{key}/rule[{index}]"
+        if rule.get("kind") not in _RULE_KINDS:
+            raise ValueError(
+                f"{label}: kind must be one of {_RULE_KINDS}, got {rule.get('kind')!r}"
+            )
+        if rule.get("severity") not in _SEVERITIES:
+            raise ValueError(
+                f"{label}: severity must be one of {_SEVERITIES}, got "
+                f"{rule.get('severity')!r}. 'incomplete' (unfinished dish) and "
+                "'wrong' (these do not go together) are different messages."
+            )
+        note = rule.get("note")
+        if not (isinstance(note, str) and note.strip()):
+            raise ValueError(
+                f"{label}: note is required and must say WHY, in your own words "
+                "- it is the only thing the app shows the user about this rule."
+            )
+
+        requires = rule.get("requires") or []
+        if not requires:
+            raise ValueError(
+                f"{label}: every rule needs a `requires` list - it is the other "
+                "side of the rule (what must also be there, or what must not be)"
+            )
+        predicates = [rule.get("when"), *requires]
+        min_satisfied = rule.get("min_satisfied", 1)
+        if not 1 <= min_satisfied <= len(requires):
+            raise ValueError(
+                f"{label}: min_satisfied is {min_satisfied}, which no combination "
+                f"of its {len(requires)} predicates can reach"
+            )
+        for predicate in predicates:
+            if not isinstance(predicate, dict) or not predicate:
+                raise ValueError(f"{label}: a predicate must be a non-empty mapping")
+            slot_key = predicate.get("slot")
+            if slot_key is not None and slot_key not in slot_keys:
+                raise ValueError(
+                    f"{label}: predicate names slot {slot_key!r}, which this "
+                    f"template does not have. Slots are {sorted(slot_keys)}."
+                )
+            for food_type in predicate.get("food_types") or []:
+                if food_type not in known_food_types:
+                    raise ValueError(
+                        f"{label}: unknown food_type {food_type!r} in a predicate"
+                    )
+                if food_type not in offered:
+                    raise ValueError(
+                        f"{label}: predicate names {food_type!r}, which no slot of "
+                        "this template offers - the rule could never fire. Add it "
+                        "as a candidate, or remove it from the rule."
+                    )

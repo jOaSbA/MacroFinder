@@ -78,11 +78,12 @@ def cmd_fetch(args: argparse.Namespace) -> int:
 # ----------------------------------------------------------------- seed
 
 def cmd_seed(args: argparse.Namespace) -> int:
-    from .seed import load_archetypes, load_seed
+    from .seed import load_archetypes, load_seed, load_templates
 
     with connect() as conn:
         counts = load_seed(conn)
         archetypes = load_archetypes(conn)
+        templates = load_templates(conn)
         total = conn.execute("SELECT COUNT(*) FROM food_types").fetchone()[0]
         with_protein = conn.execute(
             "SELECT COUNT(*) FROM food_types WHERE protein_per_100g IS NOT NULL"
@@ -95,6 +96,10 @@ def cmd_seed(args: argparse.Namespace) -> int:
           f"({archetypes['compositions']} compositions, {archetypes['items']} items, "
           f"{archetypes['ready_made_rules']} ready-made rules)")
     print("every composition states what it tastes like INSTEAD - see `bonusrank compare`.\n")
+    print(f"meal templates seeded: {templates['templates']}  "
+          f"({templates['slots']} slots, {templates['candidates']} candidates, "
+          f"{templates['rules']} compatibility rules)")
+    print("see `bonusrank templates` for what each slot costs this week.\n")
     return 0
 
 
@@ -361,6 +366,70 @@ def cmd_prices(args: argparse.Namespace) -> int:
     return 0
 
 
+# ------------------------------------------------------------ templates
+
+def cmd_templates(args: argparse.Namespace) -> int:
+    """What each slot of each meal template costs this week. Milestone 12.
+
+    This is the review lane for the customiser, the way `bonusrank matches` is
+    the review lane for the matcher: the ranked candidate list a slot offers is
+    only trustworthy if you can read it. Run it against two chains and the
+    orders should differ - that is the proof the ranking is price-driven.
+    """
+    from .templates import price_templates
+
+    with connect() as conn:
+        templates = price_templates(
+            conn, chain=args.chain, include_personal=args.include_personal
+        )
+
+    if args.template:
+        templates = tuple(t for t in templates if t.key == args.template)
+        if not templates:
+            print(f"No template {args.template!r}. Run `bonusrank seed`, or see "
+                  "data/seed/templates.yaml.", file=sys.stderr)
+            return 1
+    if not templates:
+        print("No templates seeded - run `bonusrank seed` first.", file=sys.stderr)
+        return 1
+
+    print(f"\n=== {args.chain.upper()} meal templates ===\n")
+
+    for template in templates:
+        prep = f"{template.base_prep_minutes} min" if template.base_prep_minutes else "?"
+        print(f"{template.name}  ({template.meal_kind}, ~{prep})")
+
+        for slot in template.slots:
+            tag = "" if slot.required else "  (optional)"
+            print(f"\n  {slot.name}{tag}")
+            for candidate in slot.candidates:
+                # Copy rule 3: a candidate that is cheapest because of a 2-for
+                # deal means two of them in the fridge, so say so here.
+                note = ""
+                price = candidate.price
+                if price is not None and price.required_quantity > 1:
+                    note = f"  (buy {price.required_quantity})"
+                if price is not None and price.promo_raw_text:
+                    note += f"  {price.promo_raw_text[:26]}"
+                if candidate.is_pantry:
+                    note += "  (pantry price, not promo data)"
+                print(f"    {candidate.name_nl[:26]:<28}"
+                      f"{candidate.grams:5.0f} g  "
+                      f"{EUR}{_fmt(candidate.eur, '5.2f')}  "
+                      f"{_fmt(candidate.protein_g, '5.1f')} g P  "
+                      f"{_fmt(candidate.eur_per_g_protein, '6.3f')} {EUR}/g P{note}")
+
+        if template.rules:
+            print("\n  Combination rules (authored - the app warns, never blocks):")
+            for rule in template.rules:
+                print(f"    [{rule.severity}] {rule.note}")
+        print()
+
+    print("An unpriced candidate is shown with ? and ranked last, never dropped -")
+    print("\"we have no price for this right now\" is not \"this is not an option\".\n")
+    return 0
+
+
 # -------------------------------------------------------------- compare
 
 def cmd_compare(args: argparse.Namespace) -> int:
@@ -597,6 +666,13 @@ def main(argv: list[str] | None = None) -> int:
     cmp_.add_argument("--include-personal", action="store_true",
                       help="include personal offers, which are not available to everyone")
     cmp_.set_defaults(func=cmd_compare)
+
+    tmpl = sub.add_parser("templates", help="what each meal-template slot costs now")
+    tmpl.add_argument("--chain", default="ah", choices=available_chains())
+    tmpl.add_argument("--template", help="one template key, e.g. pasta")
+    tmpl.add_argument("--include-personal", action="store_true",
+                      help="include personal offers, which are not available to everyone")
+    tmpl.set_defaults(func=cmd_templates)
 
     export = sub.add_parser("export", help="write a JSON snapshot for the Android app")
     export.add_argument("--out", default="docs/data/latest.json",

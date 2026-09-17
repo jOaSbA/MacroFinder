@@ -17,9 +17,29 @@ import pytest
 
 from bonusrank.db import connect
 from bonusrank.export import build_export, write_export
-from bonusrank.seed import load_archetypes, load_seed
+from bonusrank.seed import load_archetypes, load_seed, load_templates
 
 TODAY = date(2026, 9, 17)
+
+TEMPLATE_YAML = """
+- key: test_pasta
+  name: Test pasta
+  meal_kind: meal
+  base_prep_minutes: 15
+  slots:
+    - key: base
+      name: Base
+      default_grams: 100
+      candidates:
+        - {food_type: pasta_droog}
+        - {food_type: pasta_volkoren_droog}
+  rules:
+    - kind: requirement
+      severity: incomplete
+      when: {slot: base, food_types: [pasta_droog]}
+      requires: [{slot: base}]
+      note: witte pasta vraagt om iets met smaak erbij
+"""
 
 ARCHETYPE_YAML = """
 - key: test_pudding
@@ -48,6 +68,9 @@ def conn(tmp_path):
     path = tmp_path / "export_test.yaml"
     path.write_text(ARCHETYPE_YAML, encoding="utf-8")
     load_archetypes(connection, path=path)
+    template_path = tmp_path / "templates_test.yaml"
+    template_path.write_text(TEMPLATE_YAML, encoding="utf-8")
+    load_templates(connection, path=template_path)
     return connection
 
 
@@ -74,7 +97,11 @@ def test_the_export_has_one_entry_per_requested_chain(conn):
     payload = build_export(conn, chains=("ah", "jumbo"), on=TODAY)
     assert set(payload["chains"]) == {"ah", "jumbo"}
     assert "generated_at" in payload
-    assert payload["schema_version"] == 1
+    # Bumped to 2 at milestone 12, when templates and the food-type catalogue
+    # were added. The app decodes with ignoreUnknownKeys, so an older build
+    # keeps working against a newer file - the version is for humans reading
+    # a diff, not a gate.
+    assert payload["schema_version"] == 2
 
 
 def test_a_chain_with_nothing_ingested_yields_no_offers_not_an_error(conn):
@@ -163,3 +190,66 @@ def test_write_export_creates_parent_directories(conn, tmp_path):
     out = tmp_path / "nested" / "dir" / "latest.json"
     write_export(conn, out, chains=("ah",), on=TODAY)
     assert out.exists()
+
+
+# -- templates and the food-type catalogue (milestone 12) ---------------------
+
+def test_template_bodies_ship_once_not_once_per_chain(conn):
+    """The slots, the candidates and above all the authored rules are
+    chain-independent. Three copies in one file is three chances to drift."""
+    payload = build_export(conn, chains=("ah", "jumbo"), on=TODAY)
+
+    assert [t["key"] for t in payload["templates"]] == ["test_pasta"]
+    for chain in payload["chains"].values():
+        assert "rules" not in json.dumps(chain["template_prices"])
+
+
+def test_a_templates_rules_survive_the_round_trip_intact(conn):
+    rule = build_export(conn, chains=("ah",), on=TODAY)["templates"][0]["rules"][0]
+
+    assert rule["severity"] == "incomplete"
+    assert rule["note"], "the note is the only thing the app shows about a rule"
+    assert rule["when"] == {"slot": "base", "food_types": ["pasta_droog"]}
+    assert rule["requires"] == [{"slot": "base"}]
+    assert rule["min_satisfied"] == 1
+
+
+def test_slot_candidates_are_priced_per_chain(conn):
+    _priced(conn, "wi1", "AH Pasta", "pasta_droog", "500 g", 1.00, chain="ah")
+    _priced(conn, "j1", "Jumbo Pasta", "pasta_droog", "500 g", 0.50, chain="jumbo")
+    payload = build_export(conn, chains=("ah", "jumbo"), on=TODAY)
+
+    def price_of(chain):
+        entries = payload["chains"][chain]["template_prices"]["test_pasta"]["base"]
+        return next(e["price_eur"] for e in entries if e["food_type"] == "pasta_droog")
+
+    assert price_of("ah") == pytest.approx(0.20)
+    assert price_of("jumbo") == pytest.approx(0.10)
+
+
+def test_an_unpriced_candidate_ships_with_nulls_and_is_still_listed(conn):
+    entries = build_export(conn, chains=("ah",), on=TODAY)[
+        "chains"]["ah"]["template_prices"]["test_pasta"]["base"]
+
+    assert len(entries) == 2, "a slot must not lose options just because of price"
+    unpriced = entries[-1]
+    assert unpriced["price_eur"] is None
+    # The rate the app multiplies when the user changes the quantity. Null
+    # stays null; it must never arrive as 0.0.
+    assert unpriced["eur_per_kg"] is None
+
+
+def test_the_food_type_catalogue_carries_macros_and_a_unit_mass(conn):
+    """"4 boiled eggs" is g_per_unit times four, computed on the phone."""
+    catalogue = {f["key"]: f for f in build_export(conn, chains=("ah",), on=TODAY)["food_types"]}
+
+    assert len(catalogue) > 100
+    egg = catalogue["ei_gekookt"]
+    assert egg["g_per_unit"] is not None
+    assert egg["macros_per_100g"]["protein_g"] is not None
+
+
+def test_a_food_type_with_no_macro_ships_null_not_zero(conn):
+    conn.execute("UPDATE food_types SET fat_per_100g = NULL WHERE key = 'pasta_droog'")
+    catalogue = {f["key"]: f for f in build_export(conn, chains=("ah",), on=TODAY)["food_types"]}
+    assert catalogue["pasta_droog"]["macros_per_100g"]["fat_g"] is None
