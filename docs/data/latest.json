@@ -736,6 +736,7 @@
             "kcal": 69.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Pitloze rode druiven",
           "perishable": false,
           "price": {
@@ -767,6 +768,7 @@
             "kcal": 143.0,
             "protein_g": 12.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Vrije uitloop eieren M",
           "perishable": false,
           "price": {
@@ -798,6 +800,7 @@
             "kcal": 210.0,
             "protein_g": 4.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Toscana zongedroogde tomaten",
           "perishable": true,
           "price": {
@@ -829,6 +832,7 @@
             "kcal": 210.0,
             "protein_g": 4.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Pomodori secchi zongedroogde tomaten",
           "perishable": true,
           "price": {
@@ -860,6 +864,7 @@
             "kcal": 57.0,
             "protein_g": 0.4
           },
+          "meal_kind": "snack",
           "name": "Ola Festini peer",
           "perishable": true,
           "price": {
@@ -891,6 +896,7 @@
             "kcal": 57.0,
             "protein_g": 0.4
           },
+          "meal_kind": "snack",
           "name": "AH Conference los",
           "perishable": false,
           "price": {
@@ -922,6 +928,7 @@
             "kcal": 125.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biefstuk 2 stuks",
           "perishable": false,
           "price": {
@@ -953,6 +960,7 @@
             "kcal": 350.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Blooker Cacaopoeder",
           "perishable": false,
           "price": {
@@ -984,6 +992,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "AH Geschrapte worteltjes grootverpakking",
           "perishable": false,
           "price": {
@@ -1015,6 +1024,7 @@
             "kcal": 160.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Avocado eetrijp",
           "perishable": true,
           "price": {
@@ -1046,6 +1056,7 @@
             "kcal": 15.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH IJsbergsla",
           "perishable": true,
           "price": {
@@ -1077,6 +1088,7 @@
             "kcal": 250.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Mora Mini's kipnuggets",
           "perishable": false,
           "price": {
@@ -1108,6 +1120,7 @@
             "kcal": 180.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gerookte zalm",
           "perishable": false,
           "price": {
@@ -1139,6 +1152,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "AH Verse ananas stukjes",
           "perishable": false,
           "price": {
@@ -1170,6 +1184,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pangasiusfilet tuinkruiden",
           "perishable": false,
           "price": {
@@ -1201,6 +1216,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Rauwkost paprika",
           "perishable": false,
           "price": {
@@ -1232,6 +1248,7 @@
             "kcal": 300.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Geitenkaas bel licht pittig 50+ geraspt",
           "perishable": true,
           "price": {
@@ -1263,6 +1280,7 @@
             "kcal": 200.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Zalmfilet",
           "perishable": false,
           "price": {
@@ -1294,6 +1312,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Macaroni tradizionali",
           "perishable": false,
           "price": {
@@ -1325,6 +1344,7 @@
             "kcal": 57.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Blauwe bessen",
           "perishable": false,
           "price": {
@@ -1356,6 +1376,7 @@
             "kcal": 33.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "AH Magere melk",
           "perishable": true,
           "price": {
@@ -1387,6 +1408,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Aardappelschijfjes",
           "perishable": false,
           "price": {
@@ -1418,6 +1440,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Aardappelschijfjes",
           "perishable": false,
           "price": {
@@ -1449,6 +1472,7 @@
             "kcal": 20.0,
             "protein_g": 1.8
           },
+          "meal_kind": "ingredient",
           "name": "AH Andijvie fijngesneden grootverpakking",
           "perishable": false,
           "price": {
@@ -1480,6 +1504,7 @@
             "kcal": 190.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Kokosmelk",
           "perishable": false,
           "price": {
@@ -1511,6 +1536,7 @@
             "kcal": 350.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Zilvervliesrijst",
           "perishable": false,
           "price": {
@@ -1542,6 +1568,7 @@
             "kcal": 380.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "Kellogg's Cornflakes",
           "perishable": false,
           "price": {
@@ -1573,6 +1600,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Penne volkoren",
           "perishable": false,
           "price": {
@@ -1604,6 +1632,7 @@
             "kcal": 105.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Rio Mare Tonijn in water",
           "perishable": true,
           "price": {
@@ -1635,6 +1664,7 @@
             "kcal": 86.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Oranje zoete aardappel",
           "perishable": false,
           "price": {
@@ -1666,6 +1696,7 @@
             "kcal": 570.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Sesamzaad",
           "perishable": false,
           "price": {
@@ -1697,6 +1728,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch oven pommes frites",
           "perishable": false,
           "price": {
@@ -1728,6 +1760,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch originals kreukel friet",
           "perishable": false,
           "price": {
@@ -1759,6 +1792,7 @@
             "kcal": 170.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Scharrel kippenpoten 2 stuks",
           "perishable": false,
           "price": {
@@ -1790,6 +1824,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Goudse belegen geraspte kaas 50+",
           "perishable": false,
           "price": {
@@ -1821,6 +1856,7 @@
             "kcal": 380.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "AH Dikke rijstwafels meergranen",
           "perishable": false,
           "price": {
@@ -1852,6 +1888,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Spaghetti volkoren",
           "perishable": false,
           "price": {
@@ -1883,6 +1920,7 @@
             "kcal": 120.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Kikkererwten",
           "perishable": false,
           "price": {
@@ -1914,6 +1952,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch originals Franse friet",
           "perishable": false,
           "price": {
@@ -1945,6 +1984,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Franse frites",
           "perishable": false,
           "price": {
@@ -1976,6 +2016,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Pommes Frites",
           "perishable": false,
           "price": {
@@ -2007,6 +2048,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Pommes frites",
           "perishable": false,
           "price": {
@@ -2038,6 +2080,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Aardappel dobbelsteentjes",
           "perishable": true,
           "price": {
@@ -2069,6 +2112,7 @@
             "kcal": 57.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Blauwe bessen",
           "perishable": false,
           "price": {
@@ -2100,6 +2144,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Aardappelschijfjes",
           "perishable": false,
           "price": {
@@ -2131,6 +2176,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Knoflook",
           "perishable": false,
           "price": {
@@ -2162,6 +2208,7 @@
             "kcal": 33.0,
             "protein_g": 3.3
           },
+          "meal_kind": "drink",
           "name": "Alpro Sojadrink original",
           "perishable": true,
           "price": {
@@ -2193,6 +2240,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Zwarte bonen",
           "perishable": false,
           "price": {
@@ -2224,6 +2272,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Cervelaat",
           "perishable": false,
           "price": {
@@ -2255,6 +2304,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch originals Hollandse friet",
           "perishable": false,
           "price": {
@@ -2286,6 +2336,7 @@
             "kcal": 15.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH Fijngesneden ijsbergsla",
           "perishable": true,
           "price": {
@@ -2317,6 +2368,7 @@
             "kcal": 85.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Hollandse garnalen",
           "perishable": false,
           "price": {
@@ -2348,6 +2400,7 @@
             "kcal": 300.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Verse geitenkaas naturel 48+",
           "perishable": true,
           "price": {
@@ -2379,6 +2432,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Mini fusilli tradizionali",
           "perishable": false,
           "price": {
@@ -2410,6 +2464,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Mini penne tradizionali",
           "perishable": false,
           "price": {
@@ -2441,6 +2496,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Flinterdunne gegrilde beenham",
           "perishable": false,
           "price": {
@@ -2472,6 +2528,7 @@
             "kcal": 14.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "AH Rauwkost komkommer",
           "perishable": true,
           "price": {
@@ -2503,6 +2560,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Basmatirijst",
           "perishable": false,
           "price": {
@@ -2534,6 +2592,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Bio couscous",
           "perishable": false,
           "price": {
@@ -2565,6 +2624,7 @@
             "kcal": 95.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Surimi sticks",
           "perishable": true,
           "price": {
@@ -2596,6 +2656,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pangasiusfilet knoflook-citroen",
           "perishable": false,
           "price": {
@@ -2627,6 +2688,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Paprika mild gemalen",
           "perishable": false,
           "price": {
@@ -2658,6 +2720,7 @@
             "kcal": 355.0,
             "protein_g": 35.0
           },
+          "meal_kind": "ingredient",
           "name": "Two Cows Melkpoeder",
           "perishable": false,
           "price": {
@@ -2689,6 +2752,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Valle del sole Groene spliterwten",
           "perishable": false,
           "price": {
@@ -2720,6 +2784,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mini krieltjes",
           "perishable": true,
           "price": {
@@ -2751,6 +2816,7 @@
             "kcal": 130.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mager rundergehakt 300g",
           "perishable": false,
           "price": {
@@ -2782,6 +2848,7 @@
             "kcal": 220.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Brunswick Canadian style sardines",
           "perishable": true,
           "price": {
@@ -2813,6 +2880,7 @@
             "kcal": 350.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Duru Bulgur grof",
           "perishable": false,
           "price": {
@@ -2844,6 +2912,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Penne tradizionali",
           "perishable": false,
           "price": {
@@ -2875,6 +2944,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Fusilli tradizionali",
           "perishable": false,
           "price": {
@@ -2906,6 +2976,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Vlaamse friet",
           "perishable": false,
           "price": {
@@ -2937,6 +3008,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Spaghetti tradizionali",
           "perishable": false,
           "price": {
@@ -2968,6 +3040,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Tagliatelle all'uovo",
           "perishable": false,
           "price": {
@@ -2999,6 +3072,7 @@
             "kcal": 290.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Veluwse rookworst fijn",
           "perishable": false,
           "price": {
@@ -3030,6 +3104,7 @@
             "kcal": 290.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Veluwse rookworst grof",
           "perishable": false,
           "price": {
@@ -3061,6 +3136,7 @@
             "kcal": 200.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gerookte haringfilet",
           "perishable": false,
           "price": {
@@ -3092,6 +3168,7 @@
             "kcal": 40.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH Rauwkost Amsterdamse ui",
           "perishable": false,
           "price": {
@@ -3123,6 +3200,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Chorizo Pamplona",
           "perishable": false,
           "price": {
@@ -3154,6 +3232,7 @@
             "kcal": 110.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Tuinbonen fijn",
           "perishable": false,
           "price": {
@@ -3185,6 +3264,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Kruidenboter met knoflook",
           "perishable": false,
           "price": {
@@ -3216,6 +3296,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Baslicum olijven",
           "perishable": true,
           "price": {
@@ -3247,6 +3328,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Baslicum olijven",
           "perishable": true,
           "price": {
@@ -3278,6 +3360,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Knoflook olijven",
           "perishable": false,
           "price": {
@@ -3309,6 +3392,7 @@
             "kcal": 320.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Leverworst",
           "perishable": true,
           "price": {
@@ -3340,6 +3424,7 @@
             "kcal": 600.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Calvé Pindakaas pot",
           "perishable": false,
           "price": {
@@ -3371,6 +3456,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "AH Wortelen",
           "perishable": false,
           "price": {
@@ -3402,6 +3488,7 @@
             "kcal": 275.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pita broodjes",
           "perishable": false,
           "price": {
@@ -3433,6 +3520,7 @@
             "kcal": 34.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Broccoliroosjes",
           "perishable": false,
           "price": {
@@ -3464,6 +3552,7 @@
             "kcal": 70.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Verse mosselen",
           "perishable": false,
           "price": {
@@ -3495,6 +3584,7 @@
             "kcal": 360.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Smaakt Polenta",
           "perishable": false,
           "price": {
@@ -3526,6 +3616,7 @@
             "kcal": 69.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Sable pitloze blauwe druiven",
           "perishable": false,
           "price": {
@@ -3557,6 +3648,7 @@
             "kcal": 740.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "AH Roomboter appelflap",
           "perishable": false,
           "price": {
@@ -3588,6 +3680,7 @@
             "kcal": 250.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mozzarella geraspt",
           "perishable": false,
           "price": {
@@ -3619,6 +3712,7 @@
             "kcal": 250.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mozzarella geraspt",
           "perishable": false,
           "price": {
@@ -3650,6 +3744,7 @@
             "kcal": 110.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Varkenshaas",
           "perishable": false,
           "price": {
@@ -3681,6 +3776,7 @@
             "kcal": 110.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Varkenshaas",
           "perishable": false,
           "price": {
@@ -3712,6 +3808,7 @@
             "kcal": 86.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Zoete aardappel blokjes",
           "perishable": false,
           "price": {
@@ -3743,6 +3840,7 @@
             "kcal": 370.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Bio quinoa mix",
           "perishable": false,
           "price": {
@@ -3774,6 +3872,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Limburgse cervelaat",
           "perishable": false,
           "price": {
@@ -3805,6 +3904,7 @@
             "kcal": 47.0,
             "protein_g": 0.9
           },
+          "meal_kind": "snack",
           "name": "DubbelDrank Abrikoos & sinaasappel",
           "perishable": false,
           "price": {
@@ -3836,6 +3936,7 @@
             "kcal": 45.0,
             "protein_g": 0.7
           },
+          "meal_kind": "drink",
           "name": "Appelsientje Sinaasappelsap",
           "perishable": false,
           "price": {
@@ -3867,6 +3968,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Fusilli tricolori",
           "perishable": false,
           "price": {
@@ -3898,6 +4000,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Kidneybonen",
           "perishable": false,
           "price": {
@@ -3929,6 +4032,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Picos knoflook",
           "perishable": false,
           "price": {
@@ -3960,6 +4064,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Rio Mare Pasta arrabiata",
           "perishable": false,
           "price": {
@@ -3991,6 +4096,7 @@
             "kcal": 64.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "AH Volle melk",
           "perishable": true,
           "price": {
@@ -4022,6 +4128,7 @@
             "kcal": 350.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Zilvervlies rijst",
           "perishable": false,
           "price": {
@@ -4053,6 +4160,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "AH Nederlandse frambozen",
           "perishable": false,
           "price": {
@@ -4084,6 +4192,7 @@
             "kcal": 290.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Unox Rookworst Gelders varken",
           "perishable": false,
           "price": {
@@ -4115,6 +4224,7 @@
             "kcal": 190.0,
             "protein_g": 23.0
           },
+          "meal_kind": "ingredient",
           "name": "John West Tonijn in olie 3-pack",
           "perishable": true,
           "price": {
@@ -4146,6 +4256,7 @@
             "kcal": 250.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gehaktballen",
           "perishable": false,
           "price": {
@@ -4177,6 +4288,7 @@
             "kcal": 50.0,
             "protein_g": 0.8
           },
+          "meal_kind": "ingredient",
           "name": "AH Zakje met zomerfruit",
           "perishable": false,
           "price": {
@@ -4208,6 +4320,7 @@
             "kcal": 355.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Conimex Rijstnoedels 5mm",
           "perishable": false,
           "price": {
@@ -4239,6 +4352,7 @@
             "kcal": 355.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Conimex Rijstnoedels 5mm",
           "perishable": false,
           "price": {
@@ -4270,6 +4384,7 @@
             "kcal": 355.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Conimex Rijstnoedels 2mm",
           "perishable": false,
           "price": {
@@ -4301,6 +4416,7 @@
             "kcal": 25.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten blokjes naturel",
           "perishable": false,
           "price": {
@@ -4332,6 +4448,7 @@
             "kcal": 15.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH IJsbergsla melange",
           "perishable": true,
           "price": {
@@ -4363,6 +4480,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Pandan rijst builtje",
           "perishable": false,
           "price": {
@@ -4394,6 +4512,7 @@
             "kcal": 45.0,
             "protein_g": 3.3
           },
+          "meal_kind": "ingredient",
           "name": "AH Boerenkool kleinverpakking",
           "perishable": false,
           "price": {
@@ -4425,6 +4544,7 @@
             "kcal": 31.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Sperziebonen",
           "perishable": false,
           "price": {
@@ -4456,6 +4576,7 @@
             "kcal": 28.0,
             "protein_g": 2.3
           },
+          "meal_kind": "ingredient",
           "name": "AH Bloemkoolroosjes",
           "perishable": false,
           "price": {
@@ -4487,6 +4608,7 @@
             "kcal": 36.0,
             "protein_g": 1.5
           },
+          "meal_kind": "ingredient",
           "name": "AH Prei",
           "perishable": false,
           "price": {
@@ -4518,6 +4640,7 @@
             "kcal": 96.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Tilapiafilet graatvrij",
           "perishable": false,
           "price": {
@@ -4549,6 +4672,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch airfryer pommes frites",
           "perishable": false,
           "price": {
@@ -4580,6 +4704,7 @@
             "kcal": 690.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Ongebrande pecannoten",
           "perishable": false,
           "price": {
@@ -4611,6 +4736,7 @@
             "kcal": 660.0,
             "protein_g": 14.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Ongebrande paranoten",
           "perishable": false,
           "price": {
@@ -4642,6 +4768,7 @@
             "kcal": 650.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Walnoten ongebrand",
           "perishable": false,
           "price": {
@@ -4673,6 +4800,7 @@
             "kcal": 80.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Koolvisfilet",
           "perishable": false,
           "price": {
@@ -4704,6 +4832,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Zoete olijven",
           "perishable": true,
           "price": {
@@ -4735,6 +4864,7 @@
             "kcal": 250.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Rundergehakt",
           "perishable": false,
           "price": {
@@ -4766,6 +4896,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Fusilli glutenvrij",
           "perishable": false,
           "price": {
@@ -4797,6 +4928,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Penne glutenvrij",
           "perishable": false,
           "price": {
@@ -4828,6 +4960,7 @@
             "kcal": 250.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Rundergehakt",
           "perishable": false,
           "price": {
@@ -4859,6 +4992,7 @@
             "kcal": 370.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Quinoa builtje",
           "perishable": false,
           "price": {
@@ -4890,6 +5024,7 @@
             "kcal": 65.0,
             "protein_g": 7.5
           },
+          "meal_kind": "snack",
           "name": "AH Halfvolle kwark",
           "perishable": true,
           "price": {
@@ -4921,6 +5056,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "AH Winterpeen",
           "perishable": false,
           "price": {
@@ -4952,6 +5088,7 @@
             "kcal": 68.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Plantaardige kwark naturel",
           "perishable": true,
           "price": {
@@ -4983,6 +5120,7 @@
             "kcal": 40.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH Gele uien",
           "perishable": false,
           "price": {
@@ -5014,6 +5152,7 @@
             "kcal": 43.0,
             "protein_g": 3.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Spruitjes",
           "perishable": false,
           "price": {
@@ -5045,6 +5184,7 @@
             "kcal": 31.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Sperziebonen",
           "perishable": false,
           "price": {
@@ -5076,6 +5216,7 @@
             "kcal": 22.0,
             "protein_g": 2.5
           },
+          "meal_kind": "ingredient",
           "name": "AH Kastanjechampignons",
           "perishable": false,
           "price": {
@@ -5107,6 +5248,7 @@
             "kcal": 22.0,
             "protein_g": 2.5
           },
+          "meal_kind": "ingredient",
           "name": "AH Kastanjechampignons",
           "perishable": false,
           "price": {
@@ -5138,6 +5280,7 @@
             "kcal": 350.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Zilvervliesrijst builtje",
           "perishable": false,
           "price": {
@@ -5169,6 +5312,7 @@
             "kcal": 280.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH BBQ spareribs zoet",
           "perishable": false,
           "price": {
@@ -5200,6 +5344,7 @@
             "kcal": 370.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Quaker Havermout voordeelverpakking",
           "perishable": false,
           "price": {
@@ -5231,6 +5376,7 @@
             "kcal": 80.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Kabeljauwfilet",
           "perishable": false,
           "price": {
@@ -5262,6 +5408,7 @@
             "kcal": 28.0,
             "protein_g": 2.3
           },
+          "meal_kind": "ingredient",
           "name": "AH Bloemkool",
           "perishable": false,
           "price": {
@@ -5293,6 +5440,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Bertolli Classico olijfolie",
           "perishable": false,
           "price": {
@@ -5324,6 +5472,7 @@
             "kcal": 47.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "Campina Magere milde kwark naturel voordeelpak",
           "perishable": true,
           "price": {
@@ -5355,6 +5504,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Mini penne volkoren",
           "perishable": false,
           "price": {
@@ -5386,6 +5536,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Mini aardappel kroketjes",
           "perishable": true,
           "price": {
@@ -5417,6 +5568,7 @@
             "kcal": 140.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Kipgehakt naturel",
           "perishable": false,
           "price": {
@@ -5448,6 +5600,7 @@
             "kcal": 115.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Fricandeau",
           "perishable": false,
           "price": {
@@ -5479,6 +5632,7 @@
             "kcal": 360.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "AH Muesli fruit & noten",
           "perishable": false,
           "price": {
@@ -5510,6 +5664,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gegrilde beenham",
           "perishable": false,
           "price": {
@@ -5541,6 +5696,7 @@
             "kcal": 43.0,
             "protein_g": 3.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Oven & airfryer spruitjes pompoen",
           "perishable": false,
           "price": {
@@ -5572,6 +5728,7 @@
             "kcal": 86.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Oven & airfryer groente zoete aardappel",
           "perishable": false,
           "price": {
@@ -5603,6 +5760,7 @@
             "kcal": 45.0,
             "protein_g": 1.0
           },
+          "meal_kind": "drink",
           "name": "Alpro Haverdrink zonder suikers",
           "perishable": true,
           "price": {
@@ -5634,6 +5792,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Ongebrande amandelen",
           "perishable": false,
           "price": {
@@ -5665,6 +5824,7 @@
             "kcal": 230.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Souq Libanees brood met volkoren tarwemeel",
           "perishable": false,
           "price": {
@@ -5696,6 +5856,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "AH Houdbare halfvolle melk",
           "perishable": true,
           "price": {
@@ -5727,6 +5888,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Mammoet olijven",
           "perishable": true,
           "price": {
@@ -5758,6 +5920,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Oven & airfryer courgette rode paprika",
           "perishable": false,
           "price": {
@@ -5789,6 +5952,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "AH Tomaten passata gezeefd basilicum",
           "perishable": true,
           "price": {
@@ -5820,6 +5984,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "AH Knäckebröd pompoenpit",
           "perishable": false,
           "price": {
@@ -5851,6 +6016,7 @@
             "kcal": 350.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Zilvervliesrijst bio",
           "perishable": false,
           "price": {
@@ -5882,6 +6048,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Spaghetti all'uovo",
           "perishable": false,
           "price": {
@@ -5913,6 +6080,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Chio Mixplosions paprika",
           "perishable": false,
           "price": {
@@ -5944,6 +6112,7 @@
             "kcal": 330.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Romige brie 60+",
           "perishable": true,
           "price": {
@@ -5975,6 +6144,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "AH Gezouten pinda's",
           "perishable": false,
           "price": {
@@ -6006,6 +6176,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Biologisch groene linzen",
           "perishable": false,
           "price": {
@@ -6037,6 +6208,7 @@
             "kcal": 530.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Lijnzaad gebroken",
           "perishable": false,
           "price": {
@@ -6068,6 +6240,7 @@
             "kcal": 480.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Chiazaad",
           "perishable": false,
           "price": {
@@ -6099,6 +6272,7 @@
             "kcal": 560.0,
             "protein_g": 30.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Pompoenpitten",
           "perishable": false,
           "price": {
@@ -6130,6 +6304,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Zonnebloempitten",
           "perishable": false,
           "price": {
@@ -6161,6 +6336,7 @@
             "kcal": 68.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Plantaardige variatie op kwark vanille",
           "perishable": true,
           "price": {
@@ -6192,6 +6368,7 @@
             "kcal": 68.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Plantaardige variatie op kwark vanille",
           "perishable": true,
           "price": {
@@ -6223,6 +6400,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Supercrunch airfryer dunne friet",
           "perishable": false,
           "price": {
@@ -6254,6 +6432,7 @@
             "kcal": 23.0,
             "protein_g": 2.9
           },
+          "meal_kind": "ingredient",
           "name": "Iglo Biologische spinazie à la crème",
           "perishable": false,
           "price": {
@@ -6285,6 +6464,7 @@
             "kcal": 190.0,
             "protein_g": 23.0
           },
+          "meal_kind": "ingredient",
           "name": "Princes Tonijnmoot in extra vierge olijfolie",
           "perishable": true,
           "price": {
@@ -6316,6 +6496,7 @@
             "kcal": 105.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Princes Tonijnmoot in water",
           "perishable": true,
           "price": {
@@ -6347,6 +6528,7 @@
             "kcal": 390.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Bolletje Echte beschuit",
           "perishable": true,
           "price": {
@@ -6378,6 +6560,7 @@
             "kcal": 330.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Camembert",
           "perishable": true,
           "price": {
@@ -6409,6 +6592,7 @@
             "kcal": 300.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Geitenkaas 50+ gerijpt",
           "perishable": true,
           "price": {
@@ -6440,6 +6624,7 @@
             "kcal": 260.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Salakis Classic greek feta",
           "perishable": true,
           "price": {
@@ -6471,6 +6656,7 @@
             "kcal": 210.0,
             "protein_g": 4.0
           },
+          "meal_kind": "ingredient",
           "name": "Royal Zongedroogde tomaten in olie",
           "perishable": true,
           "price": {
@@ -6502,6 +6688,7 @@
             "kcal": 288.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Dr. Oetker Bourbon vanille Extract",
           "perishable": false,
           "price": {
@@ -6533,6 +6720,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "AH Orri mandarijnen",
           "perishable": true,
           "price": {
@@ -6564,6 +6752,7 @@
             "kcal": 68.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Variatie op kwark zonder suikers",
           "perishable": true,
           "price": {
@@ -6595,6 +6784,7 @@
             "kcal": 230.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Liefde & Passie Spelt volkoren brood",
           "perishable": false,
           "price": {
@@ -6626,6 +6816,7 @@
             "kcal": 150.0,
             "protein_g": 16.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardige gehakt gebraden",
           "perishable": false,
           "price": {
@@ -6657,6 +6848,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Nederlandse aardbeien",
           "perishable": false,
           "price": {
@@ -6688,6 +6880,7 @@
             "kcal": 200.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "John West Twist zalm met citroen & tijm",
           "perishable": false,
           "price": {
@@ -6719,6 +6912,7 @@
             "kcal": 143.0,
             "protein_g": 12.6
           },
+          "meal_kind": "ingredient",
           "name": "Verstegen Kruidenmix voor ei",
           "perishable": false,
           "price": {
@@ -6750,6 +6944,7 @@
             "kcal": 105.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Princes Tonijnstukken in water",
           "perishable": true,
           "price": {
@@ -6781,6 +6976,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mini krieltjes BBQ",
           "perishable": true,
           "price": {
@@ -6812,6 +7008,7 @@
             "kcal": 280.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "AH Extra lang lekker mini rozijnenbollen",
           "perishable": false,
           "price": {
@@ -6843,6 +7040,7 @@
             "kcal": 92.0,
             "protein_g": 6.5
           },
+          "meal_kind": "snack",
           "name": "Campina Volle kwark naturel voordeelpak",
           "perishable": true,
           "price": {
@@ -6874,6 +7072,7 @@
             "kcal": 14.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "AH Snoepgroente komkommer",
           "perishable": true,
           "price": {
@@ -6905,6 +7104,7 @@
             "kcal": 36.0,
             "protein_g": 1.5
           },
+          "meal_kind": "ingredient",
           "name": "AH Oven & airfryer prei peen",
           "perishable": false,
           "price": {
@@ -6936,6 +7136,7 @@
             "kcal": 250.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Extra lang lekker casino wit half",
           "perishable": false,
           "price": {
@@ -6967,6 +7168,7 @@
             "kcal": 350.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Franse roquefort",
           "perishable": true,
           "price": {
@@ -6998,6 +7200,7 @@
             "kcal": 740.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "De Zaanse Hoeve Ongezouten roomboter",
           "perishable": false,
           "price": {
@@ -7029,6 +7232,7 @@
             "kcal": 15.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "AH IJsbergsla fijngesneden",
           "perishable": true,
           "price": {
@@ -7060,6 +7264,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Spaanse tortilla",
           "perishable": false,
           "price": {
@@ -7091,6 +7296,7 @@
             "kcal": 120.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "AH Slaverrijker sojabonen",
           "perishable": false,
           "price": {
@@ -7122,6 +7328,7 @@
             "kcal": 120.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "AH Slaverrijker sojabonen",
           "perishable": false,
           "price": {
@@ -7153,6 +7360,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Basmati rijst",
           "perishable": false,
           "price": {
@@ -7184,6 +7392,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Pandan rijst",
           "perishable": false,
           "price": {
@@ -7215,6 +7424,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Aardappel partjes provencaals gekruid",
           "perishable": true,
           "price": {
@@ -7246,6 +7456,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Couscous",
           "perishable": false,
           "price": {
@@ -7277,6 +7488,7 @@
             "kcal": 370.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Drie kleuren quinoa",
           "perishable": false,
           "price": {
@@ -7308,6 +7520,7 @@
             "kcal": 145.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Scharrel kipdijfilet reepjes",
           "perishable": false,
           "price": {
@@ -7339,6 +7552,7 @@
             "kcal": 250.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Scharrel kipschnitzel 2 stuks",
           "perishable": false,
           "price": {
@@ -7370,6 +7584,7 @@
             "kcal": 105.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Scharrel kipfilet 2 stuks",
           "perishable": false,
           "price": {
@@ -7401,6 +7616,7 @@
             "kcal": 200.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Ouwehand Zure haring",
           "perishable": false,
           "price": {
@@ -7432,6 +7648,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Achterham",
           "perishable": false,
           "price": {
@@ -7463,6 +7680,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Salami",
           "perishable": false,
           "price": {
@@ -7494,6 +7712,7 @@
             "kcal": 300.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Bacon",
           "perishable": false,
           "price": {
@@ -7525,6 +7744,7 @@
             "kcal": 110.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Scharrel gerookte kipfilet",
           "perishable": false,
           "price": {
@@ -7556,6 +7776,7 @@
             "kcal": 105.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Kalkoenfilet minder vet",
           "perishable": false,
           "price": {
@@ -7587,6 +7808,7 @@
             "kcal": 0.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Rio Stevia zoetstof",
           "perishable": false,
           "price": {
@@ -7618,6 +7840,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Basmati rijst builtje",
           "perishable": false,
           "price": {
@@ -7649,6 +7872,7 @@
             "kcal": 95.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Protein pudding vanille smaak",
           "perishable": true,
           "price": {
@@ -7680,6 +7904,7 @@
             "kcal": 95.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Protein pudding chocolade smaak",
           "perishable": true,
           "price": {
@@ -7711,6 +7936,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Bifi Chorizo sticks",
           "perishable": false,
           "price": {
@@ -7742,6 +7968,7 @@
             "kcal": 265.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Verstegen Italiaanse kruiden",
           "perishable": false,
           "price": {
@@ -7773,6 +8000,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "AH Gezouten pinda's",
           "perishable": false,
           "price": {
@@ -7804,6 +8032,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "AH Ongezouten pinda's",
           "perishable": false,
           "price": {
@@ -7835,6 +8064,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "AH Cranberry & pinda mix",
           "perishable": false,
           "price": {
@@ -7866,6 +8096,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Ongezouten cashewnoten",
           "perishable": false,
           "price": {
@@ -7897,6 +8128,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Gezouten cashewnoten",
           "perishable": false,
           "price": {
@@ -7928,6 +8160,7 @@
             "kcal": 650.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "AH Walnoten",
           "perishable": false,
           "price": {
@@ -7959,6 +8192,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "AH Gezouten pistachenoten",
           "perishable": false,
           "price": {
@@ -7990,6 +8224,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Tagliatelle all' uovo",
           "perishable": false,
           "price": {
@@ -8021,6 +8256,7 @@
             "kcal": 25.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Klilah Aubergine babaganush",
           "perishable": false,
           "price": {
@@ -8052,6 +8288,7 @@
             "kcal": 180.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Dr. Oetker Big Americans shoarma",
           "perishable": false,
           "price": {
@@ -8083,6 +8320,7 @@
             "kcal": 615.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Natù Amandelpasta",
           "perishable": false,
           "price": {
@@ -8114,6 +8352,7 @@
             "kcal": 250.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Falafel pikant",
           "perishable": false,
           "price": {
@@ -8145,6 +8384,7 @@
             "kcal": 150.0,
             "protein_g": 16.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardig gehakt",
           "perishable": false,
           "price": {
@@ -8176,6 +8416,7 @@
             "kcal": 150.0,
             "protein_g": 16.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardig gehakt",
           "perishable": false,
           "price": {
@@ -8207,6 +8448,7 @@
             "kcal": 180.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardige burger",
           "perishable": false,
           "price": {
@@ -8238,6 +8480,7 @@
             "kcal": 220.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardige schnitzel",
           "perishable": false,
           "price": {
@@ -8269,6 +8512,7 @@
             "kcal": 190.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Tempeh",
           "perishable": false,
           "price": {
@@ -8300,6 +8544,7 @@
             "kcal": 120.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Biologische tofu",
           "perishable": false,
           "price": {
@@ -8331,6 +8576,7 @@
             "kcal": 13.0,
             "protein_g": 0.5
           },
+          "meal_kind": "drink",
           "name": "AH Terra Amandeldrink ongezoet",
           "perishable": true,
           "price": {
@@ -8362,6 +8608,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Spaghetti half volkoren",
           "perishable": false,
           "price": {
@@ -8393,6 +8640,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Danoontje Knijpyoghurt banaan 5-pack",
           "perishable": false,
           "price": {
@@ -8424,6 +8672,7 @@
             "kcal": 120.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Greenfields Rosbief",
           "perishable": false,
           "price": {
@@ -8455,6 +8704,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pangasiusfilet",
           "perishable": false,
           "price": {
@@ -8486,6 +8736,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pangasiusfilet",
           "perishable": false,
           "price": {
@@ -8517,6 +8768,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Pangasiusfilet",
           "perishable": false,
           "price": {
@@ -8548,6 +8800,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "AH Ananas eetrijp",
           "perishable": false,
           "price": {
@@ -8579,6 +8832,7 @@
             "kcal": 160.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Biologische gerookte tofu",
           "perishable": false,
           "price": {
@@ -8610,6 +8864,7 @@
             "kcal": 95.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "AH Protein pudding vanille smaak",
           "perishable": true,
           "price": {
@@ -8641,6 +8896,7 @@
             "kcal": 320.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Leverworst",
           "perishable": true,
           "price": {
@@ -8672,6 +8928,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heks'nkaas Tomaat basilicum",
           "perishable": true,
           "price": {
@@ -8703,6 +8960,7 @@
             "kcal": 290.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Koopmans Brood uit de pan naanbrood",
           "perishable": false,
           "price": {
@@ -8734,6 +8992,7 @@
             "kcal": 140.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Biologische seitan flakes kebab",
           "perishable": false,
           "price": {
@@ -8765,6 +9024,7 @@
             "kcal": 160.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Plantaardige kipstukjes",
           "perishable": false,
           "price": {
@@ -8796,6 +9056,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Volkoren spaghetti",
           "perishable": false,
           "price": {
@@ -8827,6 +9088,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Mora Loaded friet Indische stoof",
           "perishable": false,
           "price": {
@@ -8858,6 +9120,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Mora Loaded friet BBQ",
           "perishable": false,
           "price": {
@@ -8889,6 +9152,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Ongezouten cashewnoten",
           "perishable": false,
           "price": {
@@ -8920,6 +9184,7 @@
             "kcal": 69.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "AH Pink Muscat pitloze druiven",
           "perishable": false,
           "price": {
@@ -8951,6 +9216,7 @@
             "kcal": 105.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Witte bonen",
           "perishable": false,
           "price": {
@@ -8982,6 +9248,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "Optimel Drinkyoghurt protein bosbes vanille",
           "perishable": true,
           "price": {
@@ -9013,6 +9280,7 @@
             "kcal": 80.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "AH Skyr IJslandse stijl aardbei",
           "perishable": true,
           "price": {
@@ -9044,6 +9312,7 @@
             "kcal": 190.0,
             "protein_g": 23.0
           },
+          "meal_kind": "ingredient",
           "name": "Rio Mare Tonijnmoot in olijfolie",
           "perishable": true,
           "price": {
@@ -9075,6 +9344,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "DubbelDrank Banaan & kers",
           "perishable": false,
           "price": {
@@ -9106,6 +9376,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Aviko Wavy blends paprika",
           "perishable": false,
           "price": {
@@ -9137,6 +9408,7 @@
             "kcal": 350.0,
             "protein_g": 30.0
           },
+          "meal_kind": "snack",
           "name": "Fit Piggy Proteïnereep hazelnut heaven",
           "perishable": true,
           "price": {
@@ -9168,6 +9440,7 @@
             "kcal": 380.0,
             "protein_g": 75.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Clear whey protein poeder citroen limoen",
           "perishable": false,
           "price": {
@@ -9199,6 +9472,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Chiquita Ready to eat bananen",
           "perishable": false,
           "price": {
@@ -9230,6 +9504,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Chiquita Groene bananen",
           "perishable": false,
           "price": {
@@ -9261,6 +9536,7 @@
             "kcal": 355.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Mihoen kip ketjap",
           "perishable": false,
           "price": {
@@ -9292,6 +9568,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Pink Lady Appels schaal 2-pack",
           "perishable": true,
           "price": {
@@ -9323,6 +9600,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Fish Tales Ansjovisfilets in olijfolie 3-pack",
           "perishable": false,
           "price": {
@@ -9354,6 +9632,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Soubry Macaroni lang bel",
           "perishable": false,
           "price": {
@@ -9385,6 +9664,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "La Morena Tortilla wraps maismeel medium 3-pack",
           "perishable": false,
           "price": {
@@ -9416,6 +9696,7 @@
             "kcal": 600.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Hartige pindakaas crispy chili",
           "perishable": false,
           "price": {
@@ -9447,6 +9728,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Biologische hummus naturel",
           "perishable": true,
           "price": {
@@ -9478,6 +9760,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Hummus gegrilde groente",
           "perishable": true,
           "price": {
@@ -9509,6 +9792,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Hummus naturel",
           "perishable": true,
           "price": {
@@ -9540,6 +9824,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Hummus naturel",
           "perishable": true,
           "price": {
@@ -9571,6 +9856,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Hummus pikant",
           "perishable": true,
           "price": {
@@ -9602,6 +9888,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Hummus citroen",
           "perishable": true,
           "price": {
@@ -9633,6 +9920,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Excellent Oude kaas truffel",
           "perishable": false,
           "price": {
@@ -9664,6 +9952,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Hummus zwarte knoflook",
           "perishable": true,
           "price": {
@@ -9695,6 +9984,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Hummus labneh stijl",
           "perishable": true,
           "price": {
@@ -9726,6 +10016,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Hummus naturel met geroosterde knoflook",
           "perishable": true,
           "price": {
@@ -9757,6 +10048,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Chio Red paprika",
           "perishable": false,
           "price": {
@@ -9788,6 +10080,7 @@
             "kcal": 300.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Salamirolletjes geitenkaas",
           "perishable": true,
           "price": {
@@ -9819,6 +10112,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Spaanse chorizo",
           "perishable": false,
           "price": {
@@ -9850,6 +10144,7 @@
             "kcal": 85.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Garnalen knoflookmarinade",
           "perishable": false,
           "price": {
@@ -9881,6 +10176,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Excellent Mediterrane olijfmix met knoflook",
           "perishable": false,
           "price": {
@@ -9912,6 +10208,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Bella di Cerignola olijven",
           "perishable": true,
           "price": {
@@ -9943,6 +10240,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Wrap kip caesar",
           "perishable": false,
           "price": {
@@ -9974,6 +10272,7 @@
             "kcal": 13.0,
             "protein_g": 0.5
           },
+          "meal_kind": "drink",
           "name": "AH Terra Biologisch amandeldrink ongezoet",
           "perishable": true,
           "price": {
@@ -10005,6 +10304,7 @@
             "kcal": 45.0,
             "protein_g": 1.0
           },
+          "meal_kind": "drink",
           "name": "AH Terra Biologisch haverdrink ongezoet",
           "perishable": true,
           "price": {
@@ -10036,6 +10336,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Biologische kalamata olijven met pit",
           "perishable": true,
           "price": {
@@ -10067,6 +10368,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "AH Excellent Nocellara rozemarijn peper olijven",
           "perishable": true,
           "price": {
@@ -10098,6 +10400,7 @@
             "kcal": 320.0,
             "protein_g": 0.3
           },
+          "meal_kind": "ingredient",
           "name": "Ricola Honing citroen echinacea 2-pack",
           "perishable": false,
           "price": {
@@ -10129,6 +10432,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Paprika bollen",
           "perishable": false,
           "price": {
@@ -10160,6 +10464,7 @@
             "kcal": 690.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "AH Pecannoten suiker kaneel zeezout",
           "perishable": false,
           "price": {
@@ -10191,6 +10496,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Cashewnoten sour cream",
           "perishable": false,
           "price": {
@@ -10222,6 +10528,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Cashewnoten smoked BBQ",
           "perishable": false,
           "price": {
@@ -10253,6 +10560,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "AH Cashewnoten chili honing",
           "perishable": false,
           "price": {
@@ -10284,6 +10592,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "AH Amandelen rozemarijn knoflook",
           "perishable": false,
           "price": {
@@ -10315,6 +10624,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "AH Amandelen karamel zeezout",
           "perishable": false,
           "price": {
@@ -10346,6 +10656,7 @@
             "kcal": 600.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Suntat Tahin sesampasta",
           "perishable": false,
           "price": {
@@ -10377,6 +10688,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gegrilde beenham honing mosterd",
           "perishable": false,
           "price": {
@@ -10408,6 +10720,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Gegrilde beenham flinterdun",
           "perishable": false,
           "price": {
@@ -10439,6 +10752,7 @@
             "kcal": 250.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Encore Makreelfilet",
           "perishable": false,
           "price": {
@@ -10470,6 +10784,7 @@
             "kcal": 33.0,
             "protein_g": 3.3
           },
+          "meal_kind": "drink",
           "name": "AH Biologisch Karnemelk",
           "perishable": true,
           "price": {
@@ -10501,6 +10816,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "Johnny Cashew Mix cashew almond salted caramel",
           "perishable": false,
           "price": {
@@ -10532,6 +10848,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "AH Gepeld pistachenoten ongezouten",
           "perishable": false,
           "price": {
@@ -10563,6 +10880,7 @@
             "kcal": 34.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker broccoli/paprika",
           "perishable": false,
           "price": {
@@ -10594,6 +10912,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker spitskool/wortel",
           "perishable": false,
           "price": {
@@ -10625,6 +10944,7 @@
             "kcal": 19.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker venkel/courgette",
           "perishable": false,
           "price": {
@@ -10656,6 +10976,7 @@
             "kcal": 19.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker venkel/courgette",
           "perishable": false,
           "price": {
@@ -10687,6 +11008,7 @@
             "kcal": 370.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker quinoa",
           "perishable": false,
           "price": {
@@ -10718,6 +11040,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker volkoren pasta",
           "perishable": false,
           "price": {
@@ -10749,6 +11072,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker couscous",
           "perishable": false,
           "price": {
@@ -10780,6 +11104,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker zwarte bonen Aziatische",
           "perishable": false,
           "price": {
@@ -10811,6 +11136,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Santa Maria Extra thin tortilla wheat medium",
           "perishable": false,
           "price": {
@@ -10842,6 +11168,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Santa Maria Extra thin tortilla whole wheat medium",
           "perishable": false,
           "price": {
@@ -10873,6 +11200,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Slaverrijker linzen met rozemarijn",
           "perishable": false,
           "price": {
@@ -10904,6 +11232,7 @@
             "kcal": 400.0,
             "protein_g": 35.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Excellent Truffelsalami parmezaanse kaas",
           "perishable": false,
           "price": {
@@ -10935,6 +11264,7 @@
             "kcal": 400.0,
             "protein_g": 35.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Excellent Truffelsalami parmezaanse kaas",
           "perishable": false,
           "price": {
@@ -10966,6 +11296,7 @@
             "kcal": 52.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Vloeibaar eiwit",
           "perishable": false,
           "price": {
@@ -10997,6 +11328,7 @@
             "kcal": 63.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "AH Skyr IJslandse stijl",
           "perishable": true,
           "price": {
@@ -11028,6 +11360,7 @@
             "kcal": 61.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "AH Doosje met kiwi schijfjes 4-pack",
           "perishable": true,
           "price": {
@@ -11059,6 +11392,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "No Fairytales Knoflook & kruiden naan",
           "perishable": false,
           "price": {
@@ -11090,6 +11424,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "No Fairytales Paprika-chili flatbread",
           "perishable": false,
           "price": {
@@ -11121,6 +11456,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Gele Rijst",
           "perishable": false,
           "price": {
@@ -11152,6 +11488,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Samyang Tangle garlic oil pasta",
           "perishable": false,
           "price": {
@@ -11183,6 +11520,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "Philadelphia Light knoflook & fijne kruiden",
           "perishable": false,
           "price": {
@@ -11214,6 +11552,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "Boursin Cuisine light knoflook & fijne kruiden",
           "perishable": false,
           "price": {
@@ -11245,6 +11584,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Hummus naturel kvp",
           "perishable": true,
           "price": {
@@ -11276,6 +11616,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "AH Terra Hummus pikant kvp",
           "perishable": true,
           "price": {
@@ -11307,6 +11648,7 @@
             "kcal": 270.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Ciabatta",
           "perishable": false,
           "price": {
@@ -11338,6 +11680,7 @@
             "kcal": 15.0,
             "protein_g": 0.6
           },
+          "meal_kind": "ingredient",
           "name": "AH Cocktail augurken zoetzuur",
           "perishable": false,
           "price": {
@@ -11369,6 +11712,7 @@
             "kcal": 270.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Kip knakworst",
           "perishable": false,
           "price": {
@@ -11400,6 +11744,7 @@
             "kcal": 70.0,
             "protein_g": 5.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Biologisch Doperwten",
           "perishable": false,
           "price": {
@@ -11431,6 +11776,7 @@
             "kcal": 98.0,
             "protein_g": 12.5
           },
+          "meal_kind": "snack",
           "name": "Danone Hüttenkäse original",
           "perishable": true,
           "price": {
@@ -11462,6 +11808,7 @@
             "kcal": 320.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Leverworst",
           "perishable": true,
           "price": {
@@ -11493,6 +11840,7 @@
             "kcal": 75.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Danio Romige kwark aardbei",
           "perishable": true,
           "price": {
@@ -11524,6 +11872,7 @@
             "kcal": 47.0,
             "protein_g": 0.9
           },
+          "meal_kind": "snack",
           "name": "AH Handsinaasappelen",
           "perishable": true,
           "price": {
@@ -11555,6 +11904,7 @@
             "kcal": 95.0,
             "protein_g": 3.3
           },
+          "meal_kind": "snack",
           "name": "Campina Vla slagroom vanille smaak",
           "perishable": true,
           "price": {
@@ -11586,6 +11936,7 @@
             "kcal": 210.0,
             "protein_g": 4.0
           },
+          "meal_kind": "ingredient",
           "name": "Grand' Italia Toscana met zongedroogde tomaten",
           "perishable": true,
           "price": {
@@ -11617,6 +11968,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "AH Elstar",
           "perishable": false,
           "price": {
@@ -11648,6 +12000,7 @@
             "kcal": 100.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Kapucijners",
           "perishable": false,
           "price": {
@@ -11679,6 +12032,7 @@
             "kcal": 110.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Terra Hollandse bruine bonen",
           "perishable": false,
           "price": {
@@ -11710,6 +12064,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Weleda Amandel verzachtende gezichtscrème",
           "perishable": false,
           "price": {
@@ -11741,6 +12096,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Weleda Amandel verzachtende reinigingsmelk",
           "perishable": false,
           "price": {
@@ -11772,6 +12128,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "AH Mango",
           "perishable": false,
           "price": {
@@ -11803,6 +12160,7 @@
             "kcal": 43.0,
             "protein_g": 3.4
           },
+          "meal_kind": "ingredient",
           "name": "AH Geschoonde spruitjes",
           "perishable": false,
           "price": {
@@ -11834,6 +12192,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "AH Mandarijnen",
           "perishable": true,
           "price": {
@@ -11865,6 +12224,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "AH Mandarijnen",
           "perishable": true,
           "price": {
@@ -11896,6 +12256,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "AH Iets kruimige aardappel",
           "perishable": true,
           "price": {
@@ -12508,6 +12869,7 @@
             "kcal": 220.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Vegan schnitzels",
           "perishable": false,
           "price": {
@@ -12539,6 +12901,7 @@
             "kcal": 125.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Kogelbiefstuk",
           "perishable": false,
           "price": {
@@ -12570,6 +12933,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Mini-krieltjes",
           "perishable": true,
           "price": {
@@ -12601,6 +12965,7 @@
             "kcal": 45.0,
             "protein_g": 1.0
           },
+          "meal_kind": "drink",
           "name": "Barista haverdrink",
           "perishable": true,
           "price": {
@@ -12632,6 +12997,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Nederlandse aardbeien",
           "perishable": false,
           "price": {
@@ -12663,6 +13029,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Mandarijnen",
           "perishable": true,
           "price": {
@@ -12694,6 +13061,7 @@
             "kcal": 43.0,
             "protein_g": 3.4
           },
+          "meal_kind": "ingredient",
           "name": "Spruiten",
           "perishable": false,
           "price": {
@@ -12725,6 +13093,7 @@
             "kcal": 28.0,
             "protein_g": 2.3
           },
+          "meal_kind": "ingredient",
           "name": "Bloemkool",
           "perishable": false,
           "price": {
@@ -12756,6 +13125,7 @@
             "kcal": 61.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Kiwi's gold",
           "perishable": true,
           "price": {
@@ -12787,6 +13157,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Mango",
           "perishable": false,
           "price": {
@@ -12818,6 +13189,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Elstar appels",
           "perishable": true,
           "price": {
@@ -12849,6 +13221,7 @@
             "kcal": 70.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Verse Zeeuwse mosselen",
           "perishable": false,
           "price": {
@@ -12880,6 +13253,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Houdbare halfvolle melk",
           "perishable": true,
           "price": {
@@ -12911,6 +13285,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Goudse kaas jong 48+ plakken",
           "perishable": false,
           "price": {
@@ -12942,6 +13317,7 @@
             "kcal": 260.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Witte kaas",
           "perishable": true,
           "price": {
@@ -12973,6 +13349,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "High protein pouch",
           "perishable": true,
           "price": {
@@ -13004,6 +13381,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "Ananas in stukjes 3-pack",
           "perishable": false,
           "price": {
@@ -13035,6 +13413,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Tortilla Spaanse stijl",
           "perishable": false,
           "price": {
@@ -13066,6 +13445,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Zoete aardappelen",
           "perishable": true,
           "price": {
@@ -13097,6 +13477,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "High protein skyr drink",
           "perishable": true,
           "price": {
@@ -13128,6 +13509,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Rode paprika's",
           "perishable": false,
           "price": {
@@ -13159,6 +13541,7 @@
             "kcal": 600.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Pindakaas",
           "perishable": false,
           "price": {
@@ -13190,6 +13573,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "Verse olijven",
           "perishable": true,
           "price": {
@@ -13221,6 +13605,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Aardappel Anders",
           "perishable": false,
           "price": {
@@ -13960,6 +14345,7 @@
             "kcal": 100.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Jonge kapucijners 200 g",
           "perishable": false,
           "price": {
@@ -13991,6 +14377,7 @@
             "kcal": 250.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Rundergehakt 500 g",
           "perishable": false,
           "price": {
@@ -14022,6 +14409,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten blokjes basilicum",
           "perishable": false,
           "price": {
@@ -14053,6 +14441,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten met knoflook",
           "perishable": false,
           "price": {
@@ -14084,6 +14473,7 @@
             "kcal": 120.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Kikkererwten Bio 310g",
           "perishable": false,
           "price": {
@@ -14115,6 +14505,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Rode Kidneybonen Bio 310 g",
           "perishable": false,
           "price": {
@@ -14146,6 +14537,7 @@
             "kcal": 25.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten blokjes naturel",
           "perishable": false,
           "price": {
@@ -14177,6 +14569,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten Gepeld",
           "perishable": false,
           "price": {
@@ -14208,6 +14601,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten gepeld biologisch",
           "perishable": false,
           "price": {
@@ -14239,6 +14633,7 @@
             "kcal": 250.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Goldsteig Mozzarella Classic 220 g",
           "perishable": false,
           "price": {
@@ -14270,6 +14665,7 @@
             "kcal": 64.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Langlekker Volle Melk 1,5 L",
           "perishable": true,
           "price": {
@@ -14301,6 +14697,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Langlekker Halfvolle Melk 1,5 L",
           "perishable": true,
           "price": {
@@ -14332,6 +14729,7 @@
             "kcal": 320.0,
             "protein_g": 0.3
           },
+          "meal_kind": "ingredient",
           "name": "Langnese Bee Easy Wilde Bloemenhoning 500g",
           "perishable": false,
           "price": {
@@ -14363,6 +14761,7 @@
             "kcal": 92.0,
             "protein_g": 6.5
           },
+          "meal_kind": "snack",
           "name": "Campina Volle Milde Kwark Naturel 500 g",
           "perishable": true,
           "price": {
@@ -14394,6 +14793,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Chio Heart Breakers Paprika 125 g",
           "perishable": false,
           "price": {
@@ -14425,6 +14825,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Basmati Rijst Voordeelverpakking 1 kg",
           "perishable": false,
           "price": {
@@ -14456,6 +14857,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Groene Kidneybonen 400 g",
           "perishable": false,
           "price": {
@@ -14487,6 +14889,7 @@
             "kcal": 370.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Quaker Havermout 600 gr",
           "perishable": false,
           "price": {
@@ -14518,6 +14921,7 @@
             "kcal": 33.0,
             "protein_g": 3.3
           },
+          "meal_kind": "drink",
           "name": "Campina Karnemelk 1 l Pak met punt",
           "perishable": true,
           "price": {
@@ -14549,6 +14953,7 @@
             "kcal": 210.0,
             "protein_g": 4.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zongedroogde Tomaten Reepjes 280 g",
           "perishable": true,
           "price": {
@@ -14580,6 +14985,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Aardbei 0% Vet 1L",
           "perishable": false,
           "price": {
@@ -14611,6 +15017,7 @@
             "kcal": 31.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gebroken Sperziebonen 600 g",
           "perishable": false,
           "price": {
@@ -14642,6 +15049,7 @@
             "kcal": 70.0,
             "protein_g": 5.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Doperwten 200 g",
           "perishable": false,
           "price": {
@@ -14673,6 +15081,7 @@
             "kcal": 34.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Roosjes Broccoli 400 g",
           "perishable": false,
           "price": {
@@ -14704,6 +15113,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Geschrapte Wortelen 500 g",
           "perishable": false,
           "price": {
@@ -14735,6 +15145,7 @@
             "kcal": 15.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gesneden IJsbergsla 400 g",
           "perishable": true,
           "price": {
@@ -14766,6 +15177,7 @@
             "kcal": 40.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gele Uien 1 kg",
           "perishable": false,
           "price": {
@@ -14797,6 +15209,7 @@
             "kcal": 15.0,
             "protein_g": 0.6
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zoetzuur Fijne Augurk 670 g",
           "perishable": false,
           "price": {
@@ -14828,6 +15241,7 @@
             "kcal": 25.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tomatenblokjes 400 g",
           "perishable": false,
           "price": {
@@ -14859,6 +15273,7 @@
             "kcal": 190.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kokosmelk Romig 200 ml",
           "perishable": false,
           "price": {
@@ -14890,6 +15305,7 @@
             "kcal": 110.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Hollandse Bruine Bonen 800 g",
           "perishable": false,
           "price": {
@@ -14921,6 +15337,7 @@
             "kcal": 180.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Varken Shoarma 900 g",
           "perishable": false,
           "price": {
@@ -14952,6 +15369,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Wasa Gluten- & Lactosevrij Knäckebröd Sesame & Sea Salt 240 g",
           "perishable": false,
           "price": {
@@ -14983,6 +15401,7 @@
             "kcal": 34.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kastanjechampignon & Broccoli Ovengroente 600 g",
           "perishable": false,
           "price": {
@@ -15014,6 +15433,7 @@
             "kcal": 86.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Blokjes Zoete Aardappel 400 g",
           "perishable": false,
           "price": {
@@ -15045,6 +15465,7 @@
             "kcal": 260.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Salakis Feta Bio 150 g",
           "perishable": true,
           "price": {
@@ -15076,6 +15497,7 @@
             "kcal": 370.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Biologisch Quinoa 275 g",
           "perishable": false,
           "price": {
@@ -15107,6 +15529,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Linzen Bio 310g",
           "perishable": false,
           "price": {
@@ -15138,6 +15561,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Chio Mix Plosions Paprika 100 g",
           "perishable": false,
           "price": {
@@ -15169,6 +15593,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Langlekker halfvolle melk 12 x  1 L",
           "perishable": true,
           "price": {
@@ -15200,6 +15625,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Langlekker Halfvolle Melk 1 L",
           "perishable": true,
           "price": {
@@ -15231,6 +15657,7 @@
             "kcal": 280.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo - Rozijnen Krentenbollen - 6 Stuks",
           "perishable": false,
           "price": {
@@ -15262,6 +15689,7 @@
             "kcal": 22.0,
             "protein_g": 2.5
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Middelgrote Champignons 400 g",
           "perishable": false,
           "price": {
@@ -15293,6 +15721,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Jumbo Elstar Appels (1 kg 5 a 7 Stuks)",
           "perishable": true,
           "price": {
@@ -15324,6 +15753,7 @@
             "kcal": 69.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Jumbo Druiven Rood/Blauw Pitloos 500 g",
           "perishable": false,
           "price": {
@@ -15355,6 +15785,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Jumbo Aardbeien Hollands 400 g",
           "perishable": false,
           "price": {
@@ -15386,6 +15817,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "Jumbo Frambozen 250 g",
           "perishable": false,
           "price": {
@@ -15417,6 +15849,7 @@
             "kcal": 275.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo - Pita Broodjes - 10 Stuks",
           "perishable": false,
           "price": {
@@ -15448,6 +15881,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "Mona Frambozen",
           "perishable": false,
           "price": {
@@ -15479,6 +15913,7 @@
             "kcal": 36.0,
             "protein_g": 1.5
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gesneden Prei 400 g",
           "perishable": false,
           "price": {
@@ -15510,6 +15945,7 @@
             "kcal": 57.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Jumbo Blauwe Bessen 125 g",
           "perishable": false,
           "price": {
@@ -15541,6 +15977,7 @@
             "kcal": 300.0,
             "protein_g": 2.4
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Verse Zure Room 125 g",
           "perishable": true,
           "price": {
@@ -15572,6 +16009,7 @@
             "kcal": 360.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Naturalmente Polenta Gialla Italiana 100% Naturale 250 g",
           "perishable": false,
           "price": {
@@ -15603,6 +16041,7 @@
             "kcal": 288.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Dr. Oetker Natuurlijk Bourbon Vanille-Extract 35 ml",
           "perishable": false,
           "price": {
@@ -15634,6 +16073,7 @@
             "kcal": 105.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Snijboontjes met witte bonen 200 g",
           "perishable": false,
           "price": {
@@ -15665,6 +16105,7 @@
             "kcal": 125.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Biefstuk Rund 2 Stuks ca. 300 g",
           "perishable": false,
           "price": {
@@ -15696,6 +16137,7 @@
             "kcal": 300.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tortilla Naturel 8 Stuks",
           "perishable": false,
           "price": {
@@ -15727,6 +16169,7 @@
             "kcal": 105.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tonijnstukken in Water 160 g",
           "perishable": true,
           "price": {
@@ -15758,6 +16201,7 @@
             "kcal": 190.0,
             "protein_g": 23.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tonijnstukken in Olijfolie 160 g",
           "perishable": true,
           "price": {
@@ -15789,6 +16233,7 @@
             "kcal": 57.0,
             "protein_g": 0.4
           },
+          "meal_kind": "snack",
           "name": "Jumbo Conference Peren 1 kg",
           "perishable": true,
           "price": {
@@ -15820,6 +16265,7 @@
             "kcal": 33.0,
             "protein_g": 3.3
           },
+          "meal_kind": "drink",
           "name": "Jumbo Sojadrink Ongezoet 1 L",
           "perishable": true,
           "price": {
@@ -15851,6 +16297,7 @@
             "kcal": 13.0,
             "protein_g": 0.5
           },
+          "meal_kind": "drink",
           "name": "Jumbo Amandeldrink Ongezoet 1L",
           "perishable": true,
           "price": {
@@ -15882,6 +16329,7 @@
             "kcal": 270.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Stokbrood Knoflookboter 175 g",
           "perishable": false,
           "price": {
@@ -15913,6 +16361,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Aardappelen Kruimig Extra Groot 3 kg",
           "perishable": true,
           "price": {
@@ -15944,6 +16393,7 @@
             "kcal": 570.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Sesamzaad 100 g",
           "perishable": false,
           "price": {
@@ -15975,6 +16425,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Belegen Kaas 48+ Voordeelverpakking Plakken 400 g",
           "perishable": false,
           "price": {
@@ -16006,6 +16457,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Koopmans Appel kaneelcake met Kaneelsuiker Bakmix 400 g",
           "perishable": true,
           "price": {
@@ -16037,6 +16489,7 @@
             "kcal": 68.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Alpro Plantaardige Variatie Op Kwark Zonder Suikers 400g",
           "perishable": true,
           "price": {
@@ -16068,6 +16521,7 @@
             "kcal": 350.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Bulgur 300 g",
           "perishable": false,
           "price": {
@@ -16099,6 +16553,7 @@
             "kcal": 65.0,
             "protein_g": 7.5
           },
+          "meal_kind": "snack",
           "name": "Jumbo Franse Kwark Halfvol 500 g",
           "perishable": true,
           "price": {
@@ -16130,6 +16585,7 @@
             "kcal": 47.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Franse Kwark Mager 1000 g",
           "perishable": true,
           "price": {
@@ -16161,6 +16617,7 @@
             "kcal": 47.0,
             "protein_g": 0.9
           },
+          "meal_kind": "snack",
           "name": "Jumbo Handsinaasappelen 2 kg",
           "perishable": true,
           "price": {
@@ -16192,6 +16649,7 @@
             "kcal": 350.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zilvervliesrijst Voordeelverpakking 1 kg",
           "perishable": false,
           "price": {
@@ -16223,6 +16681,7 @@
             "kcal": 120.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Ierse Rosbief ca. 100 g",
           "perishable": false,
           "price": {
@@ -16254,6 +16713,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tomaten 500g",
           "perishable": true,
           "price": {
@@ -16285,6 +16745,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Olijfolie Mild 1 L",
           "perishable": false,
           "price": {
@@ -16316,6 +16777,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Olijfolie Classico 1 L",
           "perishable": false,
           "price": {
@@ -16347,6 +16809,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Olijfolie Classico 1 L",
           "perishable": false,
           "price": {
@@ -16378,6 +16841,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Olijfolie Extra Vierge 1 L",
           "perishable": false,
           "price": {
@@ -16409,6 +16873,7 @@
             "kcal": 25.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten blokjes biologisch",
           "perishable": false,
           "price": {
@@ -16440,6 +16905,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Krieltjes Kruidenboter Smaak 425 g",
           "perishable": true,
           "price": {
@@ -16471,6 +16937,7 @@
             "kcal": 250.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Houmous Naturel 200 g",
           "perishable": true,
           "price": {
@@ -16502,6 +16969,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Rode kidneybonen 310g",
           "perishable": false,
           "price": {
@@ -16533,6 +17001,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Rode kidneybonen 310g",
           "perishable": false,
           "price": {
@@ -16564,6 +17033,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt banaan 0% vet 1 L",
           "perishable": false,
           "price": {
@@ -16595,6 +17065,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Framboos Aardbei 300ml",
           "perishable": true,
           "price": {
@@ -16626,6 +17097,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Vanille Cookies 300ml",
           "perishable": true,
           "price": {
@@ -16657,6 +17129,7 @@
             "kcal": 250.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Koopmans Broodmix Wit Brood 450 g",
           "perishable": false,
           "price": {
@@ -16688,6 +17161,7 @@
             "kcal": 240.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo - Bruine Bollen - 12 Stuks",
           "perishable": false,
           "price": {
@@ -16719,6 +17193,7 @@
             "kcal": 350.0,
             "protein_g": 30.0
           },
+          "meal_kind": "snack",
           "name": "LiGA  Proteïne Reep Pinda (5 x 32g) 160g",
           "perishable": true,
           "price": {
@@ -16750,6 +17225,7 @@
             "kcal": 145.0,
             "protein_g": 1.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Groene Olijven Zonder Pit 340 g",
           "perishable": true,
           "price": {
@@ -16781,6 +17257,7 @@
             "kcal": 250.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kip Nuggets 500 g",
           "perishable": false,
           "price": {
@@ -16812,6 +17289,7 @@
             "kcal": 180.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "Valess Vegetarische Crispy Chik'n Burger 2 Stuks 180 g",
           "perishable": false,
           "price": {
@@ -16843,6 +17321,7 @@
             "kcal": 80.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "HiPRO Protein Skyr Stijl Vanille 450g",
           "perishable": true,
           "price": {
@@ -16874,6 +17353,7 @@
             "kcal": 80.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "HiPRO Protein Skyr Stijl Vanille 450g",
           "perishable": true,
           "price": {
@@ -16905,6 +17385,7 @@
             "kcal": 33.0,
             "protein_g": 3.3
           },
+          "meal_kind": "drink",
           "name": "Arla Bio Karnemelk 1 L",
           "perishable": true,
           "price": {
@@ -16936,6 +17417,7 @@
             "kcal": 34.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Broccoli 500 g",
           "perishable": false,
           "price": {
@@ -16967,6 +17449,7 @@
             "kcal": 270.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Unox Knakworst Knaks 3 x 400 g",
           "perishable": false,
           "price": {
@@ -16998,6 +17481,7 @@
             "kcal": 560.0,
             "protein_g": 30.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Pompoenpitten Biologisch 500 g",
           "perishable": false,
           "price": {
@@ -17029,6 +17513,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zonnebloempitten Biologisch 500 g",
           "perishable": false,
           "price": {
@@ -17060,6 +17545,7 @@
             "kcal": 480.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Chiazaad Biologisch 275 g",
           "perishable": false,
           "price": {
@@ -17091,6 +17577,7 @@
             "kcal": 530.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Lijnzaad Heel Biologisch 500 g",
           "perishable": false,
           "price": {
@@ -17122,6 +17609,7 @@
             "kcal": 400.0,
             "protein_g": 35.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Parmigiano Reggiano Flakes 125 g",
           "perishable": false,
           "price": {
@@ -17153,6 +17641,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Holie's Granola Nuts & Seeds Hazelnuts, Almonds & Pecans 350g",
           "perishable": false,
           "price": {
@@ -17184,6 +17673,7 @@
             "kcal": 90.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Pangasiusfilet Vriesvers 675 g",
           "perishable": false,
           "price": {
@@ -17215,6 +17705,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Mango 300ml",
           "perishable": true,
           "price": {
@@ -17246,6 +17737,7 @@
             "kcal": 250.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Parrano  Geraspte Mozzarella",
           "perishable": false,
           "price": {
@@ -17277,6 +17769,7 @@
             "kcal": 33.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Jumbo Houdbare Magere Melk 1 L",
           "perishable": true,
           "price": {
@@ -17308,6 +17801,7 @@
             "kcal": 350.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gorgonzola Dolce 200 g",
           "perishable": true,
           "price": {
@@ -17339,6 +17833,7 @@
             "kcal": 380.0,
             "protein_g": 8.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Rijstwafels Naturel 130 g",
           "perishable": false,
           "price": {
@@ -17370,6 +17865,7 @@
             "kcal": 64.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Jumbo Verse Volle Melk 1 L",
           "perishable": true,
           "price": {
@@ -17401,6 +17897,7 @@
             "kcal": 390.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Beschuit Naturel 13 Stuks",
           "perishable": true,
           "price": {
@@ -17432,6 +17929,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Halfvolle Melk 6 x 500 ml Fles Multipack",
           "perishable": true,
           "price": {
@@ -17463,6 +17961,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten Ketchup Zero 400 ml",
           "perishable": false,
           "price": {
@@ -17494,6 +17993,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Knäckebröd Zuurdesem",
           "perishable": false,
           "price": {
@@ -17525,6 +18025,7 @@
             "kcal": 145.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Scharrelkip Kippendijfilet 750 g",
           "perishable": false,
           "price": {
@@ -17556,6 +18057,7 @@
             "kcal": 170.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Drumsticks Gekruid Kip ca. 500 g",
           "perishable": false,
           "price": {
@@ -17587,6 +18089,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Melkunie Protein Aardbei & vanille Yoghurtdrink 330 ml",
           "perishable": false,
           "price": {
@@ -17618,6 +18121,7 @@
             "kcal": 63.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "HiPRO Protein Skyr Stijl Stracciatella 450g",
           "perishable": true,
           "price": {
@@ -17649,6 +18153,7 @@
             "kcal": 95.0,
             "protein_g": 3.3
           },
+          "meal_kind": "snack",
           "name": "Campina Vla Vanille Smaak 1 L",
           "perishable": true,
           "price": {
@@ -17680,6 +18185,7 @@
             "kcal": 45.0,
             "protein_g": 0.7
           },
+          "meal_kind": "drink",
           "name": "Jumbo Vers Geperste Sinaasappelsap 1 L",
           "perishable": false,
           "price": {
@@ -17711,6 +18217,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "Jumbo Dole Bananen 5 Stuks",
           "perishable": false,
           "price": {
@@ -17742,6 +18249,7 @@
             "kcal": 20.0,
             "protein_g": 1.8
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Fijngesneden Andijvie 500 g",
           "perishable": false,
           "price": {
@@ -17773,6 +18281,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zoete Puntpaprika 500 g",
           "perishable": false,
           "price": {
@@ -17804,6 +18313,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Verse Franse Friet 1 kg ",
           "perishable": false,
           "price": {
@@ -17835,6 +18345,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Verse Friet 1 kg",
           "perishable": false,
           "price": {
@@ -17866,6 +18377,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Perzik Passievrucht 300 ml",
           "perishable": true,
           "price": {
@@ -17897,6 +18409,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Stracciatella 300ml",
           "perishable": true,
           "price": {
@@ -17928,6 +18441,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Leev Linzenwafels Paprika 3x2-pack 54g",
           "perishable": false,
           "price": {
@@ -17959,6 +18473,7 @@
             "kcal": 36.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Doperwtjes & Worteltjes 305g",
           "perishable": false,
           "price": {
@@ -17990,6 +18505,7 @@
             "kcal": 360.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Holie's Crunchy Muesli 400 g",
           "perishable": false,
           "price": {
@@ -18021,6 +18537,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Little Maryam Bio Crazy Couscous Couscous met Kip 15+ Maanden 250 g",
           "perishable": false,
           "price": {
@@ -18052,6 +18569,7 @@
             "kcal": 690.0,
             "protein_g": 9.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Ongebrande Pecannoten 200 g",
           "perishable": false,
           "price": {
@@ -18083,6 +18601,7 @@
             "kcal": 650.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Ongebrande Walnoten 200 g",
           "perishable": false,
           "price": {
@@ -18114,6 +18633,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten gezeefd biologisch",
           "perishable": false,
           "price": {
@@ -18145,6 +18665,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten gezeefd",
           "perishable": false,
           "price": {
@@ -18176,6 +18697,7 @@
             "kcal": 250.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Minerva Makreel Pate 75 g",
           "perishable": false,
           "price": {
@@ -18207,6 +18729,7 @@
             "kcal": 45.0,
             "protein_g": 1.0
           },
+          "meal_kind": "drink",
           "name": "Jumbo Haverdrink Ongezoet 1 L",
           "perishable": true,
           "price": {
@@ -18238,6 +18761,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Amandelen Gezouten 150 g",
           "perishable": false,
           "price": {
@@ -18269,6 +18793,7 @@
             "kcal": 630.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Hazelnoten Ongezouten 200 g",
           "perishable": false,
           "price": {
@@ -18300,6 +18825,7 @@
             "kcal": 50.0,
             "protein_g": 8.0
           },
+          "meal_kind": "drink",
           "name": "NXT Level Vanilla Flavor Protein Shake 500 ml",
           "perishable": true,
           "price": {
@@ -18331,6 +18857,7 @@
             "kcal": 660.0,
             "protein_g": 14.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Ongebrande Paranoten 150 g",
           "perishable": false,
           "price": {
@@ -18362,6 +18889,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Pistachenoten Gezouten 200 g",
           "perishable": false,
           "price": {
@@ -18393,6 +18921,7 @@
             "kcal": 290.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gelderse Rookworst 375 g",
           "perishable": false,
           "price": {
@@ -18424,6 +18953,7 @@
             "kcal": 89.0,
             "protein_g": 1.1
           },
+          "meal_kind": "snack",
           "name": "HiPRO Protein Kwark Banaan 200 g",
           "perishable": false,
           "price": {
@@ -18455,6 +18985,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "HiPRO Protein Kwark Mango 200 g",
           "perishable": false,
           "price": {
@@ -18486,6 +19017,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten Ketchup 400ml",
           "perishable": false,
           "price": {
@@ -18517,6 +19049,7 @@
             "kcal": 62.0,
             "protein_g": 3.5
           },
+          "meal_kind": "snack",
           "name": "Jumbo Volle Yoghurt Stracciatella 1 KG",
           "perishable": true,
           "price": {
@@ -18548,6 +19081,7 @@
             "kcal": 31.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gebroken Sperziebonen 400 g",
           "perishable": false,
           "price": {
@@ -18579,6 +19113,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Bosbes 300 ml",
           "perishable": true,
           "price": {
@@ -18610,6 +19145,7 @@
             "kcal": 380.0,
             "protein_g": 75.0
           },
+          "meal_kind": "ingredient",
           "name": "XXL Nutrition Whey Delicious Vanilla Flavor 450 g",
           "perishable": false,
           "price": {
@@ -18641,6 +19177,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Linzen 310g",
           "perishable": false,
           "price": {
@@ -18672,6 +19209,7 @@
             "kcal": 120.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Kikkererwten 310g",
           "perishable": false,
           "price": {
@@ -18703,6 +19241,7 @@
             "kcal": 120.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Kikkererwten 310g",
           "perishable": false,
           "price": {
@@ -18734,6 +19273,7 @@
             "kcal": 75.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Melkunie Protein Aardbei kwark 200 g",
           "perishable": true,
           "price": {
@@ -18765,6 +19305,7 @@
             "kcal": 43.0,
             "protein_g": 3.4
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Geschoonde Spruitjes 350 g",
           "perishable": false,
           "price": {
@@ -18796,6 +19337,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Chan's Gele Spliterwten 1000 g",
           "perishable": false,
           "price": {
@@ -18827,6 +19369,7 @@
             "kcal": 550.0,
             "protein_g": 18.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Cashewnoten Ongezouten Voordeelverpakking 500 g",
           "perishable": false,
           "price": {
@@ -18858,6 +19401,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Speculoos Pasta Crunchy 400 g",
           "perishable": false,
           "price": {
@@ -18889,6 +19433,7 @@
             "kcal": 143.0,
             "protein_g": 12.6
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Vrije Uitloop Eieren M/L 10 Stuks",
           "perishable": false,
           "price": {
@@ -18920,6 +19465,7 @@
             "kcal": 360.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Holie Crunchy Muesli Protein 400g",
           "perishable": false,
           "price": {
@@ -18951,6 +19497,7 @@
             "kcal": 60.0,
             "protein_g": 10.0
           },
+          "meal_kind": "drink",
           "name": "HiPRO Protein Drink Banaan 300 ml",
           "perishable": true,
           "price": {
@@ -18982,6 +19529,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Pinda's Gezouten 250 g",
           "perishable": false,
           "price": {
@@ -19013,6 +19561,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Jumbo Mango Voordeelverpakking 275 g",
           "perishable": false,
           "price": {
@@ -19044,6 +19593,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Leev Linzenwafels Paprika 117g",
           "perishable": false,
           "price": {
@@ -19075,6 +19625,7 @@
             "kcal": 52.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Coco Vite Eiwit 500 g",
           "perishable": false,
           "price": {
@@ -19106,6 +19657,7 @@
             "kcal": 140.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kipgehakt 500 g",
           "perishable": false,
           "price": {
@@ -19137,6 +19689,7 @@
             "kcal": 77.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Aardappelen Hasselback 450 g",
           "perishable": true,
           "price": {
@@ -19168,6 +19721,7 @@
             "kcal": 110.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Varkenshaas ca. 310 g",
           "perishable": false,
           "price": {
@@ -19199,6 +19753,7 @@
             "kcal": 105.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kalkoenfilet 100 g",
           "perishable": false,
           "price": {
@@ -19230,6 +19785,7 @@
             "kcal": 360.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Muesli Naturel 1 kg",
           "perishable": false,
           "price": {
@@ -19261,6 +19817,7 @@
             "kcal": 63.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Skyr IJslandse Stijl Naturel 1 kg",
           "perishable": true,
           "price": {
@@ -19292,6 +19849,7 @@
             "kcal": 0.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Rio Sucralose Zoetstof 200 g",
           "perishable": false,
           "price": {
@@ -19323,6 +19881,7 @@
             "kcal": 95.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo High Protein Pudding Chocoladesmaak 200 g",
           "perishable": true,
           "price": {
@@ -19354,6 +19913,7 @@
             "kcal": 250.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gehaktbal Gebraden Varken 3 Stuks",
           "perishable": false,
           "price": {
@@ -19385,6 +19945,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Danio Mango/Passievrucht 450gr",
           "perishable": false,
           "price": {
@@ -19416,6 +19977,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Salami ca. 100 g",
           "perishable": false,
           "price": {
@@ -19447,6 +20009,7 @@
             "kcal": 105.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Scharrel Kipfilet Naturel ca. 135 g",
           "perishable": false,
           "price": {
@@ -19478,6 +20041,7 @@
             "kcal": 28.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Paprika Rood",
           "perishable": false,
           "price": {
@@ -19509,6 +20073,7 @@
             "kcal": 400.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Salami 140 g",
           "perishable": false,
           "price": {
@@ -19540,6 +20105,7 @@
             "kcal": 280.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo BBQ Spareribs Naturel ca. 300 g",
           "perishable": false,
           "price": {
@@ -19571,6 +20137,7 @@
             "kcal": 23.0,
             "protein_g": 2.9
           },
+          "meal_kind": "ingredient",
           "name": "Iglo Spinazie à la crème 750 g",
           "perishable": false,
           "price": {
@@ -19602,6 +20169,7 @@
             "kcal": 115.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Fricandeau Naturel ca. 100 g",
           "perishable": false,
           "price": {
@@ -19633,6 +20201,7 @@
             "kcal": 370.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Simply Free by Leev - Havermout Glutenvrij 450g",
           "perishable": false,
           "price": {
@@ -19664,6 +20233,7 @@
             "kcal": 250.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gemengd Gehakt 2 x 500g",
           "perishable": false,
           "price": {
@@ -19695,6 +20265,7 @@
             "kcal": 105.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Achterham 140 g",
           "perishable": false,
           "price": {
@@ -19726,6 +20297,7 @@
             "kcal": 14.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "Komkommer Rauwkost in Romige Dressing 400 g",
           "perishable": true,
           "price": {
@@ -19757,6 +20329,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Mango Passievrucht 0% Vet 1L",
           "perishable": false,
           "price": {
@@ -19788,6 +20361,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Aardbei Kers 0% Vet 1L",
           "perishable": false,
           "price": {
@@ -19819,6 +20393,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Framboos 6 x 1000 ml",
           "perishable": false,
           "price": {
@@ -19850,6 +20425,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Framboos 0% Vet 1L",
           "perishable": false,
           "price": {
@@ -19881,6 +20457,7 @@
             "kcal": 110.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Zandvliet Gerookte Kipfilet 250 g",
           "perishable": false,
           "price": {
@@ -19912,6 +20489,7 @@
             "kcal": 320.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Kips Originele Leverworst 230 g",
           "perishable": true,
           "price": {
@@ -19943,6 +20521,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Optimel Drinkyoghurt Peachy Aardbei 0% Vet Limited Edition 1L",
           "perishable": false,
           "price": {
@@ -19974,6 +20553,7 @@
             "kcal": 120.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Edamame Boontjes Gepeld 450 g",
           "perishable": false,
           "price": {
@@ -20005,6 +20585,7 @@
             "kcal": 820.0,
             "protein_g": 0.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Biologische Olijfolie Extra Vierge 1L",
           "perishable": false,
           "price": {
@@ -20036,6 +20617,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "Amorelli Pistache Crème 190 g",
           "perishable": false,
           "price": {
@@ -20067,6 +20649,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Zwarte bonen 400g",
           "perishable": false,
           "price": {
@@ -20098,6 +20681,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Zwarte bonen 400g",
           "perishable": false,
           "price": {
@@ -20129,6 +20713,7 @@
             "kcal": 600.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo's 100% Pindakaas Naturel 600 g",
           "perishable": false,
           "price": {
@@ -20160,6 +20745,7 @@
             "kcal": 143.0,
             "protein_g": 12.6
           },
+          "meal_kind": "snack",
           "name": "Jumbo Gekookte Gekleurde Scharrel Eieren 6 Stuks",
           "perishable": true,
           "price": {
@@ -20191,6 +20777,7 @@
             "kcal": 45.0,
             "protein_g": 3.3
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Boerenkool Voordeelverpakking 750 g",
           "perishable": false,
           "price": {
@@ -20222,6 +20809,7 @@
             "kcal": 95.0,
             "protein_g": 3.3
           },
+          "meal_kind": "snack",
           "name": "Campina Vla Limited Edition 1L",
           "perishable": true,
           "price": {
@@ -20253,6 +20841,7 @@
             "kcal": 220.0,
             "protein_g": 14.0
           },
+          "meal_kind": "ingredient",
           "name": "Vivera Vegetarische Kaasschnitzel 2 Stuks 150 g",
           "perishable": false,
           "price": {
@@ -20284,6 +20873,7 @@
             "kcal": 120.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tofu Naturel 375g",
           "perishable": false,
           "price": {
@@ -20315,6 +20905,7 @@
             "kcal": 190.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tempeh Naturel 395g",
           "perishable": false,
           "price": {
@@ -20346,6 +20937,7 @@
             "kcal": 250.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Falafel Naturel Voordeelverpakking 360 g",
           "perishable": false,
           "price": {
@@ -20377,6 +20969,7 @@
             "kcal": 95.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Surimi Sticks MSC 250 g",
           "perishable": true,
           "price": {
@@ -20408,6 +21001,7 @@
             "kcal": 80.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Kabeljauwfilet Naturel 2 Stuks ca. 260 g",
           "perishable": false,
           "price": {
@@ -20439,6 +21033,7 @@
             "kcal": 75.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Danio Romige Kwark Aardbei 450g",
           "perishable": true,
           "price": {
@@ -20470,6 +21065,7 @@
             "kcal": 70.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Mosselen Super 2KG",
           "perishable": false,
           "price": {
@@ -20501,6 +21097,7 @@
             "kcal": 70.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Mosselen Super 2KG",
           "perishable": false,
           "price": {
@@ -20532,6 +21129,7 @@
             "kcal": 200.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Ouwehand Sea You Fish Bites Zure Haring 355 g",
           "perishable": false,
           "price": {
@@ -20563,6 +21161,7 @@
             "kcal": 380.0,
             "protein_g": 7.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Cornflakes 500 g",
           "perishable": false,
           "price": {
@@ -20594,6 +21193,7 @@
             "kcal": 28.0,
             "protein_g": 2.3
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Bloemkool Roosjes Voordeelverpakking 750 g",
           "perishable": false,
           "price": {
@@ -20625,6 +21225,7 @@
             "kcal": 85.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Scholfilet Zonder Huid ca. 240 g",
           "perishable": false,
           "price": {
@@ -20656,6 +21257,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "Jumbo Ananas Voordeelverpakking 400 g",
           "perishable": false,
           "price": {
@@ -20687,6 +21289,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "Jumbo Ananas Voordeelverpakking 400 g",
           "perishable": false,
           "price": {
@@ -20718,6 +21321,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Leksands Origineel Zweeds Rogge Knäckebröd 200g",
           "perishable": false,
           "price": {
@@ -20749,6 +21353,7 @@
             "kcal": 75.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Danio Romige Kwark Perzik 450 g",
           "perishable": true,
           "price": {
@@ -20780,6 +21385,7 @@
             "kcal": 160.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Vegetarische Kipstukjes Naturel 200 g",
           "perishable": false,
           "price": {
@@ -20811,6 +21417,7 @@
             "kcal": 740.0,
             "protein_g": 0.7
           },
+          "meal_kind": "ingredient",
           "name": "Becel met Roomboter 250 g",
           "perishable": false,
           "price": {
@@ -20842,6 +21449,7 @@
             "kcal": 160.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Avocado Eetrijp 2 Stuks",
           "perishable": true,
           "price": {
@@ -20873,6 +21481,7 @@
             "kcal": 160.0,
             "protein_g": 2.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Avocado Eetrijp 2 Stuks",
           "perishable": true,
           "price": {
@@ -20904,6 +21513,7 @@
             "kcal": 290.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Naan Naturel 2 Stuks 260 g",
           "perishable": false,
           "price": {
@@ -20935,6 +21545,7 @@
             "kcal": 25.0,
             "protein_g": 1.0
           },
+          "meal_kind": "ingredient",
           "name": "Sera Geroosterde Aubergine 650g",
           "perishable": false,
           "price": {
@@ -20966,6 +21577,7 @@
             "kcal": 600.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Koska Sesampasta 300g",
           "perishable": false,
           "price": {
@@ -20997,6 +21609,7 @@
             "kcal": 85.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Iglo Viskraam Garnalen Krokant Gepaneerd 200g",
           "perishable": false,
           "price": {
@@ -21028,6 +21641,7 @@
             "kcal": 80.0,
             "protein_g": 18.0
           },
+          "meal_kind": "ingredient",
           "name": "Seacon Alaska Koolvisfilet 675g",
           "perishable": false,
           "price": {
@@ -21059,6 +21673,7 @@
             "kcal": 250.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gebraden Gehakt ca. 115 g",
           "perishable": false,
           "price": {
@@ -21090,6 +21705,7 @@
             "kcal": 300.0,
             "protein_g": 15.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Bacon 115 g",
           "perishable": false,
           "price": {
@@ -21121,6 +21737,7 @@
             "kcal": 350.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gedroogde Kikkererwten 500 g",
           "perishable": false,
           "price": {
@@ -21152,6 +21769,7 @@
             "kcal": 340.0,
             "protein_g": 24.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gedroogde Rode Linzen 500 g",
           "perishable": false,
           "price": {
@@ -21183,6 +21801,7 @@
             "kcal": 300.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Geitenkaas Schijfjes Naturel Voordeelverpakking 2 x 100 g",
           "perishable": true,
           "price": {
@@ -21214,6 +21833,7 @@
             "kcal": 60.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Jumbo Mango Eetrijp 2 Stuks",
           "perishable": false,
           "price": {
@@ -21245,6 +21865,7 @@
             "kcal": 105.0,
             "protein_g": 6.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Cannellini Bonen 310g",
           "perishable": false,
           "price": {
@@ -21276,6 +21897,7 @@
             "kcal": 200.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Zalmfilet Zonder Huid Naturel 230 g",
           "perishable": false,
           "price": {
@@ -21307,6 +21929,7 @@
             "kcal": 615.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo's 100% Amandelpasta 180 g",
           "perishable": false,
           "price": {
@@ -21338,6 +21961,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "Hipro Pudding Pistache 200g",
           "perishable": false,
           "price": {
@@ -21369,6 +21993,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Amorelli Amandel Crème 190 g",
           "perishable": false,
           "price": {
@@ -21400,6 +22025,7 @@
             "kcal": 630.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "Amorelli Hazelnoot Crème 190 g",
           "perishable": false,
           "price": {
@@ -21431,6 +22057,7 @@
             "kcal": 150.0,
             "protein_g": 16.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Plantaardig Gehakt Rul Gegaard 400 g",
           "perishable": false,
           "price": {
@@ -21462,6 +22089,7 @@
             "kcal": 180.0,
             "protein_g": 22.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Gerookte Zalm 200 g",
           "perishable": false,
           "price": {
@@ -21493,6 +22121,7 @@
             "kcal": 340.0,
             "protein_g": 13.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Diertjes Pasta Volkoren 500 g",
           "perishable": false,
           "price": {
@@ -21524,6 +22153,7 @@
             "kcal": 265.0,
             "protein_g": 9.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Italiaanse Kruiden 14 g",
           "perishable": false,
           "price": {
@@ -21555,6 +22185,7 @@
             "kcal": 75.0,
             "protein_g": 6.0
           },
+          "meal_kind": "snack",
           "name": "Jumbo Romige Kwark Aardbei 450 g",
           "perishable": true,
           "price": {
@@ -21586,6 +22217,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Jong Belegen Stuk ca. 380 g",
           "perishable": false,
           "price": {
@@ -21617,6 +22249,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Jong Belegen Stuk ca. 600 g",
           "perishable": false,
           "price": {
@@ -21648,6 +22281,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Belegen Stuk ca. 350 g",
           "perishable": false,
           "price": {
@@ -21679,6 +22313,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Belegen Stuk ca. 580 g",
           "perishable": false,
           "price": {
@@ -21710,6 +22345,7 @@
             "kcal": 390.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Extra Belegen Stuk ca. 340 g",
           "perishable": false,
           "price": {
@@ -21741,6 +22377,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Jong Belegen met Komijn Stuk ca. 350 g",
           "perishable": false,
           "price": {
@@ -21772,6 +22409,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Stuks Jong 640 g",
           "perishable": false,
           "price": {
@@ -21803,6 +22441,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Goudse Kaas 48+ Jong Stuk ca. 410 g",
           "perishable": false,
           "price": {
@@ -21834,6 +22473,7 @@
             "kcal": 110.0,
             "protein_g": 8.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Tuinbonen 660 g",
           "perishable": false,
           "price": {
@@ -21865,6 +22505,7 @@
             "kcal": 580.0,
             "protein_g": 21.0
           },
+          "meal_kind": "snack",
           "name": "Holie's Granola Protein Amandel Speculaas 350 g",
           "perishable": false,
           "price": {
@@ -21896,6 +22537,7 @@
             "kcal": 360.0,
             "protein_g": 10.0
           },
+          "meal_kind": "snack",
           "name": "Holie's Crunchy Muesli Protein Apple Crumble 400 g",
           "perishable": false,
           "price": {
@@ -21927,6 +22569,7 @@
             "kcal": 350.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Holie's Granola Low Carb Cacao Nuts & Seeds 350 g",
           "perishable": false,
           "price": {
@@ -21958,6 +22601,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Zuivelhoeve Boer'n Toet Aardbei 120g",
           "perishable": false,
           "price": {
@@ -21989,6 +22633,7 @@
             "kcal": 95.0,
             "protein_g": 3.3
           },
+          "meal_kind": "snack",
           "name": "Zuivelhoeve Boer'n vla Romige Karamelsnoepjes 450g",
           "perishable": true,
           "price": {
@@ -22020,6 +22665,7 @@
             "kcal": 95.0,
             "protein_g": 3.3
           },
+          "meal_kind": "snack",
           "name": "Zuivelhoeve Boer'n Vla Vanille 750g",
           "perishable": true,
           "price": {
@@ -22051,6 +22697,7 @@
             "kcal": 52.0,
             "protein_g": 1.2
           },
+          "meal_kind": "snack",
           "name": "Optimel Vezels Drinkyoghurt Framboos Bosbes 0% Vet 1L",
           "perishable": false,
           "price": {
@@ -22082,6 +22729,7 @@
             "kcal": 46.0,
             "protein_g": 3.5
           },
+          "meal_kind": "drink",
           "name": "Campina Halfvolle Melk Voordeelpack 4 x 2.4 L",
           "perishable": true,
           "price": {
@@ -22113,6 +22761,7 @@
             "kcal": 160.0,
             "protein_g": 3.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Patat Frites 2,5 kg",
           "perishable": false,
           "price": {
@@ -22144,6 +22793,7 @@
             "kcal": 25.0,
             "protein_g": 1.2
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomatenblokjes 390g",
           "perishable": false,
           "price": {
@@ -22175,6 +22825,7 @@
             "kcal": 290.0,
             "protein_g": 28.0
           },
+          "meal_kind": "ingredient",
           "name": "Rasp Mild 30+ Kaas 250 g",
           "perishable": false,
           "price": {
@@ -22206,6 +22857,7 @@
             "kcal": 380.0,
             "protein_g": 25.0
           },
+          "meal_kind": "ingredient",
           "name": "Goudse Kaas Jong 48+ Plakken 400 g",
           "perishable": false,
           "price": {
@@ -22237,6 +22889,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Healthy People Vezelrijk Superfruit Appel Pruim 1 L",
           "perishable": false,
           "price": {
@@ -22268,6 +22921,7 @@
             "kcal": 115.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Bonduelle Rode Kidney Bonen Chili 400 g",
           "perishable": false,
           "price": {
@@ -22299,6 +22953,7 @@
             "kcal": 50.0,
             "protein_g": 0.5
           },
+          "meal_kind": "snack",
           "name": "Healthy People Hydrating Kokoswater Ananas 1 L",
           "perishable": false,
           "price": {
@@ -22330,6 +22985,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Jumbo Mandarijnen 1 kg",
           "perishable": true,
           "price": {
@@ -22361,6 +23017,7 @@
             "kcal": 350.0,
             "protein_g": 20.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Cacaopoeder 125 g",
           "perishable": false,
           "price": {
@@ -22392,6 +23049,7 @@
             "kcal": 220.0,
             "protein_g": 21.0
           },
+          "meal_kind": "ingredient",
           "name": "Brunswick Sardines in Sojaolie 106 g",
           "perishable": true,
           "price": {
@@ -22423,6 +23081,7 @@
             "kcal": 20.0,
             "protein_g": 0.9
           },
+          "meal_kind": "ingredient",
           "name": "Heinz Tomaten Polpa 400g",
           "perishable": true,
           "price": {
@@ -22454,6 +23113,7 @@
             "kcal": 355.0,
             "protein_g": 11.0
           },
+          "meal_kind": "ingredient",
           "name": "Samlip Udon Noedels Vers 200 g",
           "perishable": false,
           "price": {
@@ -22485,6 +23145,7 @@
             "kcal": 330.0,
             "protein_g": 19.0
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo C'est la Brie Roombrie 60+ 200 g",
           "perishable": true,
           "price": {
@@ -22516,6 +23177,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "Chio Fusion Peanuts BBQ Honey Style 200 g",
           "perishable": false,
           "price": {
@@ -22547,6 +23209,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "Chio Fusion Peanuts Curry Orient Style 200 g",
           "perishable": false,
           "price": {
@@ -22578,6 +23241,7 @@
             "kcal": 570.0,
             "protein_g": 26.0
           },
+          "meal_kind": "snack",
           "name": "Chio Fusion Peanuts Sweet Paprika Style 200 g",
           "perishable": false,
           "price": {
@@ -22609,6 +23273,7 @@
             "kcal": 160.0,
             "protein_g": 17.0
           },
+          "meal_kind": "ingredient",
           "name": "Vivera Gerookte Tofu 280 g",
           "perishable": false,
           "price": {
@@ -22640,6 +23305,7 @@
             "kcal": 53.0,
             "protein_g": 0.8
           },
+          "meal_kind": "snack",
           "name": "Jumbo Orri Mandarijnen 750 g",
           "perishable": true,
           "price": {
@@ -22671,6 +23337,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Leksands Knäckebröd Zaden en Zeezout 200g",
           "perishable": false,
           "price": {
@@ -22702,6 +23369,7 @@
             "kcal": 380.0,
             "protein_g": 11.0
           },
+          "meal_kind": "snack",
           "name": "Leksands Zweeds Rogge Knäckebröd Original 200g",
           "perishable": false,
           "price": {
@@ -22733,6 +23401,7 @@
             "kcal": 560.0,
             "protein_g": 20.0
           },
+          "meal_kind": "snack",
           "name": "Amorelli Pistache 350 g",
           "perishable": false,
           "price": {
@@ -22764,6 +23433,7 @@
             "kcal": 630.0,
             "protein_g": 15.0
           },
+          "meal_kind": "snack",
           "name": "Amorelli Hazelnoot 350 g",
           "perishable": false,
           "price": {
@@ -22795,6 +23465,7 @@
             "kcal": 32.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Healthy People Vezelrijk Superfruit Aardbei Pruim 1 L",
           "perishable": false,
           "price": {
@@ -22826,6 +23497,7 @@
             "kcal": 360.0,
             "protein_g": 12.0
           },
+          "meal_kind": "ingredient",
           "name": "Bertolli Pasta Presto Piccante 70g",
           "perishable": false,
           "price": {
@@ -22857,6 +23529,7 @@
             "kcal": 86.0,
             "protein_g": 1.6
           },
+          "meal_kind": "ingredient",
           "name": "XXL Nutrition Protein Soup Zoete aardappel - Pompoen 570g",
           "perishable": false,
           "price": {
@@ -22888,6 +23561,7 @@
             "kcal": 52.0,
             "protein_g": 0.3
           },
+          "meal_kind": "snack",
           "name": "Jumbo Jonagold Appels 1,5 kg",
           "perishable": true,
           "price": {
@@ -22919,6 +23593,7 @@
             "kcal": 355.0,
             "protein_g": 7.0
           },
+          "meal_kind": "ingredient",
           "name": "Lassie Ready to Load Rijst Spiced 250g",
           "perishable": false,
           "price": {
@@ -22950,6 +23625,7 @@
             "kcal": 57.0,
             "protein_g": 0.7
           },
+          "meal_kind": "snack",
           "name": "Jumbo Blauwe Bessen 300 g",
           "perishable": false,
           "price": {
@@ -22981,6 +23657,7 @@
             "kcal": 350.0,
             "protein_g": 30.0
           },
+          "meal_kind": "snack",
           "name": "NXTLVL Crispy Proteinereep Raspberry Toffee 55 g",
           "perishable": true,
           "price": {
@@ -23012,6 +23689,7 @@
             "kcal": 98.0,
             "protein_g": 12.5
           },
+          "meal_kind": "snack",
           "name": "Danone Hüttenkäse 200g",
           "perishable": true,
           "price": {
@@ -23043,6 +23721,7 @@
             "kcal": 149.0,
             "protein_g": 6.4
           },
+          "meal_kind": "ingredient",
           "name": "Jumbo Knoflook 100 g",
           "perishable": false,
           "price": {
@@ -23064,6 +23743,6 @@
       ]
     }
   },
-  "generated_at": "2026-09-17T13:32:27+00:00",
+  "generated_at": "2026-09-17T13:58:44+00:00",
   "schema_version": 1
 }

@@ -754,7 +754,26 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     for the app's own structure and its test split (JVM unit tests run in CI;
     Compose UI has no instrumentation tests yet, verified manually instead).
 
-Current position: **milestones 1-10 complete.** 411 Python tests, plus the
+11. ~~food_types meal_kind + offer-driven tabs.~~ **Done.** The app's
+    Meals/Snacks/Drinks/Other tabs were gated on the 8 curated archetypes -
+    every tab but "Other" only ever showed those 8 items, no matter how much
+    was actually ingested and priced. Fixed at the source: every one of the
+    193 `food_types` seed rows now carries its own `meal_kind`
+    (`meal`/`snack`/`drink`/`ingredient` - `db.py`, `seed.py`, tagged by hand
+    per section, see `tests/test_food_types_seed.py`). **No food type is ever
+    classified `meal`** - a raw chicken fillet or a bag of rice isn't a meal,
+    it's a component of one, so `meal` stays exclusively an
+    `archetypes.meal_kind` concept (a composed dish). `ranking.RankedOffer`
+    and `export.py` carry the food type's `meal_kind` through to every offer;
+    the app's SNACKS/DRINKS/OTHER tabs now filter the FULL ranked offer list
+    (hundreds of matched SKUs) by it, while MEALS stays archetype-driven until
+    the planned slot-based meal customiser (pasta/wrap-style: pick a carb, a
+    protein, a sauce, optional greens, checked for whether the combination
+    actually works, plus user-added extras and saved custom meals) is
+    designed and built - that is a separate, much larger milestone, not yet
+    started.
+
+Current position: **milestones 1-11 complete.** 608 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`).
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`

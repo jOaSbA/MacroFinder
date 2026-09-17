@@ -15,6 +15,7 @@
 
 # ---------------------------------------------------------------- zuivel
 - key: kwark_mager
+  meal_kind: snack
   name_nl: magere kwark
   name_en: low-fat quark
   state: solid
@@ -28,6 +29,7 @@
   aliases: [kwark mager, magere kwark naturel, kwark naturel mager, magere verse kaas]
 
 - key: kwark_halfvol
+  meal_kind: snack
   name_nl: halfvolle kwark
   state: solid
   protein_per_100g: 7.5
@@ -40,6 +42,7 @@
   aliases: [kwark halfvol]
 
 - key: kwark_vol
+  meal_kind: snack
   name_nl: volle kwark
   state: solid
   protein_per_100g: 6.5
@@ -52,6 +55,7 @@
   aliases: [kwark vol, volle kwark naturel]
 
 - key: kwark_mager_fruit
+  meal_kind: snack
   name_nl: magere kwark met fruit
   state: solid
   protein_per_100g: 6.0
@@ -64,6 +68,7 @@
   aliases: [kwark fruit, vruchtenkwark, kwark aardbei, kwark perzik]
 
 - key: skyr_naturel
+  meal_kind: snack
   name_nl: skyr naturel
   state: solid
   protein_per_100g: 11.0
@@ -76,6 +81,7 @@
   aliases: [skyr, ijslandse kwark, skyr naturel]
 
 - key: skyr_fruit
+  meal_kind: snack
   name_nl: skyr met fruit
   state: solid
   protein_per_100g: 9.0
@@ -88,6 +94,7 @@
   aliases: [skyr aardbei, skyr vanille, skyr bosvruchten]
 
 - key: yoghurt_mager
+  meal_kind: snack
   name_nl: magere yoghurt
   state: solid
   protein_per_100g: 4.3
@@ -100,6 +107,7 @@
   aliases: [yoghurt mager, magere yoghurt naturel]
 
 - key: yoghurt_halfvol
+  meal_kind: snack
   name_nl: halfvolle yoghurt
   state: solid
   protein_per_100g: 4.0
@@ -112,6 +120,7 @@
   aliases: [yoghurt halfvol]
 
 - key: yoghurt_vol
+  meal_kind: snack
   name_nl: volle yoghurt
   state: solid
   protein_per_100g: 3.5
@@ -124,6 +133,7 @@
   aliases: [yoghurt vol, volle yoghurt naturel]
 
 - key: griekse_yoghurt_0
+  meal_kind: snack
   name_nl: Griekse yoghurt 0%
   state: solid
   protein_per_100g: 9.0
@@ -136,6 +146,7 @@
   aliases: [griekse yoghurt mager, grieks 0%, griekse stijl yoghurt 0%]
 
 - key: griekse_yoghurt_vol
+  meal_kind: snack
   name_nl: Griekse yoghurt vol
   state: solid
   protein_per_100g: 4.5
@@ -148,6 +159,7 @@
   aliases: [griekse yoghurt, grieks volle yoghurt, griekse stijl yoghurt]
 
 - key: huttenkase
+  meal_kind: snack
   name_nl: hüttenkäse
   name_en: cottage cheese
   state: solid
@@ -161,6 +173,7 @@
   aliases: [huttenkase, cottage cheese, hüttenkase, huttenkaese]
 
 - key: melk_mager
+  meal_kind: drink
   name_nl: magere melk
   state: liquid
   density_g_per_ml: 1.03
@@ -174,6 +187,7 @@
   aliases: [magere melk, melk mager]
 
 - key: melk_halfvol
+  meal_kind: drink
   name_nl: halfvolle melk
   state: liquid
   density_g_per_ml: 1.03
@@ -187,6 +201,7 @@
   aliases: [halfvolle melk, melk halfvol]
 
 - key: melk_vol
+  meal_kind: drink
   name_nl: volle melk
   state: liquid
   density_g_per_ml: 1.03
@@ -200,6 +215,7 @@
   aliases: [volle melk, melk vol]
 
 - key: karnemelk
+  meal_kind: drink
   name_nl: karnemelk
   state: liquid
   density_g_per_ml: 1.03
@@ -213,6 +229,7 @@
   aliases: [karnemelk]
 
 - key: sojadrink_ongezoet
+  meal_kind: drink
   name_nl: sojadrink ongezoet
   state: liquid
   density_g_per_ml: 1.03
@@ -226,6 +243,7 @@
   aliases: [sojamelk, soja drink, sojadrink naturel, plantaardige drink soja]
 
 - key: amandeldrink_ongezoet
+  meal_kind: drink
   name_nl: amandeldrink ongezoet
   state: liquid
   density_g_per_ml: 1.02
@@ -239,6 +257,7 @@
   aliases: [amandelmelk, amandel drink]
 
 - key: haverdrink
+  meal_kind: drink
   name_nl: haverdrink
   state: liquid
   density_g_per_ml: 1.03
@@ -252,6 +271,7 @@
   aliases: [havermelk, haver drink, oat drink]
 
 - key: kwark_plantaardig
+  meal_kind: snack
   name_nl: plantaardige variatie op kwark
   state: solid
   protein_per_100g: 6.0
@@ -262,6 +282,7 @@
   aliases: [plantaardige kwark, variatie op kwark, soja kwark]
 
 - key: proteine_drinkyoghurt
+  meal_kind: drink
   name_nl: proteïne drinkyoghurt
   state: liquid
   density_g_per_ml: 1.04
@@ -273,6 +294,7 @@
   aliases: [protein drink, eiwit drinkyoghurt, protein drinkyoghurt, skyr drink]
 
 - key: proteine_pudding
+  meal_kind: snack
   name_nl: proteïne pudding
   state: solid
   protein_per_100g: 10.0
@@ -283,6 +305,7 @@
   aliases: [protein pudding, eiwitpudding, proteine toetje]
 
 - key: vla_vanille
+  meal_kind: snack
   name_nl: vanillevla
   state: liquid
   density_g_per_ml: 1.05
@@ -295,6 +318,7 @@
 
 # ---------------------------------------------------------------- kaas
 - key: kaas_jong_48
+  meal_kind: ingredient
   name_nl: jonge kaas 48+
   state: solid
   protein_per_100g: 25.0
@@ -307,6 +331,7 @@
   aliases: [jonge kaas, kaas jong, jong belegen kaas 48+]
 
 - key: kaas_jong_30
+  meal_kind: ingredient
   name_nl: jonge kaas 30+
   state: solid
   protein_per_100g: 28.0
@@ -319,6 +344,7 @@
   aliases: [kaas 30+, magere kaas, jonge kaas 30+]
 
 - key: kaas_belegen_48
+  meal_kind: ingredient
   name_nl: belegen kaas 48+
   state: solid
   protein_per_100g: 25.0
@@ -330,6 +356,7 @@
   aliases: [belegen kaas, oude kaas, kaas belegen]
 
 - key: kaas_geraspt_30
+  meal_kind: ingredient
   name_nl: geraspte kaas 30+
   state: solid
   protein_per_100g: 28.0
@@ -341,6 +368,7 @@
   aliases: [geraspte kaas, kaas geraspt, rasp kaas]
 
 - key: mozzarella
+  meal_kind: ingredient
   name_nl: mozzarella
   state: solid
   drained_fraction: 0.65      # sold in brine
@@ -353,6 +381,7 @@
   aliases: [mozzarella, buffelmozzarella]
 
 - key: feta
+  meal_kind: ingredient
   name_nl: feta
   state: solid
   drained_fraction: 0.80
@@ -365,6 +394,7 @@
   aliases: [feta, witte kaas, saladekaas]
 
 - key: parmezaanse_kaas
+  meal_kind: ingredient
   name_nl: Parmezaanse kaas
   state: solid
   protein_per_100g: 35.0
@@ -376,6 +406,7 @@
   aliases: [parmezaan, parmigiano, grana padano]
 
 - key: smeerkaas_light
+  meal_kind: ingredient
   name_nl: smeerkaas light
   state: solid
   protein_per_100g: 12.0
@@ -388,6 +419,7 @@
 
 # ---------------------------------------------------------------- eieren
 - key: ei_rauw
+  meal_kind: ingredient
   name_nl: ei (rauw, heel)
   state: countable
   g_per_unit: 58.0            # maat M, bruto in de schaal
@@ -402,6 +434,7 @@
   aliases: [eieren, ei, verse eieren, scharreleieren, vrije uitloop eieren]
 
 - key: ei_gekookt
+  meal_kind: snack
   name_nl: gekookt ei
   state: countable
   g_per_unit: 58.0
@@ -414,6 +447,7 @@
   aliases: [gekookte eieren, gekookt ei]
 
 - key: eiwit_vloeibaar
+  meal_kind: ingredient
   name_nl: vloeibaar eiwit
   state: liquid
   density_g_per_ml: 1.04
@@ -428,6 +462,7 @@
 
 # ---------------------------------------------------------------- vlees
 - key: kipfilet_rauw
+  meal_kind: ingredient
   name_nl: kipfilet rauw
   state: solid
   protein_per_100g: 22.0
@@ -440,6 +475,7 @@
   aliases: [kipfilet, kippenborst, kipfilet naturel, kipfilethaasjes, kiphaas]
 
 - key: kipdijfilet
+  meal_kind: ingredient
   name_nl: kipdijfilet
   state: solid
   protein_per_100g: 18.0
@@ -451,6 +487,7 @@
   aliases: [kipdij, dijfilet, kippendijfilet]
 
 - key: kipgehakt
+  meal_kind: ingredient
   name_nl: kipgehakt
   state: solid
   protein_per_100g: 19.0
@@ -462,6 +499,7 @@
   aliases: [kipgehakt, gehakt kip]
 
 - key: kalkoenfilet_rauw
+  meal_kind: ingredient
   name_nl: kalkoenfilet rauw
   state: solid
   protein_per_100g: 22.0
@@ -473,6 +511,7 @@
   aliases: [kalkoenfilet, kalkoen]
 
 - key: rundergehakt_mager
+  meal_kind: ingredient
   name_nl: mager rundergehakt
   state: solid
   protein_per_100g: 21.0
@@ -484,6 +523,7 @@
   aliases: [mager rundergehakt, rundergehakt mager, magere gehakt]
 
 - key: rundergehakt
+  meal_kind: ingredient
   name_nl: rundergehakt
   state: solid
   protein_per_100g: 17.0
@@ -495,6 +535,7 @@
   aliases: [rundergehakt, half om half gehakt, gehakt, rundgehakt]
 
 - key: runderbiefstuk_mager
+  meal_kind: ingredient
   name_nl: magere runderbiefstuk
   state: solid
   protein_per_100g: 21.0
@@ -506,6 +547,7 @@
   aliases: [biefstuk, runderbiefstuk, magere biefstuk, kogelbiefstuk]
 
 - key: varkenshaas
+  meal_kind: ingredient
   name_nl: varkenshaas
   state: solid
   protein_per_100g: 21.0
@@ -517,6 +559,7 @@
   aliases: [varkenshaas, varkenshaasje]
 
 - key: varkensfilet
+  meal_kind: ingredient
   name_nl: varkensfilet
   state: solid
   protein_per_100g: 21.0
@@ -528,6 +571,7 @@
   aliases: [varkensfilet, varkensfricandeau]
 
 - key: shoarmavlees
+  meal_kind: ingredient
   name_nl: shoarmavlees
   state: solid
   protein_per_100g: 18.0
@@ -540,6 +584,7 @@
 
 # ---------------------------------------------------------- vleeswaren
 - key: kipfilet_vleeswaren
+  meal_kind: ingredient
   name_nl: kipfilet (vleeswaren)
   state: solid
   protein_per_100g: 20.0
@@ -551,6 +596,7 @@
   aliases: [gerookte kipfilet, kipfilet beleg, kipfilet vleeswaren]
 
 - key: achterham
+  meal_kind: ingredient
   name_nl: achterham
   state: solid
   protein_per_100g: 18.0
@@ -562,6 +608,7 @@
   aliases: [ham, achterham, beenham, gekookte ham]
 
 - key: rosbief_vleeswaren
+  meal_kind: ingredient
   name_nl: rosbief (vleeswaren)
   state: solid
   protein_per_100g: 22.0
@@ -573,6 +620,7 @@
   aliases: [rosbief, rundvleesbeleg]
 
 - key: fricandeau
+  meal_kind: ingredient
   name_nl: fricandeau
   state: solid
   protein_per_100g: 21.0
@@ -584,6 +632,7 @@
   aliases: [fricandeau]
 
 - key: bacon
+  meal_kind: ingredient
   name_nl: bacon
   state: solid
   protein_per_100g: 15.0
@@ -596,6 +645,7 @@
 
 # ---------------------------------------------------------------- vis
 - key: tonijn_blik_water
+  meal_kind: ingredient
   name_nl: tonijn in water (blik)
   state: solid
   drained_fraction: 0.75      # brief section 3.1
@@ -610,6 +660,7 @@
             tonijn naturel]
 
 - key: tonijn_blik_olie
+  meal_kind: ingredient
   name_nl: tonijn in olie (blik)
   state: solid
   drained_fraction: 0.75
@@ -627,6 +678,7 @@
             tonijn in zonnebloemolie, tonijnmoot in zonnebloemolie]
 
 - key: zalm_vers
+  meal_kind: ingredient
   name_nl: zalmfilet vers
   state: solid
   protein_per_100g: 20.0
@@ -638,6 +690,7 @@
   aliases: [zalm, zalmfilet, verse zalm]
 
 - key: zalm_gerookt
+  meal_kind: ingredient
   name_nl: gerookte zalm
   state: solid
   protein_per_100g: 22.0
@@ -649,6 +702,7 @@
   aliases: [gerookte zalm, zalm gerookt, sliced salmon]
 
 - key: makreel_gerookt
+  meal_kind: ingredient
   name_nl: gerookte makreel
   state: solid
   protein_per_100g: 19.0
@@ -660,6 +714,7 @@
   aliases: [gerookte makreel, makreelfilet, makreel]
 
 - key: haring
+  meal_kind: ingredient
   name_nl: haring
   state: solid
   protein_per_100g: 17.0
@@ -671,6 +726,7 @@
   aliases: [haring, maatjes, haringfilet, gerookte haringfilet]
 
 - key: kabeljauw
+  meal_kind: ingredient
   name_nl: kabeljauwfilet
   state: solid
   protein_per_100g: 18.0
@@ -682,6 +738,7 @@
   aliases: [kabeljauw, kabeljauwfilet, kabeljauwhaas]
 
 - key: koolvis
+  meal_kind: ingredient
   name_nl: koolvisfilet
   state: solid
   protein_per_100g: 18.0
@@ -693,6 +750,7 @@
   aliases: [koolvis, koolvisfilet, pollak]
 
 - key: tilapia
+  meal_kind: ingredient
   name_nl: tilapiafilet
   state: solid
   protein_per_100g: 20.0
@@ -704,6 +762,7 @@
   aliases: [tilapia, tilapiafilet]
 
 - key: pangasius
+  meal_kind: ingredient
   name_nl: pangasiusfilet
   state: solid
   protein_per_100g: 15.0
@@ -715,6 +774,7 @@
   aliases: [pangasius, pangasiusfilet]
 
 - key: garnalen
+  meal_kind: ingredient
   name_nl: garnalen
   state: solid
   protein_per_100g: 20.0
@@ -726,6 +786,7 @@
   aliases: [garnalen, hollandse garnalen, gamba, gamba's]
 
 - key: sardines_blik
+  meal_kind: ingredient
   name_nl: sardines in olie (blik)
   state: solid
   drained_fraction: 0.75
@@ -738,6 +799,7 @@
   aliases: [sardines, sardientjes]
 
 - key: surimi
+  meal_kind: ingredient
   name_nl: surimi
   state: solid
   protein_per_100g: 8.0
@@ -750,6 +812,7 @@
 
 # -------------------------------------------------------- plantaardig
 - key: tofu_naturel
+  meal_kind: ingredient
   name_nl: tofu naturel
   state: solid
   drained_fraction: 0.85
@@ -762,6 +825,7 @@
   aliases: [tofu, tahoe, tofu naturel]
 
 - key: tofu_gerookt
+  meal_kind: ingredient
   name_nl: gerookte tofu
   state: solid
   protein_per_100g: 17.0
@@ -773,6 +837,7 @@
   aliases: [gerookte tofu, gerookte tahoe, tofu gerookt]
 
 - key: tempeh
+  meal_kind: ingredient
   name_nl: tempeh
   state: solid
   protein_per_100g: 19.0
@@ -784,6 +849,7 @@
   aliases: [tempeh, tempé]
 
 - key: seitan
+  meal_kind: ingredient
   name_nl: seitan
   state: solid
   protein_per_100g: 25.0
@@ -795,6 +861,7 @@
   aliases: [seitan, tarwe-eiwit]
 
 - key: vega_gehakt
+  meal_kind: ingredient
   name_nl: vegetarisch gehakt
   state: solid
   protein_per_100g: 16.0
@@ -807,6 +874,7 @@
             plantaardige gehakt, vegetarische gehakt]
 
 - key: vega_burger
+  meal_kind: ingredient
   name_nl: vegetarische burger
   state: countable
   g_per_unit: 90.0
@@ -818,6 +886,7 @@
   aliases: [vegaburger, vegetarische burger, plantaardige burger, groenteburger]
 
 - key: falafel
+  meal_kind: ingredient
   name_nl: falafel
   state: solid
   protein_per_100g: 13.0
@@ -829,6 +898,7 @@
   aliases: [falafel, falafelballetjes]
 
 - key: hummus
+  meal_kind: snack
   name_nl: hummus
   state: solid
   protein_per_100g: 7.0
@@ -840,6 +910,7 @@
   aliases: [hummus, houmous, kikkererwtenspread]
 
 - key: kikkererwten_blik
+  meal_kind: ingredient
   name_nl: kikkererwten uit blik
   state: solid
   drained_fraction: 0.60      # THE trap - brief section 3.1
@@ -853,6 +924,7 @@
   aliases: [kikkererwten, kikkererwten blik, chickpeas, garbanzo]
 
 - key: kikkererwten_droog
+  meal_kind: ingredient
   name_nl: kikkererwten gedroogd
   state: solid
   dry_to_cooked_factor: 2.4
@@ -866,6 +938,7 @@
   aliases: [gedroogde kikkererwten, kikkererwten droog]
 
 - key: linzen_droog
+  meal_kind: ingredient
   name_nl: linzen gedroogd
   state: solid
   dry_to_cooked_factor: 2.4
@@ -879,6 +952,7 @@
   aliases: [linzen, gedroogde linzen, rode linzen, groene linzen, belugalinzen]
 
 - key: linzen_blik
+  meal_kind: ingredient
   name_nl: linzen uit blik
   state: solid
   drained_fraction: 0.60
@@ -891,6 +965,7 @@
   aliases: [linzen blik, linzen in blik]
 
 - key: bruine_bonen_blik
+  meal_kind: ingredient
   name_nl: bruine bonen uit blik
   state: solid
   drained_fraction: 0.60
@@ -903,6 +978,7 @@
   aliases: [bruine bonen, bruine bonen blik]
 
 - key: witte_bonen_blik
+  meal_kind: ingredient
   name_nl: witte bonen uit blik
   state: solid
   drained_fraction: 0.60
@@ -915,6 +991,7 @@
   aliases: [witte bonen, witte bonen in tomatensaus, cannellini]
 
 - key: kidneybonen_blik
+  meal_kind: ingredient
   name_nl: kidneybonen uit blik
   state: solid
   drained_fraction: 0.60
@@ -927,6 +1004,7 @@
   aliases: [kidneybonen, rode bonen, kidney bonen]
 
 - key: zwarte_bonen_blik
+  meal_kind: ingredient
   name_nl: zwarte bonen uit blik
   state: solid
   drained_fraction: 0.60
@@ -939,6 +1017,7 @@
   aliases: [zwarte bonen, black beans]
 
 - key: doperwten_blik
+  meal_kind: ingredient
   name_nl: doperwten uit blik
   state: solid
   drained_fraction: 0.65
@@ -951,6 +1030,7 @@
   aliases: [doperwten, erwten blik]
 
 - key: edamame
+  meal_kind: snack
   name_nl: edamame (sojabonen)
   state: solid
   protein_per_100g: 11.0
@@ -963,6 +1043,7 @@
 
 # ---------------------------------------------------------------- granen
 - key: havermout
+  meal_kind: ingredient
   name_nl: havermout
   state: solid
   dry_to_cooked_factor: 3.0
@@ -977,6 +1058,7 @@
   aliases: [havermout, oats, havervlokken, oatmeal]
 
 - key: rijst_wit_droog
+  meal_kind: ingredient
   name_nl: witte rijst (droog)
   state: solid
   dry_to_cooked_factor: 2.5
@@ -989,6 +1071,7 @@
   aliases: [witte rijst, rijst, basmati rijst, jasmijnrijst, pandanrijst]
 
 - key: rijst_zilvervlies_droog
+  meal_kind: ingredient
   name_nl: zilvervliesrijst (droog)
   state: solid
   dry_to_cooked_factor: 2.5
@@ -1001,6 +1084,7 @@
   aliases: [zilvervliesrijst, zilvervlies rijst, bruine rijst, volkoren rijst]
 
 - key: pasta_droog
+  meal_kind: ingredient
   name_nl: pasta (droog)
   state: solid
   dry_to_cooked_factor: 2.2
@@ -1013,6 +1097,7 @@
   aliases: [pasta, spaghetti, penne, macaroni, fusilli, tagliatelle]
 
 - key: pasta_volkoren_droog
+  meal_kind: ingredient
   name_nl: volkoren pasta (droog)
   state: solid
   dry_to_cooked_factor: 2.2
@@ -1025,6 +1110,7 @@
   aliases: [volkoren pasta, volkoren spaghetti, volkoren penne]
 
 - key: couscous_droog
+  meal_kind: ingredient
   name_nl: couscous (droog)
   state: solid
   dry_to_cooked_factor: 2.5
@@ -1036,6 +1122,7 @@
   aliases: [couscous]
 
 - key: quinoa_droog
+  meal_kind: ingredient
   name_nl: quinoa (droog)
   state: solid
   dry_to_cooked_factor: 2.7
@@ -1048,6 +1135,7 @@
   aliases: [quinoa]
 
 - key: bulgur_droog
+  meal_kind: ingredient
   name_nl: bulgur (droog)
   state: solid
   dry_to_cooked_factor: 2.5
@@ -1060,6 +1148,7 @@
   aliases: [bulgur, bulghur]
 
 - key: brood_volkoren
+  meal_kind: ingredient
   name_nl: volkorenbrood
   state: countable
   g_per_unit: 35.0            # per snee
@@ -1072,6 +1161,7 @@
   aliases: [volkorenbrood, volkoren brood, bruinbrood, volkoren casino]
 
 - key: brood_wit
+  meal_kind: ingredient
   name_nl: witbrood
   state: countable
   g_per_unit: 35.0
@@ -1083,6 +1173,7 @@
   aliases: [witbrood, wit brood, casino wit]
 
 - key: wrap_tortilla
+  meal_kind: ingredient
   name_nl: wrap / tortilla
   state: countable
   g_per_unit: 62.0            # brief section 3.1
@@ -1094,6 +1185,7 @@
   aliases: [wraps, wrap, tortilla, tortillas, tortilla wraps]
 
 - key: crackers_volkoren
+  meal_kind: snack
   name_nl: volkoren crackers
   state: solid
   protein_per_100g: 11.0
@@ -1105,6 +1197,7 @@
   aliases: [crackers, volkoren crackers, knackebrod, knäckebröd]
 
 - key: rijstwafels
+  meal_kind: snack
   name_nl: rijstwafels
   state: countable
   g_per_unit: 8.0
@@ -1116,6 +1209,7 @@
   aliases: [rijstwafels, rijstwafel]
 
 - key: beschuit
+  meal_kind: snack
   name_nl: beschuit
   state: countable
   g_per_unit: 10.0
@@ -1127,6 +1221,7 @@
   aliases: [beschuit, beschuitjes]
 
 - key: muesli
+  meal_kind: snack
   name_nl: muesli
   state: solid
   protein_per_100g: 10.0
@@ -1138,6 +1233,7 @@
   aliases: [muesli, mueslimix]
 
 - key: cornflakes
+  meal_kind: snack
   name_nl: cornflakes
   state: solid
   protein_per_100g: 7.0
@@ -1149,6 +1245,7 @@
 
 # --------------------------------------------------- noten, zaden, beleg
 - key: pindakaas
+  meal_kind: ingredient
   name_nl: pindakaas
   state: solid
   protein_per_100g: 25.0
@@ -1161,6 +1258,7 @@
   aliases: [pindakaas, peanut butter, notenpasta pinda]
 
 - key: pindas
+  meal_kind: snack
   name_nl: pinda's
   state: solid
   protein_per_100g: 26.0
@@ -1172,6 +1270,7 @@
   aliases: [pindas, pinda, gezouten pinda's, ongezouten pinda's]
 
 - key: amandelen
+  meal_kind: snack
   name_nl: amandelen
   state: solid
   protein_per_100g: 21.0
@@ -1184,6 +1283,7 @@
   aliases: [amandelen, amandel, almonds]
 
 - key: cashewnoten
+  meal_kind: snack
   name_nl: cashewnoten
   state: solid
   protein_per_100g: 18.0
@@ -1195,6 +1295,7 @@
   aliases: [cashewnoten, cashew, cashewnoot]
 
 - key: walnoten
+  meal_kind: snack
   name_nl: walnoten
   state: solid
   protein_per_100g: 15.0
@@ -1206,6 +1307,7 @@
   aliases: [walnoten, walnoot]
 
 - key: hazelnoten
+  meal_kind: snack
   name_nl: hazelnoten
   state: solid
   protein_per_100g: 15.0
@@ -1217,6 +1319,7 @@
   aliases: [hazelnoten, hazelnoot]
 
 - key: chiazaad
+  meal_kind: ingredient
   name_nl: chiazaad
   state: solid
   protein_per_100g: 17.0
@@ -1228,6 +1331,7 @@
   aliases: [chiazaad, chia, chia zaad]
 
 - key: lijnzaad
+  meal_kind: ingredient
   name_nl: lijnzaad
   state: solid
   protein_per_100g: 18.0
@@ -1239,6 +1343,7 @@
   aliases: [lijnzaad, gebroken lijnzaad]
 
 - key: zonnebloempitten
+  meal_kind: ingredient
   name_nl: zonnebloempitten
   state: solid
   protein_per_100g: 21.0
@@ -1251,6 +1356,7 @@
 
 # ------------------------------------------------------- supplementen
 - key: whey_poeder
+  meal_kind: ingredient
   name_nl: whey proteïnepoeder
   state: solid
   protein_per_100g: 75.0
@@ -1263,6 +1369,7 @@
   aliases: [whey, wei-eiwit, proteine poeder, eiwitpoeder, whey protein]
 
 - key: caseine_poeder
+  meal_kind: ingredient
   name_nl: caseïne proteïnepoeder
   state: solid
   protein_per_100g: 75.0
@@ -1273,6 +1380,7 @@
   aliases: [caseine, micellar casein, caseïne]
 
 - key: proteine_reep
+  meal_kind: snack
   name_nl: proteïnereep
   state: countable
   g_per_unit: 55.0
@@ -1284,6 +1392,7 @@
   aliases: [proteinereep, eiwitreep, protein bar, proteine reep]
 
 - key: eiwitshake_kant_en_klaar
+  meal_kind: drink
   name_nl: kant-en-klare eiwitshake
   state: liquid
   density_g_per_ml: 1.04
@@ -1296,6 +1405,7 @@
 
 # ------------------------------------------------------------- overig
 - key: cacaopoeder
+  meal_kind: ingredient
   name_nl: cacaopoeder
   state: solid
   protein_per_100g: 20.0
@@ -1307,6 +1417,7 @@
   aliases: [cacaopoeder, cacao, bakcacao]
 
 - key: melkpoeder_mager
+  meal_kind: ingredient
   name_nl: magere melkpoeder
   state: solid
   protein_per_100g: 35.0

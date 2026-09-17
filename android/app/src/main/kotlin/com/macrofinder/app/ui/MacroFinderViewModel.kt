@@ -10,7 +10,7 @@ import com.macrofinder.app.data.FoodTab
 import com.macrofinder.app.data.OfferEntry
 import com.macrofinder.app.data.SnapshotResult
 import com.macrofinder.app.data.archetypesForTab
-import com.macrofinder.app.data.filterOffers
+import com.macrofinder.app.data.offersForTab
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -64,9 +64,17 @@ class MacroFinderViewModel(
         _state.value = _state.value.copy(filter = filter)
     }
 
+    /** MEALS only - the eight curated archetypes, cheapest route first.
+     * Empty for the other three tabs, which are offer-driven instead. */
     fun visibleArchetypes(): List<ArchetypeEntry> =
         archetypesForTab(_state.value.archetypes, _state.value.tab)
 
-    fun visibleOffers(): List<OfferEntry> =
-        filterOffers(_state.value.offers, _state.value.filter)
+    /** SNACKS/DRINKS/OTHER - the full ranked offer list for that tab's food
+     * kind. Empty for MEALS, which is archetype-driven instead - see
+     * [FoodTab]'s own doc for why a "meal" isn't a single food type. */
+    fun visibleOffers(): List<OfferEntry> {
+        val tab = _state.value.tab
+        if (tab == FoodTab.MEALS) return emptyList()
+        return offersForTab(_state.value.offers, tab, _state.value.filter)
+    }
 }

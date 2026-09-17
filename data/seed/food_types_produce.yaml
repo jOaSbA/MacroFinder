@@ -11,6 +11,7 @@
 
 # ---------------------------------------------------------------- groente
 - key: broccoli
+  meal_kind: ingredient
   name_nl: broccoli
   state: solid
   protein_per_100g: 3.0
@@ -23,6 +24,7 @@
   aliases: [broccoli, broccoliroosjes]
 
 - key: spinazie
+  meal_kind: ingredient
   name_nl: spinazie
   state: solid
   protein_per_100g: 2.9
@@ -34,6 +36,7 @@
   aliases: [spinazie, bladspinazie]
 
 - key: sperziebonen
+  meal_kind: ingredient
   name_nl: sperziebonen
   state: solid
   protein_per_100g: 2.0
@@ -45,6 +48,7 @@
   aliases: [sperziebonen, haricots verts, prinsessenbonen]
 
 - key: wortel
+  meal_kind: ingredient
   name_nl: wortel
   state: solid
   protein_per_100g: 0.9
@@ -57,6 +61,7 @@
   aliases: [wortel, wortelen, worteltjes, bospeen, winterpeen]
 
 - key: paprika_groente
+  meal_kind: ingredient
   name_nl: paprika
   state: solid
   protein_per_100g: 1.0
@@ -68,6 +73,7 @@
   aliases: [paprikas, puntpaprika]
 
 - key: courgette
+  meal_kind: ingredient
   name_nl: courgette
   state: solid
   protein_per_100g: 1.6
@@ -78,6 +84,7 @@
   aliases: [courgette]
 
 - key: bloemkool
+  meal_kind: ingredient
   name_nl: bloemkool
   state: solid
   protein_per_100g: 2.3
@@ -89,6 +96,7 @@
   aliases: [bloemkool, bloemkoolroosjes]
 
 - key: champignons
+  meal_kind: ingredient
   name_nl: champignons
   state: solid
   protein_per_100g: 2.5
@@ -99,6 +107,7 @@
   aliases: [champignons, champignon, kastanjechampignons]
 
 - key: tomaat
+  meal_kind: ingredient
   name_nl: tomaat
   state: solid
   protein_per_100g: 0.9
@@ -109,6 +118,7 @@
   aliases: [tomaten, tomaat, cherrytomaten, trostomaten, snoeptomaatjes]
 
 - key: komkommer
+  meal_kind: ingredient
   name_nl: komkommer
   state: solid
   protein_per_100g: 0.7
@@ -119,6 +129,7 @@
   aliases: [komkommer]
 
 - key: sla
+  meal_kind: ingredient
   name_nl: sla
   state: solid
   protein_per_100g: 1.2
@@ -129,6 +140,7 @@
   aliases: [sla, ijsbergsla, kropsla, veldsla, rucola, little gem]
 
 - key: ui
+  meal_kind: ingredient
   name_nl: ui
   state: solid
   protein_per_100g: 1.2
@@ -139,6 +151,7 @@
   aliases: [uien, rode ui, sjalot]
 
 - key: prei
+  meal_kind: ingredient
   name_nl: prei
   state: solid
   protein_per_100g: 1.5
@@ -149,6 +162,7 @@
   aliases: [prei]
 
 - key: spruitjes
+  meal_kind: ingredient
   name_nl: spruitjes
   state: solid
   protein_per_100g: 3.4
@@ -160,6 +174,7 @@
   aliases: [spruitjes, spruiten]
 
 - key: boerenkool
+  meal_kind: ingredient
   name_nl: boerenkool
   state: solid
   protein_per_100g: 3.3
@@ -171,6 +186,7 @@
   aliases: [boerenkool]
 
 - key: andijvie
+  meal_kind: ingredient
   name_nl: andijvie
   state: solid
   protein_per_100g: 1.8
@@ -181,6 +197,7 @@
   aliases: [andijvie]
 
 - key: aubergine
+  meal_kind: ingredient
   name_nl: aubergine
   state: solid
   protein_per_100g: 1.0
@@ -191,6 +208,7 @@
   aliases: [aubergine]
 
 - key: avocado
+  meal_kind: ingredient
   name_nl: avocado
   state: countable
   g_per_unit: 200.0
@@ -206,6 +224,7 @@
 
 # ------------------------------------------------------------- aardappel
 - key: aardappelen
+  meal_kind: ingredient
   name_nl: aardappelen
   state: solid
   protein_per_100g: 2.0
@@ -218,6 +237,7 @@
   aliases: [aardappelen, aardappel, krieltjes, kruimige aardappelen, vastkokende aardappelen]
 
 - key: friet_diepvries
+  meal_kind: ingredient
   name_nl: diepvriesfriet
   state: solid
   protein_per_100g: 3.0
@@ -229,6 +249,7 @@
   aliases: [frites, friet, aardappelschijfjes, pommes duchesse]
 
 - key: zoete_aardappel
+  meal_kind: ingredient
   name_nl: zoete aardappel
   state: solid
   protein_per_100g: 1.6
@@ -242,6 +263,7 @@
 
 # ----------------------------------------------------------------- fruit
 - key: banaan
+  meal_kind: snack
   name_nl: banaan
   state: countable
   g_per_unit: 120.0
@@ -256,6 +278,7 @@
   aliases: [bananen, banaan]
 
 - key: appel
+  meal_kind: snack
   name_nl: appel
   state: countable
   g_per_unit: 150.0
@@ -269,6 +292,7 @@
   aliases: [appels, appel, elstar, jonagold, granny smith, pink lady]
 
 - key: peer
+  meal_kind: snack
   name_nl: peer
   state: countable
   g_per_unit: 170.0
@@ -282,6 +306,7 @@
   aliases: [peren, peer, conference]
 
 - key: sinaasappel
+  meal_kind: snack
   name_nl: sinaasappel
   state: countable
   g_per_unit: 180.0
@@ -295,6 +320,7 @@
   aliases: [sinaasappels, sinaasappel, handsinaasappels]
 
 - key: mandarijn
+  meal_kind: snack
   name_nl: mandarijn
   state: countable
   g_per_unit: 80.0
@@ -307,6 +333,7 @@
   aliases: [mandarijnen, mandarijn, clementine, clementines]
 
 - key: aardbeien
+  meal_kind: snack
   name_nl: aardbeien
   state: solid
   protein_per_100g: 0.7
@@ -318,6 +345,7 @@
   aliases: [aardbeien, aardbei]
 
 - key: blauwe_bessen
+  meal_kind: snack
   name_nl: blauwe bessen
   state: solid
   protein_per_100g: 0.7
@@ -329,6 +357,7 @@
   aliases: [blauwe bessen, bosbessen, blueberries]
 
 - key: frambozen
+  meal_kind: snack
   name_nl: frambozen
   state: solid
   protein_per_100g: 1.2
@@ -340,6 +369,7 @@
   aliases: [frambozen, framboos]
 
 - key: druiven
+  meal_kind: snack
   name_nl: druiven
   state: solid
   protein_per_100g: 0.7
@@ -350,6 +380,7 @@
   aliases: [druiven, pitloze druiven]
 
 - key: mango
+  meal_kind: snack
   name_nl: mango
   state: countable
   g_per_unit: 300.0
@@ -362,6 +393,7 @@
   aliases: [mango, mangos]
 
 - key: ananas
+  meal_kind: snack
   name_nl: ananas
   state: solid
   edible_fraction: 0.55
@@ -373,6 +405,7 @@
   aliases: [ananas]
 
 - key: kiwi
+  meal_kind: snack
   name_nl: kiwi
   state: countable
   g_per_unit: 90.0
@@ -386,6 +419,7 @@
   aliases: [kiwi, kiwis]
 
 - key: diepvriesfruit
+  meal_kind: ingredient
   name_nl: diepvriesfruit
   state: solid
   protein_per_100g: 0.8
@@ -397,6 +431,7 @@
 
 # --------------------------------------------------------------- kaas
 - key: geitenkaas
+  meal_kind: ingredient
   name_nl: geitenkaas
   state: solid
   protein_per_100g: 19.0
@@ -408,6 +443,7 @@
   aliases: [geitenkaas, geitenkaasje]
 
 - key: brie
+  meal_kind: ingredient
   name_nl: brie
   state: solid
   protein_per_100g: 19.0
@@ -419,6 +455,7 @@
   aliases: [brie, camembert]
 
 - key: blauwaderkaas
+  meal_kind: ingredient
   name_nl: blauwaderkaas
   state: solid
   protein_per_100g: 21.0
@@ -430,6 +467,7 @@
   aliases: [gorgonzola, roquefort, blauwaderkaas, danish blue]
 
 - key: boter
+  meal_kind: ingredient
   name_nl: roomboter
   state: solid
   protein_per_100g: 0.7
@@ -441,6 +479,7 @@
   aliases: [roomboter, ongezouten boter, gezouten boter]
 
 - key: creme_fraiche
+  meal_kind: ingredient
   name_nl: creme fraiche
   state: solid
   protein_per_100g: 2.4
@@ -453,6 +492,7 @@
 
 # ----------------------------------------------------- vlees, vleeswaren
 - key: rookworst
+  meal_kind: ingredient
   name_nl: rookworst
   state: solid
   protein_per_100g: 13.0
@@ -464,6 +504,7 @@
   aliases: [rookworst, gelderse rookworst]
 
 - key: knakworst
+  meal_kind: ingredient
   name_nl: knakworst
   state: solid
   protein_per_100g: 11.0
@@ -475,6 +516,7 @@
   aliases: [knakworst, knakworstjes]
 
 - key: salami
+  meal_kind: ingredient
   name_nl: salami
   state: solid
   protein_per_100g: 22.0
@@ -486,6 +528,7 @@
   aliases: [salami, cervelaat, chorizo]
 
 - key: leverworst
+  meal_kind: ingredient
   name_nl: leverworst
   state: solid
   protein_per_100g: 14.0
@@ -497,6 +540,7 @@
   aliases: [leverworst, smeerleverworst]
 
 - key: gehaktbal
+  meal_kind: ingredient
   name_nl: gehaktbal
   state: countable
   g_per_unit: 100.0
@@ -508,6 +552,7 @@
   aliases: [gehaktballen, gehaktbal, slavink, blinde vink]
 
 - key: kipnuggets
+  meal_kind: ingredient
   name_nl: kipnuggets
   state: solid
   protein_per_100g: 14.0
@@ -519,6 +564,7 @@
   aliases: [kipnuggets, kipschnitzel, kipcorn]
 
 - key: spareribs
+  meal_kind: ingredient
   name_nl: spareribs
   state: solid
   edible_fraction: 0.65
@@ -531,6 +577,7 @@
   aliases: [spareribs, ribs]
 
 - key: kippenpoten
+  meal_kind: ingredient
   name_nl: kippenpoten
   state: solid
   edible_fraction: 0.70
@@ -543,6 +590,7 @@
 
 # ------------------------------------------------------------------ vis
 - key: mosselen
+  meal_kind: ingredient
   name_nl: mosselen
   state: solid
   edible_fraction: 0.35
@@ -554,6 +602,7 @@
   aliases: [mosselen, mossel]
 
 - key: forel
+  meal_kind: ingredient
   name_nl: forel
   state: solid
   protein_per_100g: 20.0
@@ -565,6 +614,7 @@
   aliases: [forel, forelfilet]
 
 - key: schol
+  meal_kind: ingredient
   name_nl: scholfilet
   state: solid
   protein_per_100g: 17.0
@@ -576,6 +626,7 @@
 
 # --------------------------------------------------------- brood, granen
 - key: pitabrood
+  meal_kind: ingredient
   name_nl: pitabrood
   state: countable
   g_per_unit: 60.0
@@ -587,6 +638,7 @@
   aliases: [pitabrood, pita, pitabroodjes]
 
 - key: naanbrood
+  meal_kind: ingredient
   name_nl: naanbrood
   state: countable
   g_per_unit: 90.0
@@ -598,6 +650,7 @@
   aliases: [naan, naanbrood]
 
 - key: stokbrood
+  meal_kind: ingredient
   name_nl: stokbrood
   state: solid
   protein_per_100g: 8.0
@@ -608,6 +661,7 @@
   aliases: [stokbrood, baguette, ciabatta]
 
 - key: broodje_bruin
+  meal_kind: ingredient
   name_nl: bruine broodjes
   state: countable
   g_per_unit: 70.0
@@ -619,6 +673,7 @@
   aliases: [bruine bollen, bruine broodjes, pistolets, zachte broodjes]
 
 - key: krentenbol
+  meal_kind: snack
   name_nl: krentenbollen
   state: countable
   g_per_unit: 70.0
@@ -630,6 +685,7 @@
   aliases: [krentenbollen, rozijnenbollen, krentenbol]
 
 - key: noedels_droog
+  meal_kind: ingredient
   name_nl: noedels (droog)
   state: solid
   dry_to_cooked_factor: 2.5
@@ -641,6 +697,7 @@
   aliases: [mihoen, rijstnoedels, udon]
 
 - key: polenta_droog
+  meal_kind: ingredient
   name_nl: polenta (droog)
   state: solid
   dry_to_cooked_factor: 3.0
@@ -653,6 +710,7 @@
 
 # ------------------------------------------- peulvruchten en plantaardig
 - key: kapucijners_blik
+  meal_kind: ingredient
   name_nl: kapucijners uit blik
   state: solid
   drained_fraction: 0.60
@@ -665,6 +723,7 @@
   aliases: [kapucijners]
 
 - key: tuinbonen
+  meal_kind: ingredient
   name_nl: tuinbonen
   state: solid
   protein_per_100g: 8.0
@@ -676,6 +735,7 @@
   aliases: [tuinbonen, tuinboon]
 
 - key: spliterwten_droog
+  meal_kind: ingredient
   name_nl: spliterwten gedroogd
   state: solid
   dry_to_cooked_factor: 2.5
@@ -688,6 +748,7 @@
   aliases: [spliterwten]
 
 - key: sojabrokken_droog
+  meal_kind: ingredient
   name_nl: sojabrokken gedroogd
   state: solid
   dry_to_cooked_factor: 2.5
@@ -700,6 +761,7 @@
   aliases: [sojabrokken, sojastukjes]
 
 - key: vega_schnitzel
+  meal_kind: ingredient
   name_nl: vegetarische schnitzel
   state: countable
   g_per_unit: 100.0
@@ -711,6 +773,7 @@
   aliases: [vegetarische schnitzel, vega schnitzel, plantaardige schnitzel]
 
 - key: vega_kipstukjes
+  meal_kind: ingredient
   name_nl: vegetarische kipstukjes
   state: solid
   protein_per_100g: 17.0
@@ -722,6 +785,7 @@
 
 # --------------------------------------------------------- noten, zaden
 - key: pistachenoten
+  meal_kind: snack
   name_nl: pistachenoten
   state: solid
   edible_fraction: 0.55
@@ -734,6 +798,7 @@
   aliases: [pistachenoten, pistache]
 
 - key: paranoten
+  meal_kind: snack
   name_nl: paranoten
   state: solid
   protein_per_100g: 14.0
@@ -745,6 +810,7 @@
   aliases: [paranoten, paranoot]
 
 - key: pecannoten
+  meal_kind: snack
   name_nl: pecannoten
   state: solid
   protein_per_100g: 9.0
@@ -756,6 +822,7 @@
   aliases: [pecannoten, pecan]
 
 - key: pompoenpitten
+  meal_kind: ingredient
   name_nl: pompoenpitten
   state: solid
   protein_per_100g: 30.0
@@ -767,6 +834,7 @@
   aliases: [pompoenpitten, pompoenzaad]
 
 - key: sesamzaad
+  meal_kind: ingredient
   name_nl: sesamzaad
   state: solid
   protein_per_100g: 18.0
@@ -778,6 +846,7 @@
   aliases: [sesamzaad, sesam]
 
 - key: tahin
+  meal_kind: ingredient
   name_nl: tahin
   state: solid
   protein_per_100g: 17.0
@@ -789,6 +858,7 @@
   aliases: [tahin, tahini, sesampasta]
 
 - key: amandelpasta
+  meal_kind: ingredient
   name_nl: amandelpasta
   state: solid
   protein_per_100g: 21.0
@@ -801,6 +871,7 @@
 
 # ---------------------------------------------------------------- overig
 - key: olijven
+  meal_kind: snack
   name_nl: olijven
   state: solid
   drained_fraction: 0.55
@@ -813,6 +884,7 @@
   aliases: [olijven, groene olijven, zwarte olijven]
 
 - key: zongedroogde_tomaten
+  meal_kind: ingredient
   name_nl: zongedroogde tomaten in olie
   state: solid
   # 0.50 is not a guess: AH's own unit price implies 90 g on a 180 g pack
@@ -827,6 +899,7 @@
   aliases: [zongedroogde tomaten, pomodori secchi]
 
 - key: augurken
+  meal_kind: ingredient
   name_nl: augurken
   state: solid
   drained_fraction: 0.55
@@ -838,6 +911,7 @@
   aliases: [augurken, augurk]
 
 - key: tomatenblokjes_blik
+  meal_kind: ingredient
   name_nl: tomatenblokjes uit blik
   state: solid
   protein_per_100g: 1.2
@@ -848,6 +922,7 @@
   aliases: [tomatenblokjes, gepelde tomaten, tomatenstukjes]
 
 - key: kokosmelk
+  meal_kind: ingredient
   name_nl: kokosmelk
   state: liquid
   density_g_per_ml: 1.0
@@ -860,6 +935,7 @@
   aliases: [kokosmelk]
 
 - key: sinaasappelsap
+  meal_kind: drink
   name_nl: sinaasappelsap
   state: liquid
   density_g_per_ml: 1.04
@@ -871,6 +947,7 @@
   aliases: [sinaasappelsap, appelsap, vruchtensap, verse jus]
 
 - key: olijfolie
+  meal_kind: ingredient
   name_nl: olijfolie
   state: liquid
   density_g_per_ml: 0.92

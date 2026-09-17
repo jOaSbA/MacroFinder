@@ -16,9 +16,11 @@ class FilteringTest {
         proteinG: Double? = 10.0,
         eurPer100gProtein: Double? = 1.0,
         personal: Boolean = false,
+        mealKind: String? = "snack",
     ) = OfferEntry(
         sku = sku,
         name = "Test $sku",
+        meal_kind = mealKind,
         price = PriceInfo(
             unit_price_eur = priceEur,
             required_quantity = 1,
@@ -141,5 +143,30 @@ class FilteringTest {
     fun `cheapestEurPerGProtein is null when nothing priced`() {
         val entry = ArchetypeEntry(key = "k", name = "k", meal_kind = "meal", verdict = verdict())
         assertEquals(null, cheapestEurPerGProtein(entry))
+    }
+
+    // -- offersForTab: every ranked offer, not just the curated archetypes --
+
+    @Test
+    fun `offersForTab only returns offers matching that tab's food meal_kind`() {
+        val offers = listOf(
+            offer("fruit", 1.0, mealKind = "snack"),
+            offer("milk", 1.0, mealKind = "drink"),
+            offer("rice", 1.0, mealKind = "ingredient"),
+        )
+        assertEquals(listOf("fruit"), offersForTab(offers, FoodTab.SNACKS, FilterState()).map { it.sku })
+        assertEquals(listOf("milk"), offersForTab(offers, FoodTab.DRINKS, FilterState()).map { it.sku })
+        assertEquals(listOf("rice"), offersForTab(offers, FoodTab.OTHER, FilterState()).map { it.sku })
+    }
+
+    @Test
+    fun `offersForTab is not just the eight archetypes - it scales with the catalogue`() {
+        val manySnacks = (1..50).map { offer("snack$it", 1.0, mealKind = "snack") }
+        assertEquals(50, offersForTab(manySnacks, FoodTab.SNACKS, FilterState()).size)
+    }
+
+    @Test(expected = IllegalStateException::class)
+    fun `offersForTab refuses MEALS - that tab is archetype-driven`() {
+        offersForTab(listOf(offer("x", 1.0)), FoodTab.MEALS, FilterState())
     }
 }

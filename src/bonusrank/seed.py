@@ -30,7 +30,10 @@ _COLUMNS = (
     "edible_fraction", "dry_to_cooked_factor", "g_per_unit", "protein_per_100g",
     "kcal_per_100g", "carbs_per_100g", "fat_per_100g", "fiber_per_100g",
     "shelf_life_days_unopened", "shelf_life_days_opened", "freezable",
+    "optimise_max_grams", "meal_kind",
 )
+
+_MEAL_KINDS = ("meal", "snack", "drink", "ingredient")
 
 
 def seed_files(directory: Path | None = None) -> list[Path]:
@@ -53,6 +56,15 @@ def load_seed(conn: sqlite3.Connection, path: Path | None = None) -> dict[str, i
                 )
             seen[key] = file
             rows.append(row)
+
+    for row in rows:
+        if row.get("meal_kind") not in _MEAL_KINDS:
+            raise ValueError(
+                f"{row['key']}: meal_kind must be one of {_MEAL_KINDS}, "
+                f"got {row.get('meal_kind')!r}. Milestone 11: this decides which "
+                "app tab a matched offer of this food type appears in."
+            )
+
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     inserted = aliases = gaps = 0
 

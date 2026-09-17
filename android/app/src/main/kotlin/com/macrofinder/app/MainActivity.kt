@@ -55,8 +55,8 @@ fun MacroFinderApp(viewModel: MacroFinderViewModel = viewModel()) {
                 state.loading -> CircularProgressIndicator(modifier = Modifier.padding(32.dp))
                 state.error != null -> Text("Could not load data: ${state.error}",
                     modifier = Modifier.padding(16.dp))
-                state.tab == FoodTab.OTHER -> OfferList(viewModel.visibleOffers())
-                else -> ArchetypeList(viewModel.visibleArchetypes())
+                state.tab == FoodTab.MEALS -> ArchetypeList(viewModel.visibleArchetypes())
+                else -> OfferList(viewModel.visibleOffers())
             }
         }
     }

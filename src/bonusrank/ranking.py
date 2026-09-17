@@ -28,6 +28,10 @@ class RankedOffer:
     brand: str | None
     raw_unit_text: str | None
     food_type: str | None
+    # Milestone 11: which app tab this offer belongs in (meal/snack/drink/
+    # ingredient), from the matched food type - None when unmatched, same as
+    # food_type itself.
+    food_meal_kind: str | None
 
     effective_unit_price: float | None
     shelf_price: float | None
@@ -71,7 +75,7 @@ class RankedOffer:
 _SQL = """
 SELECT p.id AS product_id, p.sku, p.name, p.brand, p.raw_unit_text,
        f.key AS food_type, f.protein_per_100g AS ft_protein, f.kcal_per_100g AS ft_kcal,
-       f.carbs_per_100g AS ft_carbs, f.fat_per_100g AS ft_fat,
+       f.carbs_per_100g AS ft_carbs, f.fat_per_100g AS ft_fat, f.meal_kind AS ft_meal_kind,
        f.density_g_per_ml, f.g_per_unit, f.drained_fraction,
        f.shelf_life_days_opened, f.shelf_life_days_unopened, f.freezable,
        f.source AS ft_source, f.confidence AS ft_confidence,
@@ -158,6 +162,7 @@ def _build(conn: sqlite3.Connection, row: sqlite3.Row, settings: dict) -> Ranked
     return RankedOffer(
         sku=row["sku"], name=row["name"], brand=row["brand"],
         raw_unit_text=row["raw_unit_text"], food_type=row["food_type"],
+        food_meal_kind=row["ft_meal_kind"],
         effective_unit_price=unit_price, shelf_price=row["shelf_price"],
         required_quantity=required, promo_mechanic=row["promo_mechanic"] or "unknown",
         promo_raw_text=row["promo_raw_text"], total_outlay=total_outlay,

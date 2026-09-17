@@ -52,6 +52,12 @@ CREATE TABLE IF NOT EXISTS food_types (
     -- NULL falls back to optimiser._DEFAULT_MAX_GRAMS - a food type only needs
     -- this set when the generic default would let it dominate a solve.
     optimise_max_grams        REAL,
+    -- Milestone 11: which app tab a matched offer of this food type belongs
+    -- in. Distinct from archetypes.meal_kind (which classifies a composed
+    -- DISH) - this classifies the food ITSELF, so 'meal' is deliberately
+    -- never used here: a raw chicken fillet or a bag of rice isn't a meal on
+    -- its own, it's a component of one. Authored judgement, not derived.
+    meal_kind                 TEXT CHECK (meal_kind IN ('meal','snack','drink','ingredient')),
     shelf_life_days_unopened  INTEGER,
     shelf_life_days_opened    INTEGER,
     freezable                 INTEGER,
@@ -252,6 +258,7 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
         conn.executescript(SCHEMA)
         conn.commit()
     _add_column_if_missing(conn, "food_types", "optimise_max_grams", "REAL")
+    _add_column_if_missing(conn, "food_types", "meal_kind", "TEXT")
     conn.commit()
     return conn
 

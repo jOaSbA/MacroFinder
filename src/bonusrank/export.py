@@ -93,6 +93,11 @@ def _offer_json(offer: RankedOffer) -> dict[str, Any]:
         "name": offer.name,
         "brand": offer.brand,
         "food_type": offer.food_type,
+        # Milestone 11: which app tab this belongs in - meal/snack/drink/
+        # ingredient, from the matched food type. None only when unmatched
+        # (food_type is also None then; build_export already filters those
+        # out, so in practice this is always set here).
+        "meal_kind": offer.food_meal_kind,
         "price": {
             "unit_price_eur": offer.effective_unit_price,
             "shelf_price_eur": offer.shelf_price,

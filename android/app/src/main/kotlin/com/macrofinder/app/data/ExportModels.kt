@@ -30,6 +30,9 @@ data class OfferEntry(
     val name: String,
     val brand: String? = null,
     val food_type: String? = null,
+    // "meal" | "snack" | "drink" | "ingredient" - which tab this belongs in.
+    // Null only for an unmatched offer, which the export already excludes.
+    val meal_kind: String? = null,
     val price: PriceInfo,
     val macros_per_100g: Macros,
     val macros_need_marking: Boolean,

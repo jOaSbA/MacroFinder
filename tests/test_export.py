@@ -105,6 +105,8 @@ def test_offer_figures_match_what_rank_would_report(conn):
     offer = payload["chains"]["ah"]["offers"][0]
 
     assert offer["sku"] == expected.sku
+    assert offer["meal_kind"] == expected.food_meal_kind
+    assert offer["meal_kind"] == "snack"  # kwark_mager is seeded as a snack
     assert offer["price"]["unit_price_eur"] == expected.effective_unit_price
     assert offer["macros_per_100g"]["protein_g"] == expected.protein_per_100g
     assert offer["macros_per_100g"]["carbs_g"] == expected.carbs_per_100g

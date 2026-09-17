@@ -12,6 +12,7 @@
 # finding, and CLAUDE.md section 5 keeps the two distinct.
 
 - key: zoetstof
+  meal_kind: ingredient
   name_nl: zoetstof
   name_en: sweetener
   state: solid
@@ -23,6 +24,7 @@
   aliases: [zoetstof, stevia, sucralose, zoetjes, vloeibare zoetstof]
 
 - key: vanille_extract
+  meal_kind: ingredient
   name_nl: vanille-extract
   name_en: vanilla extract
   state: liquid
@@ -35,6 +37,7 @@
   aliases: [vanille-extract, vanille extract, vanillearoma, vanille aroma]
 
 - key: kruiden_gedroogd
+  meal_kind: ingredient
   name_nl: gedroogde kruiden
   name_en: dried herbs
   state: solid
@@ -48,6 +51,7 @@
   aliases: [gedroogde kruiden, italiaanse kruiden, provencaalse kruiden, tuinkruiden]
 
 - key: knoflook
+  meal_kind: ingredient
   name_nl: knoflook
   name_en: garlic
   state: solid
@@ -60,6 +64,7 @@
   aliases: [knoflook, knoflookteen, verse knoflook, knoflookpoeder]
 
 - key: honing
+  meal_kind: ingredient
   name_nl: honing
   name_en: honey
   state: solid
