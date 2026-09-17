@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# NEVO dataset carries usage conditions - never commit it (brief 2, tier 3)
+data/external/
+
+# Cached HTTP responses are reproducible; raw snapshots are not - keep those
+# in a purely personal, single-machine checkout of this tool.
+data/cache/
+
+# This repo is public and scraped/refreshed by CI on a schedule, unlike the
+# personal single-user checkout CLAUDE.md section 1 was written for - so
+# unlike that section's "never delete, never gitignore" for data/raw, this
+# repo does NOT commit raw scrape snapshots or the derived sqlite database:
+# only the final docs/data/latest.json snapshot the app reads is committed.
+# Keeping years of raw scrape history in a public repo would both bloat it
+# and publish more of the chains' own data than the app needs.
+data/raw/
+data/*.sqlite3
+
+# Android build output.
+android/.gradle/
+android/*/build/
+android/local.properties

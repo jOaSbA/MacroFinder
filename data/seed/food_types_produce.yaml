@@ -1,0 +1,883 @@
+# food_types seed, expansion pass: produce, and the protein variants the first
+# full ingest showed were missing.
+#
+# Same rules as food_types.yaml: source 'manual', confidence 'seed', gaps left
+# as gaps. Loaded automatically - the loader globs data/seed/food_types*.yaml,
+# so you can drop your own file in here without touching the code.
+#
+# Vegetables and fruit carry little protein, but they are what the kcal floor
+# and the variety cap (brief section 5) get satisfied with, so the optimiser
+# needs them present and priced rather than absent.
+
+# ---------------------------------------------------------------- groente
+- key: broccoli
+  name_nl: broccoli
+  state: solid
+  protein_per_100g: 3.0
+  kcal_per_100g: 34
+  carbs_per_100g: 4.0
+  fiber_per_100g: 3.0
+  shelf_life_days_unopened: 6
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [broccoli, broccoliroosjes]
+
+- key: spinazie
+  name_nl: spinazie
+  state: solid
+  protein_per_100g: 2.9
+  kcal_per_100g: 23
+  fiber_per_100g: 2.2
+  shelf_life_days_unopened: 4
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [spinazie, bladspinazie]
+
+- key: sperziebonen
+  name_nl: sperziebonen
+  state: solid
+  protein_per_100g: 2.0
+  kcal_per_100g: 31
+  fiber_per_100g: 3.0
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [sperziebonen, haricots verts, prinsessenbonen]
+
+- key: wortel
+  name_nl: wortel
+  state: solid
+  protein_per_100g: 0.9
+  kcal_per_100g: 36
+  carbs_per_100g: 7.0
+  fiber_per_100g: 2.8
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 7
+  freezable: true
+  aliases: [wortel, wortelen, worteltjes, bospeen, winterpeen]
+
+- key: paprika_groente
+  name_nl: paprika
+  state: solid
+  protein_per_100g: 1.0
+  kcal_per_100g: 28
+  fiber_per_100g: 2.0
+  shelf_life_days_unopened: 10
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [paprikas, puntpaprika]
+
+- key: courgette
+  name_nl: courgette
+  state: solid
+  protein_per_100g: 1.6
+  kcal_per_100g: 19
+  shelf_life_days_unopened: 10
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [courgette]
+
+- key: bloemkool
+  name_nl: bloemkool
+  state: solid
+  protein_per_100g: 2.3
+  kcal_per_100g: 28
+  fiber_per_100g: 2.5
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [bloemkool, bloemkoolroosjes]
+
+- key: champignons
+  name_nl: champignons
+  state: solid
+  protein_per_100g: 2.5
+  kcal_per_100g: 22
+  shelf_life_days_unopened: 6
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [champignons, champignon, kastanjechampignons]
+
+- key: tomaat
+  name_nl: tomaat
+  state: solid
+  protein_per_100g: 0.9
+  kcal_per_100g: 20
+  shelf_life_days_unopened: 8
+  shelf_life_days_opened: 4
+  freezable: false
+  aliases: [tomaten, tomaat, cherrytomaten, trostomaten, snoeptomaatjes]
+
+- key: komkommer
+  name_nl: komkommer
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 14
+  shelf_life_days_unopened: 8
+  shelf_life_days_opened: 3
+  freezable: false
+  aliases: [komkommer]
+
+- key: sla
+  name_nl: sla
+  state: solid
+  protein_per_100g: 1.2
+  kcal_per_100g: 15
+  shelf_life_days_unopened: 5
+  shelf_life_days_opened: 2
+  freezable: false
+  aliases: [sla, ijsbergsla, kropsla, veldsla, rucola, little gem]
+
+- key: ui
+  name_nl: ui
+  state: solid
+  protein_per_100g: 1.2
+  kcal_per_100g: 40
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 7
+  freezable: true
+  aliases: [uien, rode ui, sjalot]
+
+- key: prei
+  name_nl: prei
+  state: solid
+  protein_per_100g: 1.5
+  kcal_per_100g: 36
+  shelf_life_days_unopened: 10
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [prei]
+
+- key: spruitjes
+  name_nl: spruitjes
+  state: solid
+  protein_per_100g: 3.4
+  kcal_per_100g: 43
+  fiber_per_100g: 3.8
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [spruitjes, spruiten]
+
+- key: boerenkool
+  name_nl: boerenkool
+  state: solid
+  protein_per_100g: 3.3
+  kcal_per_100g: 45
+  fiber_per_100g: 3.5
+  shelf_life_days_unopened: 6
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [boerenkool]
+
+- key: andijvie
+  name_nl: andijvie
+  state: solid
+  protein_per_100g: 1.8
+  kcal_per_100g: 20
+  shelf_life_days_unopened: 5
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [andijvie]
+
+- key: aubergine
+  name_nl: aubergine
+  state: solid
+  protein_per_100g: 1.0
+  kcal_per_100g: 25
+  shelf_life_days_unopened: 8
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [aubergine]
+
+- key: avocado
+  name_nl: avocado
+  state: countable
+  g_per_unit: 200.0
+  edible_fraction: 0.72
+  protein_per_100g: 2.0
+  kcal_per_100g: 160
+  fat_per_100g: 15.0
+  fiber_per_100g: 7.0
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 1
+  freezable: false
+  aliases: [avocado, avocados]
+
+# ------------------------------------------------------------- aardappel
+- key: aardappelen
+  name_nl: aardappelen
+  state: solid
+  protein_per_100g: 2.0
+  kcal_per_100g: 77
+  carbs_per_100g: 17.0
+  fiber_per_100g: 2.2
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 14
+  freezable: false
+  aliases: [aardappelen, aardappel, krieltjes, kruimige aardappelen, vastkokende aardappelen]
+
+- key: friet_diepvries
+  name_nl: diepvriesfriet
+  state: solid
+  protein_per_100g: 3.0
+  kcal_per_100g: 160
+  fat_per_100g: 5.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 90
+  freezable: true
+  aliases: [frites, friet, aardappelschijfjes, pommes duchesse]
+
+- key: zoete_aardappel
+  name_nl: zoete aardappel
+  state: solid
+  protein_per_100g: 1.6
+  kcal_per_100g: 86
+  carbs_per_100g: 20.0
+  fiber_per_100g: 3.0
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 7
+  freezable: true
+  aliases: [zoete aardappel, bataat]
+
+# ----------------------------------------------------------------- fruit
+- key: banaan
+  name_nl: banaan
+  state: countable
+  g_per_unit: 120.0
+  edible_fraction: 0.65
+  protein_per_100g: 1.1
+  kcal_per_100g: 89
+  carbs_per_100g: 20.0
+  fiber_per_100g: 2.6
+  shelf_life_days_unopened: 6
+  shelf_life_days_opened: 1
+  freezable: true
+  aliases: [bananen, banaan]
+
+- key: appel
+  name_nl: appel
+  state: countable
+  g_per_unit: 150.0
+  edible_fraction: 0.90
+  protein_per_100g: 0.3
+  kcal_per_100g: 52
+  fiber_per_100g: 2.4
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 2
+  freezable: false
+  aliases: [appels, appel, elstar, jonagold, granny smith, pink lady]
+
+- key: peer
+  name_nl: peer
+  state: countable
+  g_per_unit: 170.0
+  edible_fraction: 0.90
+  protein_per_100g: 0.4
+  kcal_per_100g: 57
+  fiber_per_100g: 3.1
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 2
+  freezable: false
+  aliases: [peren, peer, conference]
+
+- key: sinaasappel
+  name_nl: sinaasappel
+  state: countable
+  g_per_unit: 180.0
+  edible_fraction: 0.70
+  protein_per_100g: 0.9
+  kcal_per_100g: 47
+  fiber_per_100g: 2.4
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 3
+  freezable: false
+  aliases: [sinaasappels, sinaasappel, handsinaasappels]
+
+- key: mandarijn
+  name_nl: mandarijn
+  state: countable
+  g_per_unit: 80.0
+  edible_fraction: 0.72
+  protein_per_100g: 0.8
+  kcal_per_100g: 53
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 3
+  freezable: false
+  aliases: [mandarijnen, mandarijn, clementine, clementines]
+
+- key: aardbeien
+  name_nl: aardbeien
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 32
+  fiber_per_100g: 2.0
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [aardbeien, aardbei]
+
+- key: blauwe_bessen
+  name_nl: blauwe bessen
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 57
+  fiber_per_100g: 2.4
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [blauwe bessen, bosbessen, blueberries]
+
+- key: frambozen
+  name_nl: frambozen
+  state: solid
+  protein_per_100g: 1.2
+  kcal_per_100g: 52
+  fiber_per_100g: 6.5
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [frambozen, framboos]
+
+- key: druiven
+  name_nl: druiven
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 69
+  shelf_life_days_unopened: 10
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [druiven, pitloze druiven]
+
+- key: mango
+  name_nl: mango
+  state: countable
+  g_per_unit: 300.0
+  edible_fraction: 0.68
+  protein_per_100g: 0.8
+  kcal_per_100g: 60
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [mango, mangos]
+
+- key: ananas
+  name_nl: ananas
+  state: solid
+  edible_fraction: 0.55
+  protein_per_100g: 0.5
+  kcal_per_100g: 50
+  shelf_life_days_unopened: 7
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [ananas]
+
+- key: kiwi
+  name_nl: kiwi
+  state: countable
+  g_per_unit: 90.0
+  edible_fraction: 0.85
+  protein_per_100g: 1.1
+  kcal_per_100g: 61
+  fiber_per_100g: 3.0
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 2
+  freezable: false
+  aliases: [kiwi, kiwis]
+
+- key: diepvriesfruit
+  name_nl: diepvriesfruit
+  state: solid
+  protein_per_100g: 0.8
+  kcal_per_100g: 50
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 180
+  freezable: true
+  aliases: [diepvriesfruit, zomerfruit, rood fruit diepvries]
+
+# --------------------------------------------------------------- kaas
+- key: geitenkaas
+  name_nl: geitenkaas
+  state: solid
+  protein_per_100g: 19.0
+  kcal_per_100g: 300
+  fat_per_100g: 24.0
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 7
+  freezable: false
+  aliases: [geitenkaas, geitenkaasje]
+
+- key: brie
+  name_nl: brie
+  state: solid
+  protein_per_100g: 19.0
+  kcal_per_100g: 330
+  fat_per_100g: 27.0
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 7
+  freezable: false
+  aliases: [brie, camembert]
+
+- key: blauwaderkaas
+  name_nl: blauwaderkaas
+  state: solid
+  protein_per_100g: 21.0
+  kcal_per_100g: 350
+  fat_per_100g: 29.0
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 10
+  freezable: false
+  aliases: [gorgonzola, roquefort, blauwaderkaas, danish blue]
+
+- key: boter
+  name_nl: roomboter
+  state: solid
+  protein_per_100g: 0.7
+  kcal_per_100g: 740
+  fat_per_100g: 82.0
+  shelf_life_days_unopened: 60
+  shelf_life_days_opened: 30
+  freezable: true
+  aliases: [roomboter, ongezouten boter, gezouten boter]
+
+- key: creme_fraiche
+  name_nl: creme fraiche
+  state: solid
+  protein_per_100g: 2.4
+  kcal_per_100g: 300
+  fat_per_100g: 30.0
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 5
+  freezable: false
+  aliases: [creme fraiche, zure room]
+
+# ----------------------------------------------------- vlees, vleeswaren
+- key: rookworst
+  name_nl: rookworst
+  state: solid
+  protein_per_100g: 13.0
+  kcal_per_100g: 290
+  fat_per_100g: 26.0
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [rookworst, gelderse rookworst]
+
+- key: knakworst
+  name_nl: knakworst
+  state: solid
+  protein_per_100g: 11.0
+  kcal_per_100g: 270
+  fat_per_100g: 24.0
+  shelf_life_days_unopened: 180
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [knakworst, knakworstjes]
+
+- key: salami
+  name_nl: salami
+  state: solid
+  protein_per_100g: 22.0
+  kcal_per_100g: 400
+  fat_per_100g: 33.0
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 7
+  freezable: true
+  aliases: [salami, cervelaat, chorizo]
+
+- key: leverworst
+  name_nl: leverworst
+  state: solid
+  protein_per_100g: 14.0
+  kcal_per_100g: 320
+  fat_per_100g: 28.0
+  shelf_life_days_unopened: 21
+  shelf_life_days_opened: 4
+  freezable: false
+  aliases: [leverworst, smeerleverworst]
+
+- key: gehaktbal
+  name_nl: gehaktbal
+  state: countable
+  g_per_unit: 100.0
+  protein_per_100g: 15.0
+  kcal_per_100g: 250
+  shelf_life_days_unopened: 4
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [gehaktballen, gehaktbal, slavink, blinde vink]
+
+- key: kipnuggets
+  name_nl: kipnuggets
+  state: solid
+  protein_per_100g: 14.0
+  kcal_per_100g: 250
+  fat_per_100g: 14.0
+  shelf_life_days_unopened: 180
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [kipnuggets, kipschnitzel, kipcorn]
+
+- key: spareribs
+  name_nl: spareribs
+  state: solid
+  edible_fraction: 0.65
+  protein_per_100g: 18.0
+  kcal_per_100g: 280
+  fat_per_100g: 22.0
+  shelf_life_days_unopened: 4
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [spareribs, ribs]
+
+- key: kippenpoten
+  name_nl: kippenpoten
+  state: solid
+  edible_fraction: 0.70
+  protein_per_100g: 18.0
+  kcal_per_100g: 170
+  shelf_life_days_unopened: 4
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [drumsticks, kippenpoten, kippendijen, kippenbouten]
+
+# ------------------------------------------------------------------ vis
+- key: mosselen
+  name_nl: mosselen
+  state: solid
+  edible_fraction: 0.35
+  protein_per_100g: 12.0
+  kcal_per_100g: 70
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 1
+  freezable: true
+  aliases: [mosselen, mossel]
+
+- key: forel
+  name_nl: forel
+  state: solid
+  protein_per_100g: 20.0
+  kcal_per_100g: 140
+  fat_per_100g: 6.0
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 1
+  freezable: true
+  aliases: [forel, forelfilet]
+
+- key: schol
+  name_nl: scholfilet
+  state: solid
+  protein_per_100g: 17.0
+  kcal_per_100g: 85
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 1
+  freezable: true
+  aliases: [schol, scholfilet]
+
+# --------------------------------------------------------- brood, granen
+- key: pitabrood
+  name_nl: pitabrood
+  state: countable
+  g_per_unit: 60.0
+  protein_per_100g: 9.0
+  kcal_per_100g: 275
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 5
+  freezable: true
+  aliases: [pitabrood, pita, pitabroodjes]
+
+- key: naanbrood
+  name_nl: naanbrood
+  state: countable
+  g_per_unit: 90.0
+  protein_per_100g: 8.0
+  kcal_per_100g: 290
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [naan, naanbrood]
+
+- key: stokbrood
+  name_nl: stokbrood
+  state: solid
+  protein_per_100g: 8.0
+  kcal_per_100g: 270
+  shelf_life_days_unopened: 3
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [stokbrood, baguette, ciabatta]
+
+- key: broodje_bruin
+  name_nl: bruine broodjes
+  state: countable
+  g_per_unit: 70.0
+  protein_per_100g: 9.0
+  kcal_per_100g: 240
+  shelf_life_days_unopened: 4
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [bruine bollen, bruine broodjes, pistolets, zachte broodjes]
+
+- key: krentenbol
+  name_nl: krentenbollen
+  state: countable
+  g_per_unit: 70.0
+  protein_per_100g: 8.0
+  kcal_per_100g: 280
+  shelf_life_days_unopened: 5
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [krentenbollen, rozijnenbollen, krentenbol]
+
+- key: noedels_droog
+  name_nl: noedels (droog)
+  state: solid
+  dry_to_cooked_factor: 2.5
+  protein_per_100g: 11.0
+  kcal_per_100g: 355
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 180
+  freezable: false
+  aliases: [mihoen, rijstnoedels, udon]
+
+- key: polenta_droog
+  name_nl: polenta (droog)
+  state: solid
+  dry_to_cooked_factor: 3.0
+  protein_per_100g: 8.0
+  kcal_per_100g: 360
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 180
+  freezable: false
+  aliases: [polenta, maisgriesmeel]
+
+# ------------------------------------------- peulvruchten en plantaardig
+- key: kapucijners_blik
+  name_nl: kapucijners uit blik
+  state: solid
+  drained_fraction: 0.60
+  protein_per_100g: 6.0
+  kcal_per_100g: 100
+  fiber_per_100g: 5.0
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [kapucijners]
+
+- key: tuinbonen
+  name_nl: tuinbonen
+  state: solid
+  protein_per_100g: 8.0
+  kcal_per_100g: 110
+  fiber_per_100g: 5.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [tuinbonen, tuinboon]
+
+- key: spliterwten_droog
+  name_nl: spliterwten gedroogd
+  state: solid
+  dry_to_cooked_factor: 2.5
+  protein_per_100g: 24.0
+  kcal_per_100g: 340
+  fiber_per_100g: 15.0
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 365
+  freezable: false
+  aliases: [spliterwten]
+
+- key: sojabrokken_droog
+  name_nl: sojabrokken gedroogd
+  state: solid
+  dry_to_cooked_factor: 2.5
+  protein_per_100g: 50.0
+  kcal_per_100g: 340
+  fiber_per_100g: 18.0
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 365
+  freezable: false
+  aliases: [sojabrokken, sojastukjes]
+
+- key: vega_schnitzel
+  name_nl: vegetarische schnitzel
+  state: countable
+  g_per_unit: 100.0
+  protein_per_100g: 14.0
+  kcal_per_100g: 220
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [vegetarische schnitzel, vega schnitzel, plantaardige schnitzel]
+
+- key: vega_kipstukjes
+  name_nl: vegetarische kipstukjes
+  state: solid
+  protein_per_100g: 17.0
+  kcal_per_100g: 160
+  shelf_life_days_unopened: 14
+  shelf_life_days_opened: 2
+  freezable: true
+  aliases: [vegetarische kipstukjes, plantaardige kipstukjes, quorn]
+
+# --------------------------------------------------------- noten, zaden
+- key: pistachenoten
+  name_nl: pistachenoten
+  state: solid
+  edible_fraction: 0.55
+  protein_per_100g: 20.0
+  kcal_per_100g: 560
+  fat_per_100g: 45.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 90
+  freezable: false
+  aliases: [pistachenoten, pistache]
+
+- key: paranoten
+  name_nl: paranoten
+  state: solid
+  protein_per_100g: 14.0
+  kcal_per_100g: 660
+  fat_per_100g: 66.0
+  shelf_life_days_unopened: 270
+  shelf_life_days_opened: 60
+  freezable: true
+  aliases: [paranoten, paranoot]
+
+- key: pecannoten
+  name_nl: pecannoten
+  state: solid
+  protein_per_100g: 9.0
+  kcal_per_100g: 690
+  fat_per_100g: 72.0
+  shelf_life_days_unopened: 270
+  shelf_life_days_opened: 60
+  freezable: true
+  aliases: [pecannoten, pecan]
+
+- key: pompoenpitten
+  name_nl: pompoenpitten
+  state: solid
+  protein_per_100g: 30.0
+  kcal_per_100g: 560
+  fat_per_100g: 49.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 90
+  freezable: false
+  aliases: [pompoenpitten, pompoenzaad]
+
+- key: sesamzaad
+  name_nl: sesamzaad
+  state: solid
+  protein_per_100g: 18.0
+  kcal_per_100g: 570
+  fat_per_100g: 50.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 120
+  freezable: false
+  aliases: [sesamzaad, sesam]
+
+- key: tahin
+  name_nl: tahin
+  state: solid
+  protein_per_100g: 17.0
+  kcal_per_100g: 600
+  fat_per_100g: 54.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 90
+  freezable: false
+  aliases: [tahin, tahini, sesampasta]
+
+- key: amandelpasta
+  name_nl: amandelpasta
+  state: solid
+  protein_per_100g: 21.0
+  kcal_per_100g: 615
+  fat_per_100g: 55.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 90
+  freezable: false
+  aliases: [amandelpasta, amandelboter]
+
+# ---------------------------------------------------------------- overig
+- key: olijven
+  name_nl: olijven
+  state: solid
+  drained_fraction: 0.55
+  protein_per_100g: 1.0
+  kcal_per_100g: 145
+  fat_per_100g: 15.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 14
+  freezable: false
+  aliases: [olijven, groene olijven, zwarte olijven]
+
+- key: zongedroogde_tomaten
+  name_nl: zongedroogde tomaten in olie
+  state: solid
+  # 0.50 is not a guess: AH's own unit price implies 90 g on a 180 g pack
+  # (verified 2026-09-16 via the unit-price cross-check).
+  drained_fraction: 0.50
+  protein_per_100g: 4.0
+  kcal_per_100g: 210
+  fat_per_100g: 15.0
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 14
+  freezable: false
+  aliases: [zongedroogde tomaten, pomodori secchi]
+
+- key: augurken
+  name_nl: augurken
+  state: solid
+  drained_fraction: 0.55
+  protein_per_100g: 0.6
+  kcal_per_100g: 15
+  shelf_life_days_unopened: 365
+  shelf_life_days_opened: 30
+  freezable: false
+  aliases: [augurken, augurk]
+
+- key: tomatenblokjes_blik
+  name_nl: tomatenblokjes uit blik
+  state: solid
+  protein_per_100g: 1.2
+  kcal_per_100g: 25
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [tomatenblokjes, gepelde tomaten, tomatenstukjes]
+
+- key: kokosmelk
+  name_nl: kokosmelk
+  state: liquid
+  density_g_per_ml: 1.0
+  protein_per_100g: 2.0
+  kcal_per_100g: 190
+  fat_per_100g: 19.0
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 3
+  freezable: true
+  aliases: [kokosmelk]
+
+- key: sinaasappelsap
+  name_nl: sinaasappelsap
+  state: liquid
+  density_g_per_ml: 1.04
+  protein_per_100g: 0.7
+  kcal_per_100g: 45
+  shelf_life_days_unopened: 30
+  shelf_life_days_opened: 4
+  freezable: true
+  aliases: [sinaasappelsap, appelsap, vruchtensap, verse jus]
+
+- key: olijfolie
+  name_nl: olijfolie
+  state: liquid
+  density_g_per_ml: 0.92
+  protein_per_100g: 0.0
+  kcal_per_100g: 820
+  fat_per_100g: 91.0
+  shelf_life_days_unopened: 540
+  shelf_life_days_opened: 180
+  freezable: false
+  aliases: [olijfolie, extra vierge olijfolie]

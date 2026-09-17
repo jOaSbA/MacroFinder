@@ -1,0 +1,276 @@
+# The substitution engine's seed. Brief section 4.4.
+#
+# An archetype is a thing you want, independent of who sells it. Each one has two
+# fulfilment routes: a ready-made SKU that *is* this thing, and one or more
+# compositions that approximate it. `bonusrank compare` prices both from current
+# promo data and says which wins - including, per section 4.5, "just buy it".
+#
+# Two conventions that matter:
+#
+#   * `items[].grams` is PER SERVING, not per batch. The engine sums them as-is.
+#     A composition's protein may legitimately differ from the archetype's
+#     target_protein_g; that difference is the point, and `compare` prints it.
+#   * `ready_made` is rules, never SKU ids. AH rotates webshopIds, so a listed id
+#     rots within weeks. `food_types` matches an offer's matched food type;
+#     `contains` matches its product name, lowercased.
+#
+# `taste_delta_note` is required and must describe what DIFFERS. Never a parity
+# claim - copy rule 2, enforced by a CHECK in the schema and by a test that
+# blacklists the phrasings. A suggestion that overclaims once makes the whole
+# tool untrustworthy.
+
+- key: chocolade_proteine_pudding
+  name: Chocolade proteine pudding
+  serving_g: 200
+  target_protein_g: 20
+  texture: creamy_spoonable
+  temperature: cold
+  meal_slots: [breakfast, snack]
+  max_prep_minutes: 5
+  # A spoonable pudding, not a plate of food - snack profile (lower kcal floor,
+  # no fat floor). Its own recipe is pure protein, so a carb companion is added
+  # for the optimiser: milestone 9, CLAUDE.md.
+  meal_kind: snack
+  optimise_extra_food_types: [diepvriesfruit, havermout]
+  ready_made:
+    food_types: [proteine_pudding]
+    contains: ["protein pudding", "proteine pudding", "protein chocolade"]
+  compositions:
+    - name: magere kwark + cacao + zoetstof
+      effort_minutes: 3
+      equipment: kom, lepel
+      similarity_confidence: medium
+      taste_delta_note: minder zoet, zuurder, sterkere cacaosmaak
+      texture_delta_note: dikker en korreliger, minder glad dan een pudding
+      items:
+        - food_type: kwark_mager
+          grams: 200
+        - food_type: cacaopoeder
+          grams: 8
+        - food_type: zoetstof
+          grams: 1
+          pantry_price_eur_per_kg: 25.00   # tabletten/druppels, jaarlijkse aankoop
+
+- key: proteine_drinkyoghurt
+  name: Proteine drinkyoghurt
+  serving_g: 250
+  target_protein_g: 20
+  texture: drinkable
+  temperature: cold
+  meal_slots: [breakfast, snack]
+  max_prep_minutes: 3
+  # A drink is allowed to stay protein-forward - no carb/fat floor applies.
+  # Milestone 9, CLAUDE.md.
+  meal_kind: drink
+  ready_made:
+    food_types: [proteine_drinkyoghurt]
+    contains: ["protein drink", "proteine drink", "high protein drinkyoghurt"]
+  compositions:
+    - name: magere kwark + halfvolle melk + vanille
+      effort_minutes: 2
+      equipment: shaker of garde
+      similarity_confidence: medium
+      taste_delta_note: zuurder en minder zoet, vanille is eenduidiger dan het origineel
+      texture_delta_note: dunner dan yoghurt, kan schiften als het te hard geklopt wordt
+      items:
+        - food_type: kwark_mager
+          grams: 180
+        - food_type: melk_halfvol
+          grams: 70
+        - food_type: vanille_extract
+          grams: 2
+          pantry_price_eur_per_kg: 60.00   # klein flesje, gaat een jaar mee
+
+- key: proteine_reep
+  name: Proteine reep
+  serving_g: 60
+  target_protein_g: 20
+  texture: chewy_bar
+  temperature: ambient
+  meal_slots: [snack]
+  max_prep_minutes: 15
+  # Already has both a carb source (havermout) and a fat source (pindakaas) in
+  # its own recipe - no extras needed. Milestone 9, CLAUDE.md.
+  meal_kind: snack
+  ready_made:
+    food_types: [proteine_reep]
+    contains: ["protein bar", "proteine reep", "barebells", "quest bar"]
+  compositions:
+    - name: havermout + whey + pindakaas, no-bake
+      effort_minutes: 12
+      equipment: kom, vork, koelkast
+      similarity_confidence: low
+      taste_delta_note: nootachtiger en droger, mist de karamel- en chocolaag
+      texture_delta_note: kruimelig in plaats van taai, valt uiteen zonder koeling
+      items:
+        - food_type: havermout
+          grams: 20
+        - food_type: whey_poeder
+          grams: 25
+        - food_type: pindakaas
+          grams: 15
+
+- key: proteine_shake
+  name: Proteine shake
+  serving_g: 300
+  target_protein_g: 25
+  texture: drinkable
+  temperature: cold
+  meal_slots: [breakfast, snack, post_workout]
+  max_prep_minutes: 3
+  # A shake, by definition - protein-forward is the point. Milestone 9,
+  # CLAUDE.md.
+  meal_kind: drink
+  ready_made:
+    food_types: [eiwitshake_kant_en_klaar]
+    contains: ["protein shake", "eiwitshake", "protein milkshake"]
+  compositions:
+    - name: whey + halfvolle melk
+      effort_minutes: 2
+      equipment: shaker
+      similarity_confidence: high
+      taste_delta_note: poederiger nasmaak, zoetheid hangt af van de gekozen whey
+      texture_delta_note: schuimiger, kan klonteren zonder shakerbal
+      items:
+        - food_type: whey_poeder
+          grams: 30
+        - food_type: melk_halfvol
+          grams: 270
+    - name: magere kwark + halfvolle melk
+      effort_minutes: 3
+      equipment: garde of blender
+      similarity_confidence: medium
+      taste_delta_note: duidelijk zuurder, zonder toegevoegde zoetheid
+      texture_delta_note: dikker en zwaarder dan een shake
+      items:
+        - food_type: kwark_mager
+          grams: 200
+        - food_type: melk_halfvol
+          grams: 100
+
+- key: skyr_met_fruit
+  name: Skyr met fruit
+  serving_g: 200
+  target_protein_g: 20
+  texture: creamy_spoonable
+  temperature: cold
+  meal_slots: [breakfast, snack]
+  max_prep_minutes: 3
+  # A fruit-yogurt bowl, not a full plate - snack profile. Its own recipe
+  # already has a carb source (diepvriesfruit); no fat floor applies at
+  # snack level, so no extras needed. Milestone 9, CLAUDE.md.
+  meal_kind: snack
+  ready_made:
+    food_types: [skyr_fruit]
+    contains: ["skyr aardbei", "skyr bosvruchten", "skyr mango", "skyr framboos"]
+  compositions:
+    # Brief section 4.4: flavour-variant products are the single biggest easy
+    # win - the fruit portion is tiny and the markup is large.
+    - name: naturel skyr + diepvriesfruit
+      effort_minutes: 2
+      equipment: kom, lepel
+      similarity_confidence: high
+      taste_delta_note: minder zoet, fruit is stukjes in plaats van doorgeroerde puree
+      texture_delta_note: koeler en waterig op de plek van het fruit
+      items:
+        - food_type: skyr_naturel
+          grams: 170
+        - food_type: diepvriesfruit
+          grams: 40
+
+- key: huttenkase_spread
+  name: Huttenkase spread
+  serving_g: 100
+  target_protein_g: 12
+  texture: spreadable
+  temperature: cold
+  meal_slots: [lunch, snack]
+  max_prep_minutes: 5
+  # A 100 g spread portion, not a plate - snack profile. Its own recipe has
+  # essentially no carbs; a companion is added so a small carb floor can be
+  # met. Milestone 9, CLAUDE.md.
+  meal_kind: snack
+  optimise_extra_food_types: [brood_volkoren]
+  ready_made:
+    food_types: [smeerkaas_light]
+    contains: ["kruidenkwark", "kruidendip", "kruidenspread"]
+  compositions:
+    - name: huttenkase + kruiden + knoflook
+      effort_minutes: 4
+      equipment: kom, vork
+      similarity_confidence: medium
+      taste_delta_note: scherper van knoflook, minder romig-zout dan een spread
+      texture_delta_note: korrelig in plaats van glad; pureren helpt maar haalt het niet
+      items:
+        - food_type: huttenkase
+          grams: 90
+        - food_type: kruiden_gedroogd
+          grams: 2
+          pantry_price_eur_per_kg: 40.00   # potje van 10 g, voorraadartikel
+        - food_type: knoflook
+          grams: 5
+
+- key: kip_wrap_lunch
+  name: Kip-wrap lunch
+  serving_g: 220
+  target_protein_g: 30
+  texture: handheld
+  temperature: cold
+  meal_slots: [lunch]
+  max_prep_minutes: 10
+  # A real lunch plate - meal profile (kcal, carb and fat floors all apply).
+  # Its own recipe already has a carb source (wrap_tortilla); a fat companion
+  # is added so the fat floor is reachable. Milestone 9, CLAUDE.md.
+  meal_kind: meal
+  optimise_extra_food_types: [olijfolie]
+  ready_made:
+    contains: ["wrap kip", "kipwrap", "wrap chicken", "wrap caesar"]
+  compositions:
+    - name: wrap + kipfilet + huttenkase + sla
+      effort_minutes: 8
+      equipment: snijplank, mes, koekenpan
+      similarity_confidence: medium
+      taste_delta_note: minder gekruid, geen dressing; de saus is wat je zelf toevoegt
+      texture_delta_note: knapperiger sla, drogere vulling zonder dressing
+      items:
+        - food_type: wrap_tortilla
+          grams: 60
+        - food_type: kipfilet_rauw
+          grams: 110
+        - food_type: huttenkase
+          grams: 30
+        - food_type: sla
+          grams: 20
+
+- key: overnight_oats
+  name: Overnight oats
+  serving_g: 300
+  target_protein_g: 20
+  texture: creamy_spoonable
+  temperature: cold
+  meal_slots: [breakfast]
+  max_prep_minutes: 5
+  # A full breakfast, not a snack - meal profile. Its own recipe already has
+  # carbs (havermout, diepvriesfruit); a fat companion is added so the fat
+  # floor is reachable (a spoon of pindakaas is a normal oats topping).
+  # Milestone 9, CLAUDE.md.
+  meal_kind: meal
+  optimise_extra_food_types: [pindakaas]
+  ready_made:
+    contains: ["overnight oats", "havermout pot", "oats to go"]
+  compositions:
+    - name: havermout + magere kwark + melk + fruit
+      effort_minutes: 4
+      equipment: pot met deksel, koelkast (nacht wachten)
+      similarity_confidence: medium
+      taste_delta_note: minder zoet en minder gekruid; geen kaneel of siroop tenzij toegevoegd
+      texture_delta_note: steviger en korreliger, hangt af van hoe lang het staat
+      items:
+        - food_type: havermout
+          grams: 50
+        - food_type: kwark_mager
+          grams: 150
+        - food_type: melk_halfvol
+          grams: 70
+        - food_type: diepvriesfruit
+          grams: 40

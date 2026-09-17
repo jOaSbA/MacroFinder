@@ -1,0 +1,15 @@
+# Your settings. Every value here is a user input, not a constant in the code
+# (brief section 5). Delete a line to fall back to the default.
+
+daily_protein_target_g: 150
+daily_kcal_floor: 2200          # a FLOOR - the optimiser may never minimise this
+weekly_budget_eur: 50
+max_stores_per_week: 2
+
+# How much of a single food you would realistically get through in a day.
+# Drives the waste adjustment: a 1+1 gratis on 2 kg of kwark is only a deal
+# if the second kilo actually gets eaten before it turns.
+daily_consumption_g: 250
+
+freezer_horizon_days: 90
+variety_cap_servings_per_week: 7

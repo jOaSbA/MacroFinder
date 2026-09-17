@@ -1,0 +1,71 @@
+# Cupboard staples the substitution engine (brief section 4) needs to cost a
+# recipe. They carry almost no protein, but a composition cannot be priced or
+# described without them: "kwark + cacao" is not the recipe, "kwark + cacao +
+# zoetstof" is.
+#
+# These never appear in a bonus folder and are bought once a year, so the
+# compositions that use them declare a `pantry_price_eur_per_kg` instead of
+# relying on an observed price. The price belongs to the recipe item, not to the
+# food - see data/seed/archetypes.yaml.
+#
+# Protein is a real 0.0 here, not NULL: "this food has no protein" is a positive
+# finding, and CLAUDE.md section 5 keeps the two distinct.
+
+- key: zoetstof
+  name_nl: zoetstof
+  name_en: sweetener
+  state: solid
+  protein_per_100g: 0.0
+  kcal_per_100g: 0          # sucralose/steviol tablets and drops
+  shelf_life_days_unopened: 1095
+  shelf_life_days_opened: 730
+  freezable: false
+  aliases: [zoetstof, stevia, sucralose, zoetjes, vloeibare zoetstof]
+
+- key: vanille_extract
+  name_nl: vanille-extract
+  name_en: vanilla extract
+  state: liquid
+  density_g_per_ml: 0.88
+  protein_per_100g: 0.0
+  kcal_per_100g: 288
+  shelf_life_days_unopened: 1095
+  shelf_life_days_opened: 730
+  freezable: false
+  aliases: [vanille-extract, vanille extract, vanillearoma, vanille aroma]
+
+- key: kruiden_gedroogd
+  name_nl: gedroogde kruiden
+  name_en: dried herbs
+  state: solid
+  protein_per_100g: 9.0
+  kcal_per_100g: 265
+  shelf_life_days_unopened: 730
+  shelf_life_days_opened: 365
+  freezable: false
+  # Not "kruiden" alone: that word sits inside kruidenkaas, kruidenboter and
+  # kruidenmix, and the matcher would file half the cheese aisle here.
+  aliases: [gedroogde kruiden, italiaanse kruiden, provencaalse kruiden, tuinkruiden]
+
+- key: knoflook
+  name_nl: knoflook
+  name_en: garlic
+  state: solid
+  protein_per_100g: 6.4
+  kcal_per_100g: 149
+  edible_fraction: 0.87
+  shelf_life_days_unopened: 90
+  shelf_life_days_opened: 30
+  freezable: false
+  aliases: [knoflook, knoflookteen, verse knoflook, knoflookpoeder]
+
+- key: honing
+  name_nl: honing
+  name_en: honey
+  state: solid
+  protein_per_100g: 0.3
+  kcal_per_100g: 320
+  shelf_life_days_unopened: 1095
+  shelf_life_days_opened: 730
+  freezable: false
+  aliases: [honing, vloeibare honing, bloemenhoning]

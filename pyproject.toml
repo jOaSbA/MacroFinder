@@ -1,0 +1,27 @@
+[project]
+name = "bonusrank"
+version = "0.1.0"
+description = "Track Dutch supermarket promotions and rank them by protein-per-euro."
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "pulp>=2.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+bonusrank = "bonusrank.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bonusrank"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

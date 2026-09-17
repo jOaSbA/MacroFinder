@@ -1,0 +1,187 @@
+# Manual matcher overrides. Hand-edited; the matcher never writes here.
+#
+# Priority: sku > never_match > contains > fuzzy.
+# Anything the fuzzy lane cannot place lands in needs_review - add a rule here
+# rather than lowering the threshold, which would guess across the whole catalogue.
+
+# Exact "chain:sku" -> food_type key. Highest priority, use for one-off oddities.
+sku: {}
+
+# Substring of the product title -> food_type key. Case-insensitive.
+contains:
+  "protein pudding": proteine_pudding
+  "proteine pudding": proteine_pudding
+  "skyr drink": proteine_drinkyoghurt
+  "protein drink": proteine_drinkyoghurt
+  "high protein": proteine_drinkyoghurt
+  # "sap" is a dish marker (it blocks "Groentesap ... appel" from matching
+  # apple). The override lane runs before that guard, so the genuine juices
+  # still resolve. This is the intended use of this file.
+  "sinaasappelsap": sinaasappelsap
+  "jus d'orange": sinaasappelsap
+  "appelsap": sinaasappelsap
+  # Jumbo's 'Koek, snoep, chocolade en chips' is NOT excluded (see
+  # non_rankable_categories) because it also holds real food - these two
+  # product lines, found there 2026-09-17. `proteine_reep`'s own aliases
+  # already cover the unaccented "proteine reep"; this catches the accented
+  # spelling Jumbo actually prints ("LiGA Proteïne Reep Pinda").
+  "proteïne reep": proteine_reep
+  "fusion peanuts": pindas
+
+# Not food, or not rankable. Suppressed from needs_review so the queue stays
+# worth reading - a queue full of crockery is a queue nobody opens.
+never_match:
+  - statiegeld
+  - emballage
+  - cadeaukaart
+  - geschenkbon
+  # Supplements name a food but are not one: "rode gist rijst capsules" is not rice.
+  - capsules
+  - tabletten
+  - dragees
+  - supplement
+  - vitamine
+  - multivitamine
+  - dagravit
+  - davitamon
+  # Confectionery that borrows a food word. "Peanut butter cup" is not pindakaas.
+  - ben & jerry
+  - magnum
+  - cornetto
+  # Crisp lines whose name is just a flavour ('Heartbreakers paprika'), with no
+  # dish word for the matcher to see. Their category also holds nuts, so this
+  # has to be done by name.
+  - heartbreakers
+  - bugles
+  - doritos
+  - pringles
+  - lay's
+
+  # Jumbo's 'Koek, snoep, chocolade en chips' (not excluded - see
+  # non_rankable_categories - because it also holds real protein bars and
+  # peanuts, caught above by `contains:`). Confirmed pure confectionery/chip
+  # lines from that category, measured 2026-09-17. Specific product LINES, not
+  # bare brand names, so a future "Liga Proteïne Reep" variant is never at risk
+  # of being caught by a same-brand rule meant for its candy siblings.
+  - liga milkbreak
+  - liga evergreen
+  - liga belvita
+  - liga haverkick
+  - milka
+  - kitkat
+  - oreo
+  - knoppers
+  - stimorol
+  # The Extra chewing gum brand - "extra" alone would also catch "AH Extra
+  # vierge olijfolie" (AH's own premium line), so it is never a bare word here.
+  - extra kauwgom
+  - extra kauwgum
+  - extra spearmint
+  - extra peppermint
+  - extra strawberry
+  - extra refreshers
+  - mentos
+  - smint
+  - klene
+  - autodrop
+  - frisia
+  - manner
+  - verkade
+  - look-o-look
+  - oldtimers
+  - pom-bär
+  - chio heartbreakers
+  - chio flippies
+  - ontbijtkoekrepen
+
+  # Aldi's 'Snoep, koek en chocolade' (not excluded either - see
+  # non_rankable_categories) - confirmed pure confectionery, measured
+  # 2026-09-17. Kept separate from the Jumbo group above in case either
+  # chain's naming drifts and the two need to diverge later.
+  - kauwdragees
+  - belgische bonbons
+  - délice
+
+  # Aldi's own general-merchandise items ("weekly specials" alongside the
+  # groceries) mostly carry NO `hierarchicalCategories` at all - 168 of 211
+  # SKUs measured 2026-09-17 - so there is no category lever here the way
+  # there is for AH/Jumbo. Caught by name instead, the same fallback AH itself
+  # would need for an uncategorised SKU.
+  - kattenvoer
+  - kattenbak
+  - hondenkauw
+  - hondensnack
+  - hondenbrokken
+  - voerbak
+  - massagesteen
+  - gua sha
+  - regencape
+  - keukenpapier
+  - gasstel
+  - schoonmaakazijn
+
+# Whole chain categories that are not rankable food. Checked before the matcher
+# runs, so these never reach the review queue at all.
+#
+# This is the single biggest lever on review-queue signal: the first full ingest
+# queued 2760 SKUs, and the most common words in that queue were spray,
+# wasmiddel, navulling, shampoo, deodorant and spf50 - Etos and drogisterij
+# stock, not gaps in the food_types seed.
+#
+# Category NAMES are per-chain (AH, Jumbo and Aldi each use their own
+# taxonomy), but this is one flat list because the matcher checks membership
+# without caring which chain produced the string - a category meaning
+# "detergent" excludes detergent everywhere the same way.
+non_rankable_categories:
+  # -- Albert Heijn --
+  - Drogisterij
+  - Huishouden
+  - Baby en kind
+  - Koken, tafelen, vrije tijd
+  - Etos acties
+  - Gall & Gall acties
+  - Gall & Gall klantenkaart
+  - AH Voordeelshop
+  # Alcohol: not a protein source, and not what this tool is for.
+  - Bier, wijn, aperitieven
+  # Soft drinks and confectionery contribute no protein, and every one that
+  # names a fruit was matching that fruit. Excluding the categories is more
+  # reliable than keyword-matching the titles.
+  - Frisdrank, sappen, water
+  - Koek, snoep, chocolade
+  # NOT excluded: 'Borrel, chips, snacks'. It was, briefly, and it cost 80
+  # matches - cashewnoten, amandelen, pecannoten and pindas all live there and
+  # are among the better protein-per-euro buys in the folder. The category
+  # mixes crisps with nuts, so it cannot be excluded wholesale. The crisps that
+  # slip through are handled by name below.
+
+  # -- Jumbo -- measured 2026-09-17 on the first full ingest (1238 unmatched
+  # of 1466 real SKUs, after `expand_offer` turned every multi-variant
+  # promotion into its real per-SKU count). Same shape as AH's own history:
+  # drogisterij and household made up most of the queue, not seed gaps.
+  - Drogisterij en gezondheid
+  - Huishouden en dieren
+  - Baby en kind
+  - Bier en wijn
+  - Frisdrank en sappen
+  # Coffee and tea leaves contribute no protein and match nothing in the seed
+  # by design - not the fruit-name trap AH's soft drinks had, just genuinely
+  # out of scope for a protein tracker.
+  - Koffie en thee
+  # NOT excluded: 'Koek, snoep, chocolade en chips'. Unlike AH, Jumbo lumps
+  # confectionery, chips AND nuts/protein bars into one category - "LiGA
+  # Proteïne Reep Pinda" and "Chio Fusion Peanuts" both live here. Handled by
+  # name below instead, the same reasoning as AH's 'Borrel, chips, snacks'.
+
+  # -- Aldi NL -- measured 2026-09-17. Aldi's own `mainCategoryID` is mostly
+  # the useless literal "offer"; `adapters/aldi.py::_department` reads the
+  # real taxonomy out of `hierarchicalCategories.lvl0` instead, which is why
+  # these names look like AH's rather than Aldi's internal ids.
+  - Huisdieren
+  - Huishouden
+  - Bier, mixdranken, aperitieven en likeuren
+  - Sappen, frisdrank, siropen en water
+  - Snoep, koek en chocolade
+  # NOT excluded: 'Borrelhapjes' (party snacks). It mixes real food - "Worsten
+  # 5-pack", "Tapas roomkaasrolletjes" - with novelty items, the same "mixed
+  # bag" shape as AH's 'Borrel, chips, snacks'.
