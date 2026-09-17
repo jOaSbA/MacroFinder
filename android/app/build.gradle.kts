@@ -19,7 +19,7 @@ android {
         // flavour is not needed yet - there is one repo, one branch, one file.
         buildConfigField(
             "String", "DATA_URL",
-            "\"https://raw.githubusercontent.com/jOaSbA/MacroFinder/main/docs/data/latest.json\"",
+            "\"https://raw.githubusercontent.com/jOaSbA/MacroFinder/master/docs/data/latest.json\"",
         )
     }
 

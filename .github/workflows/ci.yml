@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    # This repo's default branch is master, not main. Both are listed so a
+    # future rename doesn't silently stop CI from running again - which is
+    # exactly what happened here: the first two commits landed on master
+    # against a main-only trigger and no workflow ever fired.
+    branches: [master, main]
   pull_request:
 
 jobs:

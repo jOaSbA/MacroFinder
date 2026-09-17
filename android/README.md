@@ -18,7 +18,7 @@ This app has no backend and no scraping code of its own:
 3. `.github/workflows/refresh-data.yml` runs that on a schedule and commits
    the result.
 4. This app fetches that file straight from
-   `raw.githubusercontent.com/jOaSbA/MacroFinder/main/docs/data/latest.json`
+   `raw.githubusercontent.com/jOaSbA/MacroFinder/master/docs/data/latest.json`
    (`app/build.gradle.kts`'s `DATA_URL` build config field) - no server to
    host, no API to maintain.
 
