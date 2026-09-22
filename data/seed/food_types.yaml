@@ -544,7 +544,10 @@
   shelf_life_days_unopened: 4
   shelf_life_days_opened: 2
   freezable: true
-  aliases: [biefstuk, runderbiefstuk, magere biefstuk, kogelbiefstuk]
+  # `steak` came from a duplicate `biefstuk` row milestone 12 added without
+  # noticing this one: same food, identical macros, four aliases that collided.
+  # The duplicate is gone; its one distinct spelling lives here.
+  aliases: [biefstuk, runderbiefstuk, magere biefstuk, kogelbiefstuk, steak]
 
 - key: varkenshaas
   meal_kind: ingredient
@@ -949,7 +952,13 @@
   shelf_life_days_unopened: 730
   shelf_life_days_opened: 365
   freezable: false
-  aliases: [linzen, gedroogde linzen, rode linzen, groene linzen, belugalinzen]
+  # NOT the bare word "linzen" - that belongs to linzen_blik below. BRIEF
+  # section 3.1's canned-legume trap, measured on the real catalogue: Hak sells
+  # tins, so every "Hak Linzen" and "Bonduelle Linzen" landed here at 24 g
+  # protein instead of the tin's 7, and a 380 g tin ranked FIRST in the whole
+  # protein-per-euro list. The dry form stays reachable by every spelling that
+  # actually says dry.
+  aliases: [gedroogde linzen, linzen droog, rode linzen, groene linzen, belugalinzen]
 
 - key: linzen_blik
   meal_kind: ingredient
@@ -962,7 +971,9 @@
   shelf_life_days_unopened: 730
   shelf_life_days_opened: 2
   freezable: true
-  aliases: [linzen blik, linzen in blik]
+  # The bare word lives here, exactly as `bruine bonen` lives on
+  # bruine_bonen_blik: on a Dutch shelf, unqualified "linzen" is a tin.
+  aliases: [linzen, linzen blik, linzen in blik]
 
 - key: bruine_bonen_blik
   meal_kind: ingredient

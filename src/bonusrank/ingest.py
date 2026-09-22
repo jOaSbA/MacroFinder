@@ -15,7 +15,7 @@ import json
 import logging
 import sqlite3
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from typing import Any
 
 from .matcher import MatchMethod, Matcher, MatchResult
@@ -292,6 +292,36 @@ def ingest_flat(
 
     conn.commit()
     return stats
+
+
+# Which SKUs are worth a label-macro request, best first.
+#
+# One request each, so the order is the whole design. A SKU that is matched AND
+# on a live promo is one the ranking actually prints; a matched SKU with no
+# promo may never be seen. After the milestone 15 catalogue crawl there are
+# 4,360 matched AH products and only 254 of them on a current offer, so
+# selecting "any matched product" spends the budget almost entirely on rows
+# nobody reads.
+_MACRO_CANDIDATES_SQL = """
+SELECT p.sku,
+       MAX(CASE WHEN o.promo_mechanic NOT IN ('not_a_promo','unknown')
+                 AND (o.valid_to IS NULL OR o.valid_to >= ?) THEN 1 ELSE 0 END) AS on_promo
+FROM products p
+LEFT JOIN price_observations o ON o.product_id = p.id
+WHERE p.chain = ?
+  AND p.food_type_id IS NOT NULL
+  AND p.id NOT IN (SELECT product_id FROM product_macros)
+GROUP BY p.id
+ORDER BY on_promo DESC, p.sku
+LIMIT ?
+"""
+
+
+def macro_candidates(conn: sqlite3.Connection, chain: str, limit: int,
+                     *, on=None) -> list[str]:
+    """SKUs most worth spending a label-macro request on, best first."""
+    today = (on or date.today()).isoformat()
+    return [r["sku"] for r in conn.execute(_MACRO_CANDIDATES_SQL, (today, chain, limit))]
 
 
 def fetch_label_macros(conn: sqlite3.Connection, adapter, skus: list[str]) -> int:

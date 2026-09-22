@@ -39,7 +39,7 @@ FROM template_slots WHERE template_id = ? ORDER BY sort_order
 
 _CANDIDATE_SQL = """
 SELECT f.key, f.name_nl, f.protein_per_100g, f.kcal_per_100g,
-       f.carbs_per_100g, f.fat_per_100g,
+       f.carbs_per_100g, f.fat_per_100g, f.source, f.confidence,
        c.grams, c.pantry_price_eur_per_kg
 FROM template_slot_candidates c
 JOIN food_types f ON f.id = c.food_type_id
@@ -71,6 +71,13 @@ class PricedCandidate:
     carbs_g: float | None
     fat_g: float | None
     is_pantry: bool
+    # BRIEF section 9 rule 1: a macro figure from the seed may never be shown
+    # bare. Every seeded row is source='manual', confidence='seed', so this is
+    # true for every candidate today - but it travels with the data rather than
+    # being assumed, because the tier-1 label lane exists and will flip some of
+    # them. docs/AUDIT.md finding 3.3 is what happens without it: the
+    # customiser rendered these totals with no marker at all.
+    macros_need_marking: bool
     # The observation behind the price, carrying the promo mechanic, the
     # required quantity and the personal-offer flag. Copy rule 3 applies to a
     # ranked candidate exactly as it does to a ranked offer: a candidate that
@@ -220,6 +227,8 @@ def _candidate(row: sqlite3.Row, prices: dict[str, FoodTypePrice]) -> PricedCand
         carbs_g=_per_serving(row["carbs_per_100g"], grams),
         fat_g=_per_serving(row["fat_per_100g"], grams),
         is_pantry=pantry is not None,
+        macros_need_marking=row["confidence"] in ("seed", "low")
+        or row["source"] == "estimated",
         price=price,
     )
 

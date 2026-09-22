@@ -41,6 +41,32 @@ def seed_files(directory: Path | None = None) -> list[Path]:
     return sorted((directory or SEED_DIR).glob(SEED_GLOB))
 
 
+def _reject_shared_aliases(rows: list[dict], owner_file: dict[str, Path]) -> None:
+    """An alias may belong to exactly one food type.
+
+    The duplicate-KEY check above is what stopped anyone noticing this for a
+    milestone: milestone 12 added `rucola`, `ijsbergsla` and `biefstuk` as new
+    keys, each of which collided with an alias an existing row already claimed
+    (`sla` had both leaves; `runderbiefstuk_mager` had three spellings of
+    steak). A distinct key is not a distinct food, and whichever row the
+    matcher reached first decided which macros a product was costed with -
+    a coincidence of iteration order, silently.
+    """
+    owners: dict[str, list[str]] = {}
+    for row in rows:
+        for alias in row.get("aliases") or []:
+            owners.setdefault(alias.strip().lower(), []).append(row["key"])
+
+    clashes = {alias: keys for alias, keys in owners.items() if len(keys) > 1}
+    if clashes:
+        detail = "; ".join(
+            f"{alias!r} claimed by {', '.join(keys)} "
+            f"({', '.join(sorted({owner_file[k].name for k in keys}))})"
+            for alias, keys in sorted(clashes.items())
+        )
+        raise ValueError(f"an alias may belong to only one food type: {detail}")
+
+
 def load_seed(conn: sqlite3.Connection, path: Path | None = None) -> dict[str, int]:
     """Insert or refresh seed food types from every seed file. Returns counts."""
     paths = [path] if path else seed_files()
@@ -56,6 +82,26 @@ def load_seed(conn: sqlite3.Connection, path: Path | None = None) -> dict[str, i
                 )
             seen[key] = file
             rows.append(row)
+
+    _reject_shared_aliases(rows, seen)
+
+    # Aliases are derived entirely from these files and nothing else writes
+    # them, so they are rebuilt wholesale rather than upserted - the same
+    # delete-and-reinsert `load_archetypes` does for compositions and
+    # `load_templates` for slots.
+    #
+    # Upserting made `load_seed` additive-only, which meant every alias ever
+    # REMOVED from the seed stayed live forever. That is not a tidiness point:
+    # it made a correctness fix a no-op. Moving the bare word "linzen" from the
+    # dry row to the tin edited the YAML and changed nothing, because the old
+    # alias was still in the table pointing at the dry row. It also covers a
+    # food type dropped from the seed entirely - its row cannot be deleted
+    # (products and compositions reference it) but stripping its aliases makes
+    # the matcher unable to reach it, which is the part that decides what a
+    # product gets costed with.
+    # Wholesale, including for a single-file load: `path=` means "these files
+    # ARE the seed", so a food type absent from them is absent, full stop.
+    conn.execute("DELETE FROM food_type_aliases")
 
     for row in rows:
         if row.get("meal_kind") not in _MEAL_KINDS:
@@ -88,7 +134,7 @@ def load_seed(conn: sqlite3.Connection, path: Path | None = None) -> dict[str, i
             conn.execute(
                 "INSERT INTO food_type_aliases (food_type_id, alias) VALUES (?,?) "
                 "ON CONFLICT DO NOTHING",
-                (food_type_id, alias.lower()),
+                (food_type_id, alias.strip().lower()),
             )
             aliases += 1
 

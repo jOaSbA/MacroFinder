@@ -437,7 +437,7 @@ Brief section 6, with two things enforced by the database rather than by discipl
   SKU's own FIR label figures above everything else ("prefer it always") and the
   brief's tables have nowhere to put per-SKU macros. `food_types` stays generic.
 
-### `food_types` seed — 188 types, 590 aliases
+### `food_types` seed — 204 types, 649 aliases
 
 Loaded from **every** `data/seed/food_types*.yaml` (the loader globs, so you can
 drop your own file in without touching code). A duplicate key across files raises
@@ -677,7 +677,7 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
 2. ~~Parsers + tests (tests first).~~ **Done.** 165 tests; unit size, unit-price
    cross-check, promo mechanics, nutrition (both shapes).
 3. ~~SQLite schema + ingest.~~ **Done.** Append-only enforced by trigger.
-4. ~~`food_types` seed.~~ **Done.** 111 types, all `confidence='seed'`.
+4. ~~`food_types` seed.~~ **Done.** 204 types, all `confidence='seed'`.
 5. ~~Matcher + override YAML.~~ **Done.** Four guards; see section 6.
 6. ~~Ranking CLI.~~ **Done.** `bonusrank list --sort protein-per-euro`.
 7. ~~Jumbo, then Aldi.~~ **Done, and brought to full parity with AH**, not just
@@ -1127,7 +1127,51 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     Aldi's whole public pricing model is the weekly `aanbiedingen` feed the
     adapter already reads in full.
 
-Current position: **milestones 1-16 complete.** 721 Python tests, plus the
+**Audit fixes (docs/AUDIT.md section 7).** Seven of the eight findings from
+milestone 0 are closed; only the Aldi empty state is left, and it is a screen
+(M23). Four of them are worth remembering:
+
+- **The canned-legume trap was live and ranked first.** `linzen_droog` claimed
+  the bare alias `linzen` while `bruine_bonen_blik` claimed the bare `bruine
+  bonen`, so every Hak and Bonduelle *tin* of lentils was costed at the dry
+  figure - 24 g protein against 7 - and a 380 g tin sat at the top of the whole
+  protein-per-euro ranking. The bare name now belongs to the tin, because that
+  is what a Dutch shelf sells. Pinned per legume in `test_food_types_seed.py`
+  rather than by a general rule, because the audit's own first version wrongly
+  named `spliterwten` too: all six split-pea matches really are dried.
+
+- **`load_seed` was purely additive for aliases, which made that fix a no-op.**
+  An alias removed from the YAML stayed in the database forever, so editing the
+  seed changed nothing on an existing database - and every alias ever removed
+  while tuning the matcher had still been live. Aliases are rebuilt wholesale on
+  every load now, the same delete-and-reinsert `load_archetypes` does for
+  compositions. This was the larger bug and it was not in the audit at all; it
+  turned up only because the first fix visibly did nothing.
+
+- **`product_macros` had never held a row in production.** Tier-1 FIR label
+  figures need `ingest --with-macros` and no workflow passed it, so every macro
+  the app has ever shown came from the generic seed. Both workflows run it now,
+  and `ingest.macro_candidates` spends the one-request-per-SKU budget on matched
+  products that are on a *current* offer first - after the catalogue crawl there
+  are 4,360 matched AH products and 254 on a live offer, so "any matched
+  product" would have spent almost all of it on rows no ranking prints. The
+  first live run wrote 39 rows and the figures genuinely differ: geitenkaas
+  19 -> 23 g protein, Hak doperwtjes 0.9 -> 2.2.
+
+- **An alias may now belong to only one food type**, enforced at load time.
+  `load_seed` already rejected a duplicate KEY, which is exactly what hid this:
+  milestone 12 added three new keys that each collided with an alias an existing
+  row already claimed, and whichever row the matcher reached first decided what
+  a product was costed with.
+
+Also: `cheapest_in_weeks` is suppressed below `ranking.MIN_HISTORY_WEEKS` and
+the CLI says "not enough price history yet"; `export.py` ships
+`macros_need_marking` on food types and slot candidates so the customiser can
+obey BRIEF section 9 rule 1; and the archetype verdict strings are Dutch, which
+closes the last English seam in the UI.
+
+Current position: **milestones 1-16 complete, audit findings closed.** 749
+Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
 decoding, rule evaluation, meal costing, saved-meal round trips).
 

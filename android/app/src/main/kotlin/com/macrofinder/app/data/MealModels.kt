@@ -74,6 +74,12 @@ data class PricedLine(
     val kcal: Double?,
     val carbsG: Double?,
     val fatG: Double?,
+    /**
+     * BRIEF section 9 rule 1: whether this line's macros are an estimate.
+     * True when the food type says so, and true for a line whose food type is
+     * unknown entirely - an unidentified line cannot vouch for anything.
+     */
+    val macrosNeedMarking: Boolean = true,
 )
 
 /**
@@ -100,6 +106,13 @@ data class MealTotals(
     val fatG: Double?,
     val unpricedLines: List<String> = emptyList(),
     val unknownMacroLines: List<String> = emptyList(),
+    /**
+     * True when ANY line that contributed a macro figure is an estimate, which
+     * makes the whole total an estimate. A total is only as trustworthy as its
+     * least trustworthy line, exactly as it is only as priced as its least
+     * priced one.
+     */
+    val macrosNeedMarking: Boolean = true,
 ) {
     val eurPerGProtein: Double?
         get() {

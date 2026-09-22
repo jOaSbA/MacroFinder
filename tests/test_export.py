@@ -277,3 +277,47 @@ def test_food_type_prices_agree_with_what_the_pricing_module_reports(conn):
         "chains"]["ah"]["food_type_prices"]["kwark_mager"]
     assert shipped["eur_per_kg"] == expected.eur_per_kg
     assert shipped["sku"] == expected.sku
+
+
+# -- provenance (BRIEF section 9 rule 1, docs/AUDIT.md finding 3.3) ------------
+
+def test_every_food_type_says_whether_its_macros_are_an_estimate(conn):
+    """The customiser's totals bar rendered protein and kcal bare, computed
+    entirely from these rows. That is a section 9 rule 1 violation, and the
+    root cause was here rather than in the app: the export shipped the numbers
+    with no way to know they are seed estimates."""
+    payload = build_export(conn, chains=("ah",), on=TODAY)
+
+    assert payload["food_types"], "nothing to check"
+    for entry in payload["food_types"]:
+        assert "macros_need_marking" in entry, entry["key"]
+
+    # Every seeded row is source='manual', confidence='seed' today.
+    assert all(e["macros_need_marking"] for e in payload["food_types"])
+
+
+def test_a_food_type_upgraded_to_a_high_confidence_source_drops_the_marker(conn):
+    """The flag travels with the data rather than being hardcoded true, because
+    `seed.load_nevo` exists to flip exactly this."""
+    conn.execute(
+        "UPDATE food_types SET source='nevo', confidence='high' WHERE key='kwark_mager'"
+    )
+
+    payload = build_export(conn, chains=("ah",), on=TODAY)
+    entry = next(e for e in payload["food_types"] if e["key"] == "kwark_mager")
+
+    assert entry["macros_need_marking"] is False
+
+
+def test_every_slot_candidate_says_whether_its_macros_are_an_estimate(conn):
+    """Same numbers, same screen, same rule - and the same field name a ranked
+    offer uses, so the app has one rule rather than two."""
+    _priced(conn, "wi1", "AH Pasta", "pasta_droog", "500 g", 1.10)
+
+    payload = build_export(conn, chains=("ah",), on=TODAY)
+    slots = payload["chains"]["ah"]["template_prices"]["test_pasta"]
+
+    candidates = [c for entries in slots.values() for c in entries]
+    assert candidates, "nothing to check"
+    for candidate in candidates:
+        assert candidate["macros_need_marking"] is True, candidate["food_type"]
