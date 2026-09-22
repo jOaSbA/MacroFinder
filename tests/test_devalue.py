@@ -105,3 +105,28 @@ def test_extract_nuxt_data_pulls_the_script_contents():
 def test_extract_nuxt_data_raises_when_the_tag_is_missing():
     with pytest.raises(ValueError, match="__NUXT_DATA__"):
         extract_nuxt_data("<html><body>no data here</body></html>")
+
+
+# -- EmptyRef (milestone 16) ---------------------------------------------------
+
+def test_an_empty_ref_carries_a_json_string_not_the_value():
+    """The one reactivity tag whose payload is encoded rather than resolved.
+
+    Found on Jumbo's `/producten/` page past the last offset, where `count`
+    comes back as `["EmptyRef", "0"]` instead of `["Ref", 17062]`. Treating it
+    like the others hands the caller the string '0'; not recognising it at all
+    leaves the whole two-element list in place, which is what ended a 712-page
+    crawl 18 pages from the end with a TypeError from `int()`.
+    """
+    assert unwrap(["EmptyRef", "0"]) == 0
+    assert unwrap(["EmptyRef", '""']) == ""
+    assert unwrap(["EmptyRef", "null"]) is None
+
+
+def test_an_unrecognised_tag_is_still_left_alone():
+    """The existing promise: a tag outside the known set is not guessed at."""
+    assert unwrap(["SomethingNew", "payload"]) == ["SomethingNew", "payload"]
+
+
+def test_a_malformed_empty_ref_payload_is_unknown_rather_than_a_crash():
+    assert unwrap(["EmptyRef", "not json"]) is None

@@ -78,7 +78,8 @@ class FakeCatalogue:
 
     def browse_category(self, taxonomy_id, *, page=0, size=PAGE_SIZE):
         self._tick()
-        if page * size >= self.CATALOGUE_MAX_OFFSET:
+        if (self.CATALOGUE_MAX_OFFSET is not None
+                and page * size >= self.CATALOGUE_MAX_OFFSET):
             raise AssertionError(
                 f"the crawl asked for offset {page * size}, past the ceiling - "
                 "this is the HTTP 400 that loses a category's tail"
@@ -197,6 +198,22 @@ def test_a_shelf_price_is_recorded_on_the_not_a_promo_lane(conn, small):
     assert mechanics == {"not_a_promo"}
 
 
+def test_a_chain_with_no_paging_ceiling_is_crawled_flat(conn):
+    """Milestone 16. Jumbo answers at offset 17,000 where AH errors past 3000,
+    so it declares `CATALOGUE_MAX_OFFSET = None` and walks its whole assortment
+    as one list. A made-up limit would send the crawl looking for children that
+    do not exist."""
+    adapter = FakeCatalogue(
+        tree=[{"id": "", "name": "hele assortiment"}], products={"": _skus(200)},
+    )
+    adapter.CATALOGUE_MAX_OFFSET = None
+
+    stats = catalogue.crawl(conn, adapter)
+
+    assert stats.products == 200
+    assert stats.nodes == 1
+
+
 # -- resumption ----------------------------------------------------------------
 
 def test_a_killed_crawl_resumes_instead_of_starting_over(conn, oversized):
@@ -237,6 +254,46 @@ def test_progress_is_recorded_per_page_not_per_category(conn, oversized):
 
     pages = conn.execute("SELECT count(*) FROM catalogue_crawl_pages").fetchone()[0]
     assert pages >= 5   # 40 and 50 products at 20 per page, plus the tails
+
+
+# -- the adapter contract ------------------------------------------------------
+
+def test_every_crawlable_adapter_declares_its_limits_on_the_class():
+    """The bug this exists to prevent, because it was silent for a whole
+    milestone.
+
+    `catalogue.crawl` reads these with `getattr(adapter, ...)`, so a constant
+    defined at MODULE level in an adapter file is invisible and the crawl
+    quietly falls back to its own defaults. That went unnoticed for AH because
+    AH's real values happen to equal those defaults. Jumbo, whose values differ,
+    got AH's 3000-offset ceiling applied to a site that has none - and stopped
+    after 15 of 712 pages while reporting a complete crawl.
+    """
+    from bonusrank.adapters.ah import AHAdapter
+    from bonusrank.adapters.jumbo import JumboAdapter
+
+    for adapter in (AHAdapter, JumboAdapter):
+        assert "CATALOGUE_PAGE_SIZE" in dir(adapter), adapter.__name__
+        assert "CATALOGUE_MAX_OFFSET" in dir(adapter), adapter.__name__
+
+    assert AHAdapter.CATALOGUE_MAX_OFFSET == 3000
+    assert JumboAdapter.CATALOGUE_MAX_OFFSET is None
+    assert JumboAdapter.CATALOGUE_PAGE_SIZE == 24
+
+
+def test_an_adapter_that_declares_no_limits_is_refused_rather_than_guessed_at(conn):
+    """A wrong limit does not fail, it truncates. So there is no default."""
+    class NewChain:
+        """A new chain's adapter, written without reading catalogue.py first."""
+        chain = "somewhere"
+
+        def category_tree(self):
+            raise AssertionError("must be refused before any request is made")
+
+    adapter = NewChain()
+
+    with pytest.raises(TypeError, match="does not declare"):
+        catalogue.crawl(conn, adapter)
 
 
 # -- the request budget --------------------------------------------------------

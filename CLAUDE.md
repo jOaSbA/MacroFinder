@@ -658,7 +658,7 @@ src/bonusrank/
   appdb.py            the published app database: byte-deterministic full builds,
                        deltas, manifest.json (milestone 14)
   catalogue.py        the full-assortment crawl: chain-generic, resumable,
-                       descends past a chain's paging ceiling (milestone 15)
+                       descends past a chain's paging ceiling (milestones 15-16)
 data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
 data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
@@ -1083,7 +1083,51 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     43,000 products is 6 hours at 2 requests/second, which is not a polite way
     to spend the budget for a field nothing currently reads.
 
-Current position: **milestones 1-15 complete.** 708 Python tests, plus the
+16. ~~Full catalogue ingest, Jumbo.~~ **Done.** 17,063 products, from the same
+    `__NUXT_DATA__` lane `/aanbiedingen` already uses. `/producten/` server-
+    renders the whole assortment into a Pinia `productStore` whose `count`
+    states the total, and pages on an `offSet` query parameter.
+
+    **Jumbo has no paging ceiling, and that changes the crawl's shape.**
+    `?offSet=17000` answers normally where AH's own lane returns HTTP 400 past
+    offset 3000. So Jumbo's `category_tree()` returns a single node meaning
+    "everything" and the assortment is walked as one flat list. Splitting it by
+    category tile would cost the same requests and add a way to miss a product
+    that sits in no tile. `catalogue.py` gained `CATALOGUE_MAX_OFFSET = None`
+    for this: "no ceiling" has to be expressible, or a chain without one gets a
+    made-up limit and descends for no reason.
+
+    **`pageSize` is accepted and ignored.** `?offSet=0&pageSize=100` returns 24
+    products, exactly as without it. The page size is therefore pinned to the
+    site's own 24 and not to what would be convenient - a crawl that asks for
+    100 and advances by 100 while being handed 24 skips 76 of every 100
+    products, silently.
+
+    Products come back with an image, a top-level category, a shelf price and a
+    `pricePerUnit` in cents, so the section-7 cross-check works here the same
+    way it does for AH. `subcategory` stays NULL: Jumbo's product node carries
+    only the department, and inventing a finer level from the crawl's own
+    position - which, walking a flat list, is nothing - would be a field that
+    lies.
+
+    **The request arithmetic, stated plainly.** 17,063 products at a fixed 24
+    per page is ~712 requests, against AH's 299 for nearly three times as many
+    products. Together the weekly catalogue build is ~1,000 requests. That is
+    more than BRIEF section 7's "a few hundred requests a week", and it stays
+    defensible for one reason: PLAN-V2 section 7 makes the snapshot
+    architecture an architectural **rule** rather than a preference. One
+    scraper run feeds every device; the app never calls a chain directly, so
+    ten users or a thousand, the chains see this and nothing else. The
+    catalogue also runs weekly, not twice daily - it is the slow-moving feed,
+    while the prices that actually move ride in `latest.json`.
+
+    **Not done:** Aldi, which has no browsable catalogue to crawl. That is a
+    confirmed structural fact about its own site (section 4), not a gap - its
+    search box does not submit a query and its category pages carry no prices.
+    Aldi's whole public pricing model is the weekly `aanbiedingen` feed the
+    adapter already reads in full.
+
+Current position: **milestones 1-16 complete.** 721 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
 decoding, rule evaluation, meal costing, saved-meal round trips).
 
@@ -1092,7 +1136,7 @@ Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-ma
 `bonusrank templates --chain ah|jumbo|aldi [--template pasta]` /
 `bonusrank list --chain ah|jumbo|aldi --sort protein-per-euro` / `bonusrank prices` /
 `bonusrank matches` / `bonusrank review` /
-`bonusrank catalogue --chain ah [--max-requests N]` /
+`bonusrank catalogue --chain ah|jumbo [--max-requests N]` /
 `bonusrank build-db --out-dir dist/data [--against PREVIOUS.sqlite]`.
 
 **Run `bonusrank prices --refresh` before `compare`**, or most compositions

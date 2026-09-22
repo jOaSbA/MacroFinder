@@ -41,14 +41,27 @@ from .parsers.promos import Promo, PromoKind
 
 log = logging.getLogger(__name__)
 
-DEFAULT_PAGE_SIZE = 200
-DEFAULT_MAX_OFFSET = 3000
+# No defaults for a chain's page size or paging ceiling, deliberately. They
+# used to exist, and a chain whose constants lived at module level instead of
+# on its class silently inherited them - AH's real values equal what the
+# defaults were, so nothing looked wrong until Jumbo, which needs different
+# ones, got AH's 3000-offset ceiling applied to a site that has none and
+# stopped after 15 of 712 pages **while reporting a complete crawl**.
+#
+# A wrong limit here does not fail; it truncates. So a chain that has not said
+# what its limits are is refused rather than guessed at.
 
 
 class CatalogueSource(Protocol):
     """What a chain must offer to be crawlable."""
 
     chain: str
+
+    # How many products one request returns, and the offset past which the
+    # chain refuses to page (None when it has no such limit). Both are
+    # properties of the site, not preferences - see the note above.
+    CATALOGUE_PAGE_SIZE: int
+    CATALOGUE_MAX_OFFSET: int | None
 
     def category_tree(self) -> list[dict[str, Any]]: ...
     def category_children(self, taxonomy_id: Any) -> list[dict[str, Any]]: ...
@@ -82,8 +95,18 @@ def crawl(conn: sqlite3.Connection, adapter: CatalogueSource, *,
     code. A run that stops on the budget leaves the crawl open, so the next one
     picks up where it left off rather than re-reading what it already has.
     """
-    page_size = getattr(adapter, "CATALOGUE_PAGE_SIZE", DEFAULT_PAGE_SIZE)
-    max_offset = getattr(adapter, "CATALOGUE_MAX_OFFSET", DEFAULT_MAX_OFFSET)
+    missing = [name for name in ("CATALOGUE_PAGE_SIZE", "CATALOGUE_MAX_OFFSET")
+               if not hasattr(adapter, name)]
+    if missing:
+        raise TypeError(
+            f"{type(adapter).__name__} does not declare {', '.join(missing)}. "
+            "A crawl cannot guess these: too large a page size skips products, "
+            "and too large a ceiling truncates a category silently. Declare "
+            "them on the adapter CLASS - a module-level constant is invisible "
+            "here."
+        )
+    page_size = adapter.CATALOGUE_PAGE_SIZE
+    max_offset = adapter.CATALOGUE_MAX_OFFSET
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     crawl_id, done_pages, known_nodes = _open_crawl(conn, adapter.chain, now)
@@ -112,7 +135,8 @@ def crawl(conn: sqlite3.Connection, adapter: CatalogueSource, *,
                 if not budget.take():
                     break
                 size = adapter.category_size(taxonomy_id)
-                if size and _page_count(size, page_size) * page_size > max_offset:
+                if (size and max_offset is not None
+                        and _page_count(size, page_size) * page_size > max_offset):
                     children = _children(adapter, budget, taxonomy_id, known_nodes)
                     if children is None:
                         break

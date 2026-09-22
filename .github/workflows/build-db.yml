@@ -75,6 +75,18 @@ jobs:
       - name: Crawl the AH catalogue
         run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
 
+      # Milestone 16. 17,063 products at a site-fixed 24 per page is ~712
+      # requests, against AH's 299 for nearly three times as many. Together
+      # they are ~1,000 requests once a week.
+      #
+      # That is more than BRIEF section 7's "a few hundred requests a week",
+      # and it stays defensible for one reason: PLAN-V2 section 7 makes the
+      # snapshot architecture an architectural rule rather than a preference.
+      # One scraper run feeds every device, so ten users or a thousand, the
+      # chains see this and nothing else. The app never calls a chain directly.
+      - name: Crawl the Jumbo catalogue
+        run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
+
       # The previous full build, so this run can cut a delta against it. A
       # missing release is the normal first-run case, not an error.
       - name: Fetch the previous build

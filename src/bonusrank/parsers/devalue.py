@@ -17,6 +17,7 @@ returning wrong data - the exact failure mode CLAUDE.md forbids for parsers.
 
 from __future__ import annotations
 
+import json
 import re
 from typing import Any
 
@@ -74,14 +75,30 @@ def resolve(arr: list, index: int = 0, *, memo: dict[int, Any] | None = None) ->
 # rather than guessed at.
 _REACTIVITY_TAGS = {"ShallowReactive", "Reactive", "EmptyShallowReactive", "Ref", "ShallowRef"}
 
+# `EmptyRef` is the odd one out: its payload is a JSON *string* rather than the
+# value, so `["EmptyRef", "0"]` means 0 and `["EmptyRef", '""']` means "".
+# Stripping the tag like the others would hand a caller the string '0' or the
+# two-character string '""'.
+#
+# Found on Jumbo's `/producten/` page past the last offset, where `count` comes
+# back as `["EmptyRef", "0"]` instead of `["Ref", 17062]` - an unrecognised tag
+# left the whole list in place, and `int()` on it ended a 712-page crawl 18
+# pages from the end.
+_EMPTY_REF_TAG = "EmptyRef"
+
 
 def unwrap(node: Any) -> Any:
     """Strip Vue reactivity wrappers so plain dict/list traversal works."""
-    while (
-        isinstance(node, list) and len(node) == 2
-        and isinstance(node[0], str) and node[0] in _REACTIVITY_TAGS
-    ):
-        node = node[1]
+    while isinstance(node, list) and len(node) == 2 and isinstance(node[0], str):
+        if node[0] in _REACTIVITY_TAGS:
+            node = node[1]
+        elif node[0] == _EMPTY_REF_TAG:
+            try:
+                return json.loads(node[1]) if isinstance(node[1], str) else node[1]
+            except (TypeError, ValueError):
+                return None
+        else:
+            break
     return node
 
 

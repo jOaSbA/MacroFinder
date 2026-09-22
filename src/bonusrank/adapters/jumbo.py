@@ -53,10 +53,34 @@ BASE_URL = "https://www.jumbo.com"
 OFFERS_PAGE = f"{BASE_URL}/aanbiedingen"
 SEARCH_PAGE = f"{BASE_URL}/producten/"
 
+# Milestone 15/16, verified live 2026-09-22. `/producten/` server-renders the
+# whole assortment through the same `__NUXT_DATA__` lane `/aanbiedingen` uses -
+# 17,063 products, `count` on the product store says so - and pages on an
+# `offSet` query parameter.
+CATALOGUE_PAGE = f"{BASE_URL}/producten/"
+
+# Fixed by the site. `pageSize` is accepted and ignored: `?offSet=0&pageSize=100`
+# returns 24 products, same as without it. So the assortment costs ~712 requests
+# to walk, against AH's 299 for nearly three times as many products.
+CATALOGUE_PAGE_SIZE = 24
+
+# Jumbo has no paging ceiling - `?offSet=17000` answers normally where AH's own
+# lane returns HTTP 400 past offset 3000. So the whole assortment is one flat
+# list and the category descent `catalogue.py` needs for AH never fires here.
+CATALOGUE_MAX_OFFSET = None
+
+# Jumbo publishes one rendition per product, at 360px.
+CATALOGUE_IMAGE_WIDTH = 360
+
 
 @register
 class JumboAdapter:
     chain = "jumbo"
+
+    # On the CLASS: `catalogue.crawl` reads these with getattr(adapter, ...),
+    # so a module-level constant never reaches it. See the same note in ah.py.
+    CATALOGUE_PAGE_SIZE = CATALOGUE_PAGE_SIZE
+    CATALOGUE_MAX_OFFSET = CATALOGUE_MAX_OFFSET
 
     def __init__(self, client: PoliteClient | None = None, store: RawStore | None = None) -> None:
         self._client = client or PoliteClient(self.chain, base_url=BASE_URL)
@@ -210,6 +234,49 @@ class JumboAdapter:
             return [self._map_product(single, url)] if single else []
         return [self._map_product(unwrap(p), url) for p in products]
 
+    # -- catalogue (milestone 16) --------------------------------------------
+
+    def category_tree(self) -> list[dict]:
+        """One node: the whole assortment.
+
+        AH needs a real tree because its search lane refuses offsets past 3000
+        and four of its categories are bigger than that. Jumbo answers at
+        offset 17,000, so there is nothing to work around - splitting the crawl
+        by category here would cost the same requests and add a way to miss a
+        product that sits in no tile.
+        """
+        return [{"id": "", "name": "hele assortiment"}]
+
+    def category_children(self, taxonomy_id) -> list[dict]:
+        return []
+
+    def category_size(self, taxonomy_id) -> int:
+        return self._product_store(CATALOGUE_PAGE)[1]
+
+    def browse_category(self, taxonomy_id, *, page: int = 0,
+                        size: int = CATALOGUE_PAGE_SIZE) -> list[RawProduct]:
+        url = f"{CATALOGUE_PAGE}?offSet={page * size}"
+        products, _ = self._product_store(url)
+        return [self._map_product(unwrap(p), url) for p in products]
+
+    def _product_store(self, url: str) -> tuple[list, int]:
+        """The `productStore` Pinia state: this page's products and the total.
+
+        Values arrive wrapped as `["Ref", x]` / `["Reactive", [...]]` because
+        Nuxt serialises Pinia's reactivity along with the data. `unwrap`
+        already handles that for the offers lane.
+        """
+        payload = self._get_resolved(url)
+        store = ((payload or {}).get("pinia") or [None, {}])[1].get("productStore") or {}
+        products = unwrap(store.get("products")) or []
+        # Past the last offset the store answers `count = ["EmptyRef", "0"]`
+        # rather than a number, which `unwrap` now decodes to 0. Coerced
+        # defensively anyway: a page shape that changes again should give an
+        # empty page rather than end the crawl 18 pages from the finish, which
+        # is exactly what happened once.
+        count = unwrap(store.get("count"))
+        return list(products), int(count) if isinstance(count, (int, float)) else 0
+
     def _map_product(self, product: dict, url: str) -> RawProduct:
         """A `__typename: "Product"` node -> `RawProduct`.
 
@@ -244,6 +311,11 @@ class JumboAdapter:
                 else None
             ),
             category=product.get("category"),
+            # Jumbo's product node carries only the top-level department, so
+            # `subcategory` stays NULL here rather than being invented from the
+            # crawl's own position - which, walking a flat list, is nothing.
+            image_url=product.get("image"),
+            image_width=CATALOGUE_IMAGE_WIDTH if product.get("image") else None,
             url=product.get("link"),
             source_url=url,
             raw_path=str(self._store.path_for(self.chain, url)),

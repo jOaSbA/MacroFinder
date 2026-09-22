@@ -79,6 +79,14 @@ _PERSONAL_PROMOTION_TYPES = {"PERSONAL", "BONUSBOX", "EXTRAS"}
 class AHAdapter:
     chain = "ah"
 
+    # Declared on the CLASS, not just at module level. `catalogue.crawl` reads
+    # them with getattr(adapter, ...), so a module-level constant is invisible
+    # to it and the crawl silently falls back to its own defaults. That went
+    # unnoticed here because AH's real values happen to equal those defaults;
+    # it was Jumbo, which needs different ones, that exposed it.
+    CATALOGUE_PAGE_SIZE = CATALOGUE_PAGE_SIZE
+    CATALOGUE_MAX_OFFSET = CATALOGUE_MAX_OFFSET
+
     def __init__(self, client: PoliteClient | None = None, store: RawStore | None = None) -> None:
         self._client = client or PoliteClient(self.chain, base_url=API_ROOT)
         self._store = store or RawStore()
