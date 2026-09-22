@@ -25,3 +25,7 @@ data/*.sqlite3
 android/.gradle/
 android/*/build/
 android/local.properties
+
+# Milestone 14 release assets. These are published to a GitHub Release and
+# must never enter git history - that is the entire reason they exist.
+dist/

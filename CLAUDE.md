@@ -655,10 +655,16 @@ src/bonusrank/
                        protein target, bound by a meal/snack/drink macro-floor profile
   templates.py        the customiser: a template's slots, each with its candidates
                        priced and ranked for this week (milestone 12)
+  appdb.py            the published app database: byte-deterministic full builds,
+                       deltas, manifest.json (milestone 14)
 data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
 data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
 docs/BRIEF.md         the full dossier — source of truth
+docs/PLAN-V2.md       what gets built next, and the autonomy protocol
+docs/AUDIT.md         milestone 0: what actually works, measured
+docs/DESIGN.md        the visual direction for M23/M24
+dist/                 milestone 14 release assets — gitignored, never committed
 data/raw/             persisted responses (replay source; keep)
 data/external/        NEVO dataset — gitignored, has usage conditions, never commit
 ```
@@ -937,7 +943,80 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     `archetypes.py::_verdict`, not the app), so the UI is still bilingual at
     that seam.
 
-Current position: **milestones 1-13 complete.** 669 Python tests, plus the
+14. ~~Data plane migration: a published SQLite database, deltas, a manifest.~~
+    **Done, Python and CI only - the Android app is untouched, which is
+    milestone 17.** `docs/data/latest.json` is a good design for ~500 bonus
+    items and a bad one for a catalogue: five revisions of it already account
+    for most of this repository's object store, and git cannot prune. So
+    anything catalogue-sized moves to a **GitHub Release asset**, which never
+    enters history and can be deleted freely. `latest.json` stays exactly as it
+    is - small, fetched on launch, and the reason a failed catalogue sync gives
+    you a smaller app rather than a broken one.
+
+    **The artifact is a pure function of the source database's contents.** No
+    timestamp, no build counter, no insertion history reaches the bytes; the
+    clock lives in `manifest.json`. That is what makes the published `sha256`
+    worth anything - one string answers "did the catalogue actually change?",
+    so an unchanged week costs nobody a download.
+
+    Getting there took one real discovery. `VACUUM INTO` normalises page
+    layout, free lists and insertion order away, so two databases with the same
+    contents produce the same bytes through it - **except for the schema cookie
+    at header offset 40**, which counts schema-changing statements in the
+    file's whole history rather than describing its contents. A database
+    created by running the schema lands on 10; the same database copied and
+    vacuumed again lands on 11, and the files then differ in exactly one byte.
+    `_vacuum_into` pins it first. Without that, every hash in the module would
+    be noise.
+
+    This is why PLAN-V2's "deltas apply cleanly to produce a byte-identical DB"
+    is taken at its **strictest** reading, per the plan's own section 6.1: not
+    the same rows, not the same content hash, the same file. Measured on the
+    real catalogue - 8,672 products, 3.1 MB - a delta covering 300 moved prices
+    and 50 delisted products is **94 KB, 3.0% of a full download**, and applies
+    to a byte-identical result.
+
+    Four decisions taken without asking, per section 6.1:
+
+    - **A build's version is its own content hash, not a clock.** PLAN-V2
+      sketches `macrofinder-{YYYYMMDD-HHMM}.sqlite`, which gives two identical
+      catalogues two names and makes "did this change?" undecidable without
+      downloading both.
+    - **Product ids are `{chain}:{sku}` strings, and every table is
+      `WITHOUT ROWID`.** The dev database's `products.id` is an autoincrement;
+      rebuild from the raw snapshots, which this project exists to let you do,
+      and every id shifts. A delta keyed on those re-points silently at a
+      different product. Same reasoning that keeps saved meals off database ids.
+    - **`prices` is keyed on `(product_id, lane)`, not `product_id`.** Milestone
+      8 already measured what one lane costs: a shelf price recorded today
+      supersedes this week's still-valid bonus and `bonusrank list` drops from
+      174 rated offers to 160. It also forced the deletions table to carry a
+      composite key - a SKU that was on the shelf last week and on promo this
+      week loses its shelf row, and keyed on `product_id` alone that deletion is
+      invisible.
+    - **`manifest.json` carries a `status` field from version one**, reading
+      `ok`. PLAN-V2 section 7 wants a kill switch for milestone 30; a kill
+      switch added later only reaches installs that have already updated, which
+      is exactly the set that does not need one.
+
+    **CI throws the price history away twice a day, and always has.**
+    `data/bonusrank.sqlite3` is gitignored and `refresh-data.yml` starts from a
+    fresh checkout, so every scheduled run ingests into an empty database. This
+    is the root cause of `docs/AUDIT.md` finding 3.2 - "cheapest in 0 weeks" is
+    not a shortage of history, it is history being structurally impossible -
+    and it means BRIEF section 3.4 is unreachable until something persists
+    across runs. It also means a product dropping out of the catalogue is the
+    **common** case between two builds rather than an exotic one, which is why
+    deletions are a first-class part of the delta format. Making history
+    durable is milestone 21's problem, and milestone 21 cannot be done without
+    it.
+
+    **Not done, deliberately:** the Android side. No Room, no sync, no
+    WorkManager - that is milestone 17, and PLAN-V2 says in as many words not to
+    touch the app here. `products.image_url` exists and is NULL for every row;
+    milestones 15 and 16 fill it.
+
+Current position: **milestones 1-14 complete.** 689 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
 decoding, rule evaluation, meal costing, saved-meal round trips).
 
@@ -945,7 +1024,8 @@ Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-ma
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /
 `bonusrank templates --chain ah|jumbo|aldi [--template pasta]` /
 `bonusrank list --chain ah|jumbo|aldi --sort protein-per-euro` / `bonusrank prices` /
-`bonusrank matches` / `bonusrank review`.
+`bonusrank matches` / `bonusrank review` / `bonusrank build-db --out-dir dist/data
+[--against PREVIOUS.sqlite]`.
 
 **Run `bonusrank prices --refresh` before `compare`**, or most compositions
 price as `?`. That is correct behaviour, not a bug.
