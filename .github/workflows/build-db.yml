@@ -63,6 +63,18 @@ jobs:
       - name: Refresh base prices (Jumbo)
         run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
 
+      # Milestone 15. The full assortment, not just what is on offer: ~43,000
+      # AH products with images and a category path. This is the step that
+      # makes the catalogue worth a release asset at all.
+      #
+      # The crawl resumes from its own checkpoint, but the checkpoint lives in
+      # the gitignored dev database and a fresh runner has neither - so each
+      # run starts clean and must finish in one go. ~280 requests at 2/second
+      # is a couple of minutes of network; the work is dominated by matching
+      # every product, not by the network.
+      - name: Crawl the AH catalogue
+        run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
+
       # The previous full build, so this run can cut a delta against it. A
       # missing release is the normal first-run case, not an error.
       - name: Fetch the previous build

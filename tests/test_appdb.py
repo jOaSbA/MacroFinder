@@ -51,7 +51,8 @@ def conn():
 
 
 def _product(conn, sku, name, food_type_key=None, *, chain="ah",
-             raw_unit_text="500 g", brand="AH", category="Zuivel, eieren"):
+             raw_unit_text="500 g", brand="AH", category="Zuivel, eieren",
+             image_url="https://static.ah.nl/dam/product/x", image_width=400):
     food_type_id = None
     if food_type_key is not None:
         food_type_id = conn.execute(
@@ -59,10 +60,10 @@ def _product(conn, sku, name, food_type_key=None, *, chain="ah",
         ).fetchone()[0]
     conn.execute(
         "INSERT INTO products (chain, sku, name, brand, raw_unit_text, category, "
-        "food_type_id, match_method, match_score, first_seen) "
-        "VALUES (?,?,?,?,?,?,?,'alias_exact',1.0,?)",
-        (chain, sku, name, brand, raw_unit_text, category, food_type_id,
-         TODAY.isoformat()),
+        "subcategory, image_url, image_width, food_type_id, match_method, "
+        "match_score, first_seen) VALUES (?,?,?,?,?,?,?,?,?,?,'alias_exact',1.0,?)",
+        (chain, sku, name, brand, raw_unit_text, category, "Kwark", image_url,
+         image_width, food_type_id, TODAY.isoformat()),
     )
     return conn.execute(
         "SELECT id FROM products WHERE chain=? AND sku=?", (chain, sku)
@@ -128,6 +129,31 @@ def test_every_product_keeps_a_stable_text_id_across_builds(conn, tmp_path):
     second = appdb.build_full(other, tmp_path / "b.sqlite", on=TODAY)
 
     assert "ah:wi1" in {r["id"] for r in _rows(second, "SELECT id FROM products")}
+
+
+def test_a_products_image_url_and_width_survive_into_the_app_database(conn, tmp_path):
+    """PLAN-V2 section 3.3: the chain's own CDN url, never rehosted. The width
+    ships beside it so the app never parses a `rendition=400x400_WEBP` query
+    string it does not own to find out what it is about to download."""
+    _price(conn, _product(conn, "wi1", "AH Magere kwark", "kwark_mager"), 1.20)
+
+    out = appdb.build_full(conn, tmp_path / "full.sqlite", on=TODAY)
+
+    row = _rows(out, "SELECT image_url, image_width, subcategory FROM products")[0]
+    assert row["image_url"] == "https://static.ah.nl/dam/product/x"
+    assert row["image_width"] == 400
+    assert row["subcategory"] == "Kwark"
+
+
+def test_a_product_with_no_image_ships_a_null_rather_than_a_placeholder(conn, tmp_path):
+    """A product only ever seen in a promo feed has no image. The app degrades
+    to its own placeholder; the data does not invent a url."""
+    _price(conn, _product(conn, "wi1", "AH Magere kwark", "kwark_mager",
+                          image_url=None, image_width=None), 1.20)
+
+    out = appdb.build_full(conn, tmp_path / "full.sqlite", on=TODAY)
+
+    assert _rows(out, "SELECT image_url FROM products")[0]["image_url"] is None
 
 
 def test_an_unmatched_product_is_kept_with_a_null_food_type(conn, tmp_path):
@@ -354,6 +380,35 @@ def test_applying_a_delta_to_the_wrong_base_is_refused(conn, tmp_path):
         appdb.apply_delta(wrong_base, delta, tmp_path / "out.sqlite")
 
     assert prev.exists()  # nothing was mutated in place
+
+
+def test_two_builds_with_different_columns_refuse_to_be_diffed(conn, tmp_path):
+    """The guard that has to survive somebody forgetting to bump a number.
+
+    A delta is a row-level EXCEPT, so both sides need identical columns. This
+    was found the hard way: the declared `schema_version` matched while the
+    columns did not, and the diff failed several frames later with a raw SQL
+    error about mismatched result columns. So the check compares what is in the
+    files, which cannot be forgotten.
+    """
+    _price(conn, _product(conn, "wi1", "AH Magere kwark", "kwark_mager"), 1.20)
+    current = appdb.build_full(conn, tmp_path / "current.sqlite", on=TODAY)
+
+    # A build from before a column existed.
+    older = tmp_path / "older.sqlite"
+    stage = tmp_path / "older.stage"
+    db = sqlite3.connect(stage)
+    # It is the last column of `products`, so the preceding comma goes too.
+    dropped_column = ",\n    image_width  INTEGER"
+    assert dropped_column in appdb.APP_SCHEMA, "this fixture is out of date"
+    db.executescript(appdb.APP_SCHEMA.replace(dropped_column, ""))
+    db.execute("INSERT INTO meta VALUES ('schema_version', '1')")
+    db.commit()
+    db.execute("VACUUM INTO ?", (str(older),))
+    db.close()
+
+    with pytest.raises(appdb.SchemaMismatch, match="cannot be diffed"):
+        appdb.build_delta(older, current, tmp_path / "delta.sqlite")
 
 
 # -- the manifest --------------------------------------------------------------

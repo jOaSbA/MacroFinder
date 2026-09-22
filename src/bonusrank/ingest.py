@@ -111,6 +111,7 @@ def _ingest_sku(
     category: str | None, shelf_price: float | None, bonus_price: float | None,
     ean: str | None, promo, is_personal: bool, valid_from, valid_to,
     matcher: Matcher, stats: IngestStats, now: str,
+    queue_unmatched: bool = True,
 ) -> None:
     """The chain-generic core of ingest: parse, cross-check, match, store.
 
@@ -161,10 +162,19 @@ def _ingest_sku(
         stats.excluded += 1
     else:
         stats.unmatched += 1
-        stats.review("unmatched_sku")
-        _review(conn, "unmatched_sku", f"{chain}:{sku}",
-                {"name": name, "brand": brand, "reason": match.reason,
-                 "best_score": round(match.score, 3)}, now)
+        # `queue_unmatched=False` is the full-catalogue crawl (milestone 15).
+        # The review queue exists to surface a gap that COSTS something - an
+        # unmatched bonus offer is a missing row in a ranking somebody reads.
+        # An unmatched catalogue SKU is the expected case for roughly nine in
+        # ten of 43,000 products, and queueing them all would bury the few
+        # hundred entries the queue is actually for. The count still lands in
+        # `stats.unmatched`, so the crawl can report the rate without drowning
+        # the lane used to tune the matcher.
+        if queue_unmatched:
+            stats.review("unmatched_sku")
+            _review(conn, "unmatched_sku", f"{chain}:{sku}",
+                    {"name": name, "brand": brand, "reason": match.reason,
+                     "best_score": round(match.score, 3)}, now)
 
     food_type_id = None
     if match.food_type_key:

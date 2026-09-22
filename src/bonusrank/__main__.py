@@ -576,6 +576,41 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+# --------------------------------------------------------------- catalogue
+
+def cmd_catalogue(args: argparse.Namespace) -> int:
+    """Crawl a chain's whole assortment, not just what is on offer.
+
+    Resumes an unfinished crawl automatically, so killing this and running it
+    again costs only what is left. `--max-requests` does a slice today and the
+    rest tomorrow, which is the polite way to meet a big catalogue for the
+    first time.
+    """
+    from .adapters import get_adapter
+    from .catalogue import crawl
+
+    adapter = get_adapter(args.chain)
+    if not hasattr(adapter, "browse_category"):
+        print(f"{args.chain} has no catalogue lane - see CLAUDE.md section 4 "
+              f"for which chains publish a browsable assortment.")
+        return 1
+
+    with connect() as conn:
+        stats = crawl(conn, adapter, max_requests=args.max_requests)
+
+    print(f"=== {args.chain} catalogue ===")
+    print(f"  {stats.nodes} categories, {stats.pages} pages fetched"
+          + (f", {stats.pages_skipped} already had" if stats.pages_skipped else ""))
+    print(f"  {stats.products} new products, {stats.duplicates} already known")
+    print(f"  {stats.ingest.matched} matched to a food type, "
+          f"{stats.ingest.unmatched} unmatched, {stats.ingest.excluded} excluded as non-food")
+    print(f"  {stats.requests} requests")
+    if not stats.complete:
+        print("\n  Stopped on the request budget, not finished. Run it again to "
+              "pick up where it left off - nothing is re-fetched.")
+    return 0
+
+
 # --------------------------------------------------------------- build-db
 
 def cmd_build_db(args: argparse.Namespace) -> int:
@@ -607,9 +642,13 @@ def cmd_build_db(args: argparse.Namespace) -> int:
         if appdb.version_of(previous) == appdb.version_of(full):
             print(f"  skipped {previous.name}: identical to this build")
             continue
-        delta = appdb.build_delta(
-            previous, full, out_dir / appdb.delta_filename(previous, full)
-        )
+        try:
+            delta = appdb.build_delta(
+                previous, full, out_dir / appdb.delta_filename(previous, full)
+            )
+        except appdb.SchemaMismatch as exc:
+            print(f"  skipped {previous.name}: {exc}")
+            continue
         deltas.append(delta)
         share = delta.stat().st_size / full.stat().st_size
         print(f"delta  {delta.name}  {delta.stat().st_size:,} bytes "
@@ -735,6 +774,12 @@ def main(argv: list[str] | None = None) -> int:
     export.add_argument("--chain", action="append", dest="chains",
                         help="repeatable; defaults to every registered chain")
     export.set_defaults(func=cmd_export)
+
+    cat = sub.add_parser("catalogue", help="crawl a chain's full assortment")
+    cat.add_argument("--chain", default="ah")
+    cat.add_argument("--max-requests", type=int,
+                     help="stop after this many requests; the next run resumes")
+    cat.set_defaults(func=cmd_catalogue)
 
     build_db = sub.add_parser("build-db",
                               help="build the app database release assets")

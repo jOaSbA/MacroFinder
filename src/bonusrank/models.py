@@ -72,6 +72,14 @@ class RawProduct(BaseModel):
     raw_unit_text: str | None = None
     ean: str | None = None
     category: str | None = None
+    # Milestone 15. The finer shelf level, kept apart from `category` because
+    # match_overrides.yaml excludes whole departments by the coarse one.
+    subcategory: str | None = None
+
+    # The chain's own CDN url and the rendition width it was chosen at.
+    # Never rehosted and never proxied - PLAN-V2 section 3.3.
+    image_url: str | None = None
+    image_width: int | None = None
 
     shelf_price: float | None = None
     bonus_price: float | None = None
