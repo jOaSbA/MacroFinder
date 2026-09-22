@@ -41,7 +41,11 @@ import sqlite3
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 1
+# Bumped whenever APP_SCHEMA changes. This is for the app to read; it is NOT
+# what guards delta building - `_schema_of` compares the databases' actual
+# schemas, because a version number nobody bumped is exactly the bug that
+# reaches production. Milestone 15 added products.subcategory/image_width.
+SCHEMA_VERSION = 2
 
 # Enough of the hash to be unique across any plausible number of builds, short
 # enough to read in a filename and a log line.
@@ -85,6 +89,9 @@ CREATE TABLE products (
     name         TEXT NOT NULL,
     brand        TEXT,
     category     TEXT,
+    -- The finer shelf level. Kept apart from `category` because
+    -- match_overrides.yaml excludes whole departments by the coarse one.
+    subcategory  TEXT,
     -- NULL for roughly nine SKUs in ten. The catalogue exists to make every
     -- product priceable into a meal, not only the matched ones, so an
     -- unmatched row is kept and says so.
@@ -94,9 +101,12 @@ CREATE TABLE products (
     unit_size_ml REAL,
     cost_basis_g REAL,
     ean          TEXT,
-    -- Milestone 15/16 fill this from the chain's own CDN. Never rehosted:
-    -- PLAN-V2 section 3.3.
-    image_url    TEXT
+    -- The chain's own CDN url and the rendition width it was chosen at, from
+    -- the milestone 15 catalogue crawl. Never rehosted and never proxied:
+    -- PLAN-V2 section 3.3. NULL for a product only ever seen in a promo feed
+    -- that carries no image.
+    image_url    TEXT,
+    image_width  INTEGER
 ) WITHOUT ROWID;
 
 -- Tier 1, the SKU's own FIR label figures. BRIEF section 2 prefers these over
@@ -190,6 +200,43 @@ CREATE TABLE deletions (
 """
 
 
+class SchemaMismatch(Exception):
+    """Two builds of different schema versions cannot be diffed."""
+
+
+def _schema_of(path: Path) -> tuple[str, ...]:
+    """Every table and index definition in the file, as SQLite stored it.
+
+    A delta is a row-level `EXCEPT`, so both sides need identical columns. The
+    obvious guard is to compare the declared `schema_version`, and the obvious
+    guard is wrong: a hand-maintained integer somebody forgot to bump reads as
+    a match and the diff fails several frames later with "SELECTs to the left
+    and right of EXCEPT do not have the same number of result columns". Which
+    is how this was found. Comparing what is actually in the files cannot be
+    forgotten.
+    """
+    db = sqlite3.connect(path)
+    try:
+        return tuple(sorted(
+            row[0] for row in db.execute(
+                "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL"
+            )
+        ))
+    finally:
+        db.close()
+
+
+def _schema_version(path: Path) -> str | None:
+    db = sqlite3.connect(path)
+    try:
+        row = db.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()
+    except sqlite3.DatabaseError:
+        return None
+    finally:
+        db.close()
+    return row[0] if row else None
+
+
 # -- building ------------------------------------------------------------------
 
 def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -> Path:
@@ -239,20 +286,17 @@ def _copy_food_types(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
 
 def _copy_products(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
     rows = src.execute(
-        "SELECT p.chain, p.sku, p.name, p.brand, p.category, f.key AS food_type, "
-        "       p.raw_unit_text, p.unit_size_g, p.unit_size_ml, p.cost_basis_g, p.ean, "
-        "       p.url "
+        "SELECT p.chain, p.sku, p.name, p.brand, p.category, p.subcategory, "
+        "       f.key AS food_type, p.raw_unit_text, p.unit_size_g, p.unit_size_ml, "
+        "       p.cost_basis_g, p.ean, p.image_url, p.image_width "
         "FROM products p LEFT JOIN food_types f ON f.id = p.food_type_id "
         "ORDER BY p.chain, p.sku"
     ).fetchall()
     dst.executemany(
-        "INSERT INTO products (id, chain, sku, name, brand, category, food_type, "
-        "raw_unit_text, unit_size_g, unit_size_ml, cost_basis_g, ean, image_url) "
-        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        # `url` is the product page, not an image; milestone 15 adds the real
-        # image column upstream. Shipping the page URL here instead would be a
-        # field that silently means the wrong thing later.
-        [(product_id(r[0], r[1]), *r[:11], None) for r in rows],
+        "INSERT INTO products (id, chain, sku, name, brand, category, subcategory, "
+        "food_type, raw_unit_text, unit_size_g, unit_size_ml, cost_basis_g, ean, "
+        "image_url, image_width) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [(product_id(r[0], r[1]), *r) for r in rows],
     )
 
 
@@ -315,6 +359,20 @@ def build_delta(prev: Path, nxt: Path, out: Path) -> Path:
     changed row in one pass without needing to know which columns matter.
     """
     prev, nxt, out = Path(prev), Path(nxt), Path(out)
+
+    # A delta is a row-level diff, so both sides must have the same columns.
+    # When the schema moves, they do not, and the bare `EXCEPT` fails with
+    # "SELECTs to the left and right of EXCEPT do not have the same number of
+    # result columns" - a SQL error several frames from the actual cause.
+    # Checked up front so the caller can do the only sensible thing, which is
+    # publish a full build and let clients take it.
+    if _schema_of(prev) != _schema_of(nxt):
+        raise SchemaMismatch(
+            f"schema {_schema_version(prev)} and schema {_schema_version(nxt)} "
+            f"builds have different columns and cannot be diffed row by row; "
+            f"publish a full build instead"
+        )
+
     staging = out.with_suffix(out.suffix + ".staging")
     staging.unlink(missing_ok=True)
 

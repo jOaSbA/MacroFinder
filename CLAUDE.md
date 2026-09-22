@@ -657,6 +657,8 @@ src/bonusrank/
                        priced and ranked for this week (milestone 12)
   appdb.py            the published app database: byte-deterministic full builds,
                        deltas, manifest.json (milestone 14)
+  catalogue.py        the full-assortment crawl: chain-generic, resumable,
+                       descends past a chain's paging ceiling (milestone 15)
 data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
 data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
@@ -1016,7 +1018,72 @@ data/external/        NEVO dataset — gitignored, has usage conditions, never c
     touch the app here. `products.image_url` exists and is NULL for every row;
     milestones 15 and 16 fill it.
 
-Current position: **milestones 1-14 complete.** 689 Python tests, plus the
+15. ~~Full catalogue ingest, AH.~~ **Done.** The promo lanes answer "what is
+    cheap this week". This answers "what does the shop sell" - 43,038 products
+    across 28 top-level categories, with the chain's own image url, a category
+    path and a shelf price. PLAN-V2 section 1 is explicit that this is
+    infrastructure and not a feature: it exists so any product can be priced
+    into a meal, not so anyone browses 43,000 SKUs.
+
+    **The endpoint is where PLAN-V2 said, with the version in an unexpected
+    place.** `mobile-services/v1/product-shelves/categories` - the `v1` sits
+    BEFORE the path, unlike every other lane in `adapters/ah.py`. Both obvious
+    spellings (`product-shelves/v1/...`, `product-shelves/v2/...`) return 404.
+    Products come from the search lane already used for base prices, with an
+    empty query and a `taxonomyId` filter, so the cross-check, unit parsing and
+    matching downstream see a shape they already handle.
+
+    **Two undocumented limits, found by probing, one of them dangerous.**
+    `size=200` returns 203 items - three sponsored cards ride along, and are
+    kept and deduped on sku rather than trimmed by count, because trimming a
+    page's tail by number throws away real products. And **`page * size >= 3000`
+    returns HTTP 400**: not an empty page, an error. Four top-level categories
+    hold more than 3000 (Drogisterij 3531, Soepen/sauzen 3358, Bier/wijn 3075),
+    so a top-level-only crawl loses their tails **while reporting success**.
+    `catalogue.py` measures every node before paging it and descends into the
+    children of any node too big to page through, which also keeps the crawl
+    correct as an assortment grows past the line on its own.
+
+    **Discovery and fetching are interleaved, not two phases.** Measuring every
+    category first is the obvious shape and the wrong one: 28 top-level
+    categories means a run given a small request budget spends all of it on
+    size probes and stores nothing. Measured: a 15-request budget stored 0
+    products before this change and 1,711 after.
+
+    **Resumption is per PAGE, in the database.** A category is dozens of pages;
+    checkpointing whole categories would discard up to a category's worth of
+    work on every kill. One bug the tests caught before any live run did: the
+    checkpoint column is `TEXT` and a taxonomy id is an `int`, so comparing
+    them raw made every lookup miss and a "resumed" crawl silently re-fetched
+    the entire catalogue - the exact cost the table exists to avoid.
+
+    **A catalogue miss does not enter the review queue.** `_ingest_sku` grew a
+    `queue_unmatched` flag for it. The queue exists to surface a gap that costs
+    something - an unmatched bonus offer is a missing row in a ranking somebody
+    reads - and roughly nine catalogue SKUs in ten match nothing. Queueing them
+    all would bury the few hundred entries the queue is actually for. The count
+    still lands in the stats, so the crawl reports the rate without drowning
+    the lane used to tune the matcher.
+
+    `products` gained `subcategory`, `image_url` and `image_width`, all
+    nullable, so `_add_column_if_missing` covers an existing database.
+    `category` deliberately keeps its old meaning (the top-level department),
+    because `match_overrides.yaml`'s `non_rankable_categories` matches on it
+    and re-pointing it would silently re-include every drogisterij SKU.
+
+    **Images are urls, never bytes.** PLAN-V2 section 3.3: the chain's own CDN,
+    no rehosting and no proxy. One rendition is stored, 400px, which is the one
+    size that serves a 64dp list thumbnail at 3x and a detail screen without a
+    second request, with the width beside it so the app never parses a
+    `rendition=400x400_WEBP` query string it does not own.
+
+    **Not done:** Jumbo, which is milestone 16 - PLAN-V2 section 6.4 says in as
+    many words not to let this one turn into "and also Jumbo". EAN is also not
+    filled: the browse card does not carry it, and a per-SKU detail call for
+    43,000 products is 6 hours at 2 requests/second, which is not a polite way
+    to spend the budget for a field nothing currently reads.
+
+Current position: **milestones 1-15 complete.** 708 Python tests, plus the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
 decoding, rule evaluation, meal costing, saved-meal round trips).
 
@@ -1024,8 +1091,9 @@ Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-ma
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /
 `bonusrank templates --chain ah|jumbo|aldi [--template pasta]` /
 `bonusrank list --chain ah|jumbo|aldi --sort protein-per-euro` / `bonusrank prices` /
-`bonusrank matches` / `bonusrank review` / `bonusrank build-db --out-dir dist/data
-[--against PREVIOUS.sqlite]`.
+`bonusrank matches` / `bonusrank review` /
+`bonusrank catalogue --chain ah [--max-requests N]` /
+`bonusrank build-db --out-dir dist/data [--against PREVIOUS.sqlite]`.
 
 **Run `bonusrank prices --refresh` before `compare`**, or most compositions
 price as `?`. That is correct behaviour, not a bug.
