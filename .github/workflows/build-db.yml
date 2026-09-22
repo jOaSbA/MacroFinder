@@ -1,0 +1,157 @@
+name: Build catalogue database
+
+# Milestone 14 (docs/PLAN-V2.md section 5). The sibling of refresh-data.yml,
+# with one deliberate difference: this job publishes to a GitHub **Release**
+# and commits nothing.
+#
+# That difference is the whole point. Release assets do not enter git history
+# and can be deleted freely; a committed file cannot, ever, without rewriting
+# history. Five revisions of the 1.07 MB latest.json already account for most
+# of this repository's object store, and the catalogue this job builds is
+# several times that. Committing it twice a day would make the repo
+# un-clonable inside a year.
+#
+# docs/data/latest.json stays where it is, committed by refresh-data.yml. It
+# is small, it is the app's fast path on launch, and it is what keeps a failed
+# catalogue sync into a smaller app rather than a broken one.
+
+on:
+  # Weekly rather than twice daily. The catalogue is the slow-moving feed - a
+  # product's name, pack size and category barely change - while the prices
+  # that do move twice a day already ride in latest.json. Same politeness
+  # budget argument as refresh-data.yml, applied to a much larger crawl.
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: data-latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Seed reference data
+        run: bonusrank seed
+
+      # As in refresh-data.yml: one chain's endpoint moving must not take the
+      # other two down with it.
+      - name: Ingest AH
+        run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"
+
+      - name: Ingest Jumbo
+        run: bonusrank ingest --chain jumbo || echo "Jumbo ingest failed, continuing"
+
+      - name: Ingest Aldi
+        run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
+
+      - name: Refresh base prices (AH)
+        run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
+
+      - name: Refresh base prices (Jumbo)
+        run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
+
+      # Milestone 15. The full assortment, not just what is on offer: ~43,000
+      # AH products with images and a category path. This is the step that
+      # makes the catalogue worth a release asset at all.
+      #
+      # The crawl resumes from its own checkpoint, but the checkpoint lives in
+      # the gitignored dev database and a fresh runner has neither - so each
+      # run starts clean and must finish in one go. ~280 requests at 2/second
+      # is a couple of minutes of network; the work is dominated by matching
+      # every product, not by the network.
+      - name: Crawl the AH catalogue
+        run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
+
+      # Milestone 16. 17,063 products at a site-fixed 24 per page is ~712
+      # requests, against AH's 299 for nearly three times as many. Together
+      # they are ~1,000 requests once a week.
+      #
+      # That is more than BRIEF section 7's "a few hundred requests a week",
+      # and it stays defensible for one reason: PLAN-V2 section 7 makes the
+      # snapshot architecture an architectural rule rather than a preference.
+      # One scraper run feeds every device, so ten users or a thousand, the
+      # chains see this and nothing else. The app never calls a chain directly.
+      - name: Crawl the Jumbo catalogue
+        run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
+
+      # The previous full build, so this run can cut a delta against it. A
+      # missing release is the normal first-run case, not an error.
+      - name: Fetch the previous build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p previous dist/data
+          if gh release download "$RELEASE_TAG" --pattern 'macrofinder-*.sqlite' --dir previous; then
+            echo "previous build: $(ls previous)"
+          else
+            echo "no previous release yet - this run publishes a full build only"
+          fi
+
+      - name: Build
+        run: |
+          args=""
+          for f in previous/macrofinder-*.sqlite; do
+            [ -e "$f" ] && args="$args --against $f"
+          done
+          bonusrank build-db --out-dir dist/data $args
+
+      # PLAN-V2's own acceptance check, run on every build rather than once.
+      - name: Check the build is not empty
+        run: |
+          db=$(ls dist/data/macrofinder-*.sqlite)
+          n=$(sqlite3 "$db" "select count(*) from products")
+          echo "$db holds $n products"
+          [ "$n" -gt 0 ] || { echo "refusing to publish an empty catalogue"; exit 1; }
+
+      # A release rather than a commit. `--clobber` because the tag is a moving
+      # pointer at "the current data", not a version marker.
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" \
+              --title "Catalogue data" \
+              --notes "Rolling catalogue build. Assets are replaced in place; see manifest.json for the current version, its sha256, and any deltas. Not a source release." \
+              --latest=false
+          gh release upload "$RELEASE_TAG" dist/data/* --clobber
+
+      # Anything the new manifest does not reference is dead weight on the
+      # release page. Deleting an asset is free here precisely because it never
+      # entered git.
+      - name: Prune superseded assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          keep=$(python -c "import json,sys; m=json.load(open('dist/data/manifest.json')); print(' '.join(['manifest.json', m['full']['file']] + [d['file'] for d in m['deltas']]))")
+          echo "keeping: $keep"
+          for asset in $(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name'); do
+            case " $keep " in
+              *" $asset "*) ;;
+              *) echo "deleting $asset"; gh release delete-asset "$RELEASE_TAG" "$asset" --yes ;;
+            esac
+          done
+
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("dist/data/manifest.json"))
+          print(f"version {m['full']['version']}  {m['full']['products']:,} products  "
+                f"{m['full']['bytes']:,} bytes")
+          for d in m["deltas"]:
+              print(f"  delta {d['from']} -> {d['to']}  {d['bytes']:,} bytes")
+          PY

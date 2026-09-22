@@ -34,6 +34,36 @@ SEGMENT_URL = f"{MOBILE_SERVICES}/bonuspage/v2/segment"
 PRODUCT_DETAIL_URL = f"{MOBILE_SERVICES}/product/detail/v4/fir"
 PRODUCT_SEARCH_URL = f"{MOBILE_SERVICES}/product/search/v2"
 
+# Milestone 15, verified live 2026-09-22. Note the version sits BEFORE the path
+# here, unlike every other lane in this file - `mobile-services/v1/product-
+# shelves/...`, not `mobile-services/product-shelves/v1/...`. Both of the
+# obvious spellings return 404, which costs an afternoon to find out.
+CATEGORIES_URL = f"{MOBILE_SERVICES}/v1/product-shelves/categories"
+
+# The same search lane the food-type price sweep uses, filtered by taxonomy and
+# with an empty query. 28 top-level categories, 43,038 products, measured
+# 2026-09-22.
+#
+# Two limits found by probing, neither documented:
+#
+#   * `size=200` returns 203 items. The three extras are sponsored/injected
+#     cards and carry the same shape, so they are kept and deduped on sku
+#     rather than trimmed - dropping the tail of a page by count would throw
+#     away real products.
+#   * **`page * size >= 3000` returns HTTP 400.** Not an empty page - a hard
+#     error. Four top-level categories are larger than that (Drogisterij 3531,
+#     Soepen/sauzen 3358, Bier/wijn 3075, Koek/snoep 2856 is close), so a
+#     top-level-only crawl silently loses their tails. `catalogue.py` descends
+#     into sub-categories whenever a node is too big to page through, which
+#     also keeps the crawl correct as the assortment grows.
+CATALOGUE_PAGE_SIZE = 200
+CATALOGUE_MAX_OFFSET = 3000
+
+# The rendition to store. A 64dp list thumbnail is ~200px at 3x and the detail
+# screen wants more, so 400 is the one size that serves both without a second
+# request. Falls back to the largest available when a product has no 400.
+PREFERRED_IMAGE_WIDTH = 400
+
 # Required as a HEADER on the product lanes. Without it product/detail/v4/fir and
 # product/search/v2 return HTTP 500 ("Can not find application: 'null'") even with
 # a valid token - verified 2026-09-16. The bonuspage lanes take it as a query
@@ -48,6 +78,14 @@ _PERSONAL_PROMOTION_TYPES = {"PERSONAL", "BONUSBOX", "EXTRAS"}
 @register
 class AHAdapter:
     chain = "ah"
+
+    # Declared on the CLASS, not just at module level. `catalogue.crawl` reads
+    # them with getattr(adapter, ...), so a module-level constant is invisible
+    # to it and the crawl silently falls back to its own defaults. That went
+    # unnoticed here because AH's real values happen to equal those defaults;
+    # it was Jumbo, which needs different ones, that exposed it.
+    CATALOGUE_PAGE_SIZE = CATALOGUE_PAGE_SIZE
+    CATALOGUE_MAX_OFFSET = CATALOGUE_MAX_OFFSET
 
     def __init__(self, client: PoliteClient | None = None, store: RawStore | None = None) -> None:
         self._client = client or PoliteClient(self.chain, base_url=API_ROOT)
@@ -196,6 +234,40 @@ class AHAdapter:
         cards = payload.get("products") or payload.get("cards") or []
         return [self._to_product(card, source_url=url) for card in cards if card]
 
+    # -- catalogue (milestone 15) --------------------------------------------
+
+    def category_tree(self) -> list[dict[str, Any]]:
+        """The top-level shelf categories, each with its own children.
+
+        Three levels deep in practice. Only as much of it as the crawl needs is
+        walked: `catalogue.py` asks for children when a node turns out to be
+        too big to page through, and not otherwise.
+        """
+        return list(self._get(CATEGORIES_URL) or [])
+
+    def category_children(self, taxonomy_id: int | str) -> list[dict[str, Any]]:
+        payload = self._get(f"{CATEGORIES_URL}/{taxonomy_id}/sub-categories")
+        return list((payload or {}).get("children") or [])
+
+    def category_size(self, taxonomy_id: int | str) -> int:
+        """How many products a category holds, including its whole subtree."""
+        payload = self._get(f"{PRODUCT_SEARCH_URL}?query=&taxonomyId={taxonomy_id}&size=1")
+        return int(((payload or {}).get("page") or {}).get("totalElements") or 0)
+
+    def browse_category(self, taxonomy_id: int | str, *, page: int = 0,
+                        size: int = CATALOGUE_PAGE_SIZE) -> list[RawProduct]:
+        """One page of a category, as full products rather than offers.
+
+        Same endpoint as `search_products`, with an empty query and a taxonomy
+        filter - so the cross-check, unit parsing and matching downstream see
+        exactly the shape they already handle.
+        """
+        url = (f"{PRODUCT_SEARCH_URL}?query=&taxonomyId={taxonomy_id}"
+               f"&size={size}&page={page}")
+        payload = self._get(url)
+        cards = (payload or {}).get("products") or []
+        return [self._to_product(card, source_url=url) for card in cards if card]
+
     def _to_product(self, card: dict[str, Any], *, source_url: str) -> RawProduct:
         """Map a search-result card. Detail responses nest one; search lists them."""
         price = card.get("price") or {}
@@ -218,6 +290,8 @@ class AHAdapter:
             raw_unit_text=card.get("salesUnitSize") or card.get("unitSize"),
             ean=card.get("gtin") or card.get("ean"),
             category=card.get("mainCategory"),
+            subcategory=card.get("subCategory"),
+            **_image(card.get("images")),
             shelf_price=shelf,
             bonus_price=bonus,
             stated_unit_price_text=card.get("unitPriceDescription"),
@@ -233,6 +307,22 @@ class AHAdapter:
 
         payload = self._get(f"{PRODUCT_DETAIL_URL}/{sku}")
         return parse_gs1_nutrition((payload.get("tradeItem") or {}).get("nutritionalInformation"))
+
+
+def _image(images: Any) -> dict[str, Any]:
+    """Pick one rendition from AH's own list, and say how wide it is.
+
+    PLAN-V2 section 3.3: store the chain's url, never the bytes and never a
+    proxy. Storing the width alongside means the app never has to parse a
+    `rendition=400x400_WEBP` query string it does not own to find out what it
+    is about to download.
+    """
+    candidates = [i for i in (images or []) if i.get("url") and i.get("width")]
+    if not candidates:
+        return {"image_url": None, "image_width": None}
+    exact = [i for i in candidates if i["width"] == PREFERRED_IMAGE_WIDTH]
+    chosen = exact[0] if exact else max(candidates, key=lambda i: i["width"])
+    return {"image_url": chosen["url"], "image_width": int(chosen["width"])}
 
 
 def _as_date(value: str | None) -> date | None:

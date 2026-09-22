@@ -86,6 +86,16 @@ CREATE TABLE IF NOT EXISTS products (
     cost_basis_g   REAL,
     ean            TEXT,
     category       TEXT,
+    -- Milestone 15. `category` stays the top-level department, because
+    -- match_overrides.yaml's non_rankable_categories matches on it and
+    -- changing its meaning would silently re-include every drogisterij SKU.
+    -- The finer level goes here instead.
+    subcategory    TEXT,
+    -- The chain's OWN CDN url, never rehosted (PLAN-V2 section 3.3). One url
+    -- plus the rendition width it was picked at, so Coil can size a request
+    -- without the app re-deriving it from a query string it does not own.
+    image_url      TEXT,
+    image_width    INTEGER,
     food_type_id   INTEGER REFERENCES food_types(id),
     match_method   TEXT,
     match_score    REAL,
@@ -109,6 +119,45 @@ CREATE TABLE IF NOT EXISTS product_macros (
     source            TEXT NOT NULL,
     confidence        TEXT NOT NULL,
     observed_at       TEXT NOT NULL
+);
+
+-- Milestone 15: a full-catalogue crawl is thousands of paged requests, and
+-- BRIEF section 7 caps them at 2/second. A run that dies halfway must not
+-- start over - it would double the request count for nothing, which is the
+-- politeness budget spent on an accident.
+--
+-- Progress is a table rather than a file so a half-finished crawl can be
+-- inspected with the same tools as everything else, and so it survives
+-- whatever killed the process.
+-- No UNIQUE on (chain, started_at): `id` already identifies a crawl, and two
+-- crawls sharing a second-resolution timestamp is a legitimate state that the
+-- constraint turned into a crash for nothing.
+CREATE TABLE IF NOT EXISTS catalogue_crawls (
+    id           INTEGER PRIMARY KEY,
+    chain        TEXT NOT NULL,
+    started_at   TEXT NOT NULL,
+    finished_at  TEXT
+);
+
+-- One row per category the crawl has decided about, so a resumed run does not
+-- pay the measuring requests again. `size` is NULL for a node that turned out
+-- to be too big to page through and was replaced by its children.
+CREATE TABLE IF NOT EXISTS catalogue_crawl_nodes (
+    crawl_id  INTEGER NOT NULL REFERENCES catalogue_crawls(id) ON DELETE CASCADE,
+    node      TEXT NOT NULL,
+    size      INTEGER,
+    PRIMARY KEY (crawl_id, node)
+);
+
+-- One row per page successfully fetched AND ingested. The pair is the unit of
+-- resumption: a page recorded here is never fetched again by the same crawl.
+CREATE TABLE IF NOT EXISTS catalogue_crawl_pages (
+    crawl_id    INTEGER NOT NULL REFERENCES catalogue_crawls(id) ON DELETE CASCADE,
+    node        TEXT NOT NULL,
+    page        INTEGER NOT NULL,
+    fetched_at  TEXT NOT NULL,
+    products    INTEGER NOT NULL,
+    PRIMARY KEY (crawl_id, node, page)
 );
 
 CREATE TABLE IF NOT EXISTS price_observations (
@@ -351,6 +400,10 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
         conn.commit()
     _add_column_if_missing(conn, "food_types", "optimise_max_grams", "REAL")
     _add_column_if_missing(conn, "food_types", "meal_kind", "TEXT")
+    # Milestone 15. All nullable with no default, so no rebuild is needed.
+    _add_column_if_missing(conn, "products", "subcategory", "TEXT")
+    _add_column_if_missing(conn, "products", "image_url", "TEXT")
+    _add_column_if_missing(conn, "products", "image_width", "INTEGER")
     conn.commit()
     return conn
 

@@ -113,6 +113,19 @@ it crowds out the honest alternative the same code path already has, "no price
 history yet". This is `BRIEF` section 9 rule 5 firing on data that cannot
 support it.
 
+**Amended during M14, and it is worse than "not enough history yet".**
+`data/bonusrank.sqlite3` is gitignored, and `refresh-data.yml` starts from a
+fresh `actions/checkout`. Every scheduled run therefore ingests into an **empty**
+database and throws it away afterwards. Price history is not merely thin in
+production - it structurally cannot accumulate, and never has.
+`cheapest_in_weeks` can only ever be `0` or `None` there.
+
+Everything in `BRIEF` section 3.4 depends on history: the percentile,
+reference-price inflation, cycle prediction, stock-up advice. All four are
+unreachable until something persists across runs, which makes this a blocker for
+**M21 and M22** rather than a copy bug. The append-only trigger has been doing
+its job perfectly on a database nobody keeps.
+
 ### 3.3 Macros render without a provenance marker on two app screens
 
 `BRIEF` section 9 rule 1: never display a macro sourced as estimated without

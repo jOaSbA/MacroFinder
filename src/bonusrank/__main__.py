@@ -576,6 +576,100 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+# --------------------------------------------------------------- catalogue
+
+def cmd_catalogue(args: argparse.Namespace) -> int:
+    """Crawl a chain's whole assortment, not just what is on offer.
+
+    Resumes an unfinished crawl automatically, so killing this and running it
+    again costs only what is left. `--max-requests` does a slice today and the
+    rest tomorrow, which is the polite way to meet a big catalogue for the
+    first time.
+    """
+    from .adapters import get_adapter
+    from .catalogue import crawl
+
+    adapter = get_adapter(args.chain)
+    if not hasattr(adapter, "browse_category"):
+        print(f"{args.chain} has no catalogue lane - see CLAUDE.md section 4 "
+              f"for which chains publish a browsable assortment.")
+        return 1
+
+    with connect() as conn:
+        stats = crawl(conn, adapter, max_requests=args.max_requests)
+
+    print(f"=== {args.chain} catalogue ===")
+    print(f"  {stats.nodes} categories, {stats.pages} pages fetched"
+          + (f", {stats.pages_skipped} already had" if stats.pages_skipped else ""))
+    print(f"  {stats.products} new products, {stats.duplicates} already known")
+    print(f"  {stats.ingest.matched} matched to a food type, "
+          f"{stats.ingest.unmatched} unmatched, {stats.ingest.excluded} excluded as non-food")
+    print(f"  {stats.requests} requests")
+    if not stats.complete:
+        print("\n  Stopped on the request budget, not finished. Run it again to "
+              "pick up where it left off - nothing is re-fetched.")
+    return 0
+
+
+# --------------------------------------------------------------- build-db
+
+def cmd_build_db(args: argparse.Namespace) -> int:
+    """Build the app database release assets. Milestone 14 (PLAN-V2 section 5).
+
+    Like `export`, this computes nothing new - it is a projection of the dev
+    database into the read-optimised shape the app syncs. Unlike `export`, its
+    output never enters git: release assets can be deleted, git history cannot.
+    """
+    from . import appdb
+
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    with connect() as conn:
+        built = appdb.build_full(conn, out_dir / "build.tmp")
+
+    # Named after its own content, so an unchanged catalogue keeps its name and
+    # the refresh job can see there is nothing worth publishing.
+    full = out_dir / appdb.full_filename(built)
+    built.replace(full)
+    print(f"full   {full.name}  {full.stat().st_size:,} bytes")
+
+    deltas = []
+    for previous in (Path(p) for p in args.against or []):
+        if not previous.exists():
+            print(f"  skipped {previous}: not found")
+            continue
+        if appdb.version_of(previous) == appdb.version_of(full):
+            print(f"  skipped {previous.name}: identical to this build")
+            continue
+        try:
+            delta = appdb.build_delta(
+                previous, full, out_dir / appdb.delta_filename(previous, full)
+            )
+        except appdb.SchemaMismatch as exc:
+            print(f"  skipped {previous.name}: {exc}")
+            continue
+        deltas.append(delta)
+        share = delta.stat().st_size / full.stat().st_size
+        print(f"delta  {delta.name}  {delta.stat().st_size:,} bytes "
+              f"({share:.1%} of a full download)")
+
+        # A delta that does not reproduce the full build is worse than no
+        # delta: it fails silently, on the user's phone, weeks later.
+        check = appdb.apply_delta(previous, delta, out_dir / "verify.tmp")
+        identical = appdb.sha256_of(check) == appdb.sha256_of(full)
+        check.unlink()
+        if not identical:
+            print(f"  REFUSED: {delta.name} does not reproduce {full.name}")
+            delta.unlink()
+            deltas.pop()
+
+    manifest = appdb.write_manifest(out_dir / "manifest.json", full=full, deltas=deltas)
+    print(f"manifest  version {manifest['full']['version']}, "
+          f"{manifest['full']['products']:,} products, {len(deltas)} delta(s)")
+    return 0
+
+
 # --------------------------------------------------------------- review
 
 def cmd_review(args: argparse.Namespace) -> int:
@@ -680,6 +774,21 @@ def main(argv: list[str] | None = None) -> int:
     export.add_argument("--chain", action="append", dest="chains",
                         help="repeatable; defaults to every registered chain")
     export.set_defaults(func=cmd_export)
+
+    cat = sub.add_parser("catalogue", help="crawl a chain's full assortment")
+    cat.add_argument("--chain", default="ah")
+    cat.add_argument("--max-requests", type=int,
+                     help="stop after this many requests; the next run resumes")
+    cat.set_defaults(func=cmd_catalogue)
+
+    build_db = sub.add_parser("build-db",
+                              help="build the app database release assets")
+    build_db.add_argument("--out-dir", default="dist/data",
+                          help="where the assets are written; never committed")
+    build_db.add_argument("--against", action="append",
+                          help="a previous full build to cut a delta against; "
+                               "repeatable, missing files are skipped")
+    build_db.set_defaults(func=cmd_build_db)
 
     review = sub.add_parser("review", help="show the review queue")
     review.add_argument("--kind")
