@@ -45,10 +45,18 @@ jobs:
           gradle-version: "8.7"
 
       # No Android emulator here on purpose - only the plain JVM unit tests
-      # under app/src/test run in CI. See android/README.md for the split
-      # between those and the (currently nonexistent) instrumentation tests.
+      # under app/src/test RUN in CI. See android/README.md for the split
+      # between those and the instrumented tests under app/src/androidTest,
+      # which need a device (milestone 29).
       - name: Run unit tests
         run: gradle testDebugUnitTest
+
+      # The instrumented tests cannot RUN here, but they can still be compiled,
+      # which is most of what stops them rotting: a rename or a signature
+      # change in the code they exercise fails this step rather than being
+      # found weeks later by whoever next boots an emulator.
+      - name: Compile the instrumented tests (not run - no emulator)
+        run: gradle assembleDebugAndroidTest
 
       # Built in the same job as the tests so the Gradle setup and cache are
       # paid for once. This is the only way to get a runnable app without

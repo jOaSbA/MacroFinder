@@ -56,11 +56,22 @@ import com.macrofinder.app.ui.MacroFinderViewModel
 import com.macrofinder.app.ui.Screen
 import com.macrofinder.app.ui.theme.MacroFinderTheme
 import com.macrofinder.app.ui.theme.chainSignal
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.work.WorkManager
+import com.macrofinder.app.data.sync.CatalogueSyncWorker
+import com.macrofinder.app.ui.CatalogueSyncState
+import com.macrofinder.app.ui.fmt
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Milestone 17. Idempotent (ExistingPeriodicWorkPolicy.KEEP), so
+        // calling it on every launch simply re-asserts the schedule rather than
+        // stacking jobs.
+        CatalogueSyncWorker.schedule(this)
         setContent {
             MacroFinderTheme {
                 MacroFinderApp()
@@ -70,7 +81,53 @@ class MainActivity : ComponentActivity() {
 }
 
 private fun eur(value: Double?): String =
-    value?.let { "€%.2f".format(it) } ?: "?"
+    value?.let { fmt("€%.2f", it) } ?: "?"
+
+/**
+ * One line about the catalogue sync, and a way to ask for it now.
+ *
+ * Shows nothing at all when there is nothing to say. A sync that found the
+ * catalogue already current is not news, and a banner that is always there
+ * stops being read.
+ */
+@Composable
+private fun CatalogueSyncBanner(sync: CatalogueSyncState, onRefresh: () -> Unit) {
+    if (!sync.running && sync.message == null) return
+
+    Surface(color = MaterialTheme.colorScheme.surfaceVariant) {
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    sync.label ?: sync.message.orEmpty(),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                if (!sync.running && !sync.halted) {
+                    TextButton(onClick = onRefresh) { Text("Nu verversen") }
+                }
+            }
+            // A determinate bar where the size is known, an indeterminate one
+            // where it is not. Faking a fraction would be worse than admitting
+            // the step has no measurable progress.
+            if (sync.running) {
+                if (sync.fraction != null) {
+                    LinearProgressIndicator(
+                        progress = { sync.fraction },
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    )
+                } else {
+                    LinearProgressIndicator(
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun MacroFinderApp(viewModel: MacroFinderViewModel = viewModel()) {
@@ -83,6 +140,20 @@ fun MacroFinderApp(viewModel: MacroFinderViewModel = viewModel()) {
         store.meals.collect { viewModel.setSavedMeals(it) }
     }
 
+    // The catalogue sync runs whether or not this screen is open, so the UI
+    // observes WorkManager rather than owning the work.
+    val workManager = remember { WorkManager.getInstance(context) }
+    val periodic by workManager
+        .getWorkInfosForUniqueWorkLiveData(CatalogueSyncWorker.PERIODIC_NAME)
+        .observeAsState(emptyList())
+    val oneOff by workManager
+        .getWorkInfosForUniqueWorkLiveData(CatalogueSyncWorker.ONE_OFF_NAME)
+        .observeAsState(emptyList())
+    val sync = CatalogueSyncState.fromWorkInfo(
+        // A manual refresh is what the user is waiting on, so it wins.
+        oneOff.firstOrNull() ?: periodic.firstOrNull()
+    )
+
     Scaffold(
         // The total is the number this screen exists to show, and it changes
         // on every tap. Pinning it means the feedback is never below the fold,
@@ -92,6 +163,10 @@ fun MacroFinderApp(viewModel: MacroFinderViewModel = viewModel()) {
         },
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
+            CatalogueSyncBanner(
+                sync = sync,
+                onRefresh = { CatalogueSyncWorker.syncNow(context) },
+            )
             when (state.screen) {
                 is Screen.Customise -> CustomiseScreen(
                     viewModel = viewModel,
@@ -297,7 +372,7 @@ private fun CandidateRow(
             Text(candidate.name, style = MaterialTheme.typography.bodyLarge)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    "%.0f g".format(candidate.grams),
+                    fmt("%.0f g", candidate.grams),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -377,12 +452,12 @@ private fun TotalsBar(viewModel: MacroFinderViewModel) {
                     // there is nothing to qualify about an unknown.
                     val mark = if (totals.macrosNeedMarking) "*" else ""
                     Text(
-                        totals.proteinG?.let { "%.1f g eiwit$mark".format(it) }
+                        totals.proteinG?.let { fmt("%.1f g eiwit$mark", it) }
                             ?: "eiwit onbekend",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
-                        totals.kcal?.let { "%.0f kcal$mark".format(it) } ?: "kcal onbekend",
+                        totals.kcal?.let { fmt("%.0f kcal$mark", it) } ?: "kcal onbekend",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -556,7 +631,7 @@ private fun OfferList(offers: List<OfferEntry>, chain: String) {
                         if (protein != null) {
                             val mark = if (offer.macros_need_marking) "*" else ""
                             Text(
-                                "%.1f g eiwit / 100 g$mark".format(protein),
+                                fmt("%.1f g eiwit / 100 g$mark", protein),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )

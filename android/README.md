@@ -75,12 +75,31 @@ code**, and everything that can run in CI does.
   DataStore itself. Those two are split out of `SavedMealsStore` for exactly
   that reason: the round trip is the part that can silently lose a user's
   saved meals, and it is testable where CI runs.
-- **No Compose UI / instrumentation tests exist yet.** They need an Android
-  emulator, which is slow and flaky in CI. Until that's worth the cost, UI
-  changes are verified manually: build the app (`gradle assembleDebug`) and
-  run it on a device or emulator yourself. Do not add `androidTest` UI tests
-  and assume they run in CI - they won't, unless the workflow is updated to
-  provision an emulator.
+- `app/src/androidTest/kotlin/` - **instrumented tests, which do NOT run in
+  CI.** They need an emulator, and the workflow does not provision one
+  (milestone 29). CI does *compile* them, which is most of what stops them
+  rotting. Run them yourself:
+
+  ```bash
+  cd android && gradle connectedDebugAndroidTest
+  ```
+
+  Milestone 17 added 15 of them, covering the catalogue sync end to end: real
+  HTTP, a real SQLite file, real deltas. That is the one thing no JVM test can
+  establish, because the delta application is SQL against a database rather
+  than logic over objects.
+
+  The part of the sync that *rots* is covered in CI instead, and from the
+  Python side: `tests/test_appdb_kotlin_parity.py` reads `CatalogueStore.kt`
+  and checks its table list and key expressions still match `appdb._TABLES`. A
+  table added on one side and not the other means that table silently never
+  syncs, and that is exactly the kind of drift an emulator test found weeks
+  later would be too late for.
+
+- **No Compose UI tests exist yet.** UI changes are verified manually: build
+  the app (`gradle assembleDebug`) and run it on a device or emulator. Do not
+  add Compose UI tests and assume they run in CI - they won't, unless the
+  workflow is updated to provision an emulator.
 
 ## Getting a runnable app without installing anything
 

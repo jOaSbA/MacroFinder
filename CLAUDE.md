@@ -1170,8 +1170,81 @@ the CLI says "not enough price history yet"; `export.py` ships
 obey BRIEF section 9 rule 1; and the archetype verdict strings are Dutch, which
 closes the last English seam in the UI.
 
-Current position: **milestones 1-16 complete, audit findings closed.** 749
-Python tests, plus the
+17. ~~Android: Room + delta sync.~~ **Done, with one library decision taken
+    against the plan and one blocker found.** The app now syncs the published
+    catalogue into a local database: it reads `manifest.json`, applies deltas
+    when it can chain them, and falls back to the full build when it cannot.
+    WorkManager runs it daily on an unmetered network only, and "nu verversen"
+    drops that constraint because the person asking is the point.
+
+    **Raw SQLite, not Room** - a deliberate departure from PLAN-V2 section 3.2.
+    The artifact arrives fully formed from `appdb.py`, with its own schema and
+    indexes. Room's value is generating queries against a schema the app owns
+    and migrating it; the app owns neither. It would need entities mirroring
+    `APP_SCHEMA` exactly and a `@Database(version=)` kept in lockstep with
+    `appdb.SCHEMA_VERSION`, where any drift is a crash on somebody's phone
+    rather than something the code can notice. Applying a delta is `ATTACH`
+    plus `DELETE` and `INSERT OR REPLACE`, which Room actively gets in the way
+    of. Reading `meta.schema_version` and deciding beats declaring one and
+    hoping. It also avoids KSP codegen, which milestone 13 already turned down
+    for the same reason.
+
+    **Everything that can be decided rather than performed is pure.**
+    `SyncPlan.kt` has no Android imports, so the part that fails in interesting
+    ways - "should I take 24 MB or a 300 KB diff, and is the diff even
+    applicable to what I have?" - runs in CI on the JVM. What is left is
+    downloading bytes and running SQL.
+
+    **Nothing is installed before its hash matches the manifest**, and the
+    rename is the commit point, so a sync that dies mid-download leaves the
+    previous catalogue working rather than an empty app. A delta whose hash is
+    wrong does NOT silently escalate to a full download: the caller asked for a
+    300 KB update, possibly on a slow connection, and turning that into 24 MB
+    is not a decision to make on their behalf.
+
+    **The local version lives in the database's own `meta` table**, not in a
+    preference file. It has to travel with the bytes it describes, or a
+    restore or a half-applied delta leaves the app confidently wrong about what
+    it holds - and the next delta is then applied to the wrong base. `appdb`
+    deliberately keeps it out of the published file, because a version stored
+    inside the bytes it hashes cannot be computed; it is written on arrival.
+
+    **Two implementations of `apply_delta` now exist, in two languages, and
+    only one runs in CI.** `tests/test_appdb_kotlin_parity.py` reads
+    `CatalogueStore.kt` and checks its table list, key expressions and
+    separator against `appdb._TABLES`. Reading source text is blunt and it is
+    the right instrument: a table added on one side and not the other means
+    that table silently never syncs, and the emulator test that would catch it
+    does not run in CI. Verified by breaking it both ways.
+
+    **15 instrumented tests** (`app/src/androidTest`) cover the sync end to
+    end against a real HTTP server and a real SQLite file, including PLAN-V2's
+    own "more than 7 deltas behind" fallback. They need an emulator and do not
+    run in CI - CI compiles them, which is most of what stops them rotting.
+    This is the split the user's own testing rule asks for: what can run in
+    Actions does, and what cannot is distinguished and run by hand.
+
+    **One bug found while looking at a running screen, again.** Every number in
+    the app was formatted with `"%.2f".format(x)`, which uses the DEVICE
+    locale - so the same price rendered "€2,54" on a Dutch phone and "€2.54" on
+    an English one, inside otherwise identical Dutch copy. `ui/Formatting.kt`
+    pins it to the app's own locale. Found by a unit test that expected a point
+    and got a comma because the machine happened to be Dutch; on a different CI
+    runner it would have failed the other way.
+
+    **Blocker, not fixed here: the repository is PRIVATE.** Both feeds are
+    therefore unreachable from a device -
+    `raw.githubusercontent.com/.../latest.json` returns 404 without
+    credentials, and release assets are gated the same way. Verified on the
+    emulator: the app shows "Could not load this week's prices - HTTP 404".
+    The sync machinery is complete and tested against a real server, but it
+    cannot reach the real one. Making the repository public publishes the
+    scraped catalogue, which PLAN-V2 section 7 reserves explicitly for the
+    author, so it is left alone.
+
+Current position: **milestones 1-17 complete.** 754 Python tests, 91 Android
+JVM tests, and 15 instrumented tests that run on a device rather than in CI.
+Also the
 Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
 decoding, rule evaluation, meal costing, saved-meal round trips).
 
