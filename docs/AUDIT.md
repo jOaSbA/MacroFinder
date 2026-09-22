@@ -98,11 +98,19 @@ bruine_bonen_blik  -> ['bruine bonen', ...]        6 g P
 
 The bare phrase `bruine bonen` is claimed by the tin, which is right, because
 Hak sells tins. The bare word `linzen` is claimed by the dry form, which is
-wrong for the same reason. Four Hak and Bonduelle tins land on `linzen_droog`,
-and `Chan's Gele Spliterwten` and `Hak Spliterwten` share the shape.
+wrong for the same reason. Four Hak and Bonduelle tins land on `linzen_droog`.
 
-Affected: `linzen`, `spliterwten`. Correctly handled: `bruine bonen`,
-`kikkererwten`, `witte bonen`, `kidneybonen`, `zwarte bonen`, `doperwten`.
+Affected: `linzen`. Correctly handled: `bruine bonen`, `kikkererwten`,
+`witte bonen`, `kidneybonen`, `zwarte bonen`, `doperwten`.
+
+**Correction, made while fixing this.** The first version of this section also
+named `spliterwten`. That was wrong: all six products matched to
+`spliterwten_droog` really are dried split peas - `Hak Spliterwten gedroogd`,
+`Chan's Gele Spliterwten 1000 g`, `AH Terra Biologisch spliterwten` and so on.
+The `24.0 g P` figure beside them is correct, and after the lentil fix the
+Hak bag is the honest top of the ranking rather than a tin pretending to be
+one. Reading the rank-2 line as a second instance of the rank-1 bug was
+pattern-matching, not checking.
 
 ### 3.2 "cheapest in 0 weeks" is printed and shipped
 
@@ -219,3 +227,36 @@ Not fixed here, per the milestone's own instruction. Each needs a home.
    the rest of the UI is Dutch.
 8. **`CLAUDE.md` section 6 seed counts are stale** (188/590 against the actual
    204/655).
+
+
+---
+
+## 7. Resolution
+
+Added after the fixes landed, so this document records what became of its own
+findings rather than only what it found.
+
+| # | Finding | State |
+|---|---|---|
+| 3.1 | Canned lentils costed as dry, ranked #1 | **fixed** — the bare alias `linzen` moved to `linzen_blik`, matching how `bruine bonen` already worked. 88 products re-matched; the tin is out of the ranking. |
+| 3.2 | "cheapest in 0 weeks" | **fixed** — `ranking.MIN_HISTORY_WEEKS`. Below a week the claim is suppressed and the CLI says "not enough price history yet", which is a fact rather than silence. The underlying cause (CI discarding history) is still open and is M21's. |
+| 3.3 | Macros rendered with no provenance marker | **fixed** — `export.py` ships `macros_need_marking` on `food_types` and on every slot candidate, and the customiser's totals bar renders the mark and a footnote. It was never an app bug alone: the export gave the screen nothing to mark with. |
+| 3.4 | Aldi exports zero ranked offers | **open** — M23, as an empty state. |
+| 5 | `product_macros` never populated | **fixed** — both workflows now run `ingest --chain ah --with-macros 300`, and `ingest.macro_candidates` spends the budget on matched products that are on a *current* offer first. Verified live: 39 rows written on the first run, and the figures differ from the seed (geitenkaas 19 → 23 g protein, Hak doperwtjes 0.9 → 2.2). |
+| 6 | Duplicate food types from milestone 12 | **fixed** — five colliding aliases, not three. `sla` gave up `rucola` and `ijsbergsla` to their own better rows; the duplicate `biefstuk` row was deleted in favour of `runderbiefstuk_mager`. `load_seed` now rejects an alias two food types claim. |
+| 7 | Archetype verdict strings in English | **fixed** — the last English seam in the UI. |
+| 8 | Stale seed counts in `CLAUDE.md` | **fixed** — 204 types, 649 aliases. |
+
+One thing this document got wrong, corrected in 3.1: it named `spliterwten`
+alongside `linzen`. All six split-pea matches are genuinely dry. Reading the
+rank-2 line as a second instance of the rank-1 bug was pattern-matching rather
+than checking, and it is the reason the fix is pinned by a per-legume test
+rather than by a rule about legumes in general.
+
+The biggest fix is not in the table, because it was not in the original list.
+`load_seed` was **purely additive for aliases**: an alias removed from the YAML
+stayed in the database forever. That made the canned-legume fix a no-op on any
+existing database - the edit changed the seed file and nothing else - and it
+means every alias ever removed while tuning the matcher has still been live.
+Aliases are now rebuilt wholesale on every load, the same delete-and-reinsert
+`load_archetypes` already does for compositions.

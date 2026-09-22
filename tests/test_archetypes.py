@@ -214,7 +214,9 @@ def test_ready_made_wins_when_it_is_cheaper(conn):
     verdict = _only(conn).verdict
 
     assert verdict.winner == "ready_made"
-    assert "buy" in verdict.text.lower() or "koop" in verdict.text.lower()
+    # The copy is Dutch now (docs/AUDIT.md finding 7); what matters is that it
+    # says to buy the thing, not which language it says it in.
+    assert "kopen" in verdict.text.lower()
 
 
 def test_no_verdict_is_claimed_when_one_side_cannot_be_priced(conn):
@@ -249,3 +251,36 @@ def test_selecting_one_archetype_by_key(conn):
     assert [c.archetype.key for c in compare(conn, archetype_key="test_pudding",
                                              on=TODAY)] == ["test_pudding"]
     assert compare(conn, archetype_key="niet_bestaand", on=TODAY) == []
+
+
+# -- verdict copy is Dutch (docs/AUDIT.md finding 7) --------------------------
+
+def test_the_verdict_text_is_dutch(conn):
+    """The app renders `verdict.text` verbatim, so this string is user-facing
+    and PLAN-V2 section 6.1 puts user-facing strings in Dutch. It was the last
+    English seam in the UI: a Dutch screen with "DIY is 45% cheaper per gram of
+    protein" in the middle of it."""
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+    _priced(conn, "wi2", "AH Cacaopoeder", "cacaopoeder", "250 g", 3.00)
+    _priced(conn, "wi3", "AH Protein pudding", "proteine_pudding", "200 g", 1.39)
+
+    texts = [c.verdict.text for c in compare(conn, chain="ah", on=TODAY)]
+
+    assert texts, "nothing to check"
+    banned = ("cheaper", "protein", "Just buy it", "No verdict", "costs", "saves")
+    for text in texts:
+        assert not any(word in text for word in banned), text
+
+
+def test_an_unpriceable_side_says_so_in_dutch(conn):
+    """The most important verdict string of the three: refusing to pick a
+    winner when only one side is priced. Translating must not lose that it is a
+    refusal rather than a result."""
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+
+    unknown = [c for c in compare(conn, chain="ah", on=TODAY)
+               if c.verdict.winner == "unknown"]
+
+    assert unknown, "expected at least one archetype with an unpriceable side"
+    for comparison in unknown:
+        assert "Geen oordeel" in comparison.verdict.text, comparison.verdict.text

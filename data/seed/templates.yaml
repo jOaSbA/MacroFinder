@@ -41,7 +41,7 @@
         - {food_type: kipgehakt}
         - {food_type: rundergehakt_mager}
         - {food_type: rundergehakt}
-        - {food_type: biefstuk, grams: 125}
+        - {food_type: runderbiefstuk_mager, grams: 125}
         - {food_type: vega_gehakt}
     - key: sauce
       name: Saus
@@ -121,7 +121,7 @@
       candidates:
         - {food_type: kipfilet_rauw, grams: 110}
         - {food_type: rundergehakt_mager}
-        - {food_type: biefstuk, grams: 110}
+        - {food_type: runderbiefstuk_mager, grams: 110}
         - {food_type: kipfilet_vleeswaren, grams: 60}
         - {food_type: vega_gehakt}
     - key: sauce
@@ -157,7 +157,7 @@
       severity: note
       when: {slot: sauce, food_types: [ketchup]}
       requires:
-        - {slot: meat, food_types: [biefstuk]}
+        - {slot: meat, food_types: [runderbiefstuk_mager]}
       note: >
         Ketchup op biefstuk kan, maar je betaalt voor het vlees en proeft de
         ketchup. Een yoghurtsaus laat de biefstuk beter tot zijn recht komen.

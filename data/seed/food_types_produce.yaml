@@ -137,7 +137,11 @@
   shelf_life_days_unopened: 5
   shelf_life_days_opened: 2
   freezable: false
-  aliases: [sla, ijsbergsla, kropsla, veldsla, rucola, little gem]
+  # `rucola` and `ijsbergsla` are NOT here: milestone 12 gave both their own
+  # rows with their own macros (rucola 2.6 g protein, ijsbergsla 0.7, this
+  # generic row 1.2), and an alias claimed by two food types makes the matcher
+  # toss a coin over which macros to use.
+  aliases: [sla, kropsla, veldsla, little gem]
 
 - key: ui
   meal_kind: ingredient

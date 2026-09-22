@@ -361,10 +361,13 @@ def _verdict(ready_made: PricedReadyMade | None,
     diy = composition.eur_per_g_protein if composition else None
     ready = ready_made.eur_per_g_protein if ready_made else None
 
+    # Dutch, because the app renders this string verbatim and PLAN-V2 section
+    # 6.1 puts user-facing copy in Dutch. It was the last English seam in the
+    # UI (docs/AUDIT.md finding 7).
     if diy is None or ready is None:
-        missing = "DIY" if diy is None else "ready-made"
+        missing = "zelf maken" if diy is None else "kant-en-klaar"
         return Verdict("unknown", None, None, None,
-                       f"No verdict: the {missing} side could not be priced.")
+                       f"Geen oordeel: de prijs van {missing} is niet bekend.")
 
     protein_delta = (composition.protein_g or 0) - (ready_made.protein_g or 0)
     minutes = composition.effort_minutes or 0
@@ -375,8 +378,8 @@ def _verdict(ready_made: PricedReadyMade | None,
             cheaper_pct=(ready - diy) / ready * 100.0,
             protein_delta_g=protein_delta,
             extra_minutes=minutes,
-            text=(f"DIY is {(ready - diy) / ready * 100:.0f}% cheaper per gram of "
-                  f"protein and {protein_delta:+.0f} g protein, costs {minutes} min."),
+            text=(f"Zelf maken is {(ready - diy) / ready * 100:.0f}% goedkoper per "
+                  f"gram eiwit, {protein_delta:+.0f} g eiwit, kost {minutes} min."),
         )
 
     return Verdict(
@@ -384,8 +387,8 @@ def _verdict(ready_made: PricedReadyMade | None,
         cheaper_pct=(diy - ready) / diy * 100.0,
         protein_delta_g=protein_delta,
         extra_minutes=minutes,
-        text=(f"Just buy it: ready-made is {(diy - ready) / diy * 100:.0f}% cheaper "
-              f"per gram of protein and saves {minutes} min."),
+        text=(f"Gewoon kopen: kant-en-klaar is {(diy - ready) / diy * 100:.0f}% "
+              f"goedkoper per gram eiwit en scheelt {minutes} min."),
     )
 
 

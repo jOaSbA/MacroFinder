@@ -60,6 +60,9 @@ fun priceLine(line: MealLine, context: MealContext): PricedLine {
         kcal = perServing(macros?.kcal, grams),
         carbsG = perServing(macros?.carbs_g, grams),
         fatG = perServing(macros?.fat_g, grams),
+        // An unidentified line cannot vouch for its own macros, so the absence
+        // of a food type reads as "needs marking" rather than as "fine".
+        macrosNeedMarking = food?.macros_need_marking ?: true,
     )
 }
 
@@ -89,6 +92,9 @@ fun priceMeal(lines: List<MealLine>, context: MealContext): MealTotals {
         fatG = sumOrNull(priced.map { it.fatG }),
         unpricedLines = unpriced.distinct(),
         unknownMacroLines = unknownMacros.distinct(),
+        // Only lines that actually contributed a figure can taint the total.
+        // An empty meal has nothing to mark.
+        macrosNeedMarking = priced.any { it.proteinG != null && it.macrosNeedMarking },
     )
 }
 

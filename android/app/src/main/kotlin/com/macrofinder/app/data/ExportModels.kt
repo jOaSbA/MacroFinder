@@ -226,6 +226,14 @@ data class SlotCandidate(
     val fat_g: Double? = null,
     val eur_per_g_protein: Double? = null,
     val is_pantry: Boolean = false,
+    /**
+     * BRIEF section 9 rule 1: a macro figure from the seed may never be shown
+     * bare. Defaults to TRUE, not false: an older snapshot that predates the
+     * field carries seed estimates, so the safe reading of a missing value is
+     * "assume it needs marking". Defaulting the other way would silently
+     * render guesses as facts on exactly the data this exists to flag.
+     */
+    val macros_need_marking: Boolean = true,
     val promo_text: String? = null,
     /** Copy rule 3: a 2-for deal means two of them in the fridge. Show it. */
     val required_quantity: Int? = null,
@@ -241,6 +249,14 @@ data class FoodTypeEntry(
     /** "4 boiled eggs" is this times four. Null where a unit makes no sense. */
     val g_per_unit: Double? = null,
     val macros_per_100g: Macros = Macros(),
+    /**
+     * BRIEF section 9 rule 1: a macro figure from the seed may never be shown
+     * bare. Defaults to TRUE, not false: an older snapshot that predates the
+     * field carries seed estimates, so the safe reading of a missing value is
+     * "assume it needs marking". Defaulting the other way would silently
+     * render guesses as facts on exactly the data this exists to flag.
+     */
+    val macros_need_marking: Boolean = true,
 )
 
 @Serializable

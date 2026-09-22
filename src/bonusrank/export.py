@@ -151,6 +151,9 @@ def _candidate_json(candidate: PricedCandidate) -> dict[str, Any]:
         "fat_g": candidate.fat_g,
         "eur_per_g_protein": candidate.eur_per_g_protein,
         "is_pantry": candidate.is_pantry,
+        # See `_food_types_json`: a slot candidate's macros come from the same
+        # seeded rows and need the same marker.
+        "macros_need_marking": candidate.macros_need_marking,
         # Copy rule 3 and the PERSONAL corollary apply to a ranked candidate
         # exactly as they do to a ranked offer.
         "promo_text": price.promo_raw_text if price else None,
@@ -186,7 +189,8 @@ def _food_types_json(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     """
     rows = conn.execute(
         "SELECT key, name_nl, meal_kind, g_per_unit, protein_per_100g, "
-        "kcal_per_100g, carbs_per_100g, fat_per_100g FROM food_types ORDER BY key"
+        "kcal_per_100g, carbs_per_100g, fat_per_100g, source, confidence "
+        "FROM food_types ORDER BY key"
     ).fetchall()
     return [
         {
@@ -202,9 +206,26 @@ def _food_types_json(conn: sqlite3.Connection) -> list[dict[str, Any]]:
                 "carbs_g": row["carbs_per_100g"],
                 "fat_g": row["fat_per_100g"],
             },
+            # BRIEF section 9 rule 1, and docs/AUDIT.md finding 3.3. The
+            # customiser's totals bar rendered these figures bare because the
+            # export never said what they were: every seeded row is
+            # source='manual', confidence='seed', so the answer is always yes
+            # today and the app had no way to know. Same field name as a ranked
+            # offer's, so the app has one rule and not two.
+            "macros_need_marking": _needs_marking(row["source"], row["confidence"]),
         }
         for row in rows
     ]
+
+
+def _needs_marking(source: str | None, confidence: str | None) -> bool:
+    """One definition of "this figure is an estimate", shared with ranking.
+
+    `RankedOffer.needs_macro_marking` asks the same question of a resolved
+    offer. Two spellings of it would drift, and the one that drifts is the one
+    that forgets a confidence level and renders a guess as a fact.
+    """
+    return confidence in ("seed", "low") or source == "estimated"
 
 
 def write_export(conn: sqlite3.Connection, out: Path, **kwargs) -> dict[str, Any]:

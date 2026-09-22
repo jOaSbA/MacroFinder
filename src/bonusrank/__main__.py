@@ -106,7 +106,7 @@ def cmd_seed(args: argparse.Namespace) -> int:
 # --------------------------------------------------------------- ingest
 
 def cmd_ingest(args: argparse.Namespace) -> int:
-    from .ingest import fetch_label_macros, ingest_ah, ingest_flat
+    from .ingest import fetch_label_macros, ingest_ah, ingest_flat, macro_candidates
 
     adapter = get_adapter(args.chain)
     with connect() as conn:
@@ -126,11 +126,9 @@ def cmd_ingest(args: argparse.Namespace) -> int:
             stats = ingest_flat(conn, adapter, limit=args.limit)
 
         if args.with_macros:
-            skus = [r[0] for r in conn.execute(
-                "SELECT sku FROM products WHERE chain=? AND food_type_id IS NOT NULL "
-                "AND id NOT IN (SELECT product_id FROM product_macros) LIMIT ?",
-                (args.chain, args.with_macros)).fetchall()]
-            print(f"fetching label macros for {len(skus)} matched SKUs...")
+            skus = macro_candidates(conn, args.chain, args.with_macros)
+            print(f"fetching label macros for {len(skus)} matched SKUs "
+                  f"(products on a current offer first)...")
             print(f"  wrote {fetch_label_macros(conn, adapter, skus)} macro rows")
 
         counts = {t: conn.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
@@ -215,10 +213,16 @@ def cmd_list(args: argparse.Namespace) -> int:
             else:
                 detail.append(f"perishable, {o.realistically_consumable}x consumable in time")
         # Copy rule 5: prefer "cheapest in N weeks" over the percentage.
+        #
+        # `cheapest_in_weeks` is None both when there is nothing to compare and
+        # when the span is under a week (ranking.MIN_HISTORY_WEEKS). Saying
+        # nothing in the second case would read as "no signal was worth
+        # printing" rather than "not enough history yet" - the first is a
+        # judgement, the second is a fact, and only the second is true.
         if o.cheapest_in_weeks is not None:
             detail.append(f"cheapest in {o.cheapest_in_weeks} weeks")
-        elif o.observations < 2:
-            detail.append("no price history yet")
+        else:
+            detail.append("not enough price history yet")
         if o.total_outlay is not None and o.required_quantity > 1:
             detail.append(f"total outlay {EUR}{o.total_outlay:.2f}")
         if o.is_personal:
@@ -490,6 +494,8 @@ def cmd_compare(args: argparse.Namespace) -> int:
             # Copy rule 5: the history signal beats a percentage.
             if offer.cheapest_in_weeks is not None:
                 detail.append(f"cheapest in {offer.cheapest_in_weeks} weeks")
+            else:
+                detail.append("not enough price history yet")
             if offer.is_personal:
                 detail.append("PERSONAL OFFER - not available to everyone")
             print(f"               {' | '.join(detail)}")

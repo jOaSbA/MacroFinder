@@ -160,14 +160,3 @@
 
 # --- vlees ----------------------------------------------------------------
 
-- key: biefstuk
-  meal_kind: ingredient
-  name_nl: biefstuk (rauw)
-  state: solid
-  protein_per_100g: 21.0
-  kcal_per_100g: 125
-  fat_per_100g: 4.0
-  shelf_life_days_unopened: 5
-  shelf_life_days_opened: 2
-  freezable: true
-  aliases: [biefstuk, kogelbiefstuk, steak, runderbiefstuk]

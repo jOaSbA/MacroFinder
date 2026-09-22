@@ -254,7 +254,13 @@ def _waste_adjust(row, size, mass_g, unit_price, required, protein, settings):
 
 
 def _history(conn: sqlite3.Connection, product_id: int, unit_price: float | None) -> dict:
-    """'Cheapest in N weeks' - the headline signal the brief prefers over '% off'."""
+    """'Cheapest in N weeks' - the headline signal the brief prefers over '% off'.
+
+    Returns None below `MIN_HISTORY_WEEKS`. "Cheapest in 0 weeks" is not false,
+    but it is not a claim either, and it was being printed beside 246 AH offers
+    at once while crowding out the honest alternative this same path already
+    has ("no price history yet"). See docs/AUDIT.md finding 3.2.
+    """
     rows = conn.execute(
         "SELECT observed_at, effective_unit_price FROM price_observations "
         "WHERE product_id=? AND effective_unit_price IS NOT NULL ORDER BY observed_at DESC",
@@ -266,11 +272,30 @@ def _history(conn: sqlite3.Connection, product_id: int, unit_price: float | None
     today = datetime.fromisoformat(rows[0]["observed_at"]).date()
     for row in rows[1:]:
         if row["effective_unit_price"] < unit_price:
-            weeks = (today - datetime.fromisoformat(row["observed_at"]).date()).days // 7
-            return {"cheapest_in_weeks": weeks, "observations": len(rows)}
+            # Back to the last time it WAS cheaper: "cheapest in 3 weeks" means
+            # it has not been this cheap for three weeks, not that we have been
+            # watching it for three weeks.
+            since = datetime.fromisoformat(row["observed_at"]).date()
+            return _weeks(today - since, len(rows))
 
     oldest = datetime.fromisoformat(rows[-1]["observed_at"]).date()
-    return {"cheapest_in_weeks": (today - oldest).days // 7, "observations": len(rows)}
+    return _weeks(today - oldest, len(rows))
+
+
+def _weeks(span, observations: int) -> dict:
+    weeks = span.days // 7
+    return {
+        "cheapest_in_weeks": weeks if weeks >= MIN_HISTORY_WEEKS else None,
+        "observations": observations,
+    }
+
+
+# The shortest span "cheapest in N weeks" may be claimed over. One whole week,
+# because below that the sentence carries no information - and because
+# `refresh-data.yml` starts from a fresh checkout with a gitignored database, so
+# in production history does not accumulate at all yet and None is the only
+# honest answer this can give there (PLAN-V2 M21).
+MIN_HISTORY_WEEKS = 1
 
 
 SORT_KEYS = {

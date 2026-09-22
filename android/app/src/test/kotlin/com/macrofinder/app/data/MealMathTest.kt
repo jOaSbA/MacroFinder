@@ -33,11 +33,20 @@ class MealMathTest {
                 key = "unpriced_food", name = "rucola",
                 macros_per_100g = Macros(protein_g = 2.6, kcal = 25.0, carbs_g = 2.1, fat_g = 0.7),
             ),
+            // Label-sourced rather than seeded: the one kind that needs no
+            // marker. Rare today and the reason the flag is data rather than a
+            // constant.
+            "from_label" to FoodTypeEntry(
+                key = "from_label", name = "kwark van het etiket",
+                macros_per_100g = Macros(protein_g = 10.0, kcal = 60.0, carbs_g = 4.0, fat_g = 0.2),
+                macros_need_marking = false,
+            ),
         ),
         prices = mapOf(
             "pasta_droog" to FoodTypePriceEntry(eur_per_kg = 2.00),
             "ei_gekookt" to FoodTypePriceEntry(eur_per_kg = 8.00),
             "mystery" to FoodTypePriceEntry(eur_per_kg = 4.00),
+            "from_label" to FoodTypePriceEntry(eur_per_kg = 3.00),
             // "unpriced_food" deliberately absent - absent IS the unknown.
         ),
     )
@@ -210,5 +219,49 @@ class MealMathTest {
             slots = listOf(TemplateSlot("sauce", "Saus", false, 150.0, listOf("pesto_groen"))),
         )
         assertEquals(emptyList<MealLine>(), linesFromSelections(template, emptyMap(), emptyMap()))
+    }
+
+    // -- provenance (BRIEF section 9 rule 1, docs/AUDIT.md finding 3.3) -------
+
+    @Test
+    fun `a total built from seed estimates is marked as estimated`() {
+        val totals = priceMeal(listOf(line("pasta_droog", 100.0)), context)
+
+        assertTrue(totals.macrosNeedMarking)
+    }
+
+    @Test
+    fun `a total built only from label figures needs no mark`() {
+        val totals = priceMeal(listOf(line("from_label", 200.0)), context)
+
+        assertEquals(20.0, totals.proteinG!!, 0.001)
+        assertTrue(!totals.macrosNeedMarking)
+    }
+
+    @Test
+    fun `one estimated line taints the whole total`() {
+        // A total is only as trustworthy as its least trustworthy line, exactly
+        // as it is only as priced as its least priced one.
+        val totals = priceMeal(
+            listOf(line("from_label", 200.0), line("pasta_droog", 100.0)), context,
+        )
+
+        assertTrue(totals.macrosNeedMarking)
+    }
+
+    @Test
+    fun `a line the app cannot identify is treated as needing a mark`() {
+        // An unidentified line cannot vouch for its own macros. It contributes
+        // no figure, so it cannot taint a total on its own...
+        val unknownOnly = priceMeal(listOf(line(null, 100.0)), context)
+        assertNull(unknownOnly.proteinG)
+
+        // ...but the line itself still reads as unverified.
+        assertTrue(priceLine(line(null, 100.0), context).macrosNeedMarking)
+    }
+
+    @Test
+    fun `an empty meal has nothing to mark`() {
+        assertTrue(!priceMeal(emptyList(), context).macrosNeedMarking)
     }
 }

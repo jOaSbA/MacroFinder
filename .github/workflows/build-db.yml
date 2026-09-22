@@ -57,6 +57,21 @@ jobs:
       - name: Ingest Aldi
         run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
 
+      # docs/AUDIT.md finding 5: product_macros had never held a row in
+      # production. Tier-1 FIR label figures need --with-macros and no workflow
+      # passed it, so every macro the app has ever shown came from the generic
+      # seed - and all 478 exported AH offers were flagged as needing an
+      # estimate marker. BRIEF section 2 says to prefer a SKU's own label
+      # "always"; there was simply never anything there to prefer.
+      #
+      # 300 is one request each at 2/second, so about two and a half minutes.
+      # `macro_candidates` spends them on matched products that are on a
+      # CURRENT offer first - those are the rows a ranking actually prints.
+      # Only AH has a label endpoint (its FIR lane); Jumbo and Aldi publish no
+      # nutrition this adapter can read.
+      - name: Fetch tier-1 label macros (AH)
+        run: bonusrank ingest --chain ah --with-macros 300 || echo "AH macro fetch failed, continuing"
+
       - name: Refresh base prices (AH)
         run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
 

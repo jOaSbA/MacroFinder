@@ -340,6 +340,13 @@ private fun CandidateRow(
  * displaying a protein figure that included sla - two contradictory claims on
  * one screen. `sla` has protein and kcal but no carbs or fat, so the honest
  * sentence names what is missing rather than overstating it.
+ *
+ * The figures also carry a provenance mark. BRIEF section 9 rule 1 forbids
+ * showing an estimated macro bare, and every one of these comes from the
+ * generic seed - this screen was showing them unmarked, which is
+ * docs/AUDIT.md finding 3.3. The offer list already marked its own with the
+ * same asterisk and the same footnote wording, so the two screens now say the
+ * same thing in the same way.
  */
 @Composable
 private fun TotalsBar(viewModel: MacroFinderViewModel) {
@@ -366,12 +373,16 @@ private fun TotalsBar(viewModel: MacroFinderViewModel) {
                     )
                 }
                 Column(horizontalAlignment = Alignment.End) {
+                    // The mark goes on the figures, never on "onbekend" -
+                    // there is nothing to qualify about an unknown.
+                    val mark = if (totals.macrosNeedMarking) "*" else ""
                     Text(
-                        totals.proteinG?.let { "%.1f g eiwit".format(it) } ?: "eiwit onbekend",
+                        totals.proteinG?.let { "%.1f g eiwit$mark".format(it) }
+                            ?: "eiwit onbekend",
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Text(
-                        totals.kcal?.let { "%.0f kcal".format(it) } ?: "kcal onbekend",
+                        totals.kcal?.let { "%.0f kcal$mark".format(it) } ?: "kcal onbekend",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -390,6 +401,15 @@ private fun TotalsBar(viewModel: MacroFinderViewModel) {
                     "Geen actuele prijs voor: ${totals.unpricedLines.joinToString(", ")}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            if (totals.macrosNeedMarking) {
+                Text(
+                    "* geschatte macro's, uit algemene voedingswaarden en niet " +
+                        "van het etiket van dit product",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 6.dp),
                 )
             }
             if (totals.unknownMacroLines.isNotEmpty()) {
