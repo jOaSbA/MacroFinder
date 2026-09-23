@@ -7,7 +7,7 @@
             {
               "effort_minutes": 3,
               "equipment": "kom, lepel",
-              "eur_per_g_protein": 0.03994204545454545,
+              "eur_per_g_protein": 0.027697727272727273,
               "items": [
                 {
                   "food_type": "kwark_mager",
@@ -15,7 +15,7 @@
                   "is_pantry": false,
                   "kcal": 94.0,
                   "name": "magere kwark",
-                  "price_eur": 0.5535,
+                  "price_eur": 0.338,
                   "protein_g": 16.0
                 },
                 {
@@ -39,7 +39,7 @@
               ],
               "kcal": 122.0,
               "name": "magere kwark + cacao + zoetstof",
-              "price_eur": 0.70298,
+              "price_eur": 0.48748,
               "protein_g": 17.6,
               "similarity_confidence": "medium",
               "taste_delta_note": "minder zoet, zuurder, sterkere cacaosmaak",
@@ -73,9 +73,9 @@
           "serving_g": 200.0,
           "target_protein_g": 20.0,
           "verdict": {
-            "cheaper_pct": 42.529431000654014,
+            "cheaper_pct": 60.1471550032701,
             "protein_delta_g": -2.3999999999999986,
-            "text": "Zelf maken is 43% goedkoper per gram eiwit, -2 g eiwit, kost 3 min.",
+            "text": "Zelf maken is 60% goedkoper per gram eiwit, -2 g eiwit, kost 3 min.",
             "winner": "diy"
           }
         },
@@ -224,7 +224,7 @@
             {
               "effort_minutes": 4,
               "equipment": "pot met deksel, koelkast (nacht wachten)",
-              "eur_per_g_protein": 0.04311329675629866,
+              "eur_per_g_protein": 0.03551456614981065,
               "items": [
                 {
                   "food_type": "havermout",
@@ -241,7 +241,7 @@
                   "is_pantry": false,
                   "kcal": 70.5,
                   "name": "magere kwark",
-                  "price_eur": 0.415125,
+                  "price_eur": 0.2535,
                   "protein_g": 12.0
                 },
                 {
@@ -265,7 +265,7 @@
               ],
               "kcal": 307.7,
               "name": "havermout + magere kwark + melk + fruit",
-              "price_eur": 0.9170198220064725,
+              "price_eur": 0.7553948220064725,
               "protein_g": 21.27,
               "similarity_confidence": "medium",
               "taste_delta_note": "minder zoet en minder gekruid; geen kaneel of siroop tenzij toegevoegd",
@@ -280,40 +280,40 @@
           "meal_kind": "meal",
           "name": "Overnight oats",
           "optimised": {
-            "carbs_g": 19.9999999986,
-            "fat_g": 17.8689653619,
+            "carbs_g": 20.00000008,
+            "fat_g": 10.184601634,
             "items": [
               {
-                "food_type": "melk_halfvol",
-                "grams": 400.0,
+                "food_type": "kwark_mager",
+                "grams": 65.711728,
                 "is_pantry": false,
-                "kcal": 184.0,
-                "name": "halfvolle melk",
-                "price_eur": 0.31844660194174756,
-                "protein_g": 14.000000000000002
+                "kcal": 30.884512159999996,
+                "name": "magere kwark",
+                "price_eur": 0.11105282031999998,
+                "protein_g": 5.256938239999999
               },
               {
-                "food_type": "havermout",
-                "grams": 0.68965517,
+                "food_type": "melk_halfvol",
+                "grams": 354.52104,
                 "is_pantry": false,
-                "kcal": 2.551724129,
-                "name": "havermout",
-                "price_eur": 0.0030919540121666666,
-                "protein_g": 0.0896551721
+                "kcal": 163.0796784,
+                "name": "halfvolle melk",
+                "price_eur": 0.2822400512621359,
+                "protein_g": 12.408236400000002
               },
               {
                 "food_type": "pindakaas",
-                "grams": 23.641379,
+                "grams": 9.3393017,
                 "is_pantry": false,
-                "kcal": 141.848274,
+                "kcal": 56.0358102,
                 "name": "pindakaas",
-                "price_eur": 0.1274861362575,
-                "protein_g": 5.91034475
+                "price_eur": 0.050362184417249996,
+                "protein_g": 2.334825425
               }
             ],
-            "kcal": 328.399998129,
-            "price_eur": 0.4490246922114142,
-            "protein_g": 19.999999922100002,
+            "kcal": 250.00000075999998,
+            "price_eur": 0.44365505599938587,
+            "protein_g": 20.000000065000002,
             "rejected": false
           },
           "ready_made": null,
@@ -331,7 +331,7 @@
             {
               "effort_minutes": 2,
               "equipment": "shaker of garde",
-              "eur_per_g_protein": 0.03999276886289649,
+              "eur_per_g_protein": 0.028482383106219925,
               "items": [
                 {
                   "food_type": "kwark_mager",
@@ -339,7 +339,7 @@
                   "is_pantry": false,
                   "kcal": 84.6,
                   "name": "magere kwark",
-                  "price_eur": 0.49815000000000004,
+                  "price_eur": 0.30419999999999997,
                   "protein_g": 14.4
                 },
                 {
@@ -363,7 +363,7 @@
               ],
               "kcal": 122.56,
               "name": "magere kwark + halfvolle melk + vanille",
-              "price_eur": 0.6738781553398059,
+              "price_eur": 0.47992815533980576,
               "protein_g": 16.85,
               "similarity_confidence": "medium",
               "taste_delta_note": "zuurder en minder zoet, vanille is eenduidiger dan het origineel",
@@ -379,30 +379,21 @@
           "meal_kind": "drink",
           "name": "Proteine drinkyoghurt",
           "optimised": {
-            "carbs_g": 22.6,
-            "fat_g": 6.225,
+            "carbs_g": 10.0,
+            "fat_g": 0.75,
             "items": [
               {
                 "food_type": "kwark_mager",
-                "grams": 75.0,
+                "grams": 250.0,
                 "is_pantry": false,
-                "kcal": 35.25,
+                "kcal": 117.5,
                 "name": "magere kwark",
-                "price_eur": 0.2075625,
-                "protein_g": 6.0
-              },
-              {
-                "food_type": "melk_halfvol",
-                "grams": 400.0,
-                "is_pantry": false,
-                "kcal": 184.0,
-                "name": "halfvolle melk",
-                "price_eur": 0.31844660194174756,
-                "protein_g": 14.000000000000002
+                "price_eur": 0.4225,
+                "protein_g": 20.0
               }
             ],
-            "kcal": 219.25,
-            "price_eur": 0.5260091019417475,
+            "kcal": 117.5,
+            "price_eur": 0.4225,
             "protein_g": 20.0,
             "rejected": false
           },
@@ -421,9 +412,9 @@
           "serving_g": 250.0,
           "target_protein_g": 20.0,
           "verdict": {
-            "cheaper_pct": 40.133408180896666,
+            "cheaper_pct": 15.939942233698753,
             "protein_delta_g": -8.149999999999999,
-            "text": "Gewoon kopen: kant-en-klaar is 40% goedkoper per gram eiwit en scheelt 2 min.",
+            "text": "Gewoon kopen: kant-en-klaar is 16% goedkoper per gram eiwit en scheelt 2 min.",
             "winner": "ready_made"
           }
         },
@@ -565,7 +556,7 @@
             {
               "effort_minutes": 3,
               "equipment": "garde of blender",
-              "eur_per_g_protein": 0.0324672641274583,
+              "eur_per_g_protein": 0.021415982076176253,
               "items": [
                 {
                   "food_type": "kwark_mager",
@@ -573,7 +564,7 @@
                   "is_pantry": false,
                   "kcal": 94.0,
                   "name": "magere kwark",
-                  "price_eur": 0.5535,
+                  "price_eur": 0.338,
                   "protein_g": 16.0
                 },
                 {
@@ -588,7 +579,7 @@
               ],
               "kcal": 140.0,
               "name": "magere kwark + halfvolle melk",
-              "price_eur": 0.6331116504854368,
+              "price_eur": 0.4176116504854369,
               "protein_g": 19.5,
               "similarity_confidence": "medium",
               "taste_delta_note": "duidelijk zuurder, zonder toegevoegde zoetheid",
@@ -605,30 +596,21 @@
           "meal_kind": "drink",
           "name": "Proteine shake",
           "optimised": {
-            "carbs_g": 25.1,
-            "fat_g": 6.4125,
+            "carbs_g": 12.5,
+            "fat_g": 0.9375,
             "items": [
               {
                 "food_type": "kwark_mager",
-                "grams": 137.5,
+                "grams": 312.5,
                 "is_pantry": false,
-                "kcal": 64.625,
+                "kcal": 146.875,
                 "name": "magere kwark",
-                "price_eur": 0.38053125,
-                "protein_g": 11.0
-              },
-              {
-                "food_type": "melk_halfvol",
-                "grams": 400.0,
-                "is_pantry": false,
-                "kcal": 184.0,
-                "name": "halfvolle melk",
-                "price_eur": 0.31844660194174756,
-                "protein_g": 14.000000000000002
+                "price_eur": 0.528125,
+                "protein_g": 25.0
               }
             ],
-            "kcal": 248.625,
-            "price_eur": 0.6989778519417476,
+            "kcal": 146.875,
+            "price_eur": 0.528125,
             "protein_g": 25.0,
             "rejected": false
           },
@@ -713,12 +695,12 @@
       ],
       "food_type_prices": {
         "aardappelen": {
-          "eur_per_kg": 4.49,
+          "eur_per_kg": 1.2833333333333334,
           "is_personal_offer": false,
-          "product_name": "AH Aardappel ovenschaal patatas bravas",
-          "promo_text": "2 voor 4.49",
-          "required_quantity": 2,
-          "sku": "603618"
+          "product_name": "AH Iets kruimige aardappel",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "96049"
         },
         "aardbeien": {
           "eur_per_kg": 4.485000000000001,
@@ -1033,12 +1015,12 @@
           "sku": "564792"
         },
         "feta": {
-          "eur_per_kg": 27.5,
+          "eur_per_kg": 21.583333333333332,
           "is_personal_offer": false,
-          "product_name": "Salakis Classic greek feta",
+          "product_name": "AH Biologisch Griekse feta",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "478226"
+          "sku": "497552"
         },
         "frambozen": {
           "eur_per_kg": 6.123076923076923,
@@ -1105,12 +1087,12 @@
           "sku": "53542"
         },
         "haverdrink": {
-          "eur_per_kg": 2.7087378640776696,
+          "eur_per_kg": 1.4466019417475728,
           "is_personal_offer": false,
-          "product_name": "Alpro Haverdrink zonder suikers",
+          "product_name": "AH Terra Biologisch haverdrink ongezoet",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "447631"
+          "sku": "605272"
         },
         "havermout": {
           "eur_per_kg": 4.483333333333333,
@@ -1353,12 +1335,12 @@
           "sku": "403752"
         },
         "kwark_mager": {
-          "eur_per_kg": 2.7675,
+          "eur_per_kg": 1.69,
           "is_personal_offer": false,
-          "product_name": "Campina Magere milde kwark vanille voordeelpak",
-          "promo_text": "2e halve prijs",
-          "required_quantity": 2,
-          "sku": "555453"
+          "product_name": "De Zaanse Hoeve Magere kwark",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "458995"
         },
         "kwark_mager_fruit": {
           "eur_per_kg": 6.644444444444445,
@@ -2337,6 +2319,38 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": 37.71008403361344
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 4.588744588744589,
+          "food_type": "vla_vanille",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 95.0,
+            "protein_g": 3.3
+          },
+          "meal_kind": "snack",
+          "name": "AH Vanillevla",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.59,
+            "total_outlay_eur": 1.59,
+            "unit_price_eur": 1.59
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "118131",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 4.588744588744589
         },
         {
           "brand": "AH Biologisch",
@@ -5153,38 +5167,6 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": 2.60989010989011
-        },
-        {
-          "brand": "Calvé",
-          "eur_per_100g_protein": 3.47985347985348,
-          "food_type": "pindakaas",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": false,
-          "macros_per_100g": {
-            "carbs_g": 11.0,
-            "fat_g": 58.0,
-            "kcal": 664.0,
-            "protein_g": 21.0
-          },
-          "meal_kind": "ingredient",
-          "name": "Calvé Pindakaas pot",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 4.75,
-            "total_outlay_eur": 4.75,
-            "unit_price_eur": 4.75
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "220739",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 3.47985347985348
         },
         {
           "brand": "Campina",
@@ -8035,70 +8017,6 @@
           "waste_adjusted_eur_per_100g_protein": 5.235
         },
         {
-          "brand": "Campina",
-          "eur_per_100g_protein": 3.49,
-          "food_type": "kwark_mager",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": false,
-          "macros_per_100g": {
-            "carbs_g": 2.7,
-            "fat_g": 0.1,
-            "kcal": 55.0,
-            "protein_g": 10.0
-          },
-          "meal_kind": "snack",
-          "name": "Campina Magere milde kwark naturel voordeelpak",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 3.49,
-            "total_outlay_eur": 3.49,
-            "unit_price_eur": 3.49
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "429777",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 3.49
-        },
-        {
-          "brand": "Aviko",
-          "eur_per_100g_protein": 24.916666666666668,
-          "food_type": "aardappelen",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": 17.0,
-            "fat_g": null,
-            "kcal": 77.0,
-            "protein_g": 2.0
-          },
-          "meal_kind": "ingredient",
-          "name": "Aviko Mini aardappel kroketjes",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 2.99,
-            "total_outlay_eur": 2.99,
-            "unit_price_eur": 2.99
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "430431",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 24.916666666666668
-        },
-        {
           "brand": "Knorr",
           "eur_per_100g_protein": 16.481701677896684,
           "food_type": "kipfilet_rauw",
@@ -8419,38 +8337,6 @@
           "waste_adjusted_eur_per_100g_protein": 41.66666666666667
         },
         {
-          "brand": "Alpro",
-          "eur_per_100g_protein": 27.0873786407767,
-          "food_type": "haverdrink",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": 6.6,
-            "fat_g": 1.5,
-            "kcal": 45.0,
-            "protein_g": 1.0
-          },
-          "meal_kind": "drink",
-          "name": "Alpro Haverdrink zonder suikers",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 2.79,
-            "total_outlay_eur": 2.79,
-            "unit_price_eur": 2.79
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "447631",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 27.0873786407767
-        },
-        {
           "brand": "AH Terra",
           "eur_per_100g_protein": 5.928571428571429,
           "food_type": "amandelen",
@@ -8705,6 +8591,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 6.003430531732419
+        },
+        {
+          "brand": "De Zaanse Hoeve",
+          "eur_per_100g_protein": 2.1125,
+          "food_type": "kwark_mager",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 4.0,
+            "fat_g": 0.3,
+            "kcal": 47.0,
+            "protein_g": 8.0
+          },
+          "meal_kind": "snack",
+          "name": "De Zaanse Hoeve Magere kwark",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.69,
+            "total_outlay_eur": 1.69,
+            "unit_price_eur": 1.69
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "458995",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 2.1125
         },
         {
           "brand": "AH",
@@ -9089,38 +9007,6 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": 18.779342723004692
-        },
-        {
-          "brand": "Salakis",
-          "eur_per_100g_protein": 19.642857142857142,
-          "food_type": "feta",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": 21.0,
-            "kcal": 260.0,
-            "protein_g": 14.0
-          },
-          "meal_kind": "ingredient",
-          "name": "Salakis Classic greek feta",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 2.75,
-            "total_outlay_eur": 2.75,
-            "unit_price_eur": 2.75
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "478226",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 19.642857142857142
         },
         {
           "brand": "Maza",
@@ -9537,6 +9423,38 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": null
+        },
+        {
+          "brand": "AH Biologisch",
+          "eur_per_100g_protein": 15.416666666666664,
+          "food_type": "feta",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 21.0,
+            "kcal": 260.0,
+            "protein_g": 14.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Biologisch Griekse feta",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.59,
+            "total_outlay_eur": 2.59,
+            "unit_price_eur": 2.59
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "497552",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 15.416666666666664
         },
         {
           "brand": "AH",
@@ -10081,6 +9999,38 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": 122.46153846153847
+        },
+        {
+          "brand": "Whole earth",
+          "eur_per_100g_protein": 4.8625,
+          "food_type": "pindakaas",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 50.0,
+            "kcal": 600.0,
+            "protein_g": 25.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Whole earth Drizzler golden roasted peanut butter",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 3.89,
+            "total_outlay_eur": 3.89,
+            "unit_price_eur": 3.89
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "532223",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 4.8625
         },
         {
           "brand": "AH",
@@ -13955,6 +13905,38 @@
           "waste_adjusted_eur_per_100g_protein": 7.849462365591398
         },
         {
+          "brand": "AH Terra",
+          "eur_per_100g_protein": 14.466019417475728,
+          "food_type": "haverdrink",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 6.6,
+            "fat_g": 1.5,
+            "kcal": 45.0,
+            "protein_g": 1.0
+          },
+          "meal_kind": "drink",
+          "name": "AH Terra Biologisch haverdrink ongezoet",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.49,
+            "total_outlay_eur": 1.49,
+            "unit_price_eur": 1.49
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "605272",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 14.466019417475728
+        },
+        {
           "brand": "AH Excellent",
           "eur_per_100g_protein": 206.09504132231402,
           "food_type": "olijven",
@@ -15460,6 +15442,38 @@
         },
         {
           "brand": "AH",
+          "eur_per_100g_protein": 332.9166666666667,
+          "food_type": "mango",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 60.0,
+            "protein_g": 0.8
+          },
+          "meal_kind": "snack",
+          "name": "AH Zakje met mango stukjes 4-pack",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 31.96,
+            "total_outlay_eur": 31.96,
+            "unit_price_eur": 31.96
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "621016",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 332.9166666666667
+        },
+        {
+          "brand": "AH",
           "eur_per_100g_protein": 18.6,
           "food_type": "gehaktbal",
           "is_personal_offer": false,
@@ -15585,38 +15599,6 @@
           "valid_from": "2026-09-21",
           "valid_to": "2026-09-27",
           "waste_adjusted_eur_per_100g_protein": 128.125
-        },
-        {
-          "brand": "Hak",
-          "eur_per_100g_protein": 256.25,
-          "food_type": "mango",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": false,
-          "macros_per_100g": {
-            "carbs_g": 12.0,
-            "fat_g": 0.1,
-            "kcal": 54.0,
-            "protein_g": 0.4
-          },
-          "meal_kind": "snack",
-          "name": "Hak Knijpfruit mango 0% 4-pack",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 3.69,
-            "total_outlay_eur": 3.69,
-            "unit_price_eur": 3.69
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "623976",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 256.25
         },
         {
           "brand": "Philadelphia",
@@ -16035,38 +16017,6 @@
           "waste_adjusted_eur_per_100g_protein": 12.193877551020408
         },
         {
-          "brand": "Campina",
-          "eur_per_100g_protein": 8.129251700680273,
-          "food_type": "vla_vanille",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": false,
-          "macros_per_100g": {
-            "carbs_g": 15.0,
-            "fat_g": 5.6,
-            "kcal": 123.0,
-            "protein_g": 2.8
-          },
-          "meal_kind": "snack",
-          "name": "Campina Vla slagroom vanille smaak",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 2.39,
-            "total_outlay_eur": 2.39,
-            "unit_price_eur": 2.39
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "68022",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 8.129251700680273
-        },
-        {
           "brand": "AH Terra",
           "eur_per_100g_protein": 6.909722222222222,
           "food_type": "kapucijners_blik",
@@ -16193,6 +16143,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 31.125000000000004
+        },
+        {
+          "brand": "AH",
+          "eur_per_100g_protein": 6.416666666666666,
+          "food_type": "aardappelen",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 17.0,
+            "fat_g": null,
+            "kcal": 77.0,
+            "protein_g": 2.0
+          },
+          "meal_kind": "ingredient",
+          "name": "AH Iets kruimige aardappel",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 3.85,
+            "total_outlay_eur": 3.85,
+            "unit_price_eur": 3.85
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "96049",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 6.416666666666666
         }
       ],
       "template_prices": {
@@ -20094,23 +20076,23 @@
             "rejected": false
           },
           "ready_made": {
-            "eur_per_g_protein": 0.07812499999999999,
+            "eur_per_g_protein": 0.09027777777777779,
             "is_personal_offer": false,
             "kcal": 150.0,
             "matched_by": "food_type eiwitshake_kant_en_klaar",
-            "name": "NXT Level Vanilla Flavor Protein Shake 500 ml",
-            "price_eur": 1.8749999999999998,
+            "name": "Melkunie Protein Raspberry & Strawberry Shake 8 x 225 ml",
+            "price_eur": 2.166666666666667,
             "promo_text": "shelf price (search)",
             "protein_g": 24.0,
             "required_quantity": 1,
-            "sku": "572979FLS"
+            "sku": "192505DSL"
           },
           "serving_g": 300.0,
           "target_protein_g": 25.0,
           "verdict": {
-            "cheaper_pct": 70.59696290764252,
+            "cheaper_pct": 74.55506405469065,
             "protein_delta_g": -4.5,
-            "text": "Zelf maken is 71% goedkoper per gram eiwit, -4 g eiwit, kost 3 min.",
+            "text": "Zelf maken is 75% goedkoper per gram eiwit, -4 g eiwit, kost 3 min.",
             "winner": "diy"
           }
         },
@@ -20336,12 +20318,12 @@
           "sku": "673001DS"
         },
         "boter": {
-          "eur_per_kg": 12.475,
+          "eur_per_kg": 10.6,
           "is_personal_offer": false,
-          "product_name": "Becel met Roomboter 400 g",
+          "product_name": "Jumbo Ongezouten Roomboter 250 g",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "679519CUP"
+          "sku": "750545PAK"
         },
         "brie": {
           "eur_per_kg": 9.950000000000001,
@@ -20504,12 +20486,12 @@
           "sku": "624271PAK"
         },
         "eiwitshake_kant_en_klaar": {
-          "eur_per_kg": 6.25,
+          "eur_per_kg": 7.222222222222222,
           "is_personal_offer": false,
-          "product_name": "NXT Level Vanilla Flavor Protein Shake 500 ml",
+          "product_name": "Melkunie Protein Raspberry & Strawberry Shake 8 x 225 ml",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "572979FLS"
+          "sku": "192505DSL"
         },
         "falafel": {
           "eur_per_kg": 7.194444444444445,
@@ -20554,10 +20536,10 @@
         "garnalen": {
           "eur_per_kg": 11.414285714285715,
           "is_personal_offer": false,
-          "product_name": "Jumbo Garnalen XXL Knoflook 350 g",
+          "product_name": "Jumbo Garnalen XXL Naturel 350 g",
           "promo_text": "1+1 gratis",
           "required_quantity": 2,
-          "sku": "683032BAK"
+          "sku": "683332BAK"
         },
         "gehaktbal": {
           "eur_per_kg": 12.5,
@@ -20616,12 +20598,12 @@
           "sku": "572901ZK"
         },
         "honing": {
-          "eur_per_kg": 16.2,
+          "eur_per_kg": 11.98,
           "is_personal_offer": false,
-          "product_name": "Mellona Biologische Bloemenhoning Vloeibare 450 g",
+          "product_name": "Langnese Bee Easy Wilde Bloemenhoning 500g",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "484775POT"
+          "sku": "177658FLS"
         },
         "hummus": {
           "eur_per_kg": 6.45,
@@ -20696,12 +20678,12 @@
           "sku": "79503POT"
         },
         "karnemelk": {
-          "eur_per_kg": 1.6407766990291262,
+          "eur_per_kg": 1.1553398058252426,
           "is_personal_offer": false,
-          "product_name": "Arla Bio Karnemelk 1 L",
+          "product_name": "Jumbo Verse Karnemelk 1 L",
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
-          "sku": "47870PAK"
+          "sku": "711418PAK"
         },
         "kidneybonen_blik": {
           "eur_per_kg": 2.960526315789474,
@@ -20880,12 +20862,12 @@
           "sku": "408451CUP"
         },
         "leverworst": {
-          "eur_per_kg": 10.0,
+          "eur_per_kg": 2.7,
           "is_personal_offer": false,
-          "product_name": "Jumbo Biologisch Leverworst ca. 120 g",
-          "promo_text": "1+1 gratis",
-          "required_quantity": 2,
-          "sku": "669697KGR"
+          "product_name": "Leverworst 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "673416STK"
         },
         "lijnzaad": {
           "eur_per_kg": 5.98,
@@ -20968,7 +20950,7 @@
           "sku": "683341BAK"
         },
         "mozzarella": {
-          "eur_per_kg": 6.153846153846154,
+          "eur_per_kg": 6.083916083916084,
           "is_personal_offer": false,
           "product_name": "Goldsteig Mozzarella Classic 220 g",
           "promo_text": "shelf price (search)",
@@ -21296,11 +21278,11 @@
           "sku": "530937FLS"
         },
         "skyr_fruit": {
-          "eur_per_kg": 3.888888888888889,
+          "eur_per_kg": 6.644444444444445,
           "is_personal_offer": false,
           "product_name": "HiPRO Protein Skyr Stijl Vanille 450g",
-          "promo_text": "2 voor 3,50",
-          "required_quantity": 2,
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
           "sku": "478256CUP"
         },
         "skyr_naturel": {
@@ -21344,12 +21326,12 @@
           "sku": "784960POT"
         },
         "spinazie": {
-          "eur_per_kg": 3.0533333333333332,
+          "eur_per_kg": 3.924242424242424,
           "is_personal_offer": false,
-          "product_name": "Iglo Spinazie à la crème 750 g",
-          "promo_text": "shelf price (search)",
-          "required_quantity": 1,
-          "sku": "64554DS"
+          "product_name": "Hak Spinazie 330 g",
+          "promo_text": "1+1 gratis",
+          "required_quantity": 2,
+          "sku": "97354POT"
         },
         "spliterwten_droog": {
           "eur_per_kg": 1.99,
@@ -21566,6 +21548,14 @@
           "promo_text": "shelf price (search)",
           "required_quantity": 1,
           "sku": "739396ZK"
+        },
+        "yoghurt_halfvol": {
+          "eur_per_kg": 4.38,
+          "is_personal_offer": false,
+          "product_name": "Almhof Halfvolle Fruit Yoghurt Kers 1,3% Vet 500 g",
+          "promo_text": "shelf price (search)",
+          "required_quantity": 1,
+          "sku": "511649CUP"
         },
         "yoghurt_vol": {
           "eur_per_kg": 2.19,
@@ -22019,7 +22009,7 @@
         },
         {
           "brand": "GOLDSTEIG",
-          "eur_per_100g_protein": 3.418803418803419,
+          "eur_per_100g_protein": 3.37995337995338,
           "food_type": "mozzarella",
           "is_personal_offer": false,
           "kcal_is_derived": false,
@@ -22039,15 +22029,15 @@
             "promo_mechanic": "not_a_promo",
             "promo_text": "shelf price (search)",
             "required_quantity": 1,
-            "shelf_price_eur": 0.88,
-            "total_outlay_eur": 0.88,
-            "unit_price_eur": 0.88
+            "shelf_price_eur": 0.87,
+            "total_outlay_eur": 0.87,
+            "unit_price_eur": 0.87
           },
           "realistically_consumable_packs": 1,
           "sku": "167680STK",
           "valid_from": null,
           "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 3.418803418803419
+          "waste_adjusted_eur_per_100g_protein": 3.37995337995338
         },
         {
           "brand": "Campina",
@@ -22210,6 +22200,38 @@
           "waste_adjusted_eur_per_100g_protein": 5.339285714285714
         },
         {
+          "brand": "Langnese",
+          "eur_per_100g_protein": 399.33333333333337,
+          "food_type": "honing",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 320.0,
+            "protein_g": 0.3
+          },
+          "meal_kind": "ingredient",
+          "name": "Langnese Bee Easy Wilde Bloemenhoning 500g",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 5.99,
+            "total_outlay_eur": 5.99,
+            "unit_price_eur": 5.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "177658FLS",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 399.33333333333337
+        },
+        {
           "brand": "Haribo",
           "eur_per_100g_protein": 81.78571428571429,
           "food_type": "aardbeien",
@@ -22336,6 +22358,38 @@
           "valid_from": "2026-09-23",
           "valid_to": "2026-09-29",
           "waste_adjusted_eur_per_100g_protein": 6.21875
+        },
+        {
+          "brand": "Melkunie",
+          "eur_per_100g_protein": 9.027777777777777,
+          "food_type": "eiwitshake_kant_en_klaar",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 50.0,
+            "protein_g": 8.0
+          },
+          "meal_kind": "drink",
+          "name": "Melkunie Protein Raspberry & Strawberry Shake 8 x 225 ml",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 13.52,
+            "total_outlay_eur": 13.52,
+            "unit_price_eur": 13.52
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "192505DSL",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 9.027777777777777
         },
         {
           "brand": "Campina",
@@ -24067,6 +24121,38 @@
         },
         {
           "brand": "Jumbo",
+          "eur_per_100g_protein": 47.93103448275862,
+          "food_type": "spinazie",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": null,
+            "kcal": 23.0,
+            "protein_g": 2.9
+          },
+          "meal_kind": "ingredient",
+          "name": "Jumbo Baby Spinazie 100 g",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.39,
+            "total_outlay_eur": 1.39,
+            "unit_price_eur": 1.39
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "362303ZK",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 47.93103448275862
+        },
+        {
+          "brand": "Jumbo",
           "eur_per_100g_protein": 7.256944444444444,
           "food_type": "tonijn_blik_water",
           "is_personal_offer": false,
@@ -24704,38 +24790,6 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 16.611111111111114
-        },
-        {
-          "brand": "Jumbo",
-          "eur_per_100g_protein": 5.99,
-          "food_type": "kaas_belegen_48",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": 32.0,
-            "kcal": 390.0,
-            "protein_g": 25.0
-          },
-          "meal_kind": "ingredient",
-          "name": "Jumbo Belegen Kaas 48+ Voordeelverpakking Plakken 400 g",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 5.99,
-            "total_outlay_eur": 5.99,
-            "unit_price_eur": 5.99
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "387187STK",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 5.99
         },
         {
           "brand": "Maggi",
@@ -25666,20 +25720,20 @@
           "waste_adjusted_eur_per_100g_protein": 4.320987654320987
         },
         {
-          "brand": "Arla",
-          "eur_per_100g_protein": 4.972050603118563,
-          "food_type": "karnemelk",
+          "brand": "HiPRO",
+          "eur_per_100g_protein": 7.382716049382716,
+          "food_type": "skyr_fruit",
           "is_personal_offer": false,
           "kcal_is_derived": false,
           "macros_need_marking": true,
           "macros_per_100g": {
-            "carbs_g": 4.0,
-            "fat_g": 0.5,
-            "kcal": 33.0,
-            "protein_g": 3.3
+            "carbs_g": 10.0,
+            "fat_g": 0.2,
+            "kcal": 80.0,
+            "protein_g": 9.0
           },
-          "meal_kind": "drink",
-          "name": "Arla Bio Karnemelk 1 L",
+          "meal_kind": "snack",
+          "name": "HiPRO Protein Skyr Stijl Vanille 450g",
           "perishable": true,
           "price": {
             "cheapest_in_weeks": null,
@@ -25687,15 +25741,15 @@
             "promo_mechanic": "not_a_promo",
             "promo_text": "shelf price (search)",
             "required_quantity": 1,
-            "shelf_price_eur": 1.69,
-            "total_outlay_eur": 1.69,
-            "unit_price_eur": 1.69
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
           },
           "realistically_consumable_packs": 1,
-          "sku": "47870PAK",
+          "sku": "478256CUP",
           "valid_from": null,
           "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 4.972050603118563
+          "waste_adjusted_eur_per_100g_protein": 7.382716049382716
         },
         {
           "brand": "Bertolli",
@@ -25888,38 +25942,6 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 8.53475935828877
-        },
-        {
-          "brand": "Mellona",
-          "eur_per_100g_protein": 540.0,
-          "food_type": "honing",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": null,
-            "kcal": 320.0,
-            "protein_g": 0.3
-          },
-          "meal_kind": "ingredient",
-          "name": "Mellona Biologische Bloemenhoning Vloeibare 450 g",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 7.29,
-            "total_outlay_eur": 7.29,
-            "unit_price_eur": 7.29
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "484775POT",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 540.0
         },
         {
           "brand": "Jumbo",
@@ -26434,6 +26456,38 @@
           "waste_adjusted_eur_per_100g_protein": 26.397058823529413
         },
         {
+          "brand": "Almhof",
+          "eur_per_100g_protein": 10.95,
+          "food_type": "yoghurt_halfvol",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 5.0,
+            "fat_g": 1.5,
+            "kcal": 47.0,
+            "protein_g": 4.0
+          },
+          "meal_kind": "snack",
+          "name": "Almhof Halfvolle Fruit Yoghurt Kers 1,3% Vet 500 g",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.19,
+            "total_outlay_eur": 2.19,
+            "unit_price_eur": 2.19
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "511649CUP",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 10.95
+        },
+        {
           "brand": "Sharwoods",
           "eur_per_100g_protein": 90.58370044052863,
           "food_type": "mango",
@@ -26627,7 +26681,7 @@
         },
         {
           "brand": "Jumbo",
-          "eur_per_100g_protein": 11.060606060606059,
+          "eur_per_100g_protein": 10.05050505050505,
           "food_type": "boerenkool",
           "is_personal_offer": false,
           "kcal_is_derived": false,
@@ -26647,15 +26701,15 @@
             "promo_mechanic": "x_plus_y_free",
             "promo_text": "1+1 gratis",
             "required_quantity": 2,
-            "shelf_price_eur": 2.19,
-            "total_outlay_eur": 2.19,
-            "unit_price_eur": 1.095
+            "shelf_price_eur": 1.99,
+            "total_outlay_eur": 1.99,
+            "unit_price_eur": 0.995
           },
           "realistically_consumable_packs": 2,
           "sku": "516887ZK",
           "valid_from": "2026-09-23",
           "valid_to": "2026-09-29",
-          "waste_adjusted_eur_per_100g_protein": 11.060606060606059
+          "waste_adjusted_eur_per_100g_protein": 10.05050505050505
         },
         {
           "brand": "Hak",
@@ -27936,38 +27990,6 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 12.966666666666669
-        },
-        {
-          "brand": "NXTLV",
-          "eur_per_100g_protein": 7.8125,
-          "food_type": "eiwitshake_kant_en_klaar",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": null,
-            "kcal": 50.0,
-            "protein_g": 8.0
-          },
-          "meal_kind": "drink",
-          "name": "NXT Level Vanilla Flavor Protein Shake 500 ml",
-          "perishable": true,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 3.25,
-            "total_outlay_eur": 3.25,
-            "unit_price_eur": 3.25
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "572979FLS",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 7.8125
         },
         {
           "brand": "Jumbo",
@@ -29538,38 +29560,6 @@
           "waste_adjusted_eur_per_100g_protein": 9.484126984126986
         },
         {
-          "brand": "Iglo",
-          "eur_per_100g_protein": 10.528735632183908,
-          "food_type": "spinazie",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": null,
-            "kcal": 23.0,
-            "protein_g": 2.9
-          },
-          "meal_kind": "ingredient",
-          "name": "Iglo Spinazie à la crème 750 g",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 2.29,
-            "total_outlay_eur": 2.29,
-            "unit_price_eur": 2.29
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "64554DS",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 10.528735632183908
-        },
-        {
           "brand": "Jumbo",
           "eur_per_100g_protein": 7.704545454545454,
           "food_type": "kipfilet_rauw",
@@ -30178,6 +30168,38 @@
           "waste_adjusted_eur_per_100g_protein": 6.897546897546898
         },
         {
+          "brand": "Merkloos",
+          "eur_per_100g_protein": 1.9285714285714288,
+          "food_type": "leverworst",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 28.0,
+            "kcal": 320.0,
+            "protein_g": 14.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Leverworst 500 g",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.35,
+            "total_outlay_eur": 1.35,
+            "unit_price_eur": 1.35
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "673416STK",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 1.9285714285714288
+        },
+        {
           "brand": "Jumbo",
           "eur_per_100g_protein": 20.76388888888889,
           "food_type": "gesneden_groente_mix",
@@ -30240,38 +30262,6 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 15.666666666666668
-        },
-        {
-          "brand": "Becel",
-          "eur_per_100g_protein": 178.21428571428572,
-          "food_type": "boter",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": 82.0,
-            "kcal": 740.0,
-            "protein_g": 0.7
-          },
-          "meal_kind": "ingredient",
-          "name": "Becel met Roomboter 400 g",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 4.99,
-            "total_outlay_eur": 4.99,
-            "unit_price_eur": 4.99
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "679519CUP",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 178.21428571428572
         },
         {
           "brand": "Jumbo",
@@ -30496,6 +30486,38 @@
           "valid_from": "2026-09-23",
           "valid_to": "2026-09-29",
           "waste_adjusted_eur_per_100g_protein": 5.707142857142857
+        },
+        {
+          "brand": "Jumbo",
+          "eur_per_100g_protein": 11.414285714285715,
+          "food_type": "garnalen",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 1.0,
+            "kcal": 85.0,
+            "protein_g": 20.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Jumbo Garnalen XXL Knoflook 350 g",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 7.99,
+            "total_outlay_eur": 7.99,
+            "unit_price_eur": 7.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "683032BAK",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 11.414285714285715
         },
         {
           "brand": "Jumbo",
@@ -31202,38 +31224,6 @@
           "waste_adjusted_eur_per_100g_protein": 4.965986394557823
         },
         {
-          "brand": "Iglo",
-          "eur_per_100g_protein": 17.475,
-          "food_type": "garnalen",
-          "is_personal_offer": false,
-          "kcal_is_derived": false,
-          "macros_need_marking": true,
-          "macros_per_100g": {
-            "carbs_g": null,
-            "fat_g": 1.0,
-            "kcal": 85.0,
-            "protein_g": 20.0
-          },
-          "meal_kind": "ingredient",
-          "name": "Iglo Viskraam Garnalen Krokant Gepaneerd 200g",
-          "perishable": false,
-          "price": {
-            "cheapest_in_weeks": null,
-            "is_promo": false,
-            "promo_mechanic": "not_a_promo",
-            "promo_text": "shelf price (search)",
-            "required_quantity": 1,
-            "shelf_price_eur": 6.99,
-            "total_outlay_eur": 6.99,
-            "unit_price_eur": 6.99
-          },
-          "realistically_consumable_packs": 1,
-          "sku": "705370DS",
-          "valid_from": null,
-          "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 17.475
-        },
-        {
           "brand": "SEACON",
           "eur_per_100g_protein": 4.320987654320987,
           "food_type": "koolvis",
@@ -31424,6 +31414,38 @@
           "valid_from": null,
           "valid_to": null,
           "waste_adjusted_eur_per_100g_protein": 2.094736842105263
+        },
+        {
+          "brand": "Jumbo",
+          "eur_per_100g_protein": 3.501029714621947,
+          "food_type": "karnemelk",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": 4.0,
+            "fat_g": 0.5,
+            "kcal": 33.0,
+            "protein_g": 3.3
+          },
+          "meal_kind": "drink",
+          "name": "Jumbo Verse Karnemelk 1 L",
+          "perishable": true,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 1.19,
+            "total_outlay_eur": 1.19,
+            "unit_price_eur": 1.19
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "711418PAK",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 3.501029714621947
         },
         {
           "brand": "Jumbo",
@@ -32258,6 +32280,38 @@
           "waste_adjusted_eur_per_100g_protein": null
         },
         {
+          "brand": "Beemster",
+          "eur_per_100g_protein": 9.568,
+          "food_type": "kaas_belegen_48",
+          "is_personal_offer": false,
+          "kcal_is_derived": false,
+          "macros_need_marking": true,
+          "macros_per_100g": {
+            "carbs_g": null,
+            "fat_g": 32.0,
+            "kcal": 390.0,
+            "protein_g": 25.0
+          },
+          "meal_kind": "ingredient",
+          "name": "Beemster Royaal Belegen Kaas 5 Plakken 0,125 kg",
+          "perishable": false,
+          "price": {
+            "cheapest_in_weeks": null,
+            "is_promo": false,
+            "promo_mechanic": "not_a_promo",
+            "promo_text": "shelf price (search)",
+            "required_quantity": 1,
+            "shelf_price_eur": 2.99,
+            "total_outlay_eur": 2.99,
+            "unit_price_eur": 2.99
+          },
+          "realistically_consumable_packs": 1,
+          "sku": "729247ZK",
+          "valid_from": null,
+          "valid_to": null,
+          "waste_adjusted_eur_per_100g_protein": 9.568
+        },
+        {
           "brand": "Jumbo",
           "eur_per_100g_protein": 2.8219696969696972,
           "food_type": "tuinbonen",
@@ -32802,36 +32856,36 @@
           "waste_adjusted_eur_per_100g_protein": 13.450292397660816
         },
         {
-          "brand": "Kips",
-          "eur_per_100g_protein": 7.821428571428571,
-          "food_type": "leverworst",
+          "brand": "Jumbo",
+          "eur_per_100g_protein": 151.42857142857142,
+          "food_type": "boter",
           "is_personal_offer": false,
           "kcal_is_derived": false,
           "macros_need_marking": true,
           "macros_per_100g": {
             "carbs_g": null,
-            "fat_g": 28.0,
-            "kcal": 320.0,
-            "protein_g": 14.0
+            "fat_g": 82.0,
+            "kcal": 740.0,
+            "protein_g": 0.7
           },
           "meal_kind": "ingredient",
-          "name": "Kips Leverworst Mosterd 200g",
-          "perishable": true,
+          "name": "Jumbo Ongezouten Roomboter 250 g",
+          "perishable": false,
           "price": {
             "cheapest_in_weeks": null,
             "is_promo": false,
             "promo_mechanic": "not_a_promo",
             "promo_text": "shelf price (search)",
             "required_quantity": 1,
-            "shelf_price_eur": 2.19,
-            "total_outlay_eur": 2.19,
-            "unit_price_eur": 2.19
+            "shelf_price_eur": 2.65,
+            "total_outlay_eur": 2.65,
+            "unit_price_eur": 2.65
           },
           "realistically_consumable_packs": 1,
-          "sku": "750960PAK",
+          "sku": "750545PAK",
           "valid_from": null,
           "valid_to": null,
-          "waste_adjusted_eur_per_100g_protein": 7.821428571428571
+          "waste_adjusted_eur_per_100g_protein": 151.42857142857142
         },
         {
           "brand": "Jumbo",
@@ -37357,7 +37411,7 @@
       "name": "zwarte bonen uit blik"
     }
   ],
-  "generated_at": "2026-09-23T10:47:40+00:00",
+  "generated_at": "2026-09-23T21:08:17+00:00",
   "schema_version": 2,
   "templates": [
     {
