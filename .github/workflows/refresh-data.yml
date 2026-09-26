@@ -130,6 +130,11 @@ jobs:
         if: github.event.schedule == '0 4 * * 1' || inputs.crawl
         run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
 
+      # Barcodes from data already on disk: Jumbo image names and the AH
+      # detail calls the label fetch just saved. No requests.
+      - name: Fill barcodes
+        run: bonusrank fill-eans
+
       - name: Export
         run: |
           bonusrank export --out dist/data/latest.json

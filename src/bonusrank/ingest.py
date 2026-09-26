@@ -16,8 +16,10 @@ import logging
 import sqlite3
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
+from pathlib import Path
 from typing import Any
 
+from . import config
 from .matcher import MatchMethod, Matcher, MatchResult
 from .parsers import (
     compare_unit_price,
@@ -195,6 +197,7 @@ def _ingest_sku(
         "raw_unit_text=excluded.raw_unit_text, unit_size_g=excluded.unit_size_g, "
         "unit_size_ml=excluded.unit_size_ml, cost_basis_g=excluded.cost_basis_g, "
         "category=excluded.category, food_type_id=excluded.food_type_id, "
+        "ean=coalesce(excluded.ean, products.ean), "
         "match_method=excluded.match_method, match_score=excluded.match_score",
         (chain, sku, name, brand, raw_unit_text, size.total_g,
          size.total_ml, size.cost_basis_g, ean, category, food_type_id,
@@ -417,3 +420,43 @@ def rematch_all(conn: sqlite3.Connection, matcher: Matcher) -> int:
         "UPDATE products SET food_type_id=?, match_method=?, match_score=? WHERE id=?", changed)
     conn.commit()
     return len(changed)
+
+
+def fill_eans(conn: sqlite3.Connection, raw_root: Path | None = None) -> dict[str, int]:
+    """Milestone 35: barcodes, from what is already on disk. No requests.
+
+    Jumbo's come from image filenames (see `parsers.gtin`). AH's come from
+    the product detail responses the label fetch already saved, replayed from
+    the raw store, which is what the raw store is for.
+    """
+    from .parsers.gtin import jumbo_image_gtin, normalise_gtin
+
+    filled = {"jumbo": 0, "ah": 0}
+    rows = conn.execute(
+        "SELECT id, image_url FROM products WHERE chain='jumbo' AND ean IS NULL "
+        "AND image_url IS NOT NULL").fetchall()
+    for pid, url in rows:
+        code = jumbo_image_gtin(url)
+        if code:
+            conn.execute("UPDATE products SET ean=? WHERE id=?", (code, pid))
+            filled["jumbo"] += 1
+
+    root = raw_root or config.RAW_DIR
+    for folder in sorted((root / "ah").glob("mobile-services-product-detail-v4-fir-*")):
+        snapshots = sorted(folder.glob("*.json"))
+        if not snapshots:
+            continue
+        sku = folder.name.rsplit("-", 1)[1]
+        try:
+            payload = json.loads(snapshots[-1].read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        trade = payload.get("tradeItem") or {}
+        card = payload.get("productCard") or {}
+        code = normalise_gtin(trade.get("gtin") or card.get("gtin"))
+        if code:
+            cur = conn.execute(
+                "UPDATE products SET ean=? WHERE chain='ah' AND sku=? AND ean IS NULL", (code, sku))
+            filled["ah"] += cur.rowcount
+    conn.commit()
+    return filled

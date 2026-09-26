@@ -1404,6 +1404,21 @@ catalogue that lost more than 20% of its products.
     further drop alerts again, and starts with the product id so
     unfollowing clears it with the rest. Unknown protein never crosses.
 
+35. ~~Barcodes.~~ **Done, with no new requests.** `parsers/gtin.py`
+    checks the GS1 check digit and normalises to 13 digits. Jumbo states no
+    barcode anywhere, but its image filenames carry one next to a DDMMYYYY
+    date and millisecond upload times; dates and timestamps are ruled out by
+    shape (one date in ten passes the check digit by chance), and two
+    different codes in one name means no answer. That gives **15,830 of
+    17,442 Jumbo products** (91%). A handful share a barcode because a
+    multipack reuses the single pack's image. AH has no GTIN on search or
+    browse cards, only on the product detail call, so AH barcodes come from
+    the detail responses the label fetch already saves, replayed from the
+    raw store: **196 today**, growing by up to 300 a run as the label fetch
+    works through matched products. **Aldi has none**: its feed carries only
+    internal article numbers. `bonusrank fill-eans` runs before the export;
+    `products.ean` was already in the app schema, so nothing changed there.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
