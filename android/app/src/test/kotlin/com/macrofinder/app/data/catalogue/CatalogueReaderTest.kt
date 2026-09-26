@@ -64,6 +64,20 @@ class CatalogueReaderTest {
     }
 
     @Test
+    fun `detail lists the same food cheaper elsewhere`() {
+        product("jumbo:9", "Jumbo Magere kwark", foodType = "kwark_mager", protein = 8.0, kcal = 55.0)
+        price("jumbo:9", "shelf", 0.89, perProtein = 1.11)
+        product("aldi:8", "Aldi Magere kwark", foodType = "kwark_mager", protein = 8.0, kcal = 55.0)
+        price("aldi:8", "shelf", 1.29, perProtein = 1.61)
+
+        val alts = reader.detail("ah:1", today = "2026-09-24")!!.alternatives
+        assertEquals(listOf("jumbo:9"), alts.map { it.deal.id })
+        assertEquals(0.13, alts.single().savingPer100gProtein, 1e-9)
+        // Without a date there's no "now" to compare against.
+        assertTrue(reader.detail("ah:1")!!.alternatives.isEmpty())
+    }
+
+    @Test
     fun `unknown macros come back null, not zero`() {
         val tin = reader.detail("ah:3")!!.deal
         assertNull(tin.proteinPer100g)

@@ -1,9 +1,11 @@
 package com.macrofinder.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,12 +23,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.macrofinder.app.data.catalogue.Alternative
 import com.macrofinder.app.data.catalogue.CycleHint
 import com.macrofinder.app.data.catalogue.ProductDetail
 import com.macrofinder.app.data.catalogue.cycleHint
 import com.macrofinder.app.data.catalogue.cycleSentence
 import com.macrofinder.app.ui.CatalogueViewModel
+import com.macrofinder.app.ui.ESTIMATE_MARK
 import com.macrofinder.app.ui.StripRow
 import com.macrofinder.app.ui.components.Badge
 import com.macrofinder.app.ui.components.Card
@@ -56,6 +61,7 @@ fun ProductScreen(
     vm: CatalogueViewModel,
     onBack: () -> Unit,
     onFollow: (String, Boolean) -> Unit,
+    onOpen: (String) -> Unit = {},
 ) {
     val t = MF.tokens
     val detail by vm.detail.collectAsState()
@@ -85,6 +91,7 @@ fun ProductScreen(
             Header(d)
             PriceCard(d, vm.today())
             StripCard(d)
+            if (d.alternatives.isNotEmpty()) AlternativesCard(d.alternatives, d.deal.macrosEstimated, onOpen)
             CycleCard(d)
             if (d.history.size >= 2) {
                 Card {
@@ -99,6 +106,47 @@ fun ProductScreen(
                     "verbonden aan de winkel; controleer de prijs in de winkel.",
                 style = MF.type.label, color = t.muted, modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp),
             )
+        }
+    }
+}
+
+/** Milestone 31: the same food for less protein money, tap to open. */
+@Composable
+private fun AlternativesCard(alternatives: List<Alternative>, estimated: Boolean, onOpen: (String) -> Unit) {
+    val t = MF.tokens
+    Card(padding = PaddingValues(vertical = 12.dp)) {
+        Column {
+            Text("Goedkoper voor hetzelfde eiwit", style = MF.type.labelStrong, color = t.muted,
+                modifier = Modifier.padding(horizontal = 16.dp))
+            alternatives.forEachIndexed { i, alt ->
+                if (i > 0) Hairline(Modifier.padding(start = 72.dp))
+                val deal = alt.deal
+                Row(
+                    Modifier.fillMaxWidth().clickable { onOpen(deal.id) }
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    ProductImage(deal.imageUrl, 44.dp, radius = 8.dp)
+                    Column(Modifier.weight(1f).padding(horizontal = 12.dp)) {
+                        Text(deal.name, style = MF.type.body, color = t.ink, maxLines = 2,
+                            overflow = TextOverflow.Ellipsis)
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(Modifier.size(8.dp).clip(RoundedCornerShape(4.dp)).background(chainColor(deal.chain)))
+                            Text(
+                                listOfNotNull(chainName(deal.chain), euro(deal.price),
+                                    deal.promoText?.takeIf { deal.lane == "promo" }).joinToString(" · "),
+                                style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 6.dp),
+                            )
+                        }
+                    }
+                    Column(horizontalAlignment = Alignment.End) {
+                        // Estimated macros on either side make the saving an estimate too.
+                        val mark = if (deal.macrosEstimated || estimated) "$ESTIMATE_MARK " else ""
+                        Text("$mark${euro(alt.savingPer100gProtein)} minder", style = MF.type.labelStrong, color = t.ink)
+                        Text("per 100 g eiwit", style = MF.type.label, color = t.muted)
+                    }
+                }
+            }
         }
     }
 }

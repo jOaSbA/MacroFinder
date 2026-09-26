@@ -159,7 +159,7 @@ fun MacroFinderApp(
                 )
                 is Route.Product -> {
                     LaunchedEffect(route.id) { catalogue.openDetail(route.id) }
-                    ProductScreen(catalogue, onBack = ::back, onFollow = onFollow)
+                    ProductScreen(catalogue, onBack = ::back, onFollow = onFollow, onOpen = openProduct)
                 }
                 is Route.Customise -> {
                     LaunchedEffect(route.templateKey) {

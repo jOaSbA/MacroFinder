@@ -1365,6 +1365,15 @@ catalogue that lost more than 20% of its products.
     because the carried database now holds every crawled shelf price and the
     export ranked them all; it now exports offers only (about 0.9 MB).
 
+31. ~~Cheaper alternative on the product page.~~ **Done.** Up to three
+    products with the same food type that cost less per 100 g protein today,
+    at any chain the user has selected (`Alternatives.kt`, pure). "Today"
+    means a running, non-personal promo, else the shelf price; an upcoming
+    promo isn't payable yet. Same food type only: PLAN-V3 also floated "same
+    shelf and bucket" as a fallback, which would compare kwark with cheese,
+    and the ranked list already answers cross-food questions. The saving
+    carries the estimate mark when either side's macros are estimated.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
