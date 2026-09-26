@@ -38,6 +38,7 @@ import androidx.work.WorkManager
 import com.macrofinder.app.data.SavedMealsStore
 import com.macrofinder.app.data.following.PromoNotifier
 import com.macrofinder.app.data.sync.CatalogueSyncWorker
+import com.macrofinder.app.data.sync.HaltState
 import com.macrofinder.app.ui.CatalogueSyncState
 import com.macrofinder.app.ui.CatalogueViewModel
 import com.macrofinder.app.ui.MacroFinderViewModel
@@ -106,7 +107,11 @@ fun MacroFinderApp(
     // A manual refresh is what the user is waiting on, so it wins while it's live.
     val manual = oneOff.firstOrNull()?.takeIf { !it.state.isFinished || periodic.isEmpty() }
     val latest = manual ?: periodic.firstOrNull() ?: oneOff.firstOrNull()
-    val sync = CatalogueSyncState.fromWorkInfo(latest, oneOff = latest != null && latest == oneOff.firstOrNull())
+    val workSync = CatalogueSyncState.fromWorkInfo(latest, oneOff = latest != null && latest == oneOff.firstOrNull())
+    // The kill switch outlives the job that saw it; see HaltState.
+    val haltMessage = remember(latest?.state, latest?.outputData) { HaltState.message(context) }
+    val sync = if (haltMessage != null && !workSync.running)
+        CatalogueSyncState(halted = true, message = haltMessage) else workSync
     LaunchedEffect(latest?.state, latest?.outputData) {
         if (latest?.state == WorkInfo.State.SUCCEEDED || latest?.state == WorkInfo.State.ENQUEUED) {
             catalogue.reload()

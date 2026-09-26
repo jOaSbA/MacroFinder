@@ -35,7 +35,30 @@ env:
   RELEASE_TAG: data-latest
 
 jobs:
+  # The kill switch (milestone 30). Set the repository variable DATA_HALTED to
+  # "true" (and optionally DATA_HALTED_MESSAGE) and every run stops scraping
+  # and just marks the published manifest halted, so phones stop syncing and
+  # say why. Clear the variable and the next run publishes normally again.
+  halted:
+    if: vars.DATA_HALTED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e .
+      - name: Mark the manifest halted
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MESSAGE: ${{ vars.DATA_HALTED_MESSAGE }}
+        run: |
+          gh release download "$RELEASE_TAG" --pattern manifest.json --dir . --clobber
+          bonusrank halt-manifest --manifest manifest.json --message "$MESSAGE"
+          gh release upload "$RELEASE_TAG" manifest.json --clobber
+
   refresh:
+    if: vars.DATA_HALTED != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:

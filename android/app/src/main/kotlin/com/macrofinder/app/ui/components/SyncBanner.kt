@@ -32,7 +32,7 @@ fun SyncBanner(sync: CatalogueSyncState, installed: Boolean, onRefresh: () -> Un
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text, style = MF.type.body.copy(fontSize = MF.type.label.fontSize * 1.1f),
-                    color = t.muted, modifier = Modifier.weight(1f))
+                    color = if (sync.halted) t.warn else t.muted, modifier = Modifier.weight(1f))
                 if (!sync.running && !sync.halted) {
                     TextAction(if (installed) "Nu verversen" else "Nu downloaden", onRefresh,
                         modifier = Modifier.padding(start = 8.dp))

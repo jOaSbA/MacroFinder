@@ -74,7 +74,8 @@ def conn(tmp_path):
     return connection
 
 
-def _priced(conn, sku, name, food_type_key, raw_unit_text, price, chain="ah"):
+def _priced(conn, sku, name, food_type_key, raw_unit_text, price, chain="ah",
+            mechanic="not_a_promo"):
     row = conn.execute("SELECT id FROM food_types WHERE key=?", (food_type_key,)).fetchone()
     conn.execute(
         "INSERT INTO products (chain, sku, name, raw_unit_text, food_type_id, "
@@ -86,8 +87,9 @@ def _priced(conn, sku, name, food_type_key, raw_unit_text, price, chain="ah"):
     conn.execute(
         "INSERT INTO price_observations (product_id, observed_at, shelf_price, "
         "promo_mechanic, promo_raw_text, required_quantity, effective_unit_price, "
-        "is_personal_offer) VALUES (?,?,?,'not_a_promo',NULL,1,?,0)",
-        (product_id, TODAY.isoformat(), price, price),
+        "is_personal_offer) VALUES (?,?,?,?,?,1,?,0)",
+        (product_id, TODAY.isoformat(), price, mechanic,
+         None if mechanic == "not_a_promo" else "voor 1.20", price),
     )
 
 
@@ -123,7 +125,8 @@ def test_the_result_is_json_serialisable(conn):
 # -- offers trace back to ranking.rank(), nothing invented --------------------
 
 def test_offer_figures_match_what_rank_would_report(conn):
-    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20,
+            mechanic="fixed_price")
 
     from bonusrank.ranking import rank
     expected = rank(conn, chain="ah", on=TODAY)[0]
@@ -139,6 +142,17 @@ def test_offer_figures_match_what_rank_would_report(conn):
     assert offer["macros_per_100g"]["carbs_g"] == expected.carbs_per_100g
     assert offer["macros_per_100g"]["fat_g"] == expected.fat_per_100g
     assert offer["macros_need_marking"] == expected.needs_macro_marking
+
+
+def test_plain_shelf_prices_are_not_exported_as_offers(conn):
+    """latest.json is fetched on every launch. Once the carried database held
+    the whole crawled catalogue, exporting every shelf price took the file
+    from about 1 MB to 7.7 MB, for rows the app filters out anyway. Shelf
+    prices still reach the app through food_type_prices and the catalogue."""
+    _priced(conn, "wi1", "AH Magere kwark", "kwark_mager", "500 g", 1.20)
+    _priced(conn, "wi2", "AH Skyr", "skyr_naturel", "450 g", 1.50, mechanic="fixed_price")
+    offers = build_export(conn, chains=("ah",), on=TODAY)["chains"]["ah"]["offers"]
+    assert [o["sku"] for o in offers] == ["wi2"]
 
 
 # -- archetypes trace back to archetypes.compare() ----------------------------

@@ -48,10 +48,12 @@ class CatalogueSyncWorker(
 
         return when (val outcome = syncer.sync { setProgressAsync(it.toData()) }) {
             is SyncOutcome.UpToDate -> {
+                HaltState.clear(applicationContext)
                 runCatching { store.ensureSearchIndex() }
                 Result.success(Data.Builder().putString(KEY_STATE, "up_to_date").build())
             }
             is SyncOutcome.Installed -> {
+                HaltState.clear(applicationContext)
                 setProgressAsync(SyncProgress("Zoekindex bijwerken", -1f, 0).toData())
                 runCatching { store.ensureSearchIndex(force = true) }
                 runCatching { announceFollowedPromos(store) }
@@ -66,12 +68,15 @@ class CatalogueSyncWorker(
             }
             // Not a retry: the publisher has asked the app to stop, and
             // retrying on a schedule is exactly what it is asking it not to do.
-            is SyncOutcome.Halted -> Result.success(
-                Data.Builder()
-                    .putString(KEY_STATE, "halted")
-                    .putString(KEY_MESSAGE, outcome.message)
-                    .build()
-            )
+            is SyncOutcome.Halted -> {
+                HaltState.set(applicationContext, outcome.message)
+                Result.success(
+                    Data.Builder()
+                        .putString(KEY_STATE, "halted")
+                        .putString(KEY_MESSAGE, outcome.message)
+                        .build()
+                )
+            }
             // Not a failure either: nothing to retry until the app or the
             // publisher changes.
             is SyncOutcome.Incompatible -> {

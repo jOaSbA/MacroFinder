@@ -61,7 +61,12 @@ def build_export(
             # also keeps the committed JSON from ballooning with rows the app
             # would never display anyway - most of a chain's weekly offers
             # never match a food type at all.
-            "offers": [_offer_json(o) for o in rank(conn, chain=chain, on=today) if o.food_type],
+            #
+            # And only offers: plain shelf prices stay out. The carried
+            # database holds the whole crawled catalogue, and exporting every
+            # shelf price made this file 7.7 MB on a fetch-on-launch path.
+            "offers": [_offer_json(o) for o in rank(conn, chain=chain, on=today)
+                       if o.food_type and o.promo_mechanic != "not_a_promo"],
             # Milestone 12: what each template's slot candidates cost at THIS
             # chain. The template bodies themselves ship once, below.
             "template_prices": {
