@@ -55,6 +55,9 @@ class ScreensTest {
     private fun catalogue(): CatalogueViewModel {
         val vm = CatalogueViewModel(app, SavedStateHandle())
         compose.waitUntil(5_000) { vm.state.value.ready }
+        // The one-time intro would push the rows under test off a small screen.
+        vm.dismissIntro()
+        compose.waitUntil(5_000) { vm.introSeen.value == true }
         vm.setFallback(listOf(
             deal("ah:1", "Magere kwark", perProtein = 1.0, discount = 10.0),
             deal("ah:2", "Koekenpan", perProtein = null, discount = 60.0),

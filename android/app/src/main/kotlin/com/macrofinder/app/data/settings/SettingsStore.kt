@@ -17,6 +17,14 @@ class SettingsStore(private val context: Context) {
     private val dietKey = stringPreferencesKey("diet")
     private val digestKey = booleanPreferencesKey("weekly_digest")
     private val digestSentKey = stringPreferencesKey("digest_sent")
+    private val introKey = booleanPreferencesKey("intro_seen")
+
+    /** Milestone 41: whether the one-time intro on the deal list was dismissed. */
+    val introSeen: Flow<Boolean> = context.settingsStore.data.map { it[introKey] ?: false }
+
+    suspend fun dismissIntro() {
+        context.settingsStore.edit { it[introKey] = true }
+    }
 
     val prefs: Flow<Prefs> = context.settingsStore.data.map { p ->
         Prefs(

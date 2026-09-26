@@ -29,6 +29,7 @@ import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import androidx.glance.color.ColorProvider as DayNight
 import androidx.glance.unit.ColorProvider
 import com.macrofinder.app.MainActivity
 import com.macrofinder.app.data.catalogue.AndroidSqlRunner
@@ -99,9 +100,10 @@ class DealsWidget : GlanceAppWidget() {
     }
 
     companion object {
-        private val PAPER = ColorProvider(Color(0xFFF5F6F4))
-        private val INK = ColorProvider(Color(0xFF151A17))
-        private val MUTED = ColorProvider(Color(0xFF5B635E))
+        // Day and night, like the app: the launcher picks.
+        private val PAPER = DayNight(day = Color(0xFFF5F6F4), night = Color(0xFF1B201D))
+        private val INK = DayNight(day = Color(0xFF151A17), night = Color(0xFFECEFEC))
+        private val MUTED = DayNight(day = Color(0xFF5B635E), night = Color(0xFFA3ABA6))
 
         /** Called by the sync worker after a new catalogue is installed. */
         suspend fun refresh(context: Context) = DealsWidget().updateAll(context)
