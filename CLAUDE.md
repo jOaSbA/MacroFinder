@@ -659,6 +659,9 @@ src/bonusrank/
                        deltas, manifest.json (milestone 14)
   catalogue.py        the full-assortment crawl: chain-generic, resumable,
                        descends past a chain's paging ceiling (milestones 15-16)
+  shelves.py          chain departments -> 18 shared shelves (milestone 19)
+  metrics.py          the four sort metrics and macro buckets (milestone 20)
+  history.py          reference inflation, promo cycles, weekly series (21-22)
 data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
 data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
@@ -1242,11 +1245,114 @@ closes the last English seam in the UI.
     scraped catalogue, which PLAN-V2 section 7 reserves explicitly for the
     author, so it is left alone.
 
-Current position: **milestones 1-17 complete.** 754 Python tests, 91 Android
-JVM tests, and 15 instrumented tests that run on a device rather than in CI.
-Also the
-Android app's own JVM unit tests (`android/app/src/test`: filtering, JSON
-decoding, rule evaluation, meal costing, saved-meal round trips).
+**Resolved 2026-09-26:** the author made the repository public, and both
+feeds now load on a device.
+
+18. ~~Upcoming deals.~~ **Done, and it fixed a live bug.** Promo rows are now
+    picked by date through one shared rule (`ranking.lane_filter`): the latest
+    shelf price, the latest promo valid today, the latest promo that starts
+    later. Before, "the latest promo row" won regardless of dates, and since
+    Jumbo publishes next week's folder a day early (1,512 SKUs on 2026-09-22),
+    next week's promo could push this week's out of the ranking. The app DB has
+    a third price lane, `upcoming`; the phone still decides by date, because an
+    upcoming row becomes current on the day it starts. `bonusrank list
+    --upcoming` shows them.
+
+19. ~~Shelf taxonomy.~~ **Done.** `data/seed/category_map.yaml` maps each
+    chain's departments onto PLAN-V2's 18 shelves. 98.7% of the real catalogue
+    maps. The rest goes to review as `unmapped_category` (a new review kind,
+    which needed `db._widen_review_kinds`: SQLite can't alter a CHECK, so the
+    table is copied, not dropped). `build-db` refuses to publish above 10%
+    unmapped; `tests/fixtures/categories_seen.json` lets CI check the rate
+    without scraping.
+
+20. ~~Macro buckets and the four metrics.~~ **Done.** `metrics.py`, pure.
+    Resolved macros (label over seed, with provenance), mass, protein per 100
+    kcal and the buckets live on `products`; euro per 100 g protein, per 1000
+    kcal and discount live on each price lane. Unknown is NULL everywhere. Two
+    interpretations, taken under section 6.1: "per serving" means the pack up
+    to 250 g (the catalogue has no serving sizes), and `bulk` is relative, so
+    the cutoff ships once in `meta.bulk_eur_per_1000kcal` instead of on each
+    row; stamping it per row rewrote hundreds of rows per price move, and the
+    delta test caught it. `data/seed/macro_buckets.yaml` holds the two authored
+    lists (breakfast food types, supplement words).
+
+21-22. ~~Waste adjustment, price history, reference inflation, promo
+    cycles.~~ **Done.** The root blocker was CI throwing the dev database away
+    every run; the workflow now carries it between runs as
+    `history.sqlite3.gz` on the release. `history.py` is pure: reference
+    inflation needs a shelf price from before the 28-day window or says
+    unknown; the cycle is the median gap between at least three promo starts.
+    The build ships only stable facts (cycle length, last start) and the phone
+    turns them into buy/wait (`CycleHint.kt`, same test cases as Python), so a
+    date ticking over doesn't rewrite rows. A 26-week weekly-low series ships
+    in `price_history`, for products with known macros only.
+
+23-26. ~~The app rework, search, following.~~ **Done**, on top of the synced
+    catalogue. Decisions worth keeping:
+
+    - **Deals are loaded into memory once per sync and filtered and sorted in
+      Kotlin** (`DealList.kt`), not in SQL. A few thousand rows, one
+      implementation that also serves the `latest.json` fallback, instant
+      re-sorts, fully JVM-tested.
+    - **The catalogue SQL is tested on the JVM** with sqlite-jdbc against
+      `src/test/resources/app_schema.sql`, a copy of `appdb.APP_SCHEMA` that a
+      Python test keeps honest. A test-only dependency, justified by that.
+    - **Search is FTS4 built on the phone**, not FTS5 and not shipped in the
+      file. FTS5 availability varies by device, and an index in the published
+      file would have to be diffed. Built with one compiled statement: the
+      first version did 52k `execSQL` calls plus a regex compile per row and
+      took 10-20 s.
+    - **Coil for images, with an honest User-Agent.** Jumbo's CDN resets the
+      connection for okhttp's default agent and serves `MacroFinder/x
+      (Android)`. Aldi images come from its promo feed (`assets[primary]`,
+      Scene7); `ingest_flat` now stores them.
+    - **Schema compatibility is explicit.** `APP_SCHEMA_VERSION` in
+      `SyncPlan.kt` must equal `appdb.SCHEMA_VERSION` (parity test). A newer
+      published schema is not installed and the app says to update; a local
+      catalogue left by an older app is replaced whole.
+    - **The look follows docs/DESIGN.md**, with two token changes to meet its
+      own 4.5:1 rule (Muted and the "average" tier were too light), and AH kept
+      red rather than its brand blue so it doesn't read as Aldi.
+    - **Following is local**: DataStore for the set, one notification per
+      promo window, checked after each sync.
+
+    Bugs found by running it, all fixed: the periodic sync sits in ENQUEUED
+    between runs and the banner said "wacht op wifi" forever; a reload racing
+    the index build hit SQLITE_BUSY and read as "no catalogue"; the fallback
+    list lost a race with the first load and showed shelf prices as deals.
+
+    **Found while checking the metrics on real data**: AH's online "OP=OP"
+    segment mixes about 34 products with their own labels, and ingest applied
+    the segment's one label to all of them (a EUR 40 pan "voor 2.91", 93% off).
+    The product's own `discountLabels` now win, and `DISCOUNT_OP_IS_OP` is a
+    known code. The label lane also read AH's **cooked** nutrition table for
+    dried products (Hak split peas at 8.4 g protein instead of about 24):
+    `parse_gs1_nutrition` now prefers the UNPREPARED header, and
+    `LABEL_PARSER_VERSION` makes older rows eligible for a refetch.
+
+27. ~~Substitution engine surfacing.~~ **Done**: its own section on the Meals
+    tab, every comparison showing its taste delta note.
+
+28. **Not built, on purpose.** PLAN-V2's weekly ILP optimiser is the day/week
+    planner the user explicitly turned down at milestone 9 ("they plan their
+    own meals and days"). The user's instruction beats the plan.
+
+29. ~~Compose UI tests in CI.~~ **Done.** `ScreensTest` covers the list, detail
+    and customiser, and CI runs all 19 device tests on an API 34 emulator. That
+    run found that API 34 blocks cleartext to localhost, which the sync tests'
+    mock server needs, so debug builds carry a network security config for it.
+
+Also: `data/seed/protein_quality.yaml` (PLAN-V2 4.3), shown as one line on the
+detail screen for incomplete and mixed protein. One workflow now publishes
+everything twice a day, and the Monday run also crawls. Each manifest carries
+the previous one's deltas (up to 7), and the build refuses to publish a
+catalogue that lost more than 20% of its products.
+
+Current position: **milestones 1-27 and 29 complete, 28 declined.** About 820
+Python tests, 142 Android JVM tests and 19 device tests, all in CI. Milestone
+30 (distribution) is the author's call; the kill switch and the about screen
+exist.
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /
@@ -1254,7 +1360,8 @@ Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-ma
 `bonusrank list --chain ah|jumbo|aldi --sort protein-per-euro` / `bonusrank prices` /
 `bonusrank matches` / `bonusrank review` /
 `bonusrank catalogue --chain ah|jumbo [--max-requests N]` /
-`bonusrank build-db --out-dir dist/data [--against PREVIOUS.sqlite]`.
+`bonusrank build-db --out-dir dist/data [--against PREVIOUS.sqlite] [--previous-manifest M]` /
+`bonusrank list --chain jumbo --upcoming`.
 
 **Run `bonusrank prices --refresh` before `compare`**, or most compositions
 price as `?`. That is correct behaviour, not a bug.
