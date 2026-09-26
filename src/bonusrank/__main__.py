@@ -721,6 +721,16 @@ def cmd_rematch(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_fill_eans(args: argparse.Namespace) -> int:
+    """Milestone 35: barcodes from Jumbo image names and saved AH detail calls."""
+    from .ingest import fill_eans
+
+    with connect() as conn:
+        filled = fill_eans(conn)
+    print(f"barcodes filled: jumbo {filled['jumbo']}, ah {filled['ah']}")
+    return 0
+
+
 def cmd_halt_manifest(args: argparse.Namespace) -> int:
     """Milestone 30: pull the kill switch on a published manifest."""
     from . import appdb
@@ -849,6 +859,9 @@ def main(argv: list[str] | None = None) -> int:
                           help="where the assets are written; never committed")
     rematch = sub.add_parser("rematch", help="re-run the matcher over every stored product")
     rematch.set_defaults(func=cmd_rematch)
+
+    eans = sub.add_parser("fill-eans", help="fill barcodes from data already on disk")
+    eans.set_defaults(func=cmd_fill_eans)
 
     halt = sub.add_parser("halt-manifest",
                           help="mark a published manifest halted (the kill switch)")
