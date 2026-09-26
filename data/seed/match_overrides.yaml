@@ -60,6 +60,8 @@ never_match:
   # matched as 3 kg of mango (milestone 39). It stays in the supplement bucket
   # by name; it just isn't a food.
   - creatine
+  # "D&L Mayonaise met Eieren" matched raw egg. Mayonnaise is mostly oil.
+  - mayonaise
   # Wagner's pizza lines don't say "pizza" in the product name, so "Big
   # Sensation Salami & BBQ" matched as salami (2026-09-26).
   - big sensation

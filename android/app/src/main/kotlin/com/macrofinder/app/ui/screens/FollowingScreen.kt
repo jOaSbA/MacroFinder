@@ -12,8 +12,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.macrofinder.app.data.catalogue.Deal
 import com.macrofinder.app.data.catalogue.DealSort
 import com.macrofinder.app.ui.CatalogueViewModel
+import com.macrofinder.app.ui.euro
 import com.macrofinder.app.ui.components.DealRow
 import com.macrofinder.app.ui.components.EmptyState
 import com.macrofinder.app.ui.components.SectionLabel
@@ -24,6 +26,7 @@ import com.macrofinder.app.ui.theme.MF
 fun FollowingScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
     val t = MF.tokens
     val deals by vm.followedDeals.collectAsState()
+    val targets by vm.targets.collectAsState()
     val today = vm.today()
     val onOffer = deals.filter { it.lane != "shelf" && it.isActiveOn(today) }
     val rest = deals - onOffer.toSet()
@@ -32,7 +35,7 @@ fun FollowingScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
         item {
             Text("Gevolgd", style = MF.type.display, color = t.ink,
                 modifier = Modifier.padding(start = 16.dp, top = 20.dp))
-            Text("Je krijgt een melding als een van deze in de aanbieding gaat.",
+            Text("Je krijgt een melding als een van deze in de aanbieding gaat, of onder je doelprijs komt.",
                 style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp, top = 2.dp))
         }
         if (deals.isEmpty()) {
@@ -48,13 +51,29 @@ fun FollowingScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
             item { SectionLabel("Nu in de aanbieding") }
             items(onOffer, key = { "o" + it.id }) { d ->
                 DealRow(d, null, DealSort.PROTEIN_PER_EURO, today, onClick = { onOpen(d.id) })
+                TargetLine(d, targets[d.id])
             }
         }
         if (rest.isNotEmpty()) {
             item { SectionLabel("Normale prijs") }
             items(rest, key = { "r" + it.id }) { d ->
                 DealRow(d, null, DealSort.PROTEIN_PER_EURO, today, onClick = { onOpen(d.id) })
+                TargetLine(d, targets[d.id])
             }
         }
     }
+}
+
+/** Milestone 34's target, shown where the followed products are. */
+@Composable
+private fun TargetLine(deal: Deal, target: Double?) {
+    if (target == null) return
+    val t = MF.tokens
+    val now = deal.eurPer100gProtein
+    val reached = now != null && now <= target
+    Text(
+        (if (reached) "Onder je doelprijs van " else "Doelprijs ") + "${euro(target)} per 100 g eiwit",
+        style = MF.type.label, color = if (reached) t.signal else t.muted,
+        modifier = Modifier.padding(start = 28.dp, bottom = 4.dp),
+    )
 }
