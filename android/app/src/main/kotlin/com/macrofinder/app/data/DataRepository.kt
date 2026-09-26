@@ -15,11 +15,11 @@ sealed class SnapshotResult {
  * No backend of its own - `dataUrl` is an asset on the `data-latest` GitHub
  * release, replaced on a schedule by `.github/workflows/refresh-data.yml`.
  */
-class DataRepository(
+open class DataRepository(
     private val dataUrl: String,
     private val client: OkHttpClient = OkHttpClient(),
 ) {
-    suspend fun fetchSnapshot(): SnapshotResult = withContext(Dispatchers.IO) {
+    open suspend fun fetchSnapshot(): SnapshotResult = withContext(Dispatchers.IO) {
         try {
             val request = Request.Builder().url(dataUrl).build()
             client.newCall(request).execute().use { response ->

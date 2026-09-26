@@ -118,11 +118,17 @@ dependencies {
     // the one thing reading source text cannot establish: that the delta SQL
     // does what it says on a real SQLite database. Run with
     // `gradle connectedDebugAndroidTest`.
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test:core-ktx:1.6.1")
-    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:core-ktx:1.7.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
     // A local HTTP server, so the end-to-end sync test drives real downloads
     // without reaching the network. Already an okhttp project.
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    // Milestone 29: Compose UI tests for the list, detail and customiser.
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    // Older Espresso (the BOM pulls 3.5) calls InputManager.getInstance, gone on newer Android.
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
