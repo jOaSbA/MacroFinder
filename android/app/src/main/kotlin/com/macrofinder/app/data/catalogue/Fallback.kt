@@ -10,7 +10,10 @@ import com.macrofinder.app.data.OfferEntry
  * rules about unknowns.
  */
 fun fallbackDeals(snapshot: ExportSnapshot): List<Deal> =
-    snapshot.chains.flatMap { (chain, data) -> data.offers.map { it.toDeal(chain) } }
+    snapshot.chains.flatMap { (chain, data) ->
+        // latest.json also ranks plain shelf prices; the deal list is for offers.
+        data.offers.filter { it.price.is_promo }.map { it.toDeal(chain) }
+    }
 
 fun OfferEntry.toDeal(chain: String): Deal {
     val unit = price.unit_price_eur

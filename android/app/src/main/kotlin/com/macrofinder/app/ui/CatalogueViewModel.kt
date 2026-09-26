@@ -98,7 +98,9 @@ class CatalogueViewModel(
         loadJob = viewModelScope.launch {
             previous?.join()
             val next = withContext(Dispatchers.IO) { load(force) } ?: return@launch
-            _state.value = next
+            // The fallback may have arrived while this load ran; don't let a
+            // stale empty list overwrite it.
+            _state.value = if (next.installed) next else next.copy(deals = fallback)
             refreshFollowed(followed.value)
             if (_searchText.value.isNotBlank()) search(_searchText.value)
         }
