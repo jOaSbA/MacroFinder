@@ -32,6 +32,8 @@ data class ProductDetail(
     val foodTypeName: String?,
     /** complete / incomplete / blend (PLAN-V2 section 4.3), or null. */
     val proteinQuality: String? = null,
+    /** Milestone 31: the same food, cheaper per 100 g protein right now. */
+    val alternatives: List<Alternative> = emptyList(),
 )
 
 class CatalogueReader(private val db: SqlRunner) {
@@ -50,7 +52,11 @@ class CatalogueReader(private val db: SqlRunner) {
     /** Every promo and upcoming row. The window is decided later, by date. */
     fun deals(): List<Deal> = db.query("$DEAL_SELECT WHERE pr.lane != 'shelf'", emptyList(), ::deal)
 
-    fun detail(productId: String): ProductDetail? {
+    /**
+     * [today] turns on the cheaper-alternatives lookup (milestone 31), limited
+     * to [chains] when that isn't empty.
+     */
+    fun detail(productId: String, today: String? = null, chains: Set<String> = emptySet()): ProductDetail? {
         val lanes = db.query("$DEAL_SELECT WHERE p.id = ?", listOf(productId), ::deal)
         if (lanes.isEmpty()) {
             // A product with no price row at all still has a detail page.
@@ -72,8 +78,16 @@ class CatalogueReader(private val db: SqlRunner) {
             "SELECT kcal_is_derived FROM product_macros WHERE product_id = ?", listOf(productId),
         ) { (it.long("kcal_is_derived") ?: 0L) != 0L }.firstOrNull() ?: false
         val ft = foodType(main)
-        return ProductDetail(main, shelf?.price, history, derived, ft?.first, ft?.second)
+        val alternatives = if (today == null || main.foodType == null) emptyList() else
+            cheaperAlternatives(currentLane(lanes, today), sameFoodType(main.foodType, productId), today, chains)
+        return ProductDetail(main, shelf?.price, history, derived, ft?.first, ft?.second, alternatives)
     }
+
+    /** Every promo and shelf row of the other products with this food type. */
+    fun sameFoodType(foodType: String, excludeId: String): List<Deal> = db.query(
+        "$DEAL_SELECT WHERE p.food_type = ? AND p.id != ? AND pr.lane IN ('promo', 'shelf')",
+        listOf(foodType, excludeId), ::deal,
+    )
 
     /** The food type's name and protein quality, if the product has a food type. */
     private fun foodType(deal: Deal): Pair<String?, String?>? = deal.foodType?.let { key ->

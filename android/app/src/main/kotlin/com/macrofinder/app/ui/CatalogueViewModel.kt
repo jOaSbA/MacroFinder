@@ -230,7 +230,7 @@ class CatalogueViewModel(
             // fall back to the thinner latest.json row.
             loadJob?.join()
             _detail.value = withContext(Dispatchers.IO) {
-                reader()?.let { runCatching { it.detail(id) }.getOrNull() }
+                reader()?.let { runCatching { it.detail(id, today(), _query.value.chains) }.getOrNull() }
                     ?: (fallback + _searchResults.value).firstOrNull { it.id == id }
                         ?.let { ProductDetail(it, null, emptyList(), false, null) }
             }

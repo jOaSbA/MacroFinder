@@ -35,9 +35,8 @@ CI green, merged, and a line in CLAUDE.md, as before.
 ### M31: cheaper alternative on the product page
 
 From Mandje's product comparison and Yuka's "better alternative". On the detail
-screen, show up to three products with the same food type (or the same shelf
-and macro bucket when there is no food type) that are cheaper per 100 g protein
-right now, at any chain, with the saving stated ("€0,40 minder per 100 g
+screen, show up to three products with the same food type that are cheaper
+per 100 g protein right now, at any chain, with the saving stated ("€0,40 minder per 100 g
 eiwit, bij Jumbo").
 
 - Pure Kotlin over the synced catalogue, JVM-tested.
