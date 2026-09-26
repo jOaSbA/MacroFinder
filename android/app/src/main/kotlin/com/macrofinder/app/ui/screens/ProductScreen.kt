@@ -27,6 +27,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.macrofinder.app.data.catalogue.Alternative
 import com.macrofinder.app.data.catalogue.CycleHint
+import com.macrofinder.app.data.following.targetPresets
+import com.macrofinder.app.ui.components.FilterChip
+import androidx.compose.foundation.horizontalScroll
 import com.macrofinder.app.data.catalogue.ProductDetail
 import com.macrofinder.app.data.catalogue.cycleHint
 import com.macrofinder.app.data.catalogue.cycleSentence
@@ -50,6 +53,7 @@ import com.macrofinder.app.ui.theme.chainName
 import com.macrofinder.app.ui.validityText
 import com.macrofinder.app.ui.wasteText
 import java.time.LocalDate
+import kotlin.math.roundToInt
 
 /**
  * One product. Milestone 24: image, macros with where they came from, the
@@ -66,6 +70,7 @@ fun ProductScreen(
     val t = MF.tokens
     val detail by vm.detail.collectAsState()
     val followed by vm.followed.collectAsState()
+    val targets by vm.targets.collectAsState()
 
     Column(Modifier.fillMaxSize().background(t.paper)) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -91,6 +96,10 @@ fun ProductScreen(
             Header(d)
             PriceCard(d, vm.today())
             StripCard(d)
+            val now = d.todayPer100gProtein
+            if (d.deal.id in followed && now != null) {
+                TargetCard(now, targets[d.deal.id], d.deal.macrosEstimated) { vm.setTarget(d.deal.id, it) }
+            }
             if (d.alternatives.isNotEmpty()) AlternativesCard(d.alternatives, d.deal.macrosEstimated, onOpen)
             CycleCard(d)
             if (d.history.size >= 2) {
@@ -106,6 +115,39 @@ fun ProductScreen(
                     "verbonden aan de winkel; controleer de prijs in de winkel.",
                 style = MF.type.label, color = t.muted, modifier = Modifier.padding(horizontal = 4.dp, vertical = 8.dp),
             )
+        }
+    }
+}
+
+/**
+ * Milestone 34: a price target on a followed product, in protein terms.
+ * Presets rather than a number field: three taps cover what people set.
+ */
+@Composable
+private fun TargetCard(now: Double, target: Double?, estimated: Boolean, onSet: (Double?) -> Unit) {
+    val t = MF.tokens
+    val mark = if (estimated) "$ESTIMATE_MARK " else ""
+    val options = (targetPresets(now) + listOfNotNull(target)).distinct().sortedDescending()
+    Card {
+        Column {
+            Text("Doelprijs", style = MF.type.labelStrong, color = t.muted)
+            Text(
+                target?.let { "Je krijgt een melding als 100 g eiwit $mark${euro(it)} of minder kost. Nu: $mark${euro(now)}." }
+                    ?: "Krijg een melding als 100 g eiwit goedkoper wordt dan nu ($mark${euro(now)}).",
+                style = MF.type.body, color = t.ink, modifier = Modifier.padding(top = 4.dp),
+            )
+            Row(
+                Modifier.horizontalScroll(rememberScrollState()).padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                options.forEach { value ->
+                    // The percentage keeps "€1,69 per 100 g eiwit" from reading as a pack price.
+                    val pct = ((1 - value / now) * 100).roundToInt()
+                    val label = if (pct > 0) "${euro(value)} (−$pct%)" else euro(value)!!
+                    FilterChip(label, target == value, { onSet(if (target == value) null else value) })
+                }
+                if (target != null) FilterChip("Uit", false, { onSet(null) })
+            }
         }
     }
 }

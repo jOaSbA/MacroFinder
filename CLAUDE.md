@@ -1387,6 +1387,23 @@ catalogue that lost more than 20% of its products.
     says so. The diet shows as a chip on the deal list, because a filter you
     can't see makes the list look broken.
 
+33. ~~Weekly protein digest.~~ **Done.** Opt-in in Instellingen, off by
+    default. After a sync that installs a new catalogue, one notification
+    with the three best deals by protein per euro for my stores and diet,
+    one per food type (`Digest.kt`, pure), at most once per ISO week. It
+    uses the deal list's own ranking, so the two never disagree. Own
+    low-importance channel, so it can be muted without muting followed
+    products. Once a week rather than once per chain week: AH and Aldi turn
+    over on Monday and Jumbo on Wednesday, and two digests a week is a nag.
+
+34. ~~Price target alerts.~~ **Done.** On a followed product, pick a
+    target of 10, 20 or 30% under today's price per 100 g protein (presets,
+    not a number field; each chip shows its percentage so "€1,69" isn't read
+    as a pack price). Checked after each sync on the same rows as promo
+    alerts (`Targets.kt`, pure). The alert key carries the price, so a
+    further drop alerts again, and starts with the product id so
+    unfollowing clears it with the rest. Unknown protein never crosses.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.

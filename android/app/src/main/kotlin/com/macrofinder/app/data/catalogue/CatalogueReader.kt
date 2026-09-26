@@ -34,6 +34,8 @@ data class ProductDetail(
     val proteinQuality: String? = null,
     /** Milestone 31: the same food, cheaper per 100 g protein right now. */
     val alternatives: List<Alternative> = emptyList(),
+    /** What 100 g protein costs today (running promo, else shelf), for price targets. */
+    val todayPer100gProtein: Double? = null,
 )
 
 class CatalogueReader(private val db: SqlRunner) {
@@ -78,9 +80,11 @@ class CatalogueReader(private val db: SqlRunner) {
             "SELECT kcal_is_derived FROM product_macros WHERE product_id = ?", listOf(productId),
         ) { (it.long("kcal_is_derived") ?: 0L) != 0L }.firstOrNull() ?: false
         val ft = foodType(main)
+        val now = today?.let { currentLane(lanes, it) }
         val alternatives = if (today == null || main.foodType == null) emptyList() else
-            cheaperAlternatives(currentLane(lanes, today), sameFoodType(main.foodType, productId), today, chains)
-        return ProductDetail(main, shelf?.price, history, derived, ft?.first, ft?.second, alternatives)
+            cheaperAlternatives(now, sameFoodType(main.foodType, productId), today, chains)
+        return ProductDetail(main, shelf?.price, history, derived, ft?.first, ft?.second, alternatives,
+            now?.eurPer100gProtein)
     }
 
     /** Every promo and shelf row of the other products with this food type. */

@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,7 +31,7 @@ import com.macrofinder.app.ui.theme.MF
 
 /** Milestone 32: my stores and what I eat, applied to every list. */
 @Composable
-private fun SettingsCard(vm: CatalogueViewModel) {
+private fun SettingsCard(vm: CatalogueViewModel, onDigestOn: () -> Unit) {
     val t = MF.tokens
     val prefs by vm.prefs.collectAsState()
     Card {
@@ -53,6 +56,22 @@ private fun SettingsCard(vm: CatalogueViewModel) {
                 Text("Producten waarvan we niet weten wat het is, laten we dan ook weg.",
                     style = MF.type.label, color = t.muted)
             }
+            Row(Modifier.padding(top = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("Wekelijks overzicht", style = MF.type.rowTitle, color = t.ink)
+                    Text("Eén melding per week met de drie goedkoopste eiwitaanbiedingen voor jouw winkels.",
+                        style = MF.type.label, color = t.muted)
+                }
+                Switch(
+                    checked = prefs.weeklyDigest,
+                    onCheckedChange = { on ->
+                        vm.savePrefs(prefs.copy(weeklyDigest = on))
+                        if (on) onDigestOn()
+                    },
+                    colors = SwitchDefaults.colors(checkedTrackColor = t.signal),
+                    modifier = Modifier.padding(start = 12.dp),
+                )
+            }
         }
     }
 }
@@ -62,7 +81,13 @@ private fun SettingsCard(vm: CatalogueViewModel) {
  * isn't affiliated with any chain, and what happens if the publisher stops.
  */
 @Composable
-fun AboutScreen(vm: CatalogueViewModel, sync: CatalogueSyncState, generatedAt: String?, onBack: () -> Unit) {
+fun AboutScreen(
+    vm: CatalogueViewModel,
+    sync: CatalogueSyncState,
+    generatedAt: String?,
+    onBack: () -> Unit,
+    onDigestOn: () -> Unit = {},
+) {
     val t = MF.tokens
     val state by vm.state.collectAsState()
     Column(Modifier.fillMaxSize().background(t.paper)) {
@@ -72,7 +97,7 @@ fun AboutScreen(vm: CatalogueViewModel, sync: CatalogueSyncState, generatedAt: S
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text("Instellingen", style = MF.type.display, color = t.ink, modifier = Modifier.padding(4.dp))
-            SettingsCard(vm)
+            SettingsCard(vm, onDigestOn)
             Text("Over MacroFinder", style = MF.type.labelStrong, color = t.muted,
                 modifier = Modifier.padding(start = 4.dp, top = 12.dp))
             if (sync.halted) {
