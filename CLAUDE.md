@@ -1447,6 +1447,18 @@ catalogue that lost more than 20% of its products.
     your hand. Verified: scanner opens and cancels on the emulator; the
     lookup is JVM-tested. A real scan needs a phone camera.
 
+38. ~~Protein tally.~~ **Done.** "Tel mee" on a product page adds it to
+    the Teller (a multi-buy starts at the number the promo needs); a bar
+    above the tabs opens it. It shows the basket's euros, protein, kcal,
+    euros per 100 g protein and a total per chain, re-priced from the synced
+    catalogue every time, because it stores ids and pack counts only
+    (`data/tally/`). A multi-buy only gets its promo price in full groups,
+    and the rest pay the shelf price or make the cost unknown
+    (`packCost`). The same poison rule as MealMath: one unknown line makes
+    that total unknown and is named. A total built on estimated macros
+    carries the mark. Not a shopping list (PLAN-V2 says no) and not a
+    planner: nothing to tick off, no days.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
