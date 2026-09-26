@@ -37,6 +37,7 @@ import com.macrofinder.app.ui.components.TextAction
 import com.macrofinder.app.ui.euro
 import com.macrofinder.app.ui.historyText
 import com.macrofinder.app.ui.macroStrip
+import com.macrofinder.app.ui.proteinQualityNote
 import com.macrofinder.app.ui.quantityText
 import com.macrofinder.app.ui.theme.MF
 import com.macrofinder.app.ui.theme.chainColor
@@ -180,6 +181,9 @@ private fun StripCard(d: ProductDetail) {
             )
             strip.secondary?.let {
                 Text(it, style = MF.type.label, color = t.muted, modifier = Modifier.padding(top = 6.dp))
+            }
+            proteinQualityNote(d.proteinQuality)?.let {
+                Text(it, style = MF.type.label, color = t.muted, modifier = Modifier.padding(top = 8.dp))
             }
             wasteText(d.deal)?.let {
                 Text(it, style = MF.type.body, color = t.warn, modifier = Modifier.padding(top = 8.dp))

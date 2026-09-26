@@ -81,7 +81,10 @@ CREATE TABLE food_types (
     -- 3.3 is exactly that: the JSON export ships these numbers with no way to
     -- know they are seed estimates.
     macro_source              TEXT,
-    macro_confidence          TEXT
+    macro_confidence          TEXT,
+    -- complete / incomplete / blend, from data/seed/protein_quality.yaml
+    -- (PLAN-V2 section 4.3). NULL when nobody authored one.
+    protein_quality           TEXT
 ) WITHOUT ROWID;
 
 -- Milestone 19. The shared shelves from data/seed/category_map.yaml, in the
@@ -339,6 +342,7 @@ def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -
 
 
 def _copy_food_types(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
+    quality = protein_quality()
     rows = src.execute(
         "SELECT key, name_nl, meal_kind, protein_per_100g, kcal_per_100g, "
         "carbs_per_100g, fat_per_100g, g_per_unit, drained_fraction, "
@@ -349,9 +353,27 @@ def _copy_food_types(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
         "INSERT INTO food_types (key, name_nl, meal_kind, protein_per_100g, "
         "kcal_per_100g, carbs_per_100g, fat_per_100g, g_per_unit, drained_fraction, "
         "shelf_life_days_unopened, shelf_life_days_opened, freezable, "
-        "macro_source, macro_confidence) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [tuple(r) for r in rows],
+        "macro_source, macro_confidence, protein_quality) "
+        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [(*r, quality.get(r[0])) for r in rows],
     )
+
+
+QUALITY_PATH = config.PROJECT_ROOT / "data" / "seed" / "protein_quality.yaml"
+
+
+def protein_quality() -> dict[str, str]:
+    """food type key -> complete / incomplete / blend. Raises on a key listed twice."""
+    import yaml
+
+    raw = yaml.safe_load(QUALITY_PATH.read_text(encoding="utf-8")) or {}
+    out: dict[str, str] = {}
+    for quality, keys in raw.items():
+        for key in keys or []:
+            if key in out:
+                raise ValueError(f"protein_quality.yaml: {key} is both {out[key]} and {quality}")
+            out[key] = quality
+    return out
 
 
 def _copy_shelves(dst: sqlite3.Connection, shelf_map) -> None:

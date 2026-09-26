@@ -86,4 +86,12 @@ class DealTextTest {
             wasteText(kwark))
         assertNull(wasteText(kwark.copy(wasteAdjustedEurPer100gProtein = 1.24)))
     }
+
+    @Test
+    fun `only incomplete or mixed protein gets a note`() {
+        assertNull(proteinQualityNote("complete"))
+        assertNull(proteinQualityNote(null))
+        assertTrue(proteinQualityNote("incomplete")!!.startsWith("Onvolledig eiwit"))
+        assertNotNull(proteinQualityNote("blend"))
+    }
 }

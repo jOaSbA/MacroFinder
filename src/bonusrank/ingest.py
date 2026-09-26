@@ -295,6 +295,12 @@ def ingest_flat(
                 is_personal=offer.is_personal, valid_from=offer.valid_from,
                 valid_to=offer.valid_to, matcher=matcher, stats=stats, now=now,
             )
+            # Only chains without a catalogue crawl (Aldi) depend on this. A
+            # feed with no image never erases one the crawl already stored.
+            if product.image_url:
+                conn.execute(
+                    "UPDATE products SET image_url=?, image_width=? WHERE chain=? AND sku=?",
+                    (product.image_url, product.image_width, adapter.chain, product.sku))
 
     conn.commit()
     return stats

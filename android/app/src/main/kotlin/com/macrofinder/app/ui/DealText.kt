@@ -96,3 +96,14 @@ fun wasteText(deal: Deal): String? {
     return "${euro(waste)} per 100 g eiwit als je er maar $eaten van de " +
         "${deal.requiredQuantity} op krijgt voor ze bederven"
 }
+
+/**
+ * PLAN-V2 section 4.3, one line. Complete protein says nothing: the flag is
+ * there to qualify a cheap plant source, not to decorate every chicken fillet.
+ */
+fun proteinQualityNote(quality: String?): String? = when (quality) {
+    "incomplete" -> "Onvolledig eiwit: mist genoeg van een of meer essentiële aminozuren. " +
+        "Combineer peulvruchten met granen, of eet het naast zuivel, ei of soja."
+    "blend" -> "Mengsel van eiwitbronnen; hoe volledig het is hangt af van het recept."
+    else -> null
+}

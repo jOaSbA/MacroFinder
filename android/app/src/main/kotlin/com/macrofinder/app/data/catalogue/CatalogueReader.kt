@@ -28,6 +28,8 @@ data class ProductDetail(
     val history: List<PricePoint>,
     val kcalIsDerived: Boolean,
     val foodTypeName: String?,
+    /** complete / incomplete / blend (PLAN-V2 section 4.3), or null. */
+    val proteinQuality: String? = null,
 )
 
 class CatalogueReader(private val db: SqlRunner) {
@@ -51,7 +53,10 @@ class CatalogueReader(private val db: SqlRunner) {
         if (lanes.isEmpty()) {
             // A product with no price row at all still has a detail page.
             val bare = db.query("$PRODUCT_ONLY_SELECT WHERE p.id = ?", listOf(productId), ::deal)
-            return bare.firstOrNull()?.let { ProductDetail(it, null, emptyList(), false, foodTypeName(it)) }
+            return bare.firstOrNull()?.let {
+                val ft = foodType(it)
+                ProductDetail(it, null, emptyList(), false, ft?.first, ft?.second)
+            }
         }
         val promo = lanes.firstOrNull { it.lane == "promo" }
             ?: lanes.firstOrNull { it.lane == "upcoming" }
@@ -64,12 +69,15 @@ class CatalogueReader(private val db: SqlRunner) {
         val derived = db.query(
             "SELECT kcal_is_derived FROM product_macros WHERE product_id = ?", listOf(productId),
         ) { (it.long("kcal_is_derived") ?: 0L) != 0L }.firstOrNull() ?: false
-        return ProductDetail(main, shelf?.price, history, derived, foodTypeName(main))
+        val ft = foodType(main)
+        return ProductDetail(main, shelf?.price, history, derived, ft?.first, ft?.second)
     }
 
-    private fun foodTypeName(deal: Deal): String? = deal.foodType?.let { key ->
-        db.query("SELECT name_nl FROM food_types WHERE key = ?", listOf(key)) { it.string("name_nl") }
-            .firstOrNull()
+    /** The food type's name and protein quality, if the product has a food type. */
+    private fun foodType(deal: Deal): Pair<String?, String?>? = deal.foodType?.let { key ->
+        db.query("SELECT name_nl, protein_quality FROM food_types WHERE key = ?", listOf(key)) {
+            it.string("name_nl") to it.string("protein_quality")
+        }.firstOrNull()
     }
 
     /**

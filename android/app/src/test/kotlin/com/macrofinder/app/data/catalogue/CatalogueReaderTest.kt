@@ -23,7 +23,7 @@ class CatalogueReaderTest {
         db.exec("INSERT INTO meta VALUES ('bulk_eur_per_1000kcal', '2.5000')")
         db.exec("INSERT INTO shelves VALUES ('zuivel_eieren','Zuivel, plantaardig, eieren',3)")
         db.exec("INSERT INTO shelves VALUES ('groente_fruit','Groente, aardappelen, fruit',0)")
-        db.exec("INSERT INTO food_types (key, name_nl) VALUES ('kwark_mager','Magere kwark')")
+        db.exec("INSERT INTO food_types (key, name_nl, protein_quality) VALUES ('kwark_mager','Magere kwark','complete')")
         product("ah:1", "AH Magere kwark", foodType = "kwark_mager", protein = 8.0, kcal = 55.0)
         product("jumbo:2", "Jumbo Proteïne pudding", protein = 10.0, kcal = 80.0)
         product("ah:3", "Mystery tin")
@@ -78,6 +78,7 @@ class CatalogueReaderTest {
         assertEquals(1.79, detail.shelfLanePrice!!, 0.0)
         assertEquals(listOf("2026-09-07", "2026-09-14"), detail.history.map { it.week })
         assertEquals("Magere kwark", detail.foodTypeName)
+        assertEquals("complete", detail.proteinQuality)
         assertTrue(detail.deal.macrosEstimated)
     }
 

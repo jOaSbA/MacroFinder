@@ -22,7 +22,10 @@ CREATE TABLE food_types (
     -- 3.3 is exactly that: the JSON export ships these numbers with no way to
     -- know they are seed estimates.
     macro_source              TEXT,
-    macro_confidence          TEXT
+    macro_confidence          TEXT,
+    -- complete / incomplete / blend, from data/seed/protein_quality.yaml
+    -- (PLAN-V2 section 4.3). NULL when nobody authored one.
+    protein_quality           TEXT
 ) WITHOUT ROWID;
 
 -- Milestone 19. The shared shelves from data/seed/category_map.yaml, in the
