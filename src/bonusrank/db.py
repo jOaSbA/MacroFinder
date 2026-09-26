@@ -121,6 +121,15 @@ CREATE TABLE IF NOT EXISTS product_macros (
     observed_at       TEXT NOT NULL
 );
 
+-- Milestone 36: which barcodes were looked up at Open Food Facts and when,
+-- so a product OFF doesn't know isn't asked about again every run. OFF is a
+-- nonprofit; BRIEF section 7 says cache harder there.
+CREATE TABLE IF NOT EXISTS off_lookups (
+    ean           TEXT PRIMARY KEY,
+    looked_up_at  TEXT NOT NULL,
+    outcome       TEXT NOT NULL      -- written / missing / rejected
+);
+
 -- Milestone 15: a full-catalogue crawl is thousands of paged requests, and
 -- BRIEF section 7 caps them at 2/second. A run that dies halfway must not
 -- start over - it would double the request count for nothing, which is the

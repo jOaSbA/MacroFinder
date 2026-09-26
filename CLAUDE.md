@@ -1419,6 +1419,22 @@ catalogue that lost more than 20% of its products.
     internal article numbers. `bonusrank fill-eans` runs before the export;
     `products.ean` was already in the app schema, so nothing changed there.
 
+36. ~~Open Food Facts macros for Jumbo and Aldi.~~ **Done.** `off.py`
+    looks up matched Jumbo/Aldi products with a barcode and no label macros,
+    current offers first, 150 a run at 1 request/second, and remembers every
+    lookup in `off_lookups` for 60 days so misses aren't asked again (OFF is
+    a nonprofit). Rows go into `product_macros` as `source='off'`,
+    `confidence='medium'`: label data, second-hand, so not marked as an
+    estimate, and the detail screen says "overgenomen door Open Food Facts".
+    Two checks before storing: the figures must be plausible (nothing over
+    100 g, energy close to 4P+4C+9F), and the protein must not be far from
+    the food type's seed value, because a Jumbo barcode comes from an image
+    name and could point at the wrong product. First real run, 20 lookups:
+    13 written, 1 unknown, 1 rejected, 5 known to OFF without nutrition.
+    The one rejection was a real matcher bug: "Danio Mango/Passievrucht"
+    matched as mango; `danio` is now a carrier word. The Over screen credits
+    OFF (ODbL).
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.

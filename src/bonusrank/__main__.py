@@ -731,6 +731,18 @@ def cmd_fill_eans(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_off_macros(args: argparse.Namespace) -> int:
+    """Milestone 36: label macros from Open Food Facts for products with a barcode."""
+    from . import off
+    from .http import PoliteClient
+
+    with connect() as conn, PoliteClient("off", cache_ttl=off.CACHE_TTL_SECONDS, rps=1.0) as client:
+        stats = off.fetch_off_macros(conn, client, limit=args.limit)
+    print(f"open food facts: {stats['written']} written, {stats['missing']} unknown, "
+          f"{stats['rejected']} rejected")
+    return 0
+
+
 def cmd_halt_manifest(args: argparse.Namespace) -> int:
     """Milestone 30: pull the kill switch on a published manifest."""
     from . import appdb
@@ -862,6 +874,10 @@ def main(argv: list[str] | None = None) -> int:
 
     eans = sub.add_parser("fill-eans", help="fill barcodes from data already on disk")
     eans.set_defaults(func=cmd_fill_eans)
+
+    offp = sub.add_parser("off-macros", help="label macros from Open Food Facts, by barcode")
+    offp.add_argument("--limit", type=int, default=100, help="barcodes to look up this run")
+    offp.set_defaults(func=cmd_off_macros)
 
     halt = sub.add_parser("halt-manifest",
                           help="mark a published manifest halted (the kill switch)")

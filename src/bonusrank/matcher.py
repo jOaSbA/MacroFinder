@@ -146,6 +146,9 @@ _COMPOSITE_WORDS = {
 _CARRIER_WORDS = (
     "kwark", "yoghurt", "yogurt", "skyr", "pudding", "vla", "kefir", "melk", "milk",
     "protein", "proteine", "eiwit", "pancake", "pancakes", "shake", "tonijn",
+    # A brand, but only ever a kwark dessert: "Danio Mango/Passievrucht" was
+    # costed as mango. Caught by the Open Food Facts seed check (milestone 36).
+    "danio",
 )
 _CARRIER_RE = re.compile(
     "|".join(rf"\b{re.escape(w)}|{re.escape(w)}\b" for w in _CARRIER_WORDS)

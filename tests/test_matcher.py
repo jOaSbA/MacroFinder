@@ -398,6 +398,7 @@ def test_the_oil_itself_still_matches(matcher):
     "Optimel Drinkyoghurt Framboos 0% Vet 1L",
     "AH Proteine pancakes banaan",
     "Danoontje Knijpyoghurt aardbei",
+    "Danio Mango/Passievrucht 450gr",
 ])
 def test_a_flavour_is_not_the_food(matcher, name):
     result = matcher.match(name)
