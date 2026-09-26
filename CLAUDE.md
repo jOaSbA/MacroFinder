@@ -1483,6 +1483,14 @@ catalogue that lost more than 20% of its products.
     means, where the settings are) until "Begrepen". The intro state starts
     as unknown, so it never flashes on for someone who closed it.
 
+**Fixed 2026-09-26: AH promos had stopped refreshing.** Since 2026-09-25
+AH still listed segment 811682 but answered 404 for it, and the unhandled
+error aborted the whole AH ingest in most runs; the label step, which re-runs
+the ingest, died the same way, so no label macros or AH barcodes were fetched
+either. The workflow's "failed, continuing" kept the run green, which is why
+nobody saw it. `ingest_ah` now skips a 404 segment and counts it; any other
+error still fails loudly.
+
 PLAN-V3 (M31-M41) is done too. PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 875 Python tests, 180 Android JVM
 tests and 19 device tests, all in CI.

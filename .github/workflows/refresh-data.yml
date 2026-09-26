@@ -102,33 +102,33 @@ jobs:
 
       # One chain failing must not take the other two down.
       - name: Ingest AH
-        run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"
+        run: bonusrank ingest --chain ah || echo "::warning::AH ingest failed, continuing"
 
       - name: Ingest Jumbo
-        run: bonusrank ingest --chain jumbo || echo "Jumbo ingest failed, continuing"
+        run: bonusrank ingest --chain jumbo || echo "::warning::Jumbo ingest failed, continuing"
 
       - name: Ingest Aldi
-        run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
+        run: bonusrank ingest --chain aldi || echo "::warning::Aldi ingest failed, continuing"
 
       # Label macros from AH's product pages, spent on products on offer now
       # first. Jumbo and Aldi don't publish nutrition we can read.
       - name: Fetch label macros (AH)
-        run: bonusrank ingest --chain ah --with-macros 300 || echo "AH macro fetch failed, continuing"
+        run: bonusrank ingest --chain ah --with-macros 300 || echo "::warning::AH macro fetch failed, continuing"
 
       # Aldi has no searchable catalogue, so only AH and Jumbo get shelf prices.
       - name: Refresh base prices (AH)
-        run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
+        run: bonusrank prices --refresh --all --chain ah || echo "::warning::AH price refresh failed, continuing"
 
       - name: Refresh base prices (Jumbo)
-        run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
+        run: bonusrank prices --refresh --all --chain jumbo || echo "::warning::Jumbo price refresh failed, continuing"
 
       - name: Crawl the AH catalogue
         if: github.event.schedule == '0 4 * * 1' || inputs.crawl
-        run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
+        run: bonusrank catalogue --chain ah || echo "::warning::AH catalogue crawl failed, continuing"
 
       - name: Crawl the Jumbo catalogue
         if: github.event.schedule == '0 4 * * 1' || inputs.crawl
-        run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
+        run: bonusrank catalogue --chain jumbo || echo "::warning::Jumbo catalogue crawl failed, continuing"
 
       # Barcodes from data already on disk: Jumbo image names and the AH
       # detail calls the label fetch just saved. No requests.
@@ -138,7 +138,7 @@ jobs:
       # Label macros for Jumbo and Aldi from Open Food Facts. A nonprofit, so
       # a small budget, and misses are remembered for two months.
       - name: Open Food Facts macros
-        run: bonusrank off-macros --limit 150 || echo "Open Food Facts lookup failed, continuing"
+        run: bonusrank off-macros --limit 150 || echo "::warning::Open Food Facts lookup failed, continuing"
 
       - name: Export
         run: |
