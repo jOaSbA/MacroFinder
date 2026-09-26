@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Size
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,6 +47,7 @@ import com.macrofinder.app.ui.theme.tierColor
  * The coloured figure bottom-left is always the metric being sorted on, so
  * changing the sort changes what sits there: one place to look.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DealRow(
     deal: Deal,
@@ -53,18 +58,20 @@ fun DealRow(
     modifier: Modifier = Modifier,
 ) {
     val t = MF.tokens
+    val rule = chainColor(deal.chain)
     Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 4.dp)
             .clip(RoundedCornerShape(14.dp))
             .background(t.card)
-            .clickable(onClick = onClick)
-            .height(IntrinsicSize.Min),
+            // The chain rule, drawn rather than laid out: measuring the row's
+            // intrinsic height clipped wrapped text at large font sizes.
+            .drawBehind { drawRect(rule, size = Size(3.dp.toPx(), size.height)) }
+            .clickable(onClick = onClick),
     ) {
-        Box(Modifier.width(3.dp).fillMaxHeight().background(chainColor(deal.chain)))
         Row(
-            Modifier.padding(start = 9.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
+            Modifier.padding(start = 12.dp, end = 12.dp, top = 10.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ProductImage(deal.imageUrl, 64.dp)
@@ -73,18 +80,18 @@ fun DealRow(
                     deal.name, style = MF.type.rowTitle, color = t.ink,
                     maxLines = 2, overflow = TextOverflow.Ellipsis,
                 )
-                Text(
-                    listOfNotNull(chainName(deal.chain), sizeText(deal)).joinToString(" · "),
-                    style = MF.type.label, color = t.muted, maxLines = 1,
-                    modifier = Modifier.padding(top = 2.dp),
-                )
-                val showBadges = deal.promoText != null || quantityText(deal) != null ||
-                    deal.isUpcomingOn(today)
-                if (showBadges) Row(
-                    Modifier.padding(top = 6.dp),
+                // Chain, size and badges share one line, and wrap rather than
+                // truncate at large font sizes ("ko..." helps nobody).
+                FlowRow(
+                    Modifier.padding(top = 4.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
+                    Text(
+                        listOfNotNull(chainName(deal.chain), sizeText(deal)).joinToString(" · "),
+                        style = MF.type.label, color = t.muted,
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                    )
                     deal.promoText?.let { Badge(it, strong = true) }
                     quantityText(deal)?.let { Badge(it) }
                     if (deal.isUpcomingOn(today)) validityText(deal, today)?.let { Badge(it) }
@@ -93,8 +100,8 @@ fun DealRow(
                     metricText(deal, sort),
                     style = MF.type.figureSm,
                     color = tierColor(tier, deal.macrosEstimated && sort != DealSort.DISCOUNT),
-                    modifier = Modifier.padding(top = 6.dp),
-                    maxLines = 1,
+                    modifier = Modifier.padding(top = 5.dp),
+                    maxLines = 2,
                 )
             }
             Column(horizontalAlignment = Alignment.End, modifier = Modifier.padding(start = 8.dp)) {

@@ -86,6 +86,8 @@ fun <T> TextTabs(
                     label(option),
                     style = MF.type.labelStrong,
                     color = if (active) t.ink else t.muted,
+                    maxLines = 1,
+                    softWrap = false,
                     modifier = Modifier.padding(top = 12.dp, bottom = 8.dp),
                 )
                 Box(
