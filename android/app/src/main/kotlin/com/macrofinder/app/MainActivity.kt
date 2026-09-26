@@ -59,6 +59,13 @@ import com.macrofinder.app.ui.screens.MealsScreen
 import com.macrofinder.app.ui.screens.ProductScreen
 import com.macrofinder.app.ui.screens.SavedMealsScreen
 import com.macrofinder.app.ui.screens.SearchScreen
+import com.macrofinder.app.ui.screens.TallyScreen
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
 import com.macrofinder.app.ui.tab
 import com.macrofinder.app.ui.tabLabel
 import com.macrofinder.app.ui.theme.MF
@@ -168,8 +175,10 @@ fun MacroFinderApp(
                 )
                 is Route.Product -> {
                     LaunchedEffect(route.id) { catalogue.openDetail(route.id) }
-                    ProductScreen(catalogue, onBack = ::back, onFollow = onFollow, onOpen = openProduct)
+                    ProductScreen(catalogue, onBack = ::back, onFollow = onFollow, onOpen = openProduct,
+                        onTally = { go(Route.Tally) })
                 }
+                Route.Tally -> TallyScreen(catalogue, onBack = ::back, onOpen = openProduct)
                 is Route.Customise -> {
                     LaunchedEffect(route.templateKey) {
                         if (meals.currentTemplate()?.key != route.templateKey) meals.customise(route.templateKey)
@@ -183,7 +192,29 @@ fun MacroFinderApp(
             }
         }
         // Out of the way while typing, so the keyboard doesn't push it up the screen.
-        if (!typing) BottomBar(current = stack.tab(), onSelect = ::go)
+        if (!typing) {
+            val tally by catalogue.tally.collectAsState()
+            val here = stack.last()
+            if (tally.isNotEmpty() && here != Route.Tally && here !is Route.Customise) {
+                TallyBar(tally.size, onClick = { go(Route.Tally) })
+            }
+            BottomBar(current = stack.tab(), onSelect = ::go)
+        }
+    }
+}
+
+/** Milestone 38: the tally, one tap away from anywhere it matters. */
+@Composable
+private fun TallyBar(products: Int, onClick: () -> Unit) {
+    val t = MF.tokens
+    Column(Modifier.fillMaxWidth().background(t.card).clickable(onClick = onClick)) {
+        Hairline()
+        Row(Modifier.padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Text("Teller", style = MF.type.labelStrong, color = t.ink)
+            Text(if (products == 1) "  1 product" else "  $products producten", style = MF.type.label, color = t.muted,
+                modifier = Modifier.weight(1f))
+            Text("Bekijk ›", style = MF.type.labelStrong, color = t.signal)
+        }
     }
 }
 

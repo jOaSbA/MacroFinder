@@ -19,6 +19,9 @@ import com.macrofinder.app.data.catalogue.Shelf
 import com.macrofinder.app.data.catalogue.selectDeals
 import com.macrofinder.app.data.following.FollowingStore
 import com.macrofinder.app.data.catalogue.normaliseBarcode
+import com.macrofinder.app.data.catalogue.currentLane
+import com.macrofinder.app.data.tally.TallyLine
+import com.macrofinder.app.data.tally.TallyStore
 import com.macrofinder.app.data.settings.Prefs
 import com.macrofinder.app.data.settings.SettingsStore
 import com.macrofinder.app.data.sync.CatalogueStore
@@ -96,9 +99,18 @@ class CatalogueViewModel(
     private val _followedDeals = MutableStateFlow<List<Deal>>(emptyList())
     val followedDeals: StateFlow<List<Deal>> = _followedDeals.asStateFlow()
 
+    // Milestone 38. Declared before init, which starts collecting it.
+    private val tallyStore = TallyStore(app)
+    val tally: StateFlow<Map<String, Int>> =
+        tallyStore.packs.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+    private val _tallyLines = MutableStateFlow<List<TallyLine>>(emptyList())
+    /** The tally with today's price for each product, in the order it was read. */
+    val tallyLines: StateFlow<List<TallyLine>> = _tallyLines.asStateFlow()
+
     init {
         reload()
         viewModelScope.launch { followed.collect { refreshFollowed(it) } }
+        viewModelScope.launch { tally.collect { refreshTally(it) } }
     }
 
     fun today(): String = LocalDate.now().toString()
@@ -121,6 +133,7 @@ class CatalogueViewModel(
             _state.value = if (next.installed) next else next.copy(deals = fallback)
             if (next.installed && !next.searchReady) buildIndex()
             refreshFollowed(followed.value)
+            refreshTally(tally.value)
             if (_searchText.value.isNotBlank()) search(_searchText.value)
         }
     }
@@ -319,6 +332,27 @@ class CatalogueViewModel(
                 }
             }
         }.sortedWith(compareBy({ it.lane == "shelf" }, { it.name.lowercase() }))
+    }
+
+    // -- tally (milestone 38) ----------------------------------------------------
+
+    fun setPacks(id: String, packs: Int) {
+        viewModelScope.launch { tallyStore.set(id, packs) }
+    }
+
+    fun clearTally() {
+        viewModelScope.launch { tallyStore.clear() }
+    }
+
+    private suspend fun refreshTally(packs: Map<String, Int>) {
+        val today = today()
+        val lanes = withContext(Dispatchers.IO) {
+            reader()?.let { r -> runCatching { r.dealsFor(packs.keys) }.getOrDefault(emptyList()) }
+                ?: fallback.filter { it.id in packs }
+        }.groupBy { it.id }
+        _tallyLines.value = packs.entries.sortedBy { it.key }.map { (id, n) ->
+            TallyLine(id, n, lanes[id]?.let { currentLane(it, today) ?: it.first() })
+        }
     }
 
     override fun onCleared() {

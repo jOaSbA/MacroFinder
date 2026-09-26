@@ -66,11 +66,13 @@ fun ProductScreen(
     onBack: () -> Unit,
     onFollow: (String, Boolean) -> Unit,
     onOpen: (String) -> Unit = {},
+    onTally: () -> Unit = {},
 ) {
     val t = MF.tokens
     val detail by vm.detail.collectAsState()
     val followed by vm.followed.collectAsState()
     val targets by vm.targets.collectAsState()
+    val tally by vm.tally.collectAsState()
 
     Column(Modifier.fillMaxSize().background(t.paper)) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -78,6 +80,13 @@ fun ProductScreen(
             Spacer(Modifier.weight(1f))
             val d = detail
             if (d != null) {
+                // Milestone 38: add to the tally; once counted, the same spot opens it.
+                val packs = tally[d.deal.id] ?: 0
+                if (packs == 0) TextAction("Tel mee", {
+                    // A multi-buy starts at the number you need for the promo price.
+                    vm.setPacks(d.deal.id, if (d.deal.lane == "promo") d.deal.requiredQuantity.coerceAtLeast(1) else 1)
+                }, color = t.signal)
+                else TextAction("Geteld ×$packs", onTally, color = t.muted)
                 val on = d.deal.id in followed
                 TextAction(if (on) "Gevolgd ✓" else "Volg", { onFollow(d.deal.id, !on) },
                     color = if (on) t.muted else t.signal)

@@ -14,6 +14,7 @@ sealed interface Route {
     data object Following : Route { override val key = "following" }
     data object SavedMeals : Route { override val key = "saved" }
     data object About : Route { override val key = "about" }
+    data object Tally : Route { override val key = "tally" }
     data class Product(val id: String) : Route { override val key = "product:$id" }
     data class Customise(val templateKey: String) : Route { override val key = "customise:$templateKey" }
 
@@ -23,7 +24,7 @@ sealed interface Route {
         fun parse(key: String): Route = when {
             key.startsWith("product:") -> Product(key.removePrefix("product:"))
             key.startsWith("customise:") -> Customise(key.removePrefix("customise:"))
-            else -> listOf(Deals, Search, Meals, Following, SavedMeals, About)
+            else -> listOf(Deals, Search, Meals, Following, SavedMeals, About, Tally)
                 .firstOrNull { it.key == key } ?: Deals
         }
     }
