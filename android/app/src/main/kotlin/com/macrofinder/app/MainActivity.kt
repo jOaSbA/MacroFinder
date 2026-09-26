@@ -150,7 +150,14 @@ fun MacroFinderApp(
                     stores = prefs.stores,
                 )
                 Route.Following -> FollowingScreen(catalogue, openProduct)
-                Route.About -> AboutScreen(catalogue, sync, mealsState.generatedAt, onBack = ::back)
+                Route.About -> AboutScreen(
+                    catalogue, sync, mealsState.generatedAt, onBack = ::back,
+                    onDigestOn = {
+                        if (Build.VERSION.SDK_INT >= 33 && !PromoNotifier.allowed(context)) {
+                            askNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
+                        }
+                    },
+                )
                 Route.SavedMeals -> SavedMealsScreen(
                     meals, onBack = ::back,
                     onOpen = { meal ->

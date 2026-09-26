@@ -18,6 +18,9 @@ import com.macrofinder.app.data.following.FollowingStore
 import com.macrofinder.app.data.following.PromoNotifier
 import com.macrofinder.app.data.following.alertKey
 import com.macrofinder.app.data.following.promoAlerts
+import com.macrofinder.app.data.following.digestWeek
+import com.macrofinder.app.data.following.weeklyDigest
+import com.macrofinder.app.data.settings.SettingsStore
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 
@@ -57,6 +60,7 @@ class CatalogueSyncWorker(
                 setProgressAsync(SyncProgress("Zoekindex bijwerken", -1f, 0).toData())
                 runCatching { store.ensureSearchIndex(force = true) }
                 runCatching { announceFollowedPromos(store) }
+                runCatching { announceDigest(store) }
                 Result.success(
                 Data.Builder()
                     .putString(KEY_STATE, "installed")
@@ -103,6 +107,19 @@ class CatalogueSyncWorker(
         if (fresh.isEmpty()) return
         PromoNotifier.post(applicationContext, fresh)
         following.markNotified(fresh.map(::alertKey))
+    }
+
+    /** Milestone 33: the weekly digest, if it's on and hasn't gone out this week. */
+    private suspend fun announceDigest(store: CatalogueStore) {
+        val settings = SettingsStore(applicationContext)
+        val prefs = settings.current()
+        if (!prefs.weeklyDigest) return
+        val today = LocalDate.now()
+        val deals = store.open().use { CatalogueReader(AndroidSqlRunner(it)).deals() }
+        val top = weeklyDigest(deals, prefs, today, settings.lastDigest())
+        if (top.isEmpty()) return
+        PromoNotifier.postDigest(applicationContext, top)
+        settings.markDigest(digestWeek(today))
     }
 
     private fun SyncProgress.toData(): Data = Data.Builder()

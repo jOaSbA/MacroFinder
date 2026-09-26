@@ -15,6 +15,7 @@ import com.macrofinder.app.MainActivity
 import com.macrofinder.app.R
 import com.macrofinder.app.data.catalogue.Deal
 import com.macrofinder.app.ui.fmt
+import com.macrofinder.app.ui.theme.chainName
 
 /**
  * Posts "a product you follow is on offer". Default importance, so Do Not
@@ -22,6 +23,7 @@ import com.macrofinder.app.ui.fmt
  */
 object PromoNotifier {
     private const val CHANNEL = "followed-promos"
+    private const val DIGEST_CHANNEL = "weekly-digest"
 
     fun post(context: Context, deals: List<Deal>) {
         if (deals.isEmpty() || !allowed(context)) return
@@ -49,6 +51,38 @@ object PromoNotifier {
             NotificationManagerCompat.from(context).notify(1, notification)
         } catch (_: SecurityException) {
             // Permission revoked between the check and the post.
+        }
+    }
+
+    /** Milestone 33: the weekly digest, on its own channel so it can be muted alone. */
+    fun postDigest(context: Context, deals: List<Deal>) {
+        if (deals.isEmpty() || !allowed(context)) return
+        context.getSystemService(NotificationManager::class.java).createNotificationChannel(
+            NotificationChannel(DIGEST_CHANNEL, "Wekelijks overzicht", NotificationManager.IMPORTANCE_LOW)
+                .apply { description = "De goedkoopste eiwitaanbiedingen van de week" },
+        )
+        val open = PendingIntent.getActivity(
+            context, 0,
+            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            PendingIntent.FLAG_IMMUTABLE,
+        )
+        val body = deals.joinToString("\n") { d ->
+            val mark = if (d.macrosEstimated) "≈ " else ""
+            listOfNotNull(d.name, chainName(d.chain), d.eurPer100gProtein?.let { mark + fmt("€%.2f per 100 g eiwit", it) })
+                .joinToString(" · ")
+        }
+        val notification = NotificationCompat.Builder(context, DIGEST_CHANNEL)
+            .setSmallIcon(R.drawable.ic_stat_tag)
+            .setContentTitle("Goedkoop eiwit deze week")
+            .setContentText(body.lineSequence().first())
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+            .setContentIntent(open)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .build()
+        try {
+            NotificationManagerCompat.from(context).notify(2, notification)
+        } catch (_: SecurityException) {
         }
     }
 
