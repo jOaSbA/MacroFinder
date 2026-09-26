@@ -24,7 +24,13 @@ data class CatalogueSyncState(
     val halted: Boolean = false,
 ) {
     companion object {
-        fun fromWorkInfo(info: WorkInfo?): CatalogueSyncState {
+        /**
+         * [oneOff] matters for ENQUEUED: a "nu verversen" that hasn't started
+         * is waiting for a connection, but a periodic job sits in ENQUEUED
+         * between every run, and reading that as "waiting" left the banner up
+         * forever.
+         */
+        fun fromWorkInfo(info: WorkInfo?, oneOff: Boolean = true): CatalogueSyncState {
             if (info == null) return CatalogueSyncState()
 
             return when (info.state) {
@@ -38,18 +44,20 @@ data class CatalogueSyncState(
                     )
                 }
 
-                // Enqueued but not started is usually the unmetered constraint
-                // waiting for wifi. Saying so beats a silent nothing.
-                WorkInfo.State.ENQUEUED -> CatalogueSyncState(
-                    running = true,
-                    label = "Wacht op wifi",
-                )
+                WorkInfo.State.ENQUEUED ->
+                    if (oneOff) CatalogueSyncState(running = true, label = "Wacht op verbinding")
+                    else CatalogueSyncState()
 
                 WorkInfo.State.SUCCEEDED -> when (
                     info.outputData.getString(CatalogueSyncWorker.KEY_STATE)
                 ) {
                     "installed" -> CatalogueSyncState(
                         message = installedMessage(info),
+                    )
+                    "incompatible" -> CatalogueSyncState(
+                        message = if (info.outputData.getBoolean(CatalogueSyncWorker.KEY_NEWER, false))
+                            "Er is een nieuwere catalogus. Werk de app bij om die te krijgen."
+                        else null,
                     )
                     "halted" -> CatalogueSyncState(
                         halted = true,

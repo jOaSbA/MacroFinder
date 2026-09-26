@@ -2,6 +2,8 @@ package com.macrofinder.app.data.sync
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.macrofinder.app.data.catalogue.AndroidSqlRunner
+import com.macrofinder.app.data.catalogue.SearchIndex
 import java.io.File
 
 /**
@@ -70,6 +72,20 @@ class CatalogueStore(private val context: Context) {
     fun open(): SQLiteDatabase = SQLiteDatabase.openDatabase(
         databaseFile.path, null, SQLiteDatabase.OPEN_READONLY,
     )
+
+    /**
+     * Build the on-device search index (milestone 25). Runs after every
+     * install or delta, and whenever it is missing, e.g. after an app update
+     * on a phone that already had a catalogue.
+     */
+    fun ensureSearchIndex(force: Boolean = false) {
+        if (!databaseFile.exists()) return
+        SQLiteDatabase.openDatabase(databaseFile.path, null, SQLiteDatabase.OPEN_READWRITE)
+            .use { db ->
+                val runner = AndroidSqlRunner(db)
+                if (force || !SearchIndex.exists(runner)) SearchIndex.rebuild(runner)
+            }
+    }
 
     /**
      * Replace the catalogue with a freshly downloaded full build.

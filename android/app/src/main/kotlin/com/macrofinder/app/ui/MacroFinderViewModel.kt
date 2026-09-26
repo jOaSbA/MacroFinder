@@ -5,6 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.macrofinder.app.BuildConfig
 import com.macrofinder.app.data.ArchetypeEntry
 import com.macrofinder.app.data.DataRepository
+import com.macrofinder.app.data.ExportSnapshot
+import com.macrofinder.app.data.catalogue.Deal
+import com.macrofinder.app.data.catalogue.fallbackDeals
 import com.macrofinder.app.data.FilterState
 import com.macrofinder.app.data.FoodTab
 import com.macrofinder.app.data.FoodTypeEntry
@@ -62,6 +65,9 @@ data class UiState(
     /** Lines the user added that are not slot picks ("100 g ketchup"). */
     val extras: List<MealLine> = emptyList(),
     val savedMeals: List<SavedMeal> = emptyList(),
+    /** latest.json's offers across all chains, for the deal list before a catalogue sync. */
+    val fallbackDeals: List<Deal> = emptyList(),
+    val generatedAt: String? = null,
 )
 
 class MacroFinderViewModel(
@@ -80,26 +86,40 @@ class MacroFinderViewModel(
             _state.value = _state.value.copy(loading = true, error = null)
             when (val result = repository.fetchSnapshot()) {
                 is SnapshotResult.Success -> {
-                    val snapshot = result.snapshot
-                    val chain = _state.value.chain
-                    val chainData = snapshot.chains[chain]
-                    _state.value = _state.value.copy(
-                        loading = false,
-                        archetypes = chainData?.archetypes.orEmpty(),
-                        offers = chainData?.offers.orEmpty(),
-                        templates = snapshot.templates,
-                        foodTypes = snapshot.food_types,
-                        templatePrices = chainData?.template_prices.orEmpty(),
-                        // Rebuilding this is what re-prices every saved meal:
-                        // the meals themselves hold no euros, only keys.
-                        mealContext = MealContext.from(snapshot, chain),
-                    )
+                    snapshot = result.snapshot
+                    applyChain(_state.value.chain, result.snapshot)
                 }
                 is SnapshotResult.Failure -> {
                     _state.value = _state.value.copy(loading = false, error = result.message)
                 }
             }
         }
+    }
+
+    private var snapshot: ExportSnapshot? = null
+
+    private fun applyChain(chain: String, snapshot: ExportSnapshot) {
+        val chainData = snapshot.chains[chain]
+        _state.value = _state.value.copy(
+            loading = false,
+            chain = chain,
+            archetypes = chainData?.archetypes.orEmpty(),
+            offers = chainData?.offers.orEmpty(),
+            templates = snapshot.templates,
+            foodTypes = snapshot.food_types,
+            templatePrices = chainData?.template_prices.orEmpty(),
+            // Rebuilding this is what re-prices every saved meal:
+            // the meals themselves hold no euros, only keys.
+            mealContext = MealContext.from(snapshot, chain),
+            fallbackDeals = fallbackDeals(snapshot),
+            generatedAt = snapshot.generated_at,
+        )
+    }
+
+    /** Which chain the meals are priced at. */
+    fun selectChain(chain: String) {
+        val snap = snapshot
+        if (snap == null) _state.value = _state.value.copy(chain = chain) else applyChain(chain, snap)
     }
 
     // -- navigation --------------------------------------------------------

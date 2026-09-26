@@ -36,9 +36,10 @@ class CatalogueSyncer(
                 onProgress(SyncProgress("Bijwerken controleren", 0f))
                 val manifest = json.decodeFromString<Manifest>(get(manifestUrl))
 
-                when (val plan = planSync(manifest, store.localVersion())) {
+                when (val plan = planSync(manifest, store.localVersion(), store.schemaVersion())) {
                     is SyncPlan.UpToDate -> SyncOutcome.UpToDate
                     is SyncPlan.Halted -> SyncOutcome.Halted(plan.message)
+                    is SyncPlan.Incompatible -> SyncOutcome.Incompatible(plan.newer)
                     is SyncPlan.ApplyDeltas -> applyAll(plan.deltas, onProgress)
                     is SyncPlan.FullDownload -> full(plan, onProgress)
                 }
@@ -165,5 +166,6 @@ sealed interface SyncOutcome {
         val viaDelta: Boolean,
     ) : SyncOutcome
     data class Halted(val message: String) : SyncOutcome
+    data class Incompatible(val newer: Boolean) : SyncOutcome
     data class Failed(val message: String) : SyncOutcome
 }

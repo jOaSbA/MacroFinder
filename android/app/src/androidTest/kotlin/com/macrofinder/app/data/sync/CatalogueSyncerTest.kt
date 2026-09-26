@@ -89,7 +89,7 @@ class CatalogueSyncerTest {
         file.delete()
         SQLiteDatabase.openOrCreateDatabase(file, null).use { db ->
             schema(db)
-            db.execSQL("INSERT INTO meta VALUES ('schema_version','2')")
+            db.execSQL("INSERT INTO meta VALUES ('schema_version','3')")
             repeat(products) {
                 db.execSQL("INSERT INTO products VALUES ('ah:$it','ah','$it','Product $it')")
             }
@@ -131,7 +131,7 @@ class CatalogueSyncerTest {
     fun a_cold_install_downloads_and_installs_the_full_build() = runTest {
         val full = buildDatabase("full.sqlite", products = 40)
         enqueueJson(
-            """{"status":"ok","schema_version":2,
+            """{"status":"ok","schema_version":3,
                 "full":{"version":"v1","file":"full.sqlite",
                         "sha256":"${sha256(full)}","bytes":${full.length()},"products":40},
                 "deltas":[]}"""

@@ -77,6 +77,11 @@ def test_next_promo_far_away_means_buy():
                               today=START + timedelta(days=7)) == "buy"
 
 
+def test_more_than_a_cycle_overdue_means_the_pattern_broke():
+    assert history.cycle_hint(14, START, on_promo=False,
+                              today=START + timedelta(days=40)) is None
+
+
 def test_no_cycle_no_hint():
     assert history.cycle_hint(None, START, on_promo=False, today=START) is None
 

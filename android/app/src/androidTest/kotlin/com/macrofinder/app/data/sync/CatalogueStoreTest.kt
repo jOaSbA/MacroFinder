@@ -80,7 +80,7 @@ class CatalogueStoreTest {
         val file = File(scratch, "base.sqlite")
         SQLiteDatabase.openOrCreateDatabase(file, null).use { db ->
             schema(db)
-            db.execSQL("INSERT INTO meta VALUES ('schema_version','2')")
+            db.execSQL("INSERT INTO meta VALUES ('schema_version','3')")
             db.execSQL("INSERT INTO products VALUES ('ah:1','ah','1','Kwark')")
             db.execSQL("INSERT INTO products VALUES ('ah:2','ah','2','Kipfilet')")
             db.execSQL("INSERT INTO products VALUES ('ah:3','ah','3','Seizoensartikel')")
@@ -132,7 +132,7 @@ class CatalogueStoreTest {
         install()
 
         assertEquals("v1", store.localVersion())
-        assertEquals(2, store.schemaVersion())
+        assertEquals(3, store.schemaVersion())
         assertEquals(3, query("SELECT count(*) FROM products") { it.getInt(0) }.single())
     }
 

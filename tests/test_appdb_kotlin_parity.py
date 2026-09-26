@@ -104,3 +104,12 @@ def test_the_app_knows_which_schema_version_it_is_reading(source):
     the file is a crash, where a read one is a decision."""
     assert "schema_version" in source
     assert str(appdb.SCHEMA_VERSION) not in _kotlin_list(source, "DELTA_TABLES")
+
+
+def test_the_app_reads_the_schema_the_build_writes():
+    """A mismatch means every phone refuses every catalogue as incompatible,
+    or worse, installs one it can't read."""
+    plan = (KOTLIN.parent / "SyncPlan.kt").read_text(encoding="utf-8")
+    match = re.search(r"const val APP_SCHEMA_VERSION = (\d+)", plan)
+    assert match, "APP_SCHEMA_VERSION not found in SyncPlan.kt"
+    assert int(match.group(1)) == appdb.SCHEMA_VERSION

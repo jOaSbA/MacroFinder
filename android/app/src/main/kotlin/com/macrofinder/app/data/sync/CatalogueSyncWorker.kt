@@ -12,6 +12,13 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.macrofinder.app.BuildConfig
+import com.macrofinder.app.data.catalogue.AndroidSqlRunner
+import com.macrofinder.app.data.catalogue.CatalogueReader
+import com.macrofinder.app.data.following.FollowingStore
+import com.macrofinder.app.data.following.PromoNotifier
+import com.macrofinder.app.data.following.alertKey
+import com.macrofinder.app.data.following.promoAlerts
+import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 
 /**
@@ -32,24 +39,31 @@ class CatalogueSyncWorker(
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
+        val store = CatalogueStore(applicationContext)
         val syncer = CatalogueSyncer(
-            store = CatalogueStore(applicationContext),
+            store = store,
             manifestUrl = BuildConfig.MANIFEST_URL,
             assetBaseUrl = BuildConfig.ASSET_BASE_URL,
         )
 
         return when (val outcome = syncer.sync { setProgressAsync(it.toData()) }) {
-            is SyncOutcome.UpToDate -> Result.success(
-                Data.Builder().putString(KEY_STATE, "up_to_date").build()
-            )
-            is SyncOutcome.Installed -> Result.success(
+            is SyncOutcome.UpToDate -> {
+                runCatching { store.ensureSearchIndex() }
+                Result.success(Data.Builder().putString(KEY_STATE, "up_to_date").build())
+            }
+            is SyncOutcome.Installed -> {
+                setProgressAsync(SyncProgress("Zoekindex bijwerken", -1f, 0).toData())
+                runCatching { store.ensureSearchIndex(force = true) }
+                runCatching { announceFollowedPromos(store) }
+                Result.success(
                 Data.Builder()
                     .putString(KEY_STATE, "installed")
                     .putString(KEY_VERSION, outcome.version)
                     .putLong(KEY_BYTES, outcome.bytesTransferred)
                     .putBoolean(KEY_VIA_DELTA, outcome.viaDelta)
                     .build()
-            )
+                )
+            }
             // Not a retry: the publisher has asked the app to stop, and
             // retrying on a schedule is exactly what it is asking it not to do.
             is SyncOutcome.Halted -> Result.success(
@@ -58,11 +72,32 @@ class CatalogueSyncWorker(
                     .putString(KEY_MESSAGE, outcome.message)
                     .build()
             )
+            // Not a failure either: nothing to retry until the app or the
+            // publisher changes.
+            is SyncOutcome.Incompatible -> {
+                runCatching { store.ensureSearchIndex() }
+                Result.success(
+                    Data.Builder().putString(KEY_STATE, "incompatible")
+                        .putBoolean(KEY_NEWER, outcome.newer).build()
+                )
+            }
             // Retry rather than fail: the commonest cause is a connection that
             // went away mid-download, and nothing was installed, so trying
             // again later is free and correct.
             is SyncOutcome.Failed -> Result.retry()
         }
+    }
+
+    /** Milestone 26: tell the user when something they follow went on offer. */
+    private suspend fun announceFollowedPromos(store: CatalogueStore) {
+        val following = FollowingStore(applicationContext)
+        val followed = following.followedNow()
+        if (followed.isEmpty()) return
+        val deals = store.open().use { CatalogueReader(AndroidSqlRunner(it)).dealsFor(followed) }
+        val fresh = promoAlerts(followed, deals, following.notified(), LocalDate.now().toString())
+        if (fresh.isEmpty()) return
+        PromoNotifier.post(applicationContext, fresh)
+        following.markNotified(fresh.map(::alertKey))
     }
 
     private fun SyncProgress.toData(): Data = Data.Builder()
@@ -80,18 +115,18 @@ class CatalogueSyncWorker(
         const val KEY_BYTES = "bytes"
         const val KEY_VIA_DELTA = "via_delta"
         const val KEY_MESSAGE = "message"
+        const val KEY_NEWER = "newer"
         const val KEY_LABEL = "label"
         const val KEY_FRACTION = "fraction"
         const val KEY_TOTAL_BYTES = "total_bytes"
 
         /**
-         * Daily, not hourly. The catalogue is published weekly, so a daily
-         * check finds something new one run in seven and costs one small
-         * manifest fetch the other six - the whole reason a build's version is
-         * its own content hash.
+         * Every 12 hours, the same rhythm the data is published on. A run with
+         * nothing new costs one small manifest fetch, because a build's version
+         * is its own content hash.
          */
         fun schedule(context: Context) {
-            val request = PeriodicWorkRequestBuilder<CatalogueSyncWorker>(1, TimeUnit.DAYS)
+            val request = PeriodicWorkRequestBuilder<CatalogueSyncWorker>(12, TimeUnit.HOURS)
                 .setConstraints(
                     Constraints.Builder()
                         .setRequiredNetworkType(NetworkType.UNMETERED)

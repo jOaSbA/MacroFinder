@@ -84,6 +84,9 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    // Product images straight from the chain's own CDN, with an on-device
+    // disk cache. PLAN-V2 section 3.3 names Coil; nothing is rehosted.
+    implementation("io.coil-kt:coil-compose:2.7.0")
 
     // Saved meals, on-device only (milestone 13). DataStore rather than Room:
     // the persisted state is a short list of small objects, and a JSON string
@@ -107,6 +110,9 @@ dependencies {
     // WorkInfo and Data are plain value classes, so the sync-state mapping is
     // JVM-testable without an emulator.
     testImplementation("androidx.work:work-runtime-ktx:2.9.1")
+    // Runs the catalogue SQL on the JVM against the real published schema,
+    // so the queries are tested in CI rather than only on an emulator.
+    testImplementation("org.xerial:sqlite-jdbc:3.46.1.0")
 
     // Instrumented tests (emulator, NOT run in CI). Milestone 17 uses these for
     // the one thing reading source text cannot establish: that the delta SQL

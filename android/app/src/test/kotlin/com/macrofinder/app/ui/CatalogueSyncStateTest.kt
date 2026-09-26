@@ -71,14 +71,21 @@ class CatalogueSyncStateTest {
     }
 
     @Test
-    fun `waiting for wifi says so instead of showing nothing`() {
-        // The unmetered constraint means enqueued-but-not-started is the normal
-        // state on mobile data, and it can last hours. Silence there looks like
-        // the feature is broken.
-        val sync = CatalogueSyncState.fromWorkInfo(workInfo(WorkInfo.State.ENQUEUED))
+    fun `a manual refresh waiting for a connection says so`() {
+        val sync = CatalogueSyncState.fromWorkInfo(workInfo(WorkInfo.State.ENQUEUED), oneOff = true)
 
         assertTrue(sync.running)
-        assertEquals("Wacht op wifi", sync.label)
+        assertEquals("Wacht op verbinding", sync.label)
+    }
+
+    @Test
+    fun `a scheduled periodic sync says nothing between runs`() {
+        // The bug: periodic work is ENQUEUED between every run, so the banner
+        // said "wacht op wifi" permanently, on wifi.
+        val sync = CatalogueSyncState.fromWorkInfo(workInfo(WorkInfo.State.ENQUEUED), oneOff = false)
+
+        assertTrue(!sync.running)
+        assertNull(sync.label)
     }
 
     @Test

@@ -58,6 +58,13 @@ data class Delta(
  */
 const val MAX_DELTA_HOPS = 7
 
+/**
+ * The catalogue schema this build of the app reads. Must equal
+ * `appdb.SCHEMA_VERSION`; `tests/test_appdb_kotlin_parity.py` checks it. An
+ * app never installs a catalogue it can't read, newer or older.
+ */
+const val APP_SCHEMA_VERSION = 3
+
 sealed interface SyncPlan {
     /** The local copy already is the published build. Costs nothing. */
     data object UpToDate : SyncPlan
@@ -74,6 +81,13 @@ sealed interface SyncPlan {
 
     /** The publisher has asked the app to stop. [message] is for the user. */
     data class Halted(val message: String) : SyncPlan
+
+    /**
+     * The published catalogue has a schema this app can't read. [newer] means
+     * the app needs an update; otherwise the publisher hasn't caught up yet
+     * and the app keeps what it has.
+     */
+    data class Incompatible(val newer: Boolean) : SyncPlan
 }
 
 /**
@@ -82,17 +96,29 @@ sealed interface SyncPlan {
  * [localVersion] is null when there is no local catalogue at all, which is the
  * cold-install case.
  */
-fun planSync(manifest: Manifest, localVersion: String?): SyncPlan {
+fun planSync(
+    manifest: Manifest,
+    localVersion: String?,
+    localSchema: Int? = APP_SCHEMA_VERSION,
+): SyncPlan {
     if (manifest.status != "ok") {
         return SyncPlan.Halted(
             "De catalogus wordt op dit moment niet bijgewerkt. " +
                 "Je ziet de gegevens van de laatste keer."
         )
     }
+    // 0 means an old manifest that didn't say; trust it rather than refuse.
+    if (manifest.schema_version != 0 && manifest.schema_version != APP_SCHEMA_VERSION) {
+        return SyncPlan.Incompatible(newer = manifest.schema_version > APP_SCHEMA_VERSION)
+    }
 
     val target = manifest.full
     if (target.version.isBlank()) {
         return SyncPlan.FullDownload(target, "the manifest names no build")
+    }
+    if (localVersion != null && localSchema != APP_SCHEMA_VERSION) {
+        // Left over from an older app. Deltas can't bridge a schema change.
+        return SyncPlan.FullDownload(target, "the local catalogue has schema $localSchema")
     }
     if (localVersion == target.version) return SyncPlan.UpToDate
     if (localVersion == null) {

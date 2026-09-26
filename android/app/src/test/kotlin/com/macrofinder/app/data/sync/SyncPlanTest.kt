@@ -24,8 +24,9 @@ class SyncPlanTest {
         version: String = "bbb",
         deltas: List<Delta> = emptyList(),
         status: String = "ok",
+        schema: Int = APP_SCHEMA_VERSION,
     ) = Manifest(
-        schema_version = 2,
+        schema_version = schema,
         status = status,
         full = FullBuild(version = version, file = "macrofinder-$version.sqlite",
                          sha256 = "deadbeef", bytes = 24_000_000, products = 52_489),
@@ -158,7 +159,7 @@ class SyncPlanTest {
           "full": {"bytes": 23928832, "file": "macrofinder-9fe8e2c1bc23a55c.sqlite",
                    "products": 52489, "sha256": "9fe8", "version": "9fe8e2c1bc23a55c"},
           "generated_at": "2026-09-22T13:48:41+00:00",
-          "schema_version": 2,
+          "schema_version": 3,
           "status": "ok"
         }
         """.trimIndent()
@@ -185,5 +186,26 @@ class SyncPlanTest {
     @Test
     fun `an empty manifest asks for a full download rather than claiming success`() {
         assertTrue(planSync(Manifest(), localVersion = "aaa") is SyncPlan.FullDownload)
+    }
+
+    // -- schema compatibility ------------------------------------------------
+
+    @Test
+    fun `a newer catalogue schema is not installed, and says the app needs updating`() {
+        assertEquals(SyncPlan.Incompatible(newer = true),
+            planSync(manifest(schema = APP_SCHEMA_VERSION + 1), localVersion = null))
+    }
+
+    @Test
+    fun `an older published schema is left alone rather than installed over a newer app`() {
+        assertEquals(SyncPlan.Incompatible(newer = false),
+            planSync(manifest(schema = APP_SCHEMA_VERSION - 1), localVersion = "aaa"))
+    }
+
+    @Test
+    fun `a catalogue left by an older app is replaced whole, never patched`() {
+        val plan = planSync(manifest(deltas = listOf(delta("aaa", "bbb"))), localVersion = "aaa",
+            localSchema = APP_SCHEMA_VERSION - 1)
+        assertTrue(plan is SyncPlan.FullDownload)
     }
 }
