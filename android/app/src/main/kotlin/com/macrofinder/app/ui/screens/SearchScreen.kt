@@ -18,6 +18,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.activity.compose.rememberLauncherForActivityResult
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
+import com.macrofinder.app.ui.components.TextAction
+import androidx.compose.foundation.layout.Row
 import com.macrofinder.app.data.settings.ALL_CHAINS
 import com.macrofinder.app.data.settings.Diet
 import androidx.compose.runtime.getValue
@@ -43,6 +48,11 @@ import com.macrofinder.app.ui.theme.MF
 @Composable
 fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
     val t = MF.tokens
+    val scanNote by vm.scanNote.collectAsState()
+    // Milestone 37: ZXing's scanner, no Google Play services needed.
+    val scanner = rememberLauncherForActivityResult(ScanContract()) { result ->
+        vm.onScanned(result.contents, onOpen)
+    }
     val text by vm.searchText.collectAsState()
     val results by vm.searchResults.collectAsState()
     val state by vm.state.collectAsState()
@@ -50,8 +60,21 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
     LaunchedEffect(Unit) { if (text.isEmpty()) runCatching { focus.requestFocus() } }
 
     Column(Modifier.fillMaxSize().background(t.paper)) {
-        Text("Zoeken", style = MF.type.display, color = t.ink,
-            modifier = Modifier.padding(start = 16.dp, top = 20.dp, bottom = 12.dp))
+        Row(
+            Modifier.fillMaxWidth().padding(start = 16.dp, end = 8.dp, top = 20.dp, bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text("Zoeken", style = MF.type.display, color = t.ink, modifier = Modifier.weight(1f))
+            TextAction("Scan barcode", {
+                scanner.launch(
+                    ScanOptions()
+                        .setDesiredBarcodeFormats(ScanOptions.EAN_13, ScanOptions.EAN_8, ScanOptions.UPC_A)
+                        .setPrompt("Richt op de streepjescode")
+                        .setBeepEnabled(false)
+                        .setOrientationLocked(false),
+                )
+            })
+        }
         Box(
             Modifier.padding(horizontal = 12.dp).fillMaxWidth().heightIn(min = 52.dp)
                 .clip(RoundedCornerShape(14.dp)).background(t.card)
@@ -83,6 +106,9 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
             else "${results.size} gevonden $scope$narrowed",
             style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp, top = 10.dp),
         )
+        scanNote?.let {
+            Text(it, style = MF.type.body, color = t.ink, modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
+        }
         if (text.isBlank()) {
             // A blank search box is a question with no hint. These are the
             // things people here actually look for.
@@ -91,7 +117,7 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
             }
         }
         LazyColumn(contentPadding = PaddingValues(top = 4.dp, bottom = 24.dp)) {
-            if (text.isNotBlank() && results.isEmpty()) {
+            if (text.isNotBlank() && results.isEmpty() && scanNote == null) {
                 item {
                     EmptyState(
                         "Niets gevonden",

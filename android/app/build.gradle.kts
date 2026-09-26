@@ -87,6 +87,9 @@ dependencies {
     // Product images straight from the chain's own CDN, with an on-device
     // disk cache. PLAN-V2 section 3.3 names Coil; nothing is rehosted.
     implementation("io.coil-kt:coil-compose:2.7.0")
+    // Milestone 37: barcode scanning. ZXing-based, works offline and without
+    // Google Play services, unlike ML Kit.
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     // Saved meals, on-device only (milestone 13). DataStore rather than Room:
     // the persisted state is a short list of small objects, and a JSON string
