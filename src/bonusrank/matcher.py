@@ -338,7 +338,7 @@ class Matcher:
             )
 
         best_key, best_method = None, MatchMethod.NONE
-        best_rank: tuple[int, float, int] = (-1, 0.0, 0)
+        best_rank: tuple[bool, int, float, int] = (False, -1, 0.0, 0)
         best_score = 0.0
         tokens = frozenset(normalised.split())
         sku_variants = variant_profile(tokens)
@@ -361,8 +361,15 @@ class Matcher:
                 score = SequenceMatcher(None, alias_norm, normalised).ratio()
                 method = MatchMethod.FUZZY
 
-            # Agreement on a variant first, then similarity, then specificity.
-            candidate = (variant_overlap(sku_variants, alias_variants), score, len(alias_tokens))
+            # A whole alias found in the name first, then agreement on a
+            # variant, then similarity, then specificity. Variant agreement
+            # used to come first on its own, so "witte eieren" preferred the
+            # fuzzy "witte bonen" (shared "witte") over the contained
+            # "eieren", then failed the fuzzy bar and matched nothing.
+            candidate = (
+                method is not MatchMethod.FUZZY,
+                variant_overlap(sku_variants, alias_variants), score, len(alias_tokens),
+            )
             if candidate > best_rank:
                 best_key, best_rank, best_score, best_method = key, candidate, score, method
                 best_alias = alias_norm

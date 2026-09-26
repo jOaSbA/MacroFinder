@@ -229,3 +229,17 @@ def test_container_a_multipack_with_van_instead_of_a():
     assert u.kind is SizeKind.MASS
     assert u.count == 4
     assert u.unit_size_g == 250.0
+
+
+# 2026-09-26: "Eieren" without a number came first and a 6-pack read as one egg.
+def test_a_numbered_count_beats_a_bare_count_word():
+    assert parse_unit_size("Blije Kip Eieren Vrije Uitloop 6 Stuks").count == 6
+    assert parse_unit_size("Jumbo Vrije Uitloop Eieren M/L 10 Stuks").count == 10
+
+
+def test_count_in_a_compound_word():
+    assert parse_unit_size("Oerei 10 Scharreleieren").count == 10
+
+
+def test_a_bare_count_word_is_still_one():
+    assert parse_unit_size("per stuk").count == 1

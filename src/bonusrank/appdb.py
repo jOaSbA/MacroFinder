@@ -395,8 +395,17 @@ def _copy_products(src: sqlite3.Connection, dst: sqlite3.Connection, shelf_map) 
         "INSERT INTO products (id, chain, sku, name, brand, category, subcategory, "
         "food_type, raw_unit_text, unit_size_g, unit_size_ml, cost_basis_g, ean, "
         "image_url, image_width, shelf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [(product_id(r[0], r[1]), *r, shelf_map.shelf_for(r[0], r[4])) for r in rows],
+        [(product_id(r[0], r[1]), r[0], r[1], tidy_text(r[2]) or r[2], tidy_text(r[3]), *r[4:],
+          shelf_map.shelf_for(r[0], r[4])) for r in rows],
     )
+
+
+def tidy_text(value: str | None) -> str | None:
+    """Collapse the stray spaces chains leave in names ("Parrano  Geraspte
+    Mozzarella", " Baardolie", 584 products on 2026-09-26); empty is NULL."""
+    if value is None:
+        return None
+    return " ".join(value.split()) or None
 
 
 def _copy_product_macros(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:

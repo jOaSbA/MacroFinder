@@ -170,8 +170,21 @@ def _try_single(norm, pattern, units, kind):
     return kind, 1, value * units[m.group(2)]
 
 
+# "Oerei 10 Scharreleieren": the count word hides at the end of a compound.
+_COUNT_COMPOUND = re.compile(r"(?<![\d,.])(\d+)\s*\w+eieren\b")
+
+
 def _try_count(norm):
-    m = _COUNT.search(norm)
-    if not m:
+    # A count word with a number wins over one without: in "Blije Kip Eieren
+    # Vrije Uitloop 6 Stuks" the bare "eieren" came first and the pack was
+    # read as one egg, EUR 40.91 per 100 g protein (2026-09-26).
+    matches = list(_COUNT.finditer(norm))
+    numbered = [m for m in matches if m.group(1)]
+    if numbered:
+        return SizeKind.COUNT, int(numbered[0].group(1)), None
+    compound = _COUNT_COMPOUND.search(norm)
+    if compound:
+        return SizeKind.COUNT, int(compound.group(1)), None
+    if not matches:
         return None
-    return SizeKind.COUNT, int(m.group(1)) if m.group(1) else 1, None
+    return SizeKind.COUNT, 1, None
