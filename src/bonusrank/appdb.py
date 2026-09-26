@@ -514,7 +514,41 @@ def _vacuum_into(db: sqlite3.Connection, out: Path) -> None:
 
 # -- the manifest --------------------------------------------------------------
 
-def write_manifest(path: Path, *, full: Path, deltas: list[Path],
+# How many deltas a manifest lists. Same number as MAX_DELTA_HOPS in the
+# app's SyncPlan.kt: a longer chain would never be used, a shorter one sends
+# phones to the full download sooner than they need to.
+MAX_PUBLISHED_DELTAS = 7
+
+
+def chain_deltas(carried: list[dict], new: list[dict], *, target: str,
+                 limit: int = MAX_PUBLISHED_DELTAS) -> list[dict]:
+    """The deltas worth publishing: one unbroken chain ending at `target`.
+
+    `carried` comes from the previous manifest, `new` from this build. Walks
+    back from the target and stops at the first gap, so a delta that leads
+    somewhere other than the current build is never published.
+    """
+    by_target = {d["to"]: d for d in carried}
+    by_target.update({d["to"]: d for d in new})
+    chain: list[dict] = []
+    at = target
+    while at in by_target and len(chain) < limit:
+        step = by_target.pop(at)
+        chain.append(step)
+        at = step["from"]
+    return chain[::-1]
+
+
+def delta_entry(path: Path) -> dict:
+    """A delta as the manifest describes it."""
+    return _asset(path) | {
+        "from": _delta_meta(path, "base_version"),
+        "to": _delta_meta(path, "target_version"),
+    }
+
+
+def write_manifest(path: Path, *, full: Path, deltas: list[Path] = (),
+                   delta_entries: list[dict] | None = None,
                    generated_at: date | datetime | None = None,
                    status: str = "ok") -> dict:
     """Write `manifest.json` - the only file the app fetches unconditionally.
@@ -532,13 +566,8 @@ def write_manifest(path: Path, *, full: Path, deltas: list[Path],
             "version": version_of(full),
             "products": _count(full, "products"),
         },
-        "deltas": [
-            _asset(d) | {
-                "from": _delta_meta(d, "base_version"),
-                "to": _delta_meta(d, "target_version"),
-            }
-            for d in deltas
-        ],
+        "deltas": (delta_entries if delta_entries is not None
+                   else [delta_entry(d) for d in deltas]),
     }
     Path(path).write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"

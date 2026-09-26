@@ -1,23 +1,32 @@
-name: Refresh app data
+name: Refresh data
 
-# Twice a day. Bonus weeks don't line up across chains, so a weekly run would
-# miss one chain's rollover by days. Anything more often leans harder on the
-# politeness budget in CLAUDE.md section 1 than the data is worth.
+# One pipeline for both feeds, twice a day. Nothing is committed: everything
+# goes to the `data-latest` release.
 #
-# Nothing is committed. latest.json goes to the `data-latest` release next to
-# the catalogue, and so does the dev database, gzipped. Carrying the database
-# from run to run is what lets price history build up at all: before this,
-# every run started from an empty database and "cheapest in N weeks" could
-# never be more than zero.
+#   history.sqlite3.gz   the dev database, carried from run to run. This is
+#                        what lets price history build up at all.
+#   latest.json          ranked promos, templates, comparisons (the fast path)
+#   macrofinder-*.sqlite the catalogue the app syncs, plus deltas and
+#   manifest.json        a manifest that chains them
+#
+# The full catalogue crawl (~1,000 requests) only runs on the Monday slot. The
+# other runs reuse the crawled products from the carried database and only
+# refresh prices and promos, so the catalogue the app syncs is never older
+# than half a day on price.
 on:
   schedule:
     - cron: "0 6,18 * * *"
-  workflow_dispatch: {}
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+    inputs:
+      crawl:
+        description: "Also crawl the full AH and Jumbo catalogues"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
-# build-db.yml reads and writes the same release.
 concurrency:
   group: data-release
   cancel-in-progress: false
@@ -28,6 +37,7 @@ env:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
 
@@ -38,22 +48,26 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
-      # A missing asset is the first-run case. A corrupt one is treated the
-      # same way: start clean rather than fail the whole refresh.
-      - name: Restore price history
+      - name: Restore the previous run
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p data
-          if gh release download "$RELEASE_TAG" --pattern 'history.sqlite3.gz' --dir /tmp; then
-            gunzip -c /tmp/history.sqlite3.gz > data/bonusrank.sqlite3 \
-              && sqlite3 data/bonusrank.sqlite3 "pragma integrity_check" | grep -qx ok \
-              || { echo "history unreadable, starting clean"; rm -f data/bonusrank.sqlite3; }
-          else
-            echo "no history yet, starting clean"
+          mkdir -p data previous dist/data
+          gh release download "$RELEASE_TAG" --dir previous \
+            --pattern 'history.sqlite3.gz' --pattern 'manifest.json' \
+            --pattern 'macrofinder-*.sqlite' || echo "nothing published yet"
+          ls -la previous
+          if [ -f previous/history.sqlite3.gz ]; then
+            gunzip -c previous/history.sqlite3.gz > data/bonusrank.sqlite3
+            if ! sqlite3 data/bonusrank.sqlite3 "pragma integrity_check" | grep -qx ok; then
+              echo "history unreadable, starting clean"
+              rm -f data/bonusrank.sqlite3
+            fi
           fi
-          [ -f data/bonusrank.sqlite3 ] && \
-            sqlite3 data/bonusrank.sqlite3 "select count(*) || ' observations over ' || count(distinct observed_at) || ' days' from price_observations" || true
+          if [ -f data/bonusrank.sqlite3 ]; then
+            sqlite3 data/bonusrank.sqlite3 \
+              "select count(*) || ' price observations over ' || count(distinct observed_at) || ' days' from price_observations"
+          fi
 
       - name: Seed reference data
         run: bonusrank seed
@@ -68,9 +82,8 @@ jobs:
       - name: Ingest Aldi
         run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
 
-      # Label macros from AH's product pages. 300 requests is about 2.5
-      # minutes; macro_candidates spends them on products that are on offer
-      # right now first. Jumbo and Aldi don't publish nutrition we can read.
+      # Label macros from AH's product pages, spent on products on offer now
+      # first. Jumbo and Aldi don't publish nutrition we can read.
       - name: Fetch label macros (AH)
         run: bonusrank ingest --chain ah --with-macros 300 || echo "AH macro fetch failed, continuing"
 
@@ -81,20 +94,69 @@ jobs:
       - name: Refresh base prices (Jumbo)
         run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
 
-      - name: Export snapshot for the app
+      - name: Crawl the AH catalogue
+        if: github.event.schedule == '0 4 * * 1' || inputs.crawl
+        run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
+
+      - name: Crawl the Jumbo catalogue
+        if: github.event.schedule == '0 4 * * 1' || inputs.crawl
+        run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
+
+      - name: Export
         run: |
-          mkdir -p dist
-          bonusrank export --out dist/latest.json
-          gzip -9 -c data/bonusrank.sqlite3 > dist/history.sqlite3.gz
-          ls -la dist
+          bonusrank export --out dist/data/latest.json
+          args=""
+          for f in previous/macrofinder-*.sqlite; do
+            [ -e "$f" ] && args="$args --against $f"
+          done
+          bonusrank build-db --out-dir dist/data --previous-manifest previous/manifest.json $args
+
+      # A run that lost the crawled products (bad history, failed restore)
+      # would otherwise publish a catalogue a tenth the size, and every phone
+      # would apply a delta deleting the rest.
+      - name: Check the build did not shrink
+        run: |
+          n=$(python -c "import json; print(json.load(open('dist/data/manifest.json'))['full']['products'])")
+          prev=$(python -c "import json; print(json.load(open('previous/manifest.json'))['full']['products'])" 2>/dev/null || echo 0)
+          echo "products: $n (previous $prev)"
+          [ "$n" -gt 0 ] || { echo "refusing to publish an empty catalogue"; exit 1; }
+          if [ "$n" -lt $((prev * 8 / 10)) ]; then
+            echo "refusing to publish: lost more than 20% of the catalogue"
+            exit 1
+          fi
 
       - name: Publish
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          sqlite3 data/bonusrank.sqlite3 "vacuum"
+          gzip -9 -c data/bonusrank.sqlite3 > dist/data/history.sqlite3.gz
+          ls -la dist/data
           gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
-            gh release create "$RELEASE_TAG" \
-              --title "App data" \
-              --notes "Rolling data for the app. Assets are replaced in place. Not a source release." \
-              --latest=false
-          gh release upload "$RELEASE_TAG" dist/latest.json dist/history.sqlite3.gz --clobber
+            gh release create "$RELEASE_TAG" --title "App data" --latest=false \
+              --notes "Rolling data for the app. Assets are replaced in place; manifest.json names the current catalogue. Not a source release."
+          gh release upload "$RELEASE_TAG" dist/data/* --clobber
+
+      # Whatever the manifest no longer points at is dead weight.
+      - name: Prune superseded assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          keep=$(python -c "import json; m=json.load(open('dist/data/manifest.json')); print(' '.join(['manifest.json','latest.json','history.sqlite3.gz', m['full']['file']] + [d['file'] for d in m['deltas']]))")
+          echo "keeping: $keep"
+          for asset in $(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name'); do
+            case " $keep " in
+              *" $asset "*) ;;
+              *) echo "deleting $asset"; gh release delete-asset "$RELEASE_TAG" "$asset" --yes ;;
+            esac
+          done
+
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("dist/data/manifest.json"))
+          print(f"catalogue {m['full']['version']}  {m['full']['products']:,} products  {m['full']['bytes']:,} bytes")
+          for d in m["deltas"]:
+              print(f"  delta {d['from']} -> {d['to']}  {d['bytes']:,} bytes")
+          PY

@@ -670,9 +670,18 @@ def cmd_build_db(args: argparse.Namespace) -> int:
             delta.unlink()
             deltas.pop()
 
-    manifest = appdb.write_manifest(out_dir / "manifest.json", full=full, deltas=deltas)
+    # Keep the previous manifest's deltas so a phone a few builds behind can
+    # still chain small updates instead of taking the whole file.
+    carried = []
+    if args.previous_manifest and Path(args.previous_manifest).exists():
+        carried = json.loads(Path(args.previous_manifest).read_text("utf-8")).get("deltas", [])
+    entries = appdb.chain_deltas(carried, [appdb.delta_entry(d) for d in deltas],
+                                 target=appdb.version_of(full))
+
+    manifest = appdb.write_manifest(out_dir / "manifest.json", full=full,
+                                    delta_entries=entries)
     print(f"manifest  version {manifest['full']['version']}, "
-          f"{manifest['full']['products']:,} products, {len(deltas)} delta(s)")
+          f"{manifest['full']['products']:,} products, {len(entries)} delta(s)")
     return 0
 
 
@@ -791,6 +800,8 @@ def main(argv: list[str] | None = None) -> int:
                               help="build the app database release assets")
     build_db.add_argument("--out-dir", default="dist/data",
                           help="where the assets are written; never committed")
+    build_db.add_argument("--previous-manifest", default=None,
+                          help="the last published manifest.json; its deltas are carried over")
     build_db.add_argument("--against", action="append",
                           help="a previous full build to cut a delta against; "
                                "repeatable, missing files are skipped")
