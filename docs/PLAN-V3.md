@@ -1,5 +1,8 @@
 # PLAN-V3: what to build next
 
+**Status 2026-09-26: M31-M41 all done.** What was built, and what was
+decided along the way, is in CLAUDE.md under milestones 31-41.
+
 PLAN-V2 is done (M14-M30, M28 declined). This plan picks the next goals by
 looking at what existing products already do well, and keeping only what
 passes PLAN-V2's test: **does this need macros?** If it doesn't, Mandje has it
