@@ -384,3 +384,38 @@ def test_a_packing_medium_is_not_the_product(matcher):
 
 def test_the_oil_itself_still_matches(matcher):
     assert matcher.match("AH Extra vierge olijfolie").food_type_key == "olijfolie"
+
+
+# -- flavour guard -------------------------------------------------------------
+# Measured 2026-09-26: 113 catalogue products were a dairy or protein product
+# matched to the fruit in its flavour name. "HiPRO Protein Kwark Banaan" came
+# out at EUR 79.55 per 100 g protein, costed as a banana.
+
+@pytest.mark.parametrize("name", [
+    "HiPRO Protein Kwark Banaan 200 g",
+    "HiPRO Protein Kwark Mango 200 g",
+    "Optimel Drinkyoghurt Aardbei 0% Vet 1L",
+    "Optimel Drinkyoghurt Framboos 0% Vet 1L",
+    "AH Proteine pancakes banaan",
+    "Danoontje Knijpyoghurt aardbei",
+])
+def test_a_flavour_is_not_the_food(matcher, name):
+    result = matcher.match(name)
+    assert result.food_type_key not in {
+        "banaan", "mango", "aardbeien", "frambozen", "olijfolie"}, result
+
+
+@pytest.mark.parametrize("name, expected", [
+    # The guard must not touch foods whose own name carries the word.
+    ("Alpro Haverdrink", "haverdrink"),
+    ("AH Magere kwark", "kwark_mager"),
+    ("Arla Protein kipfilet", "kipfilet_rauw"),
+    ("Campina Halfvolle melk", "melk_halfvol"),
+    ("AH Kwark aardbei", "kwark_mager_fruit"),
+])
+def test_the_flavour_guard_leaves_real_matches_alone(matcher, name, expected):
+    assert matcher.match(name).food_type_key == expected
+
+
+def test_tuna_in_olive_oil_is_tuna_in_oil(matcher):
+    assert matcher.match("John West Protein tonijnmoot olijfolie").food_type_key == "tonijn_blik_olie"

@@ -95,6 +95,11 @@ jobs:
       - name: Seed reference data
         run: bonusrank seed
 
+      # Matcher and seed fixes apply to every stored product now, not only
+      # to products that happen to be ingested again.
+      - name: Re-run the matcher
+        run: bonusrank rematch
+
       # One chain failing must not take the other two down.
       - name: Ingest AH
         run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"

@@ -32,6 +32,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import androidx.compose.runtime.CompositionLocalProvider
+import kotlin.math.min
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -177,15 +181,22 @@ fun MacroFinderApp(
 /** Four text tabs, no icons: DESIGN.md prefers a word to a stock glyph. */
 @Composable
 private fun BottomBar(current: Route, onSelect: (Route) -> Unit) {
-    Column(Modifier.fillMaxWidth().background(MF.tokens.card).navigationBarsPadding()) {
-        Hairline()
-        TextTabs(
-            options = Route.TABS,
-            selected = current,
-            label = ::tabLabel,
-            onSelect = onSelect,
-            scrollable = false,
-            evenly = true,
-        )
+    // Four words across a phone: cap the font scale here, as Material's own
+    // navigation bar does, so "Maaltijden" never breaks mid-word at 200%.
+    val density = LocalDensity.current
+    CompositionLocalProvider(
+        LocalDensity provides Density(density.density, min(density.fontScale, 1.3f)),
+    ) {
+        Column(Modifier.fillMaxWidth().background(MF.tokens.card).navigationBarsPadding()) {
+            Hairline()
+            TextTabs(
+                options = Route.TABS,
+                selected = current,
+                label = ::tabLabel,
+                onSelect = onSelect,
+                scrollable = false,
+                evenly = true,
+            )
+        }
     }
 }

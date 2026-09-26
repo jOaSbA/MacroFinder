@@ -9,6 +9,9 @@ sku: {}
 
 # Substring of the product title -> food_type key. Case-insensitive.
 contains:
+  # John West's protein line drops the "in": "Protein tonijnmoot olijfolie"
+  # matched plain olive oil (2026-09-26).
+  tonijnmoot olijfolie: tonijn_blik_olie
   "protein pudding": proteine_pudding
   "proteine pudding": proteine_pudding
   "skyr drink": proteine_drinkyoghurt

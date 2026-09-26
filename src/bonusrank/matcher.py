@@ -136,6 +136,22 @@ _COMPOSITE_WORDS = {
     "drink", "drinks",
 }
 
+# Flavour guard. A dairy or protein product named after its flavour is not the
+# flavour: "HiPRO Protein Kwark Banaan" was costed as a banana (EUR 79.55 per
+# 100 g protein), "Optimel Drinkyoghurt Aardbei" as strawberries, and John West
+# "Protein tonijnmoot olijfolie" as olive oil. 113 such matches measured on
+# 2026-09-26. The guard fires only when the carrier word is in the name but not
+# in the alias that matched, and the matched food is low in protein, so
+# "haverdrink" (its alias has the word) and "protein kipfilet" (22 g) pass.
+_CARRIER_WORDS = (
+    "kwark", "yoghurt", "yogurt", "skyr", "pudding", "vla", "kefir", "melk", "milk",
+    "protein", "proteine", "eiwit", "pancake", "pancakes", "shake", "tonijn",
+)
+_CARRIER_RE = re.compile(
+    "|".join(rf"\b{re.escape(w)}|{re.escape(w)}\b" for w in _CARRIER_WORDS)
+)
+FLAVOUR_MAX_PROTEIN = 5.0
+
 _WORD_BOUNDARY = r"\b"
 _MARKER_RE = re.compile(
     "|".join(
@@ -241,6 +257,9 @@ class Matcher:
     overrides: dict = field(default_factory=dict)
     accept_threshold: float = ACCEPT_THRESHOLD
     known_keys: set[str] = field(default_factory=set)
+    # food type key -> protein per 100 g, for the flavour guard. Empty means
+    # the guard can't tell and stays out of the way.
+    protein: dict[str, float | None] = field(default_factory=dict)
 
     @property
     def non_rankable_categories(self) -> set[str]:
@@ -266,6 +285,8 @@ class Matcher:
             aliases={r["alias"]: r["key"] for r in rows},
             overrides=load_overrides(overrides_path),
             known_keys={r["key"] for r in rows},
+            protein={r["key"]: r["protein_per_100g"] for r in conn.execute(
+                "SELECT key, protein_per_100g FROM food_types")},
         )
 
     def match(
@@ -319,6 +340,7 @@ class Matcher:
         tokens = frozenset(normalised.split())
         sku_variants = variant_profile(tokens)
         blocked = 0
+        best_alias = ""
 
         for alias_norm, alias_tokens, key in self._normalised:
             alias_variants = variant_profile(alias_tokens)
@@ -340,6 +362,7 @@ class Matcher:
             candidate = (variant_overlap(sku_variants, alias_variants), score, len(alias_tokens))
             if candidate > best_rank:
                 best_key, best_rank, best_score, best_method = key, candidate, score, method
+                best_alias = alias_norm
 
         threshold = (
             FUZZY_THRESHOLD if best_method is MatchMethod.FUZZY else self.accept_threshold
@@ -350,6 +373,14 @@ class Matcher:
                 None, MatchMethod.NONE, best_score, True,
                 f"best candidate {best_key!r} scored {best_score:.2f} "
                 f"< {threshold} ({best_method.value} lane){detail}",
+            )
+        carriers = set(_CARRIER_RE.findall(normalised)) - set(_CARRIER_RE.findall(best_alias))
+        protein = self.protein.get(best_key)
+        if carriers and protein is not None and protein < FLAVOUR_MAX_PROTEIN:
+            return MatchResult(
+                None, MatchMethod.NONE, best_score, True,
+                f"{best_key!r} is the flavour of a {', '.join(sorted(carriers))} product, "
+                "not the product",
             )
         return self._resolve(best_key, best_method, best_score)
 

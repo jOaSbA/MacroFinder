@@ -13,6 +13,25 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import kotlinx.coroutines.delay
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.Role
+import com.macrofinder.app.data.catalogue.Shelf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -56,7 +75,7 @@ val CHAINS = listOf("ah" to "AH", "jumbo" to "Jumbo", "aldi" to "Aldi")
  * rather than behind an icon, filters for chain, shelf, macro bucket and
  * now/upcoming.
  */
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun DealsScreen(
     vm: CatalogueViewModel,
@@ -71,7 +90,31 @@ fun DealsScreen(
     val ranked = remember(state, query) { vm.visibleDeals() }
     val today = vm.today()
     val listState = rememberLazyListState()
+    var showShelves by remember { mutableStateOf(false) }
 
+    if (showShelves) {
+        ShelfSheet(
+            shelves = state.shelves,
+            selected = query.shelf,
+            foodOnly = query.foodOnly,
+            onPick = { vm.setQuery(query.copy(shelf = it)); showShelves = false },
+            onFoodOnly = { vm.setQuery(query.copy(foodOnly = it)) },
+            onDismiss = { showShelves = false },
+        )
+    }
+
+    // Pull to refresh starts a sync; the banner shows its progress, so the
+    // spinner only has to acknowledge the pull.
+    val pull = rememberPullToRefreshState()
+    if (pull.isRefreshing) {
+        LaunchedEffect(Unit) {
+            onRefresh()
+            delay(700)
+            pull.endRefresh()
+        }
+    }
+
+    Box(Modifier.fillMaxSize().nestedScroll(pull.nestedScrollConnection)) {
     LazyColumn(
         state = listState,
         modifier = Modifier.fillMaxSize().background(t.paper),
@@ -85,8 +128,7 @@ fun DealsScreen(
                 Column(Modifier.weight(1f)) {
                     Text("Aanbod", style = MF.type.display, color = t.ink)
                     Text(
-                        if (query.window == DealWindow.ACTIVE) "Wat nu in de aanbieding is, "
-                            + "gerangschikt op wat je aan eiwit krijgt"
+                        if (query.window == DealWindow.ACTIVE) "Nu in de aanbieding, op volgorde"
                         else "Aanbiedingen die nog moeten beginnen",
                         style = MF.type.label, color = t.muted, modifier = Modifier.padding(top = 2.dp),
                     )
@@ -113,22 +155,20 @@ fun DealsScreen(
         }
         item {
             ChipRow {
+                // Eighteen shelves don't belong in a row of chips; one chip opens
+                // them in a sheet, next to the goal buckets that do.
+                val shelfLabel = state.shelves.firstOrNull { it.key == query.shelf }?.label
+                if (state.shelves.isNotEmpty()) {
+                    FilterChip(
+                        (shelfLabel ?: if (query.foodOnly) "Alleen eten" else "Alle schappen") + "  ▾",
+                        shelfLabel != null || !query.foodOnly,
+                        { showShelves = true },
+                    )
+                }
                 BUCKETS.forEach { (key, label) ->
                     FilterChip(label, query.bucket == key, {
                         vm.setQuery(query.copy(bucket = if (query.bucket == key) null else key))
                     })
-                }
-            }
-        }
-        if (state.shelves.isNotEmpty()) {
-            item {
-                ChipRow {
-                    FilterChip("Alleen eten", query.foodOnly, { vm.setQuery(query.copy(foodOnly = !query.foodOnly)) })
-                    state.shelves.forEach { shelf ->
-                        FilterChip(shelf.label, query.shelf == shelf.key, {
-                            vm.setQuery(query.copy(shelf = if (query.shelf == shelf.key) null else shelf.key))
-                        })
-                    }
                 }
             }
         }
@@ -187,6 +227,57 @@ fun DealsScreen(
                     style = MF.type.label, color = t.muted,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
                 )
+            }
+        }
+    }
+    if (pull.progress > 0f || pull.isRefreshing) PullToRefreshContainer(
+        state = pull,
+        modifier = Modifier.align(Alignment.TopCenter),
+        containerColor = t.card,
+        contentColor = t.signal,
+    )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ShelfSheet(
+    shelves: List<Shelf>,
+    selected: String?,
+    foodOnly: Boolean,
+    onPick: (String?) -> Unit,
+    onFoodOnly: (Boolean) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val t = MF.tokens
+    ModalBottomSheet(onDismissRequest = onDismiss, containerColor = t.card) {
+        Column(Modifier.verticalScroll(rememberScrollState()).padding(bottom = 24.dp)) {
+            Row(
+                Modifier.fillMaxWidth().toggleable(foodOnly, role = Role.Switch, onValueChange = onFoodOnly)
+                    .padding(horizontal = 20.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text("Alleen eten", style = MF.type.rowTitle, color = t.ink)
+                    Text("Geen drogisterij, huishouden of alcohol. Supplementen blijven.",
+                        style = MF.type.label, color = t.muted)
+                }
+                Switch(checked = foodOnly, onCheckedChange = null,
+                    colors = SwitchDefaults.colors(checkedTrackColor = t.signal))
+            }
+            Hairline(Modifier.padding(vertical = 8.dp))
+            (listOf<Shelf?>(null) + shelves).forEach { shelf ->
+                val active = shelf?.key == selected
+                Row(
+                    Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                        .selectable(active, role = Role.RadioButton) { onPick(shelf?.key) }
+                        .padding(horizontal = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(shelf?.label ?: "Alle schappen", style = MF.type.body,
+                        color = if (active) t.ink else t.muted, modifier = Modifier.weight(1f))
+                    if (active) Text("✓", style = MF.type.rowTitle, color = t.signal)
+                }
             }
         }
     }
