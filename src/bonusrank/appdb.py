@@ -45,7 +45,7 @@ from pathlib import Path
 # what guards delta building - `_schema_of` compares the databases' actual
 # schemas, because a version number nobody bumped is exactly the bug that
 # reaches production. Milestone 15 added products.subcategory/image_width.
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 # Enough of the hash to be unique across any plausible number of builds, short
 # enough to read in a filename and a log line.
@@ -134,7 +134,7 @@ CREATE TABLE product_macros (
 -- cannot.
 CREATE TABLE prices (
     product_id            TEXT NOT NULL REFERENCES products(id),
-    lane                  TEXT NOT NULL CHECK (lane IN ('promo','shelf')),
+    lane                  TEXT NOT NULL CHECK (lane IN ('promo','upcoming','shelf')),
     observed_at           TEXT NOT NULL,
     shelf_price           REAL,
     bonus_price           REAL,
@@ -242,11 +242,11 @@ def _schema_version(path: Path) -> str | None:
 def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -> Path:
     """Write a complete app database from the dev database behind `conn`.
 
-    `on` is accepted so callers read naturally alongside the rest of the CLI,
-    and is deliberately unused for anything that reaches the bytes: the
-    catalogue is what has been scraped, not what is valid today, and the app
-    filters by `valid_to` itself.
+    `on` decides which promo counts as current and which as upcoming. The
+    app still checks the dates itself, because an upcoming row becomes
+    current on the phone the day it starts, whatever lane it arrived in.
     """
+    on = on or date.today()
     out = Path(out)
     staging = out.with_suffix(out.suffix + ".staging")
     staging.unlink(missing_ok=True)
@@ -259,7 +259,7 @@ def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -
         _copy_food_types(conn, db)
         _copy_products(conn, db)
         _copy_product_macros(conn, db)
-        _copy_prices(conn, db)
+        _copy_prices(conn, db, on)
         db.commit()
         _vacuum_into(db, out)
     finally:
@@ -315,28 +315,29 @@ def _copy_product_macros(src: sqlite3.Connection, dst: sqlite3.Connection) -> No
     )
 
 
-# Mirrors `ranking._SQL`'s lane rule exactly, including the boolean-equality
-# trick that keeps it to one correlated subquery. Two implementations of "which
-# observation counts" would drift, and the one that drifts is the one that
-# forgets a lane.
+# The same lane rule as `ranking.rank`, via `ranking.lane_filter`. Two
+# implementations of "which observation counts" would drift, and the one that
+# drifts is the one that forgets a lane.
 _PRICES_SQL = """
 SELECT p.chain, p.sku,
-       CASE WHEN o.promo_mechanic = 'not_a_promo' THEN 'shelf' ELSE 'promo' END AS lane,
+       CASE WHEN o.promo_mechanic = 'not_a_promo' THEN 'shelf'
+            WHEN o.valid_from > :day THEN 'upcoming'
+            ELSE 'promo' END AS lane,
        o.observed_at, o.shelf_price, o.bonus_price, o.promo_mechanic, o.promo_raw_text,
        o.required_quantity, o.effective_unit_price, o.is_personal_offer,
        o.valid_from, o.valid_to
 FROM price_observations o
 JOIN products p ON p.id = o.product_id
-WHERE o.id = (SELECT id FROM price_observations o2
-              WHERE o2.product_id = p.id
-                AND (o2.promo_mechanic = 'not_a_promo') = (o.promo_mechanic = 'not_a_promo')
-              ORDER BY o2.observed_at DESC, o2.id DESC LIMIT 1)
+WHERE {lanes}
 ORDER BY p.chain, p.sku, lane
 """
 
 
-def _copy_prices(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
-    rows = src.execute(_PRICES_SQL).fetchall()
+def _copy_prices(src: sqlite3.Connection, dst: sqlite3.Connection, on: date) -> None:
+    from .ranking import lane_filter
+
+    sql = _PRICES_SQL.format(lanes=lane_filter("shelf", "active", "upcoming"))
+    rows = src.execute(sql, {"day": on.isoformat()}).fetchall()
     dst.executemany(
         "INSERT INTO prices (product_id, lane, observed_at, shelf_price, bonus_price, "
         "promo_mechanic, promo_text, required_quantity, effective_unit_price, "

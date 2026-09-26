@@ -88,12 +88,39 @@ FROM price_observations o
 JOIN products p ON p.id = o.product_id
 LEFT JOIN food_types f ON f.id = p.food_type_id
 LEFT JOIN product_macros m ON m.product_id = p.id
-WHERE p.chain = ?
-  AND o.id = (SELECT id FROM price_observations o2
-              WHERE o2.product_id = p.id
-                AND (o2.promo_mechanic = 'not_a_promo') = (o.promo_mechanic = 'not_a_promo')
-              ORDER BY o2.observed_at DESC, o2.id DESC LIMIT 1)
+WHERE p.chain = :chain AND ({lanes})
 """
+
+# Which observation counts, per lane, on day `:day`. Three lanes:
+#
+#   shelf     the latest plain shelf price
+#   active    the latest promo whose window contains the day
+#   upcoming  the latest promo that starts after the day
+#
+# Picking "the latest promo row" without looking at dates was a bug: Jumbo
+# publishes next week's folder a day early, so a product has this week's and
+# next week's promo from the same scrape, and whichever was inserted last won.
+# If that was next week's, this week's deal vanished from the ranking.
+_PICK = """o.id = (SELECT id FROM price_observations o2
+        WHERE o2.product_id = p.id AND {cond}
+        ORDER BY o2.observed_at DESC, o2.id DESC LIMIT 1)"""
+
+LANE_CONDITIONS = {
+    "shelf": "o2.promo_mechanic = 'not_a_promo'",
+    "active": ("o2.promo_mechanic <> 'not_a_promo' "
+               "AND (o2.valid_from IS NULL OR o2.valid_from <= :day) "
+               "AND (o2.valid_to IS NULL OR o2.valid_to >= :day)"),
+    "upcoming": "o2.promo_mechanic <> 'not_a_promo' AND o2.valid_from > :day",
+}
+
+
+def lane_filter(*lanes: str) -> str:
+    """SQL matching the observation that counts in each of `lanes` on `:day`.
+
+    Expects the observation aliased `o` and its product `p`. Shared with
+    `appdb` so the ranking and the published catalogue can't disagree.
+    """
+    return " OR ".join(_PICK.format(cond=LANE_CONDITIONS[lane]) for lane in lanes)
 # The latest observation is taken PER LANE - promotion or plain shelf price -
 # not simply the latest row. `bonusrank prices` appends shelf prices so that DIY
 # compositions can be costed when nothing is on offer, and a shelf price
@@ -119,7 +146,8 @@ def rank(
     today = (on or date.today()).isoformat()
 
     results: list[RankedOffer] = []
-    for row in conn.execute(_SQL, (chain,)).fetchall():
+    sql = _SQL.format(lanes=lane_filter("shelf", "active"))
+    for row in conn.execute(sql, {"chain": chain, "day": today}).fetchall():
         # Bonus weeks do not align; always filter on the window, never a cycle.
         if row["valid_from"] and row["valid_from"] > today:
             continue
@@ -130,6 +158,28 @@ def rank(
         results.append(_build(conn, row, settings))
 
     return results
+
+
+def upcoming(
+    conn: sqlite3.Connection,
+    *,
+    chain: str = "ah",
+    on: date | None = None,
+    include_personal: bool = False,
+    settings: dict | None = None,
+) -> list[RankedOffer]:
+    """Promos that start after `on`, soonest first. Milestone 18.
+
+    Kept out of `rank` on purpose: an upcoming deal is not something you can
+    buy today, and it must never sit in the same list without its date.
+    """
+    settings = settings or config.user_settings()
+    today = (on or date.today()).isoformat()
+    sql = _SQL.format(lanes=lane_filter("upcoming"))
+    rows = conn.execute(sql, {"chain": chain, "day": today}).fetchall()
+    offers = [_build(conn, row, settings) for row in rows
+              if include_personal or not row["is_personal_offer"]]
+    return sorted(offers, key=lambda o: (o.valid_from or "", o.name))
 
 
 def _build(conn: sqlite3.Connection, row: sqlite3.Row, settings: dict) -> RankedOffer:

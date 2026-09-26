@@ -166,7 +166,16 @@ def _fmt(value, spec="6.2f", unknown="?"):
 
 
 def cmd_list(args: argparse.Namespace) -> int:
-    from .ranking import rank, sort_offers
+    from .ranking import rank, sort_offers, upcoming
+
+    if args.upcoming:
+        with connect() as conn:
+            items = upcoming(conn, chain=args.chain, include_personal=args.include_personal)
+        print(f"\n=== {args.chain.upper()} upcoming, {len(items)} promos not started yet ===\n")
+        for o in items[: args.limit]:
+            print(f"  vanaf {o.valid_from}  {_fmt(o.effective_unit_price, '6.2f')}  "
+                  f"{(o.promo_raw_text or '-')[:22]:<23} {o.name[:44]}")
+        return 0
 
     with connect() as conn:
         offers = rank(conn, chain=args.chain, include_personal=args.include_personal)
@@ -744,6 +753,8 @@ def main(argv: list[str] | None = None) -> int:
     lst.add_argument("--include-shelf-prices", action="store_true",
                      help="also rank plain shelf prices from `bonusrank prices`, "
                           "not just what is on offer")
+    lst.add_argument("--upcoming", action="store_true",
+                     help="list promos that have not started yet, with their start date")
     lst.set_defaults(func=cmd_list)
 
     matches = sub.add_parser("matches", help="audit what the matcher decided")
