@@ -19,18 +19,14 @@ android {
         // android/README.md and the class comment on CatalogueStoreTest.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // The URL the app fetches its data snapshot from. Overridden per build
-        // flavour is not needed yet - there is one repo, one branch, one file.
+        // Both feeds live on the `data-latest` release, not in git. The tag is
+        // a moving pointer at "the current data", so these URLs never change.
+        // latest.json used to be committed twice a day by a bot, which buried
+        // the real history under snapshot commits.
         buildConfigField(
             "String", "DATA_URL",
-            "\"https://raw.githubusercontent.com/jOaSbA/MacroFinder/master/docs/data/latest.json\"",
+            "\"https://github.com/jOaSbA/MacroFinder/releases/download/data-latest/latest.json\"",
         )
-
-        // Milestone 17: the catalogue feed. A GitHub Release rather than a
-        // file in the repo, because release assets do not enter git history
-        // and can be pruned - see .github/workflows/build-db.yml. The tag is a
-        // moving pointer at "the current data", so these URLs never change and
-        // `manifest.json` names whatever is behind them today.
         buildConfigField(
             "String", "MANIFEST_URL",
             "\"https://github.com/jOaSbA/MacroFinder/releases/download/data-latest/manifest.json\"",

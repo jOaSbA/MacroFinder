@@ -6,7 +6,7 @@ into the repository for anything catalogue-sized. Five revisions of the current
 full AH plus Jumbo catalogue is roughly fifteen times that, twice a day,
 forever, with no way to prune without rewriting history.
 
-`docs/data/latest.json` is deliberately left alone. It stays the promos-only
+`latest.json` is deliberately left alone. It stays the promos-only
 fast path the app reads on launch, and it is the reason a failed catalogue sync
 degrades into a smaller app rather than a broken one.
 

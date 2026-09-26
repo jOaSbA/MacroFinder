@@ -13,14 +13,13 @@ This app has no backend and no scraping code of its own:
 
 1. The Python tool in the repo root (`src/bonusrank/`) scrapes AH/Jumbo/Aldi
    and ranks offers, exactly as it always has.
-2. `bonusrank export` serializes that into `docs/data/latest.json`
+2. `bonusrank export` serializes that into `latest.json`
    (`src/bonusrank/export.py`).
-3. `.github/workflows/refresh-data.yml` runs that on a schedule and commits
-   the result.
-4. This app fetches that file straight from
-   `raw.githubusercontent.com/jOaSbA/MacroFinder/master/docs/data/latest.json`
-   (`app/build.gradle.kts`'s `DATA_URL` build config field) - no server to
-   host, no API to maintain.
+3. `.github/workflows/refresh-data.yml` runs that twice a day and uploads the
+   result to the `data-latest` GitHub release. Nothing gets committed.
+4. The app fetches it from
+   `github.com/jOaSbA/MacroFinder/releases/download/data-latest/latest.json`
+   (`DATA_URL` in `app/build.gradle.kts`). No server to host.
 
 `app/src/main/kotlin/com/macrofinder/app/data/ExportModels.kt` mirrors
 `export.py`'s JSON shape field-for-field. If you change one, change the other.

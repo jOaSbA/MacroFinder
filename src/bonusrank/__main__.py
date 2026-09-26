@@ -775,7 +775,7 @@ def main(argv: list[str] | None = None) -> int:
     tmpl.set_defaults(func=cmd_templates)
 
     export = sub.add_parser("export", help="write a JSON snapshot for the Android app")
-    export.add_argument("--out", default="docs/data/latest.json",
+    export.add_argument("--out", default="dist/latest.json",
                         help="output path, committed by the refresh-data workflow")
     export.add_argument("--chain", action="append", dest="chains",
                         help="repeatable; defaults to every registered chain")

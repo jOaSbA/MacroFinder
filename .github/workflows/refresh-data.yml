@@ -1,14 +1,14 @@
 name: Refresh app data
 
-# Twice a day, not hourly: bonus prices change weekly per chain (CLAUDE.md
-# section 1's "bonus weeks do not align across chains" applies here too), and
-# CLAUDE.md's own politeness section is explicit that these are undocumented
-# endpoints "tolerable for one personal user... not tolerable as a deployed
-# service." Running this from a scheduled CI job already leans harder on that
-# line than a human running the CLI a few times a week - twice a day keeps
-# total request volume close to that same personal-use budget instead of
-# scraping every few hours. Change the cron below if you want a different
-# cadence, with that tradeoff in mind.
+# Twice a day. Bonus weeks don't line up across chains, so a weekly run would
+# miss one chain's rollover by days. Anything more often leans harder on the
+# politeness budget in CLAUDE.md section 1 than the data is worth.
+#
+# Nothing is committed. latest.json goes to the `data-latest` release next to
+# the catalogue, and so does the dev database, gzipped. Carrying the database
+# from run to run is what lets price history build up at all: before this,
+# every run started from an empty database and "cheapest in N weeks" could
+# never be more than zero.
 on:
   schedule:
     - cron: "0 6,18 * * *"
@@ -16,6 +16,14 @@ on:
 
 permissions:
   contents: write
+
+# build-db.yml reads and writes the same release.
+concurrency:
+  group: data-release
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: data-latest
 
 jobs:
   refresh:
@@ -30,11 +38,27 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
+      # A missing asset is the first-run case. A corrupt one is treated the
+      # same way: start clean rather than fail the whole refresh.
+      - name: Restore price history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data
+          if gh release download "$RELEASE_TAG" --pattern 'history.sqlite3.gz' --dir /tmp; then
+            gunzip -c /tmp/history.sqlite3.gz > data/bonusrank.sqlite3 \
+              && sqlite3 data/bonusrank.sqlite3 "pragma integrity_check" | grep -qx ok \
+              || { echo "history unreadable, starting clean"; rm -f data/bonusrank.sqlite3; }
+          else
+            echo "no history yet, starting clean"
+          fi
+          [ -f data/bonusrank.sqlite3 ] && \
+            sqlite3 data/bonusrank.sqlite3 "select count(*) || ' observations over ' || count(distinct observed_at) || ' days' from price_observations" || true
+
       - name: Seed reference data
         run: bonusrank seed
 
-      # A chain's endpoint moving or a transient scrape failure must not take
-      # down the other two - each ingest is independent and non-fatal.
+      # One chain failing must not take the other two down.
       - name: Ingest AH
         run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"
 
@@ -44,23 +68,13 @@ jobs:
       - name: Ingest Aldi
         run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
 
-      # docs/AUDIT.md finding 5: product_macros had never held a row in
-      # production. Tier-1 FIR label figures need --with-macros and no workflow
-      # passed it, so every macro the app has ever shown came from the generic
-      # seed - and all 478 exported AH offers were flagged as needing an
-      # estimate marker. BRIEF section 2 says to prefer a SKU's own label
-      # "always"; there was simply never anything there to prefer.
-      #
-      # 300 is one request each at 2/second, so about two and a half minutes.
-      # `macro_candidates` spends them on matched products that are on a
-      # CURRENT offer first - those are the rows a ranking actually prints.
-      # Only AH has a label endpoint (its FIR lane); Jumbo and Aldi publish no
-      # nutrition this adapter can read.
-      - name: Fetch tier-1 label macros (AH)
+      # Label macros from AH's product pages. 300 requests is about 2.5
+      # minutes; macro_candidates spends them on products that are on offer
+      # right now first. Jumbo and Aldi don't publish nutrition we can read.
+      - name: Fetch label macros (AH)
         run: bonusrank ingest --chain ah --with-macros 300 || echo "AH macro fetch failed, continuing"
 
-      # Only AH and Jumbo have a product-search lane (CLAUDE.md section 4) -
-      # Aldi's site has no browsable catalogue to refresh a base price from.
+      # Aldi has no searchable catalogue, so only AH and Jumbo get shelf prices.
       - name: Refresh base prices (AH)
         run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
 
@@ -68,13 +82,19 @@ jobs:
         run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
 
       - name: Export snapshot for the app
-        run: bonusrank export --out docs/data/latest.json
-
-      - name: Commit and push if the snapshot changed
         run: |
-          git config user.name "macrofinder-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add docs/data/latest.json
-          git diff --cached --quiet && echo "no changes" && exit 0
-          git commit -m "Refresh app data snapshot"
-          git push
+          mkdir -p dist
+          bonusrank export --out dist/latest.json
+          gzip -9 -c data/bonusrank.sqlite3 > dist/history.sqlite3.gz
+          ls -la dist
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" \
+              --title "App data" \
+              --notes "Rolling data for the app. Assets are replaced in place. Not a source release." \
+              --latest=false
+          gh release upload "$RELEASE_TAG" dist/latest.json dist/history.sqlite3.gz --clobber

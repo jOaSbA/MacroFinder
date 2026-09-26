@@ -1,19 +1,9 @@
 name: Build catalogue database
 
-# Milestone 14 (docs/PLAN-V2.md section 5). The sibling of refresh-data.yml,
-# with one deliberate difference: this job publishes to a GitHub **Release**
-# and commits nothing.
-#
-# That difference is the whole point. Release assets do not enter git history
-# and can be deleted freely; a committed file cannot, ever, without rewriting
-# history. Five revisions of the 1.07 MB latest.json already account for most
-# of this repository's object store, and the catalogue this job builds is
-# several times that. Committing it twice a day would make the repo
-# un-clonable inside a year.
-#
-# docs/data/latest.json stays where it is, committed by refresh-data.yml. It
-# is small, it is the app's fast path on launch, and it is what keeps a failed
-# catalogue sync into a smaller app rather than a broken one.
+# Milestone 14. Publishes the full catalogue to the `data-latest` release and
+# commits nothing. Release assets stay out of git history and can be deleted;
+# a committed 24 MB file can't be, ever. refresh-data.yml publishes to the same
+# release.
 
 on:
   # Weekly rather than twice daily. The catalogue is the slow-moving feed - a
@@ -26,6 +16,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: data-release
+  cancel-in-progress: false
 
 env:
   RELEASE_TAG: data-latest
@@ -42,6 +36,18 @@ jobs:
 
       - name: Install dependencies
         run: pip install -e .
+
+      # Start from refresh-data.yml's history so the catalogue build sees the
+      # same price history the app does. This job doesn't upload it back: the
+      # weekly crawl adds ~60k shelf rows and would bloat it for little gain.
+      - name: Restore price history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data
+          gh release download "$RELEASE_TAG" --pattern 'history.sqlite3.gz' --dir /tmp \
+            && gunzip -c /tmp/history.sqlite3.gz > data/bonusrank.sqlite3 \
+            || echo "no history, starting clean"
 
       - name: Seed reference data
         run: bonusrank seed
@@ -144,14 +150,13 @@ jobs:
               --latest=false
           gh release upload "$RELEASE_TAG" dist/data/* --clobber
 
-      # Anything the new manifest does not reference is dead weight on the
-      # release page. Deleting an asset is free here precisely because it never
-      # entered git.
+      # Anything the manifest doesn't reference is dead weight, except the two
+      # assets refresh-data.yml owns.
       - name: Prune superseded assets
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          keep=$(python -c "import json,sys; m=json.load(open('dist/data/manifest.json')); print(' '.join(['manifest.json', m['full']['file']] + [d['file'] for d in m['deltas']]))")
+          keep=$(python -c "import json,sys; m=json.load(open('dist/data/manifest.json')); print(' '.join(['manifest.json', 'latest.json', 'history.sqlite3.gz', m['full']['file']] + [d['file'] for d in m['deltas']]))")
           echo "keeping: $keep"
           for asset in $(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name'); do
             case " $keep " in

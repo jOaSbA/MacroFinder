@@ -12,9 +12,8 @@ sealed class SnapshotResult {
 
 /**
  * Fetches the JSON snapshot the GitHub Actions refresh workflow publishes.
- * No backend of its own - `dataUrl` is a plain `raw.githubusercontent.com`
- * file, refreshed on a schedule server-side (see
- * `.github/workflows/refresh-data.yml` in the Python half of this repo).
+ * No backend of its own - `dataUrl` is an asset on the `data-latest` GitHub
+ * release, replaced on a schedule by `.github/workflows/refresh-data.yml`.
  */
 class DataRepository(
     private val dataUrl: String,

@@ -47,11 +47,11 @@ two feeds, on different cadences, because they change at different speeds.
 
 | Feed | Contents | Size | How | Refresh |
 |---|---|---|---|---|
-| `docs/data/latest.json` | current promos, ranked | ~900 KB | committed to the repo | twice a day |
+| `latest.json` | current promos, ranked | ~900 KB | GitHub **Release** asset | twice a day |
 | `macrofinder-*.sqlite` | the full catalogue | ~24 MB | GitHub **Release** asset | weekly |
 
-The app fetches `latest.json` straight from `raw.githubusercontent.com` on launch.
-It is small, and it is what keeps a failed catalogue sync from meaning a broken app.
+Both live on the `data-latest` release, so the bots never commit. The app fetches
+`latest.json` on launch. It is small, and it is what keeps a failed catalogue sync from meaning a broken app.
 
 The catalogue is a release asset rather than a committed file because git cannot
 prune. A 24 MB snapshot committed twice a day is roughly 10 GB of history a year
@@ -64,7 +64,7 @@ the next one **byte for byte**, or it is not published. In steady state a delta 
 about 1.8% of a full download.
 
 ```
-bonusrank scrape/rank --export--> docs/data/latest.json --raw.githubusercontent--> app
+bonusrank scrape/rank --export--> latest.json ------------------------------> app
 bonusrank catalogue/build-db ---> macrofinder-{hash}.sqlite + delta + manifest.json
                                      |
                                  GitHub Release "data-latest"
@@ -93,7 +93,6 @@ docs/BRIEF.md         the original project brief and domain research
 docs/PLAN-V2.md       what gets built next, and in what order
 docs/AUDIT.md         what actually works, measured against a live run
 docs/DESIGN.md        the visual direction for the UI rework
-docs/data/            the JSON snapshot the app reads (refreshed by CI)
 docs/images/          app screenshots used in this README
 android/              the Android app (Kotlin + Jetpack Compose)
 .github/workflows/    CI (tests), the data refresh, and the catalogue build
@@ -108,7 +107,7 @@ bonusrank seed
 bonusrank ingest --chain ah --with-macros 300
 bonusrank prices --refresh --all --chain ah
 bonusrank compare --chain ah
-bonusrank export --out docs/data/latest.json
+bonusrank export --out dist/latest.json
 ```
 
 The full catalogue crawl is separate, because it is long and only worth running
