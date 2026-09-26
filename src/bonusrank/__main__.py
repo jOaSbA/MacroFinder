@@ -710,6 +710,15 @@ def cmd_build_db(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_halt_manifest(args: argparse.Namespace) -> int:
+    """Milestone 30: pull the kill switch on a published manifest."""
+    from . import appdb
+
+    manifest = appdb.halt_manifest(Path(args.manifest), message=args.message or None)
+    print(f"manifest halted ({manifest.get('message') or 'no message'})")
+    return 0
+
+
 # --------------------------------------------------------------- review
 
 def cmd_review(args: argparse.Namespace) -> int:
@@ -827,6 +836,12 @@ def main(argv: list[str] | None = None) -> int:
                               help="build the app database release assets")
     build_db.add_argument("--out-dir", default="dist/data",
                           help="where the assets are written; never committed")
+    halt = sub.add_parser("halt-manifest",
+                          help="mark a published manifest halted (the kill switch)")
+    halt.add_argument("--manifest", required=True)
+    halt.add_argument("--message", default=None, help="shown to users, in Dutch")
+    halt.set_defaults(func=cmd_halt_manifest)
+
     build_db.add_argument("--previous-manifest", default=None,
                           help="the last published manifest.json; its deltas are carried over")
     build_db.add_argument("--against", action="append",

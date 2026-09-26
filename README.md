@@ -66,6 +66,14 @@ reproduce the new one byte for byte, or it isn't published. The catalogue crawl
 Nothing is committed by the bot. The app never talks to a supermarket directly, so
 the chains see the same traffic whether one person uses it or a thousand.
 
+### Stopping it
+
+If a chain asks for this to stop, set the repository variable `DATA_HALTED` to
+`true` (Settings, Secrets and variables, Actions, Variables), optionally with a
+Dutch `DATA_HALTED_MESSAGE`. The next run scrapes nothing and marks the
+published manifest halted; phones stop syncing and show the message. Delete the
+variable and the run after that publishes normally again.
+
 ## Repo layout
 
 ```

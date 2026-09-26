@@ -208,4 +208,12 @@ class SyncPlanTest {
             localSchema = APP_SCHEMA_VERSION - 1)
         assertTrue(plan is SyncPlan.FullDownload)
     }
+
+    @Test
+    fun `a halted manifest's own message is what the user sees`() {
+        val plan = planSync(
+            manifest(status = "halted").copy(message = "Op verzoek van een winkel gestopt."), "aaa",
+        )
+        assertEquals(SyncPlan.Halted("Op verzoek van een winkel gestopt."), plan)
+    }
 }

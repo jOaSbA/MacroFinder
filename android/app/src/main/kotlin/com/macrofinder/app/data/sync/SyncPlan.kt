@@ -25,6 +25,8 @@ data class Manifest(
      * rather than keep serving whatever it last downloaded as if it were live.
      */
     val status: String = "ok",
+    /** Milestone 30: what to tell the user when [status] isn't "ok". Dutch. */
+    val message: String? = null,
     val generated_at: String = "",
     val full: FullBuild = FullBuild(),
     val deltas: List<Delta> = emptyList(),
@@ -103,8 +105,9 @@ fun planSync(
 ): SyncPlan {
     if (manifest.status != "ok") {
         return SyncPlan.Halted(
-            "De catalogus wordt op dit moment niet bijgewerkt. " +
-                "Je ziet de gegevens van de laatste keer."
+            manifest.message?.takeIf { it.isNotBlank() }
+                ?: ("De catalogus wordt op dit moment niet bijgewerkt. " +
+                    "Je ziet de gegevens van de laatste keer.")
         )
     }
     // 0 means an old manifest that didn't say; trust it rather than refuse.

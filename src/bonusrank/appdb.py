@@ -825,6 +825,23 @@ def write_manifest(path: Path, *, full: Path, deltas: list[Path] = (),
     return manifest
 
 
+def halt_manifest(path: Path, *, message: str | None) -> dict:
+    """Milestone 30: mark the published manifest halted, keeping its assets.
+
+    Phones that read it stop syncing and show `message` (or their own default)
+    instead of pretending the data is live. The next normal build writes "ok"
+    again, so resuming is just clearing DATA_HALTED.
+    """
+    path = Path(path)
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest["status"] = "halted"
+    manifest.pop("message", None)
+    if message:
+        manifest["message"] = message
+    path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return manifest
+
+
 def _asset(path: Path) -> dict:
     path = Path(path)
     return {"file": path.name, "sha256": sha256_of(path), "bytes": path.stat().st_size}
