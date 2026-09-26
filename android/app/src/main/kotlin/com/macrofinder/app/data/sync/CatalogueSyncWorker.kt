@@ -23,6 +23,7 @@ import com.macrofinder.app.data.following.targetKey
 import com.macrofinder.app.data.following.digestWeek
 import com.macrofinder.app.data.following.weeklyDigest
 import com.macrofinder.app.data.settings.SettingsStore
+import com.macrofinder.app.widget.DealsWidget
 import java.time.LocalDate
 import java.util.concurrent.TimeUnit
 
@@ -63,6 +64,7 @@ class CatalogueSyncWorker(
                 runCatching { store.ensureSearchIndex(force = true) }
                 runCatching { announceFollowedPromos(store) }
                 runCatching { announceDigest(store) }
+                runCatching { DealsWidget.refresh(applicationContext) }
                 Result.success(
                 Data.Builder()
                     .putString(KEY_STATE, "installed")

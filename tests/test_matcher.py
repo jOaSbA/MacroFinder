@@ -420,3 +420,24 @@ def test_the_flavour_guard_leaves_real_matches_alone(matcher, name, expected):
 
 def test_tuna_in_olive_oil_is_tuna_in_oil(matcher):
     assert matcher.match("John West Protein tonijnmoot olijfolie").food_type_key == "tonijn_blik_olie"
+
+
+# Milestone 39: supplements, measured on the synced catalogue 2026-09-26.
+@pytest.mark.parametrize("name", [
+    "Optimum Nutrition Gold standard whey double rich chocolate",
+    "ESN Isoclear whey protein mango peach",
+    "Upfront Clear whey limonade limoen munt smaak",
+    "Upfront Whey Milkshake Vanille 300g",
+    "XXL Nutrition Whey Delicious Chocolate Flavor 450 g",
+    "AH Whey protein shake chocolade",
+])
+def test_flavoured_whey_is_whey(matcher, name):
+    assert matcher.match(name).food_type_key == "whey_poeder"
+
+
+@pytest.mark.parametrize("name", [
+    "Upfront Creatine Sticks Mango 10 stuks",
+    "Optimum Nutrition Creatine powder orange",
+])
+def test_creatine_is_not_a_food(matcher, name):
+    assert matcher.match(name).food_type_key is None

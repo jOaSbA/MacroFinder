@@ -21,6 +21,15 @@ contains:
   # apple). The override lane runs before that guard, so the genuine juices
   # still resolve. This is the intended use of this file.
   "sinaasappelsap": sinaasappelsap
+  # Milestone 39. Whey powders whose flavour trips a guard: "chocolate",
+  # "mango peach", "limonade" and "milkshake" are foods or dish words of their
+  # own. Every one of these is sold in grams (300-450 g tubs), never ml.
+  "whey protein": whey_poeder
+  "clear whey": whey_poeder
+  "whey milkshake": whey_poeder
+  "whey delicious": whey_poeder
+  "standard whey": whey_poeder
+  "clear protein powder": whey_poeder
   "jus d'orange": sinaasappelsap
   "appelsap": sinaasappelsap
   # Jumbo's 'Koek, snoep, chocolade en chips' is NOT excluded (see
@@ -47,6 +56,10 @@ contains:
 # Not food, or not rankable. Suppressed from needs_review so the queue stays
 # worth reading - a queue full of crockery is a queue nobody opens.
 never_match:
+  # Creatine has no protein to speak of, and "Upfront Creatine Sticks Mango"
+  # matched as 3 kg of mango (milestone 39). It stays in the supplement bucket
+  # by name; it just isn't a food.
+  - creatine
   # Wagner's pizza lines don't say "pizza" in the product name, so "Big
   # Sensation Salami & BBQ" matched as salami (2026-09-26).
   - big sensation
