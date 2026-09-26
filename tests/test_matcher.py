@@ -441,3 +441,17 @@ def test_flavoured_whey_is_whey(matcher, name):
 ])
 def test_creatine_is_not_a_food(matcher, name):
     assert matcher.match(name).food_type_key is None
+
+
+# 2026-09-26: every "witte eieren" was unmatched, and mayonnaise was egg.
+@pytest.mark.parametrize("name", [
+    "Jumbo Biologisch Witte Eieren 6 Stuks",
+    "Powerful Eggs Nederlandse Witte Scharreleieren 30 Stuks",
+    "Jumbo Kakel Verse Witte Vrije Uitloop Eieren M/L 6 Stuks",
+])
+def test_white_eggs_are_eggs(matcher, name):
+    assert matcher.match(name).food_type_key == "ei_rauw"
+
+
+def test_mayonnaise_is_not_egg(matcher):
+    assert matcher.match("D&L Mayonaise met Eieren Knijpfles 450 ml").food_type_key is None

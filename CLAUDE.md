@@ -1498,6 +1498,18 @@ running week unless it gets `&date=` for the period's start, so
 Measured live: 370 of 370 segments expand, and AH has 2,154 upcoming promos
 for the Binnenkort view, which had only ever held Jumbo's.
 
+**Egg fixes, found by searching "eieren" in the app (2026-09-26).** A Jumbo
+6-pack of "Blije Kip Eieren Vrije Uitloop 6 Stuks" cost EUR 40.91 per 100 g
+protein: the unit parser took the first count word, the bare "Eieren" (one),
+over "6 Stuks". A numbered count now wins, and "Oerei 10 Scharreleieren"
+reads its count out of the compound. 14 products, all egg packs. Separately,
+every "witte eieren" was unmatched: the matcher ranked variant agreement above
+everything, so the shared "witte" made the fuzzy "witte bonen" beat the fully
+contained "eieren", which then failed the fuzzy bar. A contained or exact
+alias now outranks any fuzzy one before variants are compared. Mayonnaise is
+`never_match` (it was raw egg). Product names and brands are tidied when the
+app database is built: 584 had leading, trailing or doubled spaces.
+
 PLAN-V3 (M31-M41) is done too. PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 875 Python tests, 180 Android JVM
 tests and 19 device tests, all in CI.
