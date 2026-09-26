@@ -125,6 +125,25 @@ class CatalogueReader(private val db: SqlRunner) {
         )
     }
 
+    /**
+     * Milestone 37: products with this barcode, each with its best current
+     * price. Usually one; a multipack can share the single pack's barcode.
+     */
+    fun byEan(ean: String): List<Deal> = db.query(
+        """
+        SELECT $PRODUCT_COLUMNS, $PRICE_COLUMNS
+        FROM products p
+        LEFT JOIN prices pr ON pr.product_id = p.id AND pr.lane = (
+            SELECT x.lane FROM prices x WHERE x.product_id = p.id
+            ORDER BY CASE x.lane WHEN 'promo' THEN 0 WHEN 'shelf' THEN 1 ELSE 2 END
+            LIMIT 1)
+        WHERE p.ean = ?
+        ORDER BY p.chain, p.name
+        """.trimIndent(),
+        listOf(ean),
+        ::deal,
+    )
+
     fun dealsFor(ids: Collection<String>): List<Deal> {
         if (ids.isEmpty()) return emptyList()
         val marks = ids.joinToString(",") { "?" }

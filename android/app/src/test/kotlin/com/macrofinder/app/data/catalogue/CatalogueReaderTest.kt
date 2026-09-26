@@ -78,6 +78,15 @@ class CatalogueReaderTest {
     }
 
     @Test
+    fun `a barcode finds its product with a price`() {
+        db.exec("UPDATE products SET ean = '8718452994274' WHERE id = 'ah:1'")
+        val found = reader.byEan("8718452994274")
+        assertEquals(listOf("ah:1"), found.map { it.id })
+        assertEquals("promo", found.single().lane)
+        assertTrue(reader.byEan("0000000000000").isEmpty())
+    }
+
+    @Test
     fun `unknown macros come back null, not zero`() {
         val tin = reader.detail("ah:3")!!.deal
         assertNull(tin.proteinPer100g)

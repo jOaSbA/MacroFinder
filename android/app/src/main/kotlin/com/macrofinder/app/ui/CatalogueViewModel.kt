@@ -18,6 +18,7 @@ import com.macrofinder.app.data.catalogue.SearchIndex
 import com.macrofinder.app.data.catalogue.Shelf
 import com.macrofinder.app.data.catalogue.selectDeals
 import com.macrofinder.app.data.following.FollowingStore
+import com.macrofinder.app.data.catalogue.normaliseBarcode
 import com.macrofinder.app.data.settings.Prefs
 import com.macrofinder.app.data.settings.SettingsStore
 import com.macrofinder.app.data.sync.CatalogueStore
@@ -215,6 +216,7 @@ class CatalogueViewModel(
     // -- search ----------------------------------------------------------------
 
     fun search(text: String) {
+        _scanNote.value = null
         _searchText.value = text
         saved["search"] = text
         searchJob?.cancel()
@@ -230,6 +232,39 @@ class CatalogueViewModel(
                 (reader()?.let { r -> runCatching { r.search(fts, limit = 300) }.getOrDefault(emptyList()) }
                     ?: searchFallback(text)).filter(p::allows).take(60)
             }
+        }
+    }
+
+    // -- barcode scan (milestone 37) --------------------------------------------
+
+    private val _scanNote = MutableStateFlow<String?>(null)
+    /** What the last scan found, when it didn't simply open one product. */
+    val scanNote: StateFlow<String?> = _scanNote.asStateFlow()
+
+    /**
+     * One match opens the product. Several (a multipack sharing the single
+     * pack's barcode) become the result list. Not filtered by my stores: in a
+     * shop you want to know about the thing in your hand.
+     */
+    fun onScanned(raw: String?, open: (String) -> Unit) {
+        viewModelScope.launch {
+            loadJob?.join()
+            val code = normaliseBarcode(raw)
+            if (code == null) {
+                _scanNote.value = if (raw == null) null else "Dat was geen streepjescode van een product."
+                return@launch
+            }
+            val found = withContext(Dispatchers.IO) {
+                reader()?.let { runCatching { it.byEan(code) }.getOrDefault(emptyList()) }.orEmpty()
+            }
+            _searchText.value = code
+            _searchResults.value = found
+            _scanNote.value = when (found.size) {
+                0 -> "Barcode $code staat niet in de catalogus. Zoek op naam; van Aldi hebben we geen barcodes."
+                1 -> null
+                else -> "Barcode $code hoort bij ${found.size} producten, bijvoorbeeld los en in een multipack."
+            }
+            if (found.size == 1) open(found.single().id)
         }
     }
 

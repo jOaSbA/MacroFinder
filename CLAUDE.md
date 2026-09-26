@@ -1435,6 +1435,18 @@ catalogue that lost more than 20% of its products.
     matched as mango; `danio` is now a carrier word. The Over screen credits
     OFF (ODbL).
 
+37. ~~Barcode scan.~~ **Done.** "Scan barcode" on Zoeken opens
+    `zxing-android-embedded` (ZXing, works offline and without Google Play
+    services; ML Kit needs both). EAN-13, EAN-8 and UPC-A only. The read is
+    normalised the same way as `parsers/gtin.py` (`Barcode.kt`, same test
+    cases) and looked up with `CatalogueReader.byEan`, unindexed: a scan of
+    52k rows is fast enough and an index would change the published schema.
+    One match opens the product; several (multipacks sharing an image)
+    become the result list; none says so, and that Aldi has no barcodes.
+    A scan is not filtered by my stores: in a shop you want the thing in
+    your hand. Verified: scanner opens and cancels on the emulator; the
+    lookup is JVM-tested. A real scan needs a phone camera.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
