@@ -18,6 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import com.macrofinder.app.data.settings.ALL_CHAINS
+import com.macrofinder.app.data.settings.Diet
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -69,10 +71,16 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
                 modifier = Modifier.fillMaxWidth().focusRequester(focus),
             )
         }
+        val prefs by vm.prefs.collectAsState()
         val scope = if (state.installed) "in ${count(state.productCount)} producten" else "in de korte lijst"
+        // Say when settings narrow the search, or a short result list looks wrong.
+        val narrowed = listOfNotNull(
+            if (prefs.stores.size < ALL_CHAINS.size) "alleen je winkels" else null,
+            when (prefs.diet) { Diet.VEGETARISCH -> "vegetarisch"; Diet.VEGAN -> "veganistisch"; else -> null },
+        ).joinToString(", ").takeIf { it.isNotEmpty() }?.let { " ($it)" }.orEmpty()
         Text(
-            if (text.isBlank()) "Zoekt $scope, ook zonder internet"
-            else "${results.size} gevonden $scope",
+            if (text.isBlank()) "Zoekt $scope$narrowed, ook zonder internet"
+            else "${results.size} gevonden $scope$narrowed",
             style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp, top = 10.dp),
         )
         if (text.isBlank()) {

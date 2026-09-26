@@ -102,7 +102,8 @@ def test_supplement_by_name_even_without_a_food_type():
 
 
 def test_unknown_macros_get_no_macro_buckets():
-    assert _b(mass_g=500, meal_kind="snack", food_type="skyr_naturel", freezable=True) == []
+    # Only the diet tag, which is about what skyr is, not what's in it.
+    assert _b(mass_g=500, meal_kind="snack", food_type="skyr_naturel", freezable=True) == ["vegetarisch"]
 
 
 def test_bulk_cutoff_is_the_bottom_quartile():

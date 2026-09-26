@@ -91,6 +91,7 @@ fun MacroFinderApp(
     val scope = rememberCoroutineScope()
     val savedMeals = remember { SavedMealsStore(context) }
     val mealsState by meals.state.collectAsState()
+    val prefs by catalogue.prefs.collectAsState()
 
     // The back stack, saved as strings so it survives process death.
     var stackKeys by rememberSaveable { mutableStateOf(listOf(Route.Deals.key)) }
@@ -146,6 +147,7 @@ fun MacroFinderApp(
                     meals,
                     onCustomise = { key -> meals.customise(key); go(Route.Customise(key)) },
                     onSaved = { go(Route.SavedMeals) },
+                    stores = prefs.stores,
                 )
                 Route.Following -> FollowingScreen(catalogue, openProduct)
                 Route.About -> AboutScreen(catalogue, sync, mealsState.generatedAt, onBack = ::back)

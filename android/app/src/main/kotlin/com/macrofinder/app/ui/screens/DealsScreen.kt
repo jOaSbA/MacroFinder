@@ -32,6 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.Role
 import com.macrofinder.app.data.catalogue.Shelf
+import com.macrofinder.app.data.settings.Diet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -87,7 +88,8 @@ fun DealsScreen(
     val t = MF.tokens
     val state by vm.state.collectAsState()
     val query by vm.query.collectAsState()
-    val ranked = remember(state, query) { vm.visibleDeals() }
+    val prefs by vm.prefs.collectAsState()
+    val ranked = remember(state, query, prefs) { vm.visibleDeals() }
     val today = vm.today()
     val listState = rememberLazyListState()
     var showShelves by remember { mutableStateOf(false) }
@@ -133,7 +135,7 @@ fun DealsScreen(
                         style = MF.type.label, color = t.muted, modifier = Modifier.padding(top = 2.dp),
                     )
                 }
-                TextAction("Over", onAbout, color = t.muted)
+                TextAction("Instellingen", onAbout, color = t.muted)
             }
         }
         item { Spacer(Modifier.padding(top = 8.dp)); SyncBanner(sync, state.installed, onRefresh) }
@@ -145,7 +147,8 @@ fun DealsScreen(
                 FilterChip("Binnenkort", query.window == DealWindow.UPCOMING,
                     { vm.setQuery(query.copy(window = DealWindow.UPCOMING)) })
                 Spacer(Modifier.padding(horizontal = 2.dp))
-                CHAINS.forEach { (key, label) ->
+                // Only my stores, and no chips at all when that's one store.
+                CHAINS.filter { it.first in prefs.stores }.takeIf { it.size > 1 }.orEmpty().forEach { (key, label) ->
                     FilterChip(label, key in query.chains, {
                         val next = if (key in query.chains) query.chains - key else query.chains + key
                         vm.setQuery(query.copy(chains = next))
@@ -164,6 +167,11 @@ fun DealsScreen(
                         shelfLabel != null || !query.foodOnly,
                         { showShelves = true },
                     )
+                }
+                // The diet lives in settings, but a filter you can't see is a
+                // list that looks broken. Tapping it goes to settings.
+                if (prefs.diet != Diet.ALLES) {
+                    FilterChip(if (prefs.diet == Diet.VEGAN) "Veganistisch" else "Vegetarisch", true, onAbout)
                 }
                 BUCKETS.forEach { (key, label) ->
                     FilterChip(label, query.bucket == key, {
@@ -201,6 +209,10 @@ fun DealsScreen(
                 EmptyState(
                     title = "Niets dat hier past",
                     body = when {
+                        // A catalogue built before milestone 32 carries no diet tags.
+                        prefs.diet != Diet.ALLES && state.deals.none { "vegetarisch" in it.buckets } ->
+                            "Deze catalogus weet nog niet wat vegetarisch is. Dat komt met de " +
+                                "volgende update; tot dan kun je het in Instellingen op Alles zetten."
                         query.window == DealWindow.UPCOMING ->
                             "Er zijn nog geen aanbiedingen voor volgende week bekend. " +
                                 "AH en Jumbo zetten die meestal een dag of twee van tevoren online."

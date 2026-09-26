@@ -16,6 +16,7 @@ import yaml
 from . import config
 
 BUCKETS_PATH = config.PROJECT_ROOT / "data" / "seed" / "macro_buckets.yaml"
+DIET_PATH = config.PROJECT_ROOT / "data" / "seed" / "diet.yaml"
 
 EIWITBOM_MIN_PROTEIN = 20.0          # g per 100 g
 CUT_MIN_PROTEIN_PER_100KCAL = 10.0
@@ -67,14 +68,21 @@ def _authored() -> dict:
     return yaml.safe_load(Path(BUCKETS_PATH).read_text(encoding="utf-8"))
 
 
+@lru_cache(maxsize=1)
+def diets() -> dict[str, str]:
+    """food type key -> vegan / vegetarisch / niet_vegetarisch (milestone 32)."""
+    authored = yaml.safe_load(Path(DIET_PATH).read_text(encoding="utf-8"))
+    return {key: diet for diet, keys in authored.items() for key in keys}
+
+
 def buckets(*, protein: float | None, kcal: float | None, mass_g: float | None,
             meal_kind: str | None, food_type: str | None, freezable: bool,
             name: str, eur_per_1000kcal: float | None,
             bulk_cutoff: float | None) -> list[str]:
     """Which macro buckets a product falls in, in a fixed order.
 
-    `supplement` is the only one that doesn't need macros: it is about what a
-    product is, not what's in it.
+    `supplement`, `vegetarisch` and `vegan` don't need macros: they are about
+    what a product is, not what's in it.
     """
     authored = _authored()
     out: list[str] = []
@@ -103,4 +111,11 @@ def buckets(*, protein: float | None, kcal: float | None, mass_g: float | None,
     if (food_type in supplement["food_types"]
             or any(word in lowered for word in supplement["name_contains"])):
         out.append("supplement")
+    # Diet rides along as two more tags, so the app filters on it without a
+    # schema change. Vegan is also vegetarian. No food type, no diet.
+    diet = diets().get(food_type) if food_type else None
+    if diet in ("vegan", "vegetarisch"):
+        out.append("vegetarisch")
+    if diet == "vegan":
+        out.append("vegan")
     return out
