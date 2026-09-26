@@ -41,7 +41,7 @@ import sqlite3
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from . import shelves
+from . import metrics, shelves
 
 # Bumped whenever APP_SCHEMA changes. This is for the app to read; it is NOT
 # what guards delta building - `_schema_of` compares the databases' actual
@@ -119,7 +119,23 @@ CREATE TABLE products (
     -- PLAN-V2 section 3.3. NULL for a product only ever seen in a promo feed
     -- that carries no image.
     image_url    TEXT,
-    image_width  INTEGER
+    image_width  INTEGER,
+    -- Milestone 20, derived at build time so the app can sort 50k rows with
+    -- an index instead of recomputing. Macros are resolved already: the SKU's
+    -- own label when there is one, else the food type's seed figure, with
+    -- the provenance beside them. Every one is NULL when unknown, never 0.
+    mass_g               REAL,
+    protein_per_100g     REAL,
+    kcal_per_100g        REAL,
+    carbs_per_100g       REAL,
+    fat_per_100g         REAL,
+    macro_source         TEXT,
+    macro_confidence     TEXT,
+    protein_per_100kcal  REAL,
+    -- Comma-separated macro buckets (PLAN-V2 section 4.1), '' for none.
+    -- `bulk` is not in here: it is relative, so meta.bulk_eur_per_1000kcal
+    -- carries the cutoff and the app compares prices.eur_per_1000kcal to it.
+    buckets              TEXT NOT NULL DEFAULT ''
 ) WITHOUT ROWID;
 
 -- Tier 1, the SKU's own FIR label figures. BRIEF section 2 prefers these over
@@ -158,6 +174,13 @@ CREATE TABLE prices (
     is_personal_offer     INTEGER NOT NULL DEFAULT 0,
     valid_from            TEXT,
     valid_to              TEXT,
+    -- Milestone 20. Per lane, because a promo and a shelf price give the same
+    -- product two different costs per gram of protein.
+    eur_per_100g_protein  REAL,
+    eur_per_1000kcal      REAL,
+    -- How far below the shelf price this lane is, in percent. NULL on the
+    -- shelf lane and whenever there is no shelf price to compare with.
+    discount_pct          REAL,
     PRIMARY KEY (product_id, lane)
 ) WITHOUT ROWID;
 
@@ -166,6 +189,8 @@ CREATE INDEX idx_products_food_type ON products(food_type);
 CREATE INDEX idx_products_category ON products(category);
 CREATE INDEX idx_products_shelf ON products(shelf);
 CREATE INDEX idx_prices_valid ON prices(valid_from, valid_to);
+CREATE INDEX idx_prices_protein ON prices(eur_per_100g_protein);
+CREATE INDEX idx_products_ratio ON products(protein_per_100kcal);
 """
 
 # name -> the columns that identify a row, for diffing and for deletions.
@@ -277,6 +302,7 @@ def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -
         _copy_products(conn, db, shelf_map)
         _copy_product_macros(conn, db)
         _copy_prices(conn, db, on)
+        _derive_metrics(conn, db)
         db.commit()
         _vacuum_into(db, out)
     finally:
@@ -368,6 +394,88 @@ def _copy_prices(src: sqlite3.Connection, dst: sqlite3.Connection, on: date) -> 
         "is_personal_offer, valid_from, valid_to) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
         [(product_id(r[0], r[1]), *r[2:]) for r in rows],
     )
+
+
+def _derive_metrics(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
+    """Milestone 20: resolved macros, the four metrics, and the macro buckets.
+
+    Uses the same unit parsing and mass rules as `ranking`, so a product costs
+    the same per gram of protein in the CLI and on the phone.
+    """
+    from .parsers.units import parse_unit_size
+    from .ranking import resolve_mass
+
+    food = {
+        r["key"]: dict(r) for r in src.execute(
+            "SELECT key, density_g_per_ml, g_per_unit, drained_fraction, meal_kind, "
+            "freezable, protein_per_100g, kcal_per_100g, carbs_per_100g, fat_per_100g, "
+            "source, confidence FROM food_types")
+    }
+    blank = dict.fromkeys(("density_g_per_ml", "g_per_unit", "drained_fraction"))
+    label = {r[0]: r for r in dst.execute(
+        "SELECT product_id, protein_per_100g, kcal_per_100g, carbs_per_100g, "
+        "fat_per_100g, macro_source, macro_confidence FROM product_macros")}
+
+    derived: dict[str, dict] = {}
+    for pid, name, food_type, raw_unit in dst.execute(
+            "SELECT id, name, food_type, raw_unit_text FROM products"):
+        ft = food.get(food_type)
+        mass = resolve_mass(parse_unit_size(raw_unit), ft or blank)
+        tier1 = label.get(pid)
+        if tier1 is not None and tier1[1] is not None:
+            macros = tier1[1:7]
+        elif ft is not None and ft["protein_per_100g"] is not None:
+            macros = (ft["protein_per_100g"], ft["kcal_per_100g"], ft["carbs_per_100g"],
+                      ft["fat_per_100g"], ft["source"], ft["confidence"])
+        else:
+            macros = (None,) * 6
+        derived[pid] = {"name": name, "food_type": food_type, "ft": ft,
+                        "mass": mass, "macros": macros}
+
+    price_rows = dst.execute(
+        "SELECT product_id, lane, effective_unit_price, shelf_price FROM prices").fetchall()
+    price_updates = []
+    current_kcal_cost: dict[str, float | None] = {}
+    for pid, lane, price, shelf in price_rows:
+        d = derived[pid]
+        protein, kcal = d["macros"][0], d["macros"][1]
+        per_protein = metrics.eur_per_100g_protein(price, d["mass"], protein)
+        per_kcal = metrics.eur_per_1000kcal(price, d["mass"], kcal)
+        discount = None
+        if lane != "shelf" and price is not None and shelf and price < shelf:
+            discount = round((1 - price / shelf) * 100.0, 1)
+        price_updates.append((per_protein, per_kcal, discount, pid, lane))
+        # The bulk quartile is over what a product costs now: the promo if
+        # there is one, else the shelf price.
+        if lane == "promo" or (lane == "shelf" and pid not in current_kcal_cost):
+            current_kcal_cost[pid] = per_kcal
+    dst.executemany(
+        "UPDATE prices SET eur_per_100g_protein=?, eur_per_1000kcal=?, discount_pct=? "
+        "WHERE product_id=? AND lane=?", price_updates)
+
+    # "Bulk" is relative: the cheapest quarter by €/1000 kcal. Stamping it on
+    # each product would rewrite hundreds of rows whenever one price moved
+    # the cutoff, and every delta would carry them. So the cutoff ships once,
+    # in meta, and the app compares against it.
+    cutoff = metrics.bulk_cutoff(current_kcal_cost.values())
+    if cutoff is not None:
+        dst.execute("INSERT INTO meta (key, value) VALUES ('bulk_eur_per_1000kcal', ?)",
+                    (f"{cutoff:.4f}",))
+    product_updates = []
+    for pid, d in derived.items():
+        protein, kcal, carbs, fat, source, confidence = d["macros"]
+        ft = d["ft"] or {}
+        tags = metrics.buckets(
+            protein=protein, kcal=kcal, mass_g=d["mass"], meal_kind=ft.get("meal_kind"),
+            food_type=d["food_type"], freezable=bool(ft.get("freezable")), name=d["name"],
+            eur_per_1000kcal=None, bulk_cutoff=None)
+        product_updates.append((
+            d["mass"], protein, kcal, carbs, fat, source, confidence,
+            metrics.protein_ratio(protein, kcal), ",".join(tags), pid))
+    dst.executemany(
+        "UPDATE products SET mass_g=?, protein_per_100g=?, kcal_per_100g=?, "
+        "carbs_per_100g=?, fat_per_100g=?, macro_source=?, macro_confidence=?, "
+        "protein_per_100kcal=?, buckets=? WHERE id=?", product_updates)
 
 
 def product_id(chain: str, sku: str) -> str:

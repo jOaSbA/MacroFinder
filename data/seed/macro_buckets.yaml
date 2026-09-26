@@ -1,0 +1,35 @@
+# Milestone 20. The two macro buckets that can't be computed from numbers
+# alone. Everything else in PLAN-V2 section 4.1 is a threshold in
+# src/bonusrank/metrics.py.
+
+# Cold, ready in under five minutes. Still has to reach 20 g protein in a
+# serving to count; this list only says "people eat this for breakfast".
+ontbijt:
+  food_types:
+    - kwark_mager
+    - skyr_naturel
+    - skyr_fruit
+    - griekse_yoghurt_0
+    - huttenkase
+    - proteine_drinkyoghurt
+    - proteine_pudding
+    - eiwitshake_kant_en_klaar
+    - ei_gekookt
+    - muesli
+
+# Most supplements never match a food type (they sit in Drogisterij), so the
+# name is what catches them. Phrases, not brand names.
+supplement:
+  food_types:
+    - whey_poeder
+    - caseine_poeder
+  name_contains:
+    - whey
+    - casein
+    - caseïne
+    - creatine
+    - eiwitpoeder
+    - proteïnepoeder
+    - proteinepoeder
+    - protein powder
+    - isolate
