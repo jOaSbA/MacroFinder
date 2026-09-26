@@ -151,8 +151,9 @@ fun AboutScreen(
                 Column {
                     Text("Open source", style = MF.type.rowTitle, color = t.ink)
                     Text(
-                        "Code en gegevens: github.com/jOaSbA/MacroFinder. Lettertype Archivo, " +
-                            "SIL Open Font License 1.1.",
+                        "Code en gegevens: github.com/jOaSbA/MacroFinder. Een deel van de " +
+                            "voedingswaarden komt van Open Food Facts (openfoodfacts.org, ODbL). " +
+                            "Lettertype Archivo, SIL Open Font License 1.1.",
                         style = MF.type.body, color = t.muted, modifier = Modifier.padding(top = 4.dp),
                     )
                 }

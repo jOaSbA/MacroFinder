@@ -135,6 +135,11 @@ jobs:
       - name: Fill barcodes
         run: bonusrank fill-eans
 
+      # Label macros for Jumbo and Aldi from Open Food Facts. A nonprofit, so
+      # a small budget, and misses are remembered for two months.
+      - name: Open Food Facts macros
+        run: bonusrank off-macros --limit 150 || echo "Open Food Facts lookup failed, continuing"
+
       - name: Export
         run: |
           bonusrank export --out dist/data/latest.json

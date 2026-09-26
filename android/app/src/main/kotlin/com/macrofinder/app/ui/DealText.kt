@@ -71,6 +71,7 @@ fun macroStrip(detail: ProductDetail): MacroStripModel {
         !anyValue && !d.hasMacros -> "Voedingswaarde onbekend. We rekenen hier niets mee."
         est -> "$ESTIMATE_MARK Geschat uit de algemene waarde voor " +
             (detail.foodTypeName?.lowercase() ?: "dit soort product") + ", niet van het etiket."
+        d.macroSource == "off" -> "Van het etiket, overgenomen door Open Food Facts."
         else -> "Van het etiket van dit product."
     }
     return MacroStripModel(top, money, secondary, provenance)
