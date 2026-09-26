@@ -1,0 +1,231 @@
+# Milestone 32. Every food type sits in exactly one list, so a new food type
+# without a diet fails tests/test_diet_seed.py instead of silently counting
+# as meat. When a product line varies (bread with or without milk, meat
+# substitutes with or without egg), the food type goes in the stricter list.
+# A product with no food type has no known diet and is hidden by the filter.
+
+vegan:
+  # plant drinks and dairy swaps
+  - sojadrink_ongezoet
+  - amandeldrink_ongezoet
+  - haverdrink
+  - kwark_plantaardig
+  # plant protein
+  - tofu_naturel
+  - tofu_gerookt
+  - tempeh
+  - seitan
+  - sojabrokken_droog
+  - falafel
+  - hummus
+  - edamame
+  # legumes
+  - kikkererwten_blik
+  - kikkererwten_droog
+  - linzen_droog
+  - linzen_blik
+  - bruine_bonen_blik
+  - witte_bonen_blik
+  - kidneybonen_blik
+  - zwarte_bonen_blik
+  - doperwten_blik
+  - kapucijners_blik
+  - tuinbonen
+  - spliterwten_droog
+  # grains and bread without milk or egg
+  - havermout
+  - rijst_wit_droog
+  - rijst_zilvervlies_droog
+  - pasta_droog
+  - pasta_volkoren_droog
+  - couscous_droog
+  - quinoa_droog
+  - bulgur_droog
+  - polenta_droog
+  - brood_volkoren
+  - wrap_tortilla
+  - wrap_volkoren
+  - crackers_volkoren
+  - rijstwafels
+  - pitabrood
+  - stokbrood
+  # nuts, seeds, spreads
+  - pindakaas
+  - pindas
+  - amandelen
+  - cashewnoten
+  - walnoten
+  - hazelnoten
+  - pistachenoten
+  - paranoten
+  - pecannoten
+  - chiazaad
+  - lijnzaad
+  - zonnebloempitten
+  - pompoenpitten
+  - sesamzaad
+  - tahin
+  - amandelpasta
+  # pantry
+  - cacaopoeder
+  - ketchup
+  - zoetstof
+  - vanille_extract
+  - kruiden_gedroogd
+  - olijfolie
+  - kokosmelk
+  - olijven
+  - zongedroogde_tomaten
+  - augurken
+  - tomatenblokjes_blik
+  - sinaasappelsap
+  # vegetables, potatoes, fruit
+  - rucola
+  - ijsbergsla
+  - gesneden_groente_mix
+  - knoflook
+  - broccoli
+  - spinazie
+  - sperziebonen
+  - wortel
+  - paprika_groente
+  - courgette
+  - bloemkool
+  - champignons
+  - tomaat
+  - komkommer
+  - sla
+  - ui
+  - prei
+  - spruitjes
+  - boerenkool
+  - andijvie
+  - aubergine
+  - avocado
+  - aardappelen
+  - friet_diepvries
+  - zoete_aardappel
+  - banaan
+  - appel
+  - peer
+  - sinaasappel
+  - mandarijn
+  - aardbeien
+  - blauwe_bessen
+  - frambozen
+  - druiven
+  - mango
+  - ananas
+  - kiwi
+  - diepvriesfruit
+
+vegetarisch:
+  # dairy and eggs
+  - kwark_mager
+  - kwark_halfvol
+  - kwark_vol
+  - kwark_mager_fruit
+  - skyr_naturel
+  - skyr_fruit
+  - yoghurt_mager
+  - yoghurt_halfvol
+  - yoghurt_vol
+  - griekse_yoghurt_0
+  - griekse_yoghurt_vol
+  - huttenkase
+  - melk_mager
+  - melk_halfvol
+  - melk_vol
+  - karnemelk
+  - proteine_drinkyoghurt
+  - proteine_pudding
+  - vla_vanille
+  - melkpoeder_mager
+  - boter
+  - creme_fraiche
+  - ei_rauw
+  - ei_gekookt
+  - eiwit_vloeibaar
+  # Most Dutch supermarket cheese uses microbial rennet and is labelled
+  # vegetarian. Parmezaan never is, see niet_vegetarisch.
+  - kaas_jong_48
+  - kaas_jong_30
+  - kaas_belegen_48
+  - kaas_geraspt_30
+  - mozzarella
+  - feta
+  - smeerkaas_light
+  - geitenkaas
+  - brie
+  - blauwaderkaas
+  # supplements and bars (milk protein)
+  - whey_poeder
+  - caseine_poeder
+  - proteine_reep
+  - eiwitshake_kant_en_klaar
+  # meat substitutes often contain egg or milk
+  - vega_gehakt
+  - vega_burger
+  - vega_schnitzel
+  - vega_kipstukjes
+  # bread and cereal that may contain milk, egg or honey
+  - brood_wit
+  - broodje_bruin
+  - krentenbol
+  - beschuit
+  - naanbrood
+  - wrap_proteine
+  - muesli
+  - cornflakes
+  - noedels_droog
+  # sauces with egg, yoghurt or cheese
+  - pastasaus_tomaat
+  - knoflooksaus
+  - yoghurtsaus_knoflook
+  - honing
+
+niet_vegetarisch:
+  # meat
+  - kipfilet_rauw
+  - kipdijfilet
+  - kipgehakt
+  - kalkoenfilet_rauw
+  - rundergehakt_mager
+  - rundergehakt
+  - runderbiefstuk_mager
+  - varkenshaas
+  - varkensfilet
+  - shoarmavlees
+  - kipfilet_vleeswaren
+  - achterham
+  - rosbief_vleeswaren
+  - fricandeau
+  - bacon
+  - rookworst
+  - knakworst
+  - salami
+  - leverworst
+  - gehaktbal
+  - kipnuggets
+  - spareribs
+  - kippenpoten
+  # fish and shellfish
+  - tonijn_blik_water
+  - tonijn_blik_olie
+  - zalm_vers
+  - zalm_gerookt
+  - makreel_gerookt
+  - haring
+  - kabeljauw
+  - koolvis
+  - tilapia
+  - pangasius
+  - garnalen
+  - sardines_blik
+  - surimi
+  - mosselen
+  - forel
+  - schol
+  # animal rennet: Parmigiano Reggiano by law, and pesto made with it
+  - parmezaanse_kaas
+  - pesto_groen

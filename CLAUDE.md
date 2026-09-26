@@ -1374,6 +1374,19 @@ catalogue that lost more than 20% of its products.
     and the ranked list already answers cross-food questions. The saving
     carries the estimate mark when either side's macros are estimated.
 
+32. ~~My stores and diet.~~ **Done.** Instellingen (the old Over screen)
+    sets the stores you shop at and Alles / Vegetarisch / Veganistisch,
+    local in DataStore (`data/settings/`). Hidden stores drop out of the deal
+    list, search, alternatives and meal prices; the last store can't be
+    turned off. The diet comes from `data/seed/diet.yaml`, which puts every
+    food type in exactly one list (a test enforces it), and ships as two
+    more tags in `products.buckets`, so no schema bump. When a product line
+    varies (bread with milk, vega burgers with egg) it goes in the stricter
+    list; Parmezaan and pesto are not vegetarian (animal rennet). A product
+    with no food type has no diet and is hidden by the filter, and the list
+    says so. The diet shows as a chip on the deal list, because a filter you
+    can't see makes the list look broken.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.

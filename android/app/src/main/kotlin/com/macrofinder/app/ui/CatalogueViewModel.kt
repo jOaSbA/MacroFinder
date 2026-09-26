@@ -18,6 +18,8 @@ import com.macrofinder.app.data.catalogue.SearchIndex
 import com.macrofinder.app.data.catalogue.Shelf
 import com.macrofinder.app.data.catalogue.selectDeals
 import com.macrofinder.app.data.following.FollowingStore
+import com.macrofinder.app.data.settings.Prefs
+import com.macrofinder.app.data.settings.SettingsStore
 import com.macrofinder.app.data.sync.CatalogueStore
 import java.time.LocalDate
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +59,7 @@ class CatalogueViewModel(
 
     private val store = CatalogueStore(app)
     private val following = FollowingStore(app)
+    private val settings = SettingsStore(app)
     private var db: SQLiteDatabase? = null
 
     private val _state = MutableStateFlow(CatalogueState())
@@ -66,6 +69,16 @@ class CatalogueViewModel(
 
     private val _query = MutableStateFlow(restoreQuery())
     val query: StateFlow<DealQuery> = _query.asStateFlow()
+
+    /** Milestone 32: my stores and diet, applied to every list. */
+    val prefs: StateFlow<Prefs> = settings.prefs.stateIn(viewModelScope, SharingStarted.Eagerly, Prefs())
+
+    fun savePrefs(p: Prefs) {
+        viewModelScope.launch {
+            settings.save(p)
+            if (_searchText.value.isNotBlank()) search(_searchText.value)
+        }
+    }
 
     val followed: StateFlow<Set<String>> =
         following.followed.stateIn(viewModelScope, SharingStarted.Eagerly, emptySet())
@@ -171,7 +184,9 @@ class CatalogueViewModel(
 
     fun visibleDeals(): List<RankedDeal> {
         val s = _state.value
-        return selectDeals(s.deals, _query.value, today(), s.bulkCutoff)
+        val p = prefs.value
+        val q = _query.value
+        return selectDeals(s.deals.filter(p::allows), q.copy(chains = p.chainsFor(q.chains)), today(), s.bulkCutoff)
     }
 
     fun setQuery(q: DealQuery) {
@@ -209,8 +224,11 @@ class CatalogueViewModel(
             indexJob?.join()
             val fts = SearchIndex.query(text)
             _searchResults.value = if (fts == null) emptyList() else withContext(Dispatchers.IO) {
-                reader()?.let { r -> runCatching { r.search(fts) }.getOrDefault(emptyList()) }
-                    ?: searchFallback(text)
+                val p = prefs.value
+                // Ask for more than a screenful, then drop what my stores and
+                // diet hide, so a filter doesn't leave a short list behind.
+                (reader()?.let { r -> runCatching { r.search(fts, limit = 300) }.getOrDefault(emptyList()) }
+                    ?: searchFallback(text)).filter(p::allows).take(60)
             }
         }
     }
@@ -230,7 +248,7 @@ class CatalogueViewModel(
             // fall back to the thinner latest.json row.
             loadJob?.join()
             _detail.value = withContext(Dispatchers.IO) {
-                reader()?.let { runCatching { it.detail(id, today(), _query.value.chains) }.getOrNull() }
+                reader()?.let { runCatching { it.detail(id, today(), prefs.value.chainsFor(_query.value.chains)) }.getOrNull() }
                     ?: (fallback + _searchResults.value).firstOrNull { it.id == id }
                         ?.let { ProductDetail(it, null, emptyList(), false, null) }
             }

@@ -72,9 +72,14 @@ fun MealsScreen(
     vm: MacroFinderViewModel,
     onCustomise: (String) -> Unit,
     onSaved: () -> Unit,
+    stores: Set<String> = CHAINS.map { it.first }.toSet(),
 ) {
     val t = MF.tokens
     val state by vm.state.collectAsState()
+    // A store I've hidden in settings can't be the one meals are priced at.
+    LaunchedEffect(stores) {
+        if (state.chain !in stores) CHAINS.firstOrNull { it.first in stores }?.let { vm.selectChain(it.first) }
+    }
 
     LazyColumn(Modifier.fillMaxSize().background(t.paper), contentPadding = PaddingValues(bottom = 24.dp)) {
         item {
@@ -83,7 +88,7 @@ fun MealsScreen(
             Text("Prijzen van deze week, per winkel. Kies er één:",
                 style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp, top = 2.dp))
             ChipRow {
-                CHAINS.forEach { (key, label) ->
+                CHAINS.filter { it.first in stores }.forEach { (key, label) ->
                     FilterChip(label, state.chain == key, { vm.selectChain(key) }, leadingColor = chainColor(key))
                 }
             }
