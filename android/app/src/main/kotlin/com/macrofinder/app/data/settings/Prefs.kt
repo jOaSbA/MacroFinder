@@ -16,6 +16,8 @@ val ALL_CHAINS = listOf("ah", "jumbo", "aldi")
 data class Prefs(
     val stores: Set<String> = ALL_CHAINS.toSet(),
     val diet: Diet = Diet.ALLES,
+    /** Milestone 33: one notification a week with the best protein deals. Off by default. */
+    val weeklyDigest: Boolean = false,
 ) {
     fun allows(deal: Deal): Boolean = deal.chain in stores && when (diet) {
         Diet.ALLES -> true
