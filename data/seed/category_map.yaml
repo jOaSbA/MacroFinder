@@ -1,0 +1,107 @@
+# Milestone 19: each chain's own departments mapped onto one shared set of
+# shelves, so the app can browse three chains the same way.
+#
+# Authored, not fuzzy-matched. There are 18 targets and three chains; a
+# category nobody mapped goes to needs_review as `unmapped_category` and shows
+# up in the app under "Overig" until someone adds it here.
+#
+# Order below is the order the app shows them in.
+shelves:
+  groente_fruit:   Groente, aardappelen, fruit
+  vlees_vis:       Vlees, vis, vega
+  kaas_vleeswaren: Kaas, vleeswaren, tapas
+  zuivel_eieren:   Zuivel, plantaardig, eieren
+  bakkerij:        Brood, bakkerij
+  maaltijden:      Maaltijden, gemak
+  ontbijt_beleg:   Ontbijt, beleg
+  pasta_rijst:     Pasta, rijst, wereldkeuken
+  soepen_sauzen:   Soepen, sauzen, kruiden
+  snoep_chips:     Snoep, koek, chips
+  diepvries:       Diepvries
+  frisdrank:       Frisdrank, sap, water
+  koffie_thee:     Koffie, thee
+  alcohol:         Bier, wijn, sterke drank
+  drogisterij:     Drogisterij, sport
+  baby:            Baby, kind
+  huishouden:      Huishouden
+  huisdier:        Huisdier
+
+chains:
+  ah:
+    Groente, aardappelen: groente_fruit
+    Fruit, verse sappen: groente_fruit
+    Vlees: vlees_vis
+    Vis: vlees_vis
+    # Mostly meat substitutes. They sit next to what they replace.
+    Vegetarisch, vegan en plantaardig: vlees_vis
+    Kaas: kaas_vleeswaren
+    Vleeswaren: kaas_vleeswaren
+    Zuivel, eieren: zuivel_eieren
+    Bakkerij: bakkerij
+    Maaltijden, salades: maaltijden
+    Ontbijtgranen, beleg: ontbijt_beleg
+    Pasta, rijst, wereldkeuken: pasta_rijst
+    Soepen, sauzen, kruiden, olie: soepen_sauzen
+    Koek, snoep, chocolade: snoep_chips
+    # Nuts live here too, which is why the matcher never excluded it.
+    Borrel, chips, snacks: snoep_chips
+    Tussendoortjes: snoep_chips
+    Diepvries: diepvries
+    Frisdrank, sappen, water: frisdrank
+    Koffie, thee: koffie_thee
+    Bier, wijn, aperitieven: alcohol
+    Drogisterij: drogisterij
+    # Protein powder and bars are here. The `supplement` macro bucket is what
+    # surfaces them; the shelf just has to be somewhere sensible.
+    Gezondheid en sport: drogisterij
+    Uiterlijk: drogisterij
+    Baby en kind: baby
+    Care & Baby: baby
+    Huishouden: huishouden
+    Koken, tafelen, vrije tijd: huishouden
+    AH Bloemenshop: huishouden
+    Huisdier: huisdier
+    # Deliberately unmapped: Glutenvrij, Extra online aanbiedingen and AH
+    # Voordeelshop cut across every shelf.
+
+  jumbo:
+    Aardappelen, groente en fruit: groente_fruit
+    Vlees, vis en vega: vlees_vis
+    Vleeswaren, kaas en tapas: kaas_vleeswaren
+    Zuivel, boter en eieren: zuivel_eieren
+    Brood en gebak: bakkerij
+    Verse maaltijden en gemak: maaltijden
+    Ontbijt, broodbeleg en bakproducten: ontbijt_beleg
+    Wereldkeukens, kruiden, pasta en rijst: pasta_rijst
+    Conserven, soepen, sauzen, oliën: soepen_sauzen
+    Koek, snoep, chocolade en chips: snoep_chips
+    Diepvries: diepvries
+    Frisdrank en sappen: frisdrank
+    Koffie en thee: koffie_thee
+    Bier en wijn: alcohol
+    Drogisterij en gezondheid: drogisterij
+    Baby en kind: baby
+    # Pet food is in here too; Jumbo doesn't split it out.
+    Huishouden en dieren: huishouden
+    Non-food en servicebalie: huishouden
+
+  aldi:
+    Aardappels, groente en fruit: groente_fruit
+    Vlees, vis en vega: vlees_vis
+    Kaas en vleeswaren: kaas_vleeswaren
+    Zuivel, eieren en boter: zuivel_eieren
+    Brood, bakkerij en bakken: bakkerij
+    Ontbijtgranen, beleg en tussendoortjes: ontbijt_beleg
+    Soepen, sauzen, kruiden en conserven: soepen_sauzen
+    Snoep, koek en chocolade: snoep_chips
+    Chips, noten en zoutjes: snoep_chips
+    chips-noten: snoep_chips
+    Borrelhapjes: snoep_chips
+    Sappen, frisdrank, siropen en water: frisdrank
+    Bier, mixdranken, aperitieven en likeuren: alcohol
+    bier-en-likeuren: alcohol
+    Baby en drogisterij: drogisterij
+    Huishouden: huishouden
+    Huisdieren: huisdier
+    # Most Aldi SKUs carry only `offer`, which is a promo bucket, not a
+    # department (CLAUDE.md section 4). Left unmapped on purpose.

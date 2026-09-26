@@ -41,6 +41,8 @@ import sqlite3
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+from . import shelves
+
 # Bumped whenever APP_SCHEMA changes. This is for the app to read; it is NOT
 # what guards delta building - `_schema_of` compares the databases' actual
 # schemas, because a version number nobody bumped is exactly the bug that
@@ -82,6 +84,15 @@ CREATE TABLE food_types (
     macro_confidence          TEXT
 ) WITHOUT ROWID;
 
+-- Milestone 19. The shared shelves from data/seed/category_map.yaml, in the
+-- order the app shows them. Shipped rather than hardcoded in the app so a
+-- relabel doesn't need an app update.
+CREATE TABLE shelves (
+    key         TEXT PRIMARY KEY,
+    label       TEXT NOT NULL,
+    sort_order  INTEGER NOT NULL
+) WITHOUT ROWID;
+
 CREATE TABLE products (
     id           TEXT PRIMARY KEY,          -- '{chain}:{sku}'
     chain        TEXT NOT NULL,
@@ -92,6 +103,8 @@ CREATE TABLE products (
     -- The finer shelf level. Kept apart from `category` because
     -- match_overrides.yaml excludes whole departments by the coarse one.
     subcategory  TEXT,
+    -- Key into `shelves`, or NULL when the chain's category isn't mapped.
+    shelf        TEXT,
     -- NULL for roughly nine SKUs in ten. The catalogue exists to make every
     -- product priceable into a meal, not only the matched ones, so an
     -- unmatched row is kept and says so.
@@ -151,6 +164,7 @@ CREATE TABLE prices (
 CREATE INDEX idx_products_chain ON products(chain);
 CREATE INDEX idx_products_food_type ON products(food_type);
 CREATE INDEX idx_products_category ON products(category);
+CREATE INDEX idx_products_shelf ON products(shelf);
 CREATE INDEX idx_prices_valid ON prices(valid_from, valid_to);
 """
 
@@ -165,6 +179,7 @@ CREATE INDEX idx_prices_valid ON prices(valid_from, valid_to);
 _TABLES: dict[str, tuple[str, ...]] = {
     "meta": ("key",),
     "food_types": ("key",),
+    "shelves": ("key",),
     "products": ("id",),
     "product_macros": ("product_id",),
     "prices": ("product_id", "lane"),
@@ -256,8 +271,10 @@ def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -
         db.executescript(APP_SCHEMA)
         db.execute("INSERT INTO meta (key, value) VALUES ('schema_version', ?)",
                    (str(SCHEMA_VERSION),))
+        shelf_map = shelves.load()
         _copy_food_types(conn, db)
-        _copy_products(conn, db)
+        _copy_shelves(db, shelf_map)
+        _copy_products(conn, db, shelf_map)
         _copy_product_macros(conn, db)
         _copy_prices(conn, db, on)
         db.commit()
@@ -284,7 +301,14 @@ def _copy_food_types(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
     )
 
 
-def _copy_products(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
+def _copy_shelves(dst: sqlite3.Connection, shelf_map) -> None:
+    dst.executemany(
+        "INSERT INTO shelves (key, label, sort_order) VALUES (?,?,?)",
+        [(key, label, i) for i, (key, label) in enumerate(shelf_map.shelves.items())],
+    )
+
+
+def _copy_products(src: sqlite3.Connection, dst: sqlite3.Connection, shelf_map) -> None:
     rows = src.execute(
         "SELECT p.chain, p.sku, p.name, p.brand, p.category, p.subcategory, "
         "       f.key AS food_type, p.raw_unit_text, p.unit_size_g, p.unit_size_ml, "
@@ -295,8 +319,8 @@ def _copy_products(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
     dst.executemany(
         "INSERT INTO products (id, chain, sku, name, brand, category, subcategory, "
         "food_type, raw_unit_text, unit_size_g, unit_size_ml, cost_basis_g, ean, "
-        "image_url, image_width) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [(product_id(r[0], r[1]), *r) for r in rows],
+        "image_url, image_width, shelf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [(product_id(r[0], r[1]), *r, shelf_map.shelf_for(r[0], r[4])) for r in rows],
     )
 
 

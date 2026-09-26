@@ -640,7 +640,23 @@ def cmd_build_db(args: argparse.Namespace) -> int:
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    from datetime import date
+
+    from . import shelves
+
     with connect() as conn:
+        # Milestone 19: an unmapped category goes to review, and a build where
+        # too much of the catalogue has no shelf fails instead of publishing.
+        shelf_map = shelves.load()
+        counts = shelves.record_unmapped(conn, observed_at=date.today().isoformat(),
+                                         shelf_map=shelf_map)
+        conn.commit()
+        try:
+            rate = shelf_map.check_rate(counts)
+        except shelves.TooManyUnmapped as exc:
+            print(f"refusing to build: {exc}", file=sys.stderr)
+            return 1
+        print(f"shelves  {1 - rate:.1%} of products mapped")
         built = appdb.build_full(conn, out_dir / "build.tmp")
 
     # Named after its own content, so an unchanged catalogue keeps its name and

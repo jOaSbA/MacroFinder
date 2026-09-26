@@ -198,7 +198,8 @@ CREATE TABLE IF NOT EXISTS needs_review (
     id           INTEGER PRIMARY KEY,
     kind         TEXT NOT NULL CHECK (kind IN
                     ('unmatched_sku','unparsed_promo','macro_conflict',
-                     'unit_price_mismatch','unparsed_unit_size','missing_macros')),
+                     'unit_price_mismatch','unparsed_unit_size','missing_macros',
+                     'unmapped_category')),
     ref          TEXT,
     payload      TEXT NOT NULL,
     first_seen   TEXT NOT NULL,
@@ -398,6 +399,7 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
             conn.execute(f"DROP TABLE IF EXISTS {table}")
         conn.executescript(SCHEMA)
         conn.commit()
+    _widen_review_kinds(conn)
     _add_column_if_missing(conn, "food_types", "optimise_max_grams", "REAL")
     _add_column_if_missing(conn, "food_types", "meal_kind", "TEXT")
     # Milestone 15. All nullable with no default, so no rebuild is needed.
@@ -406,6 +408,23 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     _add_column_if_missing(conn, "products", "image_width", "INTEGER")
     conn.commit()
     return conn
+
+
+def _widen_review_kinds(conn: sqlite3.Connection) -> None:
+    """Rebuild needs_review when its CHECK predates a new review kind.
+
+    SQLite can't alter a CHECK constraint. The table is copied rather than
+    dropped: unlike the seed tables above, its rows are real review history.
+    """
+    sql = conn.execute(
+        "SELECT sql FROM sqlite_master WHERE name='needs_review'").fetchone()[0]
+    if "unmapped_category" in sql:
+        return
+    conn.execute("ALTER TABLE needs_review RENAME TO needs_review_old")
+    conn.executescript(SCHEMA)
+    conn.execute("INSERT INTO needs_review SELECT * FROM needs_review_old")
+    conn.execute("DROP TABLE needs_review_old")
+    conn.commit()
 
 
 def _add_column_if_missing(conn: sqlite3.Connection, table: str, column: str, decl: str) -> None:

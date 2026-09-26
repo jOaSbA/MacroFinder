@@ -1,0 +1,365 @@
+{
+ "captured": "2026-09-22",
+ "counts": [
+  [
+   "ah",
+   "Drogisterij",
+   3499
+  ],
+  [
+   "ah",
+   "Bier, wijn, aperitieven",
+   2984
+  ],
+  [
+   "ah",
+   "Soepen, sauzen, kruiden, olie",
+   1994
+  ],
+  [
+   "ah",
+   "Koek, snoep, chocolade",
+   1976
+  ],
+  [
+   "ah",
+   "Borrel, chips, snacks",
+   1732
+  ],
+  [
+   "ah",
+   "Frisdrank, sappen, water",
+   1727
+  ],
+  [
+   "ah",
+   "Koken, tafelen, vrije tijd",
+   1726
+  ],
+  [
+   "ah",
+   "Huishouden",
+   1512
+  ],
+  [
+   "ah",
+   "Zuivel, eieren",
+   1419
+  ],
+  [
+   "ah",
+   "Pasta, rijst, wereldkeuken",
+   1370
+  ],
+  [
+   "ah",
+   "Bakkerij",
+   1310
+  ],
+  [
+   "ah",
+   "Kaas",
+   1148
+  ],
+  [
+   "ah",
+   "Vlees",
+   1120
+  ],
+  [
+   "ah",
+   "Koffie, thee",
+   1069
+  ],
+  [
+   "ah",
+   "Ontbijtgranen, beleg",
+   1064
+  ],
+  [
+   "ah",
+   "Groente, aardappelen",
+   1042
+  ],
+  [
+   "ah",
+   "Gezondheid en sport",
+   1011
+  ],
+  [
+   "ah",
+   "Vleeswaren",
+   983
+  ],
+  [
+   "ah",
+   "Diepvries",
+   973
+  ],
+  [
+   "ah",
+   "Baby en kind",
+   916
+  ],
+  [
+   "ah",
+   "Huisdier",
+   915
+  ],
+  [
+   "ah",
+   "Maaltijden, salades",
+   732
+  ],
+  [
+   "ah",
+   "Vis",
+   601
+  ],
+  [
+   "ah",
+   "Fruit, verse sappen",
+   542
+  ],
+  [
+   "ah",
+   "Vegetarisch, vegan en plantaardig",
+   426
+  ],
+  [
+   "ah",
+   "Tussendoortjes",
+   307
+  ],
+  [
+   "ah",
+   "Glutenvrij",
+   184
+  ],
+  [
+   "ah",
+   "Uiterlijk",
+   92
+  ],
+  [
+   "ah",
+   "Extra online aanbiedingen",
+   85
+  ],
+  [
+   "ah",
+   "AH Bloemenshop",
+   67
+  ],
+  [
+   "ah",
+   "Care & Baby",
+   52
+  ],
+  [
+   "ah",
+   "AH Voordeelshop",
+   19
+  ],
+  [
+   "ah",
+   "",
+   3
+  ],
+  [
+   "aldi",
+   "offer",
+   349
+  ],
+  [
+   "aldi",
+   "Aardappels, groente en fruit",
+   29
+  ],
+  [
+   "aldi",
+   "Huishouden",
+   19
+  ],
+  [
+   "aldi",
+   "Vlees, vis en vega",
+   9
+  ],
+  [
+   "aldi",
+   "Snoep, koek en chocolade",
+   6
+  ],
+  [
+   "aldi",
+   "Huisdieren",
+   5
+  ],
+  [
+   "aldi",
+   "Zuivel, eieren en boter",
+   4
+  ],
+  [
+   "aldi",
+   "Kaas en vleeswaren",
+   4
+  ],
+  [
+   "aldi",
+   "Brood, bakkerij en bakken",
+   4
+  ],
+  [
+   "aldi",
+   "Borrelhapjes",
+   3
+  ],
+  [
+   "aldi",
+   "winterassortiment",
+   2
+  ],
+  [
+   "aldi",
+   "Sappen, frisdrank, siropen en water",
+   2
+  ],
+  [
+   "aldi",
+   "Chips, noten en zoutjes",
+   2
+  ],
+  [
+   "aldi",
+   "Bier, mixdranken, aperitieven en likeuren",
+   2
+  ],
+  [
+   "aldi",
+   "Baby en drogisterij",
+   2
+  ],
+  [
+   "aldi",
+   "fantasiespeelgoed",
+   1
+  ],
+  [
+   "aldi",
+   "chips-noten",
+   1
+  ],
+  [
+   "aldi",
+   "bier-en-likeuren",
+   1
+  ],
+  [
+   "aldi",
+   "Soepen, sauzen, kruiden en conserven",
+   1
+  ],
+  [
+   "aldi",
+   "Ontbijtgranen, beleg en tussendoortjes",
+   1
+  ],
+  [
+   "jumbo",
+   "Koek, snoep, chocolade en chips",
+   1919
+  ],
+  [
+   "jumbo",
+   "Wereldkeukens, kruiden, pasta en rijst",
+   1637
+  ],
+  [
+   "jumbo",
+   "Conserven, soepen, sauzen, oliën",
+   1546
+  ],
+  [
+   "jumbo",
+   "Drogisterij en gezondheid",
+   1327
+  ],
+  [
+   "jumbo",
+   "Huishouden en dieren",
+   1262
+  ],
+  [
+   "jumbo",
+   "Vleeswaren, kaas en tapas",
+   1231
+  ],
+  [
+   "jumbo",
+   "Bier en wijn",
+   1138
+  ],
+  [
+   "jumbo",
+   "Ontbijt, broodbeleg en bakproducten",
+   1122
+  ],
+  [
+   "jumbo",
+   "Zuivel, boter en eieren",
+   1058
+  ],
+  [
+   "jumbo",
+   "Frisdrank en sappen",
+   1017
+  ],
+  [
+   "jumbo",
+   "Koffie en thee",
+   820
+  ],
+  [
+   "jumbo",
+   "Diepvries",
+   797
+  ],
+  [
+   "jumbo",
+   "Aardappelen, groente en fruit",
+   531
+  ],
+  [
+   "jumbo",
+   "Vlees, vis en vega",
+   507
+  ],
+  [
+   "jumbo",
+   "Baby en kind",
+   503
+  ],
+  [
+   "jumbo",
+   "Non-food en servicebalie",
+   407
+  ],
+  [
+   "jumbo",
+   "Verse maaltijden en gemak",
+   312
+  ],
+  [
+   "jumbo",
+   "Brood en gebak",
+   262
+  ],
+  [
+   "jumbo",
+   "",
+   46
+  ]
+ ]
+}

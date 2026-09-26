@@ -160,7 +160,7 @@ class CatalogueStore(private val context: Context) {
          * product alone that deletion is invisible.
          */
         val DELTA_TABLES = listOf(
-            "meta", "food_types", "products", "product_macros", "prices",
+            "meta", "food_types", "shelves", "products", "product_macros", "prices",
         )
 
         private val COMPOSITE_KEYS = mapOf(
@@ -170,6 +170,7 @@ class CatalogueStore(private val context: Context) {
         private val SINGLE_KEYS = mapOf(
             "meta" to "key",
             "food_types" to "key",
+            "shelves" to "key",
             "products" to "id",
             "product_macros" to "product_id",
         )

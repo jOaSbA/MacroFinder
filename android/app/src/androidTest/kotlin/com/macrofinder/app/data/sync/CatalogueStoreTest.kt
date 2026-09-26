@@ -55,6 +55,10 @@ class CatalogueStoreTest {
                 "protein_per_100g REAL) WITHOUT ROWID"
         )
         db.execSQL(
+            "CREATE TABLE shelves (key TEXT PRIMARY KEY, label TEXT NOT NULL, " +
+                "sort_order INTEGER NOT NULL) WITHOUT ROWID"
+        )
+        db.execSQL(
             "CREATE TABLE products (id TEXT PRIMARY KEY, chain TEXT NOT NULL, " +
                 "sku TEXT NOT NULL, name TEXT NOT NULL) WITHOUT ROWID"
         )
