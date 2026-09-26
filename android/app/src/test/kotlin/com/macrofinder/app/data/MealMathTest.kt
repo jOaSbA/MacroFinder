@@ -265,3 +265,34 @@ class MealMathTest {
         assertTrue(!priceMeal(emptyList(), context).macrosNeedMarking)
     }
 }
+
+class CheapestPicksTest {
+    private fun slot(key: String, required: Boolean) =
+        TemplateSlot(key = key, name = key, required = required, default_grams = 100.0)
+    private fun cand(food: String, eur: Double?) =
+        SlotCandidate(food_type = food, name = food, grams = 100.0, price_eur = eur)
+
+    private val template = TemplateEntry(
+        key = "pasta", name = "Pasta", meal_kind = "meal",
+        slots = listOf(slot("pasta", true), slot("sauce", true), slot("greens", false)),
+    )
+
+    @Test
+    fun picks_the_cheapest_priced_candidate_for_each_required_slot() {
+        val picks = cheapestPicks(template, mapOf(
+            "pasta" to listOf(cand("volkoren", 0.14), cand("wit", 0.07)),
+            "sauce" to listOf(cand("onbekend", null), cand("tomaat", 0.40)),
+            "greens" to listOf(cand("sla", 0.10)),
+        ))
+        assertEquals(mapOf("pasta" to "wit", "sauce" to "tomaat"), picks)
+    }
+
+    @Test
+    fun a_required_slot_with_nothing_priced_means_no_cheapest_plate() {
+        val picks = cheapestPicks(template, mapOf(
+            "pasta" to listOf(cand("wit", 0.07)),
+            "sauce" to listOf(cand("onbekend", null)),
+        ))
+        assertNull(picks)
+    }
+}

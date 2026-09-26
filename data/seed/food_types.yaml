@@ -361,6 +361,7 @@
   state: solid
   protein_per_100g: 28.0
   kcal_per_100g: 290
+  carbs_per_100g: 0.0
   fat_per_100g: 19.0
   shelf_life_days_unopened: 21
   shelf_life_days_opened: 7
@@ -399,6 +400,7 @@
   state: solid
   protein_per_100g: 35.0
   kcal_per_100g: 400
+  carbs_per_100g: 0.0
   fat_per_100g: 28.0
   shelf_life_days_unopened: 90
   shelf_life_days_opened: 21
@@ -492,6 +494,7 @@
   state: solid
   protein_per_100g: 19.0
   kcal_per_100g: 140
+  carbs_per_100g: 0.5
   fat_per_100g: 7.0
   shelf_life_days_unopened: 3
   shelf_life_days_opened: 1
@@ -516,6 +519,7 @@
   state: solid
   protein_per_100g: 21.0
   kcal_per_100g: 130
+  carbs_per_100g: 0.0
   fat_per_100g: 5.0
   shelf_life_days_unopened: 3
   shelf_life_days_opened: 1
@@ -528,6 +532,7 @@
   state: solid
   protein_per_100g: 17.0
   kcal_per_100g: 250
+  carbs_per_100g: 0.0
   fat_per_100g: 20.0
   shelf_life_days_unopened: 3
   shelf_life_days_opened: 1
@@ -540,6 +545,7 @@
   state: solid
   protein_per_100g: 21.0
   kcal_per_100g: 125
+  carbs_per_100g: 0.0
   fat_per_100g: 4.0
   shelf_life_days_unopened: 4
   shelf_life_days_opened: 2
@@ -592,6 +598,7 @@
   state: solid
   protein_per_100g: 20.0
   kcal_per_100g: 110
+  carbs_per_100g: 1.0
   fat_per_100g: 2.5
   shelf_life_days_unopened: 14
   shelf_life_days_opened: 3
@@ -869,6 +876,7 @@
   state: solid
   protein_per_100g: 16.0
   kcal_per_100g: 150
+  carbs_per_100g: 5.0
   fat_per_100g: 7.0
   shelf_life_days_unopened: 14
   shelf_life_days_opened: 2
@@ -1101,6 +1109,7 @@
   dry_to_cooked_factor: 2.2
   protein_per_100g: 12.0
   kcal_per_100g: 360
+  fat_per_100g: 1.5
   carbs_per_100g: 72.0
   shelf_life_days_unopened: 730
   shelf_life_days_opened: 365
@@ -1114,6 +1123,8 @@
   dry_to_cooked_factor: 2.2
   protein_per_100g: 13.0
   kcal_per_100g: 340
+  carbs_per_100g: 62.0
+  fat_per_100g: 2.5
   fiber_per_100g: 8.0
   shelf_life_days_unopened: 730
   shelf_life_days_opened: 365
@@ -1190,6 +1201,8 @@
   g_per_unit: 62.0            # brief section 3.1
   protein_per_100g: 9.0
   kcal_per_100g: 300
+  carbs_per_100g: 50.0
+  fat_per_100g: 7.0
   shelf_life_days_unopened: 60
   shelf_life_days_opened: 7
   freezable: true

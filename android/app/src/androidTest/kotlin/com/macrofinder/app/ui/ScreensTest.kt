@@ -3,6 +3,8 @@ package com.macrofinder.app.ui
 import android.app.Application
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.lifecycle.SavedStateHandle
@@ -103,17 +105,16 @@ class ScreensTest {
     }
 
     @Test
-    fun picking_a_candidate_prices_the_meal() {
+    fun the_customiser_starts_from_the_cheapest_plate() {
         val meals = MacroFinderViewModel(FakeRepository())
         compose.waitUntil(5_000) { !meals.state.value.loading }
         meals.customise("pasta")
         compose.setContent {
             MacroFinderTheme { CustomiseScreen(meals, onBack = {}, onSave = {}) }
         }
-        compose.onNodeWithText("Nog kiezen: soort pasta").assertIsDisplayed()
-
-        compose.onNodeWithText("pasta (droog)").performClick()
-        compose.onNodeWithText("€0,20").assertExists()
+        compose.onNodeWithText("Nog kiezen", substring = true).assertDoesNotExist()
+        // Once on the candidate row, once in the total.
+        compose.onAllNodesWithText("€0,20").assertCountEquals(2)
     }
 
     private class FakeRepository : DataRepository("http://unused") {
