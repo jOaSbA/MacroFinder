@@ -23,6 +23,8 @@ import com.macrofinder.app.data.settings.Diet
 import com.macrofinder.app.ui.components.Card
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import com.macrofinder.app.ui.components.FilterChip
 import com.macrofinder.app.ui.theme.chainColor
 import com.macrofinder.app.ui.components.TextAction
@@ -30,6 +32,7 @@ import com.macrofinder.app.ui.count
 import com.macrofinder.app.ui.theme.MF
 
 /** Milestone 32: my stores and what I eat, applied to every list. */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun SettingsCard(vm: CatalogueViewModel, onDigestOn: () -> Unit) {
     val t = MF.tokens
@@ -37,7 +40,7 @@ private fun SettingsCard(vm: CatalogueViewModel, onDigestOn: () -> Unit) {
     Card {
         Column {
             Text("Waar je boodschappen doet", style = MF.type.rowTitle, color = t.ink)
-            Row(Modifier.horizontalScroll(rememberScrollState()).padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 CHAINS.forEach { (key, label) ->
                     FilterChip(label, key in prefs.stores, { vm.savePrefs(prefs.toggleStore(key)) },
                         leadingColor = chainColor(key))
@@ -46,7 +49,7 @@ private fun SettingsCard(vm: CatalogueViewModel, onDigestOn: () -> Unit) {
             Text("Andere winkels verdwijnen uit de lijsten, de alternatieven en de maaltijden.",
                 style = MF.type.label, color = t.muted)
             Text("Wat je eet", style = MF.type.rowTitle, color = t.ink, modifier = Modifier.padding(top = 16.dp))
-            Row(Modifier.horizontalScroll(rememberScrollState()).padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(Diet.ALLES to "Alles", Diet.VEGETARISCH to "Vegetarisch", Diet.VEGAN to "Veganistisch")
                     .forEach { (diet, label) ->
                         FilterChip(label, prefs.diet == diet, { vm.savePrefs(prefs.copy(diet = diet)) })

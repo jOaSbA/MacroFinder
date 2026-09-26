@@ -1475,8 +1475,16 @@ catalogue that lost more than 20% of its products.
     the estimate mark. The sync worker refreshes it after a new catalogue;
     there is no timer. Verified on the emulator's home screen.
 
-Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
-declined at the user's instruction. About 825 Python tests, 143 Android JVM
+41. ~~Polish pass.~~ **Done.** Every new screen checked in dark mode and
+    at 200% text on the emulator. Fixes: the diet and store chips in
+    Instellingen wrap instead of running off the edge; the Teller bar caps
+    its text scale like the tabs; the widget has day and night colours; and
+    the deal list shows a one-time intro (what the ranking means, what ≈
+    means, where the settings are) until "Begrepen". The intro state starts
+    as unknown, so it never flashes on for someone who closed it.
+
+PLAN-V3 (M31-M41) is done too. PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
+declined at the user's instruction. About 875 Python tests, 180 Android JVM
 tests and 19 device tests, all in CI.
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`

@@ -207,6 +207,9 @@ fun MacroFinderApp(
 @Composable
 private fun TallyBar(products: Int, onClick: () -> Unit) {
     val t = MF.tokens
+    // Same cap as the tabs: at 200% the bar would take a fifth of the screen.
+    val density = LocalDensity.current
+    CompositionLocalProvider(LocalDensity provides Density(density.density, min(density.fontScale, 1.3f))) {
     Column(Modifier.fillMaxWidth().background(t.card).clickable(onClick = onClick)) {
         Hairline()
         Row(Modifier.padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -215,6 +218,7 @@ private fun TallyBar(products: Int, onClick: () -> Unit) {
                 modifier = Modifier.weight(1f))
             Text("Bekijk ›", style = MF.type.labelStrong, color = t.signal)
         }
+    }
     }
 }
 

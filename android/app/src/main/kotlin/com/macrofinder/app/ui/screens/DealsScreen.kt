@@ -46,6 +46,7 @@ import com.macrofinder.app.data.catalogue.DealWindow
 import com.macrofinder.app.ui.CatalogueSyncState
 import com.macrofinder.app.ui.CatalogueViewModel
 import com.macrofinder.app.ui.ESTIMATE_MARK
+import com.macrofinder.app.ui.components.Card
 import com.macrofinder.app.ui.components.ChipRow
 import com.macrofinder.app.ui.components.DealRow
 import com.macrofinder.app.ui.components.EmptyState
@@ -89,6 +90,7 @@ fun DealsScreen(
     val state by vm.state.collectAsState()
     val query by vm.query.collectAsState()
     val prefs by vm.prefs.collectAsState()
+    val introSeen by vm.introSeen.collectAsState()
     val ranked = remember(state, query, prefs) { vm.visibleDeals() }
     val today = vm.today()
     val listState = rememberLazyListState()
@@ -139,6 +141,23 @@ fun DealsScreen(
             }
         }
         item { Spacer(Modifier.padding(top = 8.dp)); SyncBanner(sync, state.installed, onRefresh) }
+        if (introSeen == false) {
+            item {
+                // Milestone 41: what the app is for, once. Gone for good on "Begrepen".
+                Card(Modifier.padding(horizontal = 12.dp, vertical = 4.dp)) {
+                    Column {
+                        Text("Aanbiedingen op volgorde van eiwit per euro", style = MF.type.rowTitle, color = MF.tokens.ink)
+                        Text(
+                            "Bovenaan staat waar je deze week het meeste eiwit voor je geld krijgt. Een ≈ betekent " +
+                                "geschat uit de algemene voedingswaarde, niet van het etiket. Kies je winkels en wat " +
+                                "je eet in Instellingen.",
+                            style = MF.type.body, color = MF.tokens.muted, modifier = Modifier.padding(top = 4.dp),
+                        )
+                        TextAction("Begrepen", vm::dismissIntro, modifier = Modifier.padding(top = 4.dp))
+                    }
+                }
+            }
+        }
 
         item {
             ChipRow {

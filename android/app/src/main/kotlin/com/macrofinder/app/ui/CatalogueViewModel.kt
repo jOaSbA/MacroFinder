@@ -77,6 +77,13 @@ class CatalogueViewModel(
     /** Milestone 32: my stores and diet, applied to every list. */
     val prefs: StateFlow<Prefs> = settings.prefs.stateIn(viewModelScope, SharingStarted.Eagerly, Prefs())
 
+    /** Milestone 41: null until read, so the intro never flashes on for people who closed it. */
+    val introSeen: StateFlow<Boolean?> = settings.introSeen.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    fun dismissIntro() {
+        viewModelScope.launch { settings.dismissIntro() }
+    }
+
     fun savePrefs(p: Prefs) {
         viewModelScope.launch {
             settings.save(p)
