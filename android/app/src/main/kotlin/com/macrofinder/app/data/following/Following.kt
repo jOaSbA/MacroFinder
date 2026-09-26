@@ -40,6 +40,21 @@ private val Context.followingStore by preferencesDataStore(name = "following")
 class FollowingStore(private val context: Context) {
     private val followedKey = stringSetPreferencesKey("followed")
     private val notifiedKey = stringSetPreferencesKey("notified")
+    private val targetsKey = stringSetPreferencesKey("targets")
+
+    /** Milestone 34: product id -> alert under this many euros per 100 g protein. */
+    val targets: Flow<Map<String, Double>> =
+        context.followingStore.data.map { decodeTargets(it[targetsKey].orEmpty()) }
+
+    suspend fun targetsNow(): Map<String, Double> = targets.first()
+
+    /** Pass null to remove the target. */
+    suspend fun setTarget(productId: String, value: Double?) {
+        context.followingStore.edit { prefs ->
+            val now = decodeTargets(prefs[targetsKey].orEmpty())
+            prefs[targetsKey] = encodeTargets(if (value == null) now - productId else now + (productId to value))
+        }
+    }
 
     val followed: Flow<Set<String>> =
         context.followingStore.data.map { it[followedKey].orEmpty() }
@@ -48,6 +63,10 @@ class FollowingStore(private val context: Context) {
         context.followingStore.edit { prefs ->
             val now = prefs[followedKey].orEmpty()
             prefs[followedKey] = if (productId in now) now - productId else now + productId
+            // Unfollowing drops the price target too.
+            if (productId in now) {
+                prefs[targetsKey] = encodeTargets(decodeTargets(prefs[targetsKey].orEmpty()) - productId)
+            }
         }
     }
 

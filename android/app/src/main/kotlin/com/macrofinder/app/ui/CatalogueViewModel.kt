@@ -257,6 +257,13 @@ class CatalogueViewModel(
 
     // -- following -------------------------------------------------------------
 
+    val targets: StateFlow<Map<String, Double>> =
+        following.targets.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
+    fun setTarget(id: String, value: Double?) {
+        viewModelScope.launch { following.setTarget(id, value) }
+    }
+
     fun toggleFollow(id: String) {
         viewModelScope.launch { following.toggle(id) }
     }

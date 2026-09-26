@@ -18,6 +18,8 @@ import com.macrofinder.app.data.following.FollowingStore
 import com.macrofinder.app.data.following.PromoNotifier
 import com.macrofinder.app.data.following.alertKey
 import com.macrofinder.app.data.following.promoAlerts
+import com.macrofinder.app.data.following.targetAlerts
+import com.macrofinder.app.data.following.targetKey
 import com.macrofinder.app.data.following.digestWeek
 import com.macrofinder.app.data.following.weeklyDigest
 import com.macrofinder.app.data.settings.SettingsStore
@@ -103,10 +105,18 @@ class CatalogueSyncWorker(
         val followed = following.followedNow()
         if (followed.isEmpty()) return
         val deals = store.open().use { CatalogueReader(AndroidSqlRunner(it)).dealsFor(followed) }
-        val fresh = promoAlerts(followed, deals, following.notified(), LocalDate.now().toString())
-        if (fresh.isEmpty()) return
-        PromoNotifier.post(applicationContext, fresh)
-        following.markNotified(fresh.map(::alertKey))
+        val today = LocalDate.now().toString()
+        val fresh = promoAlerts(followed, deals, following.notified(), today)
+        if (fresh.isNotEmpty()) {
+            PromoNotifier.post(applicationContext, fresh)
+            following.markNotified(fresh.map(::alertKey))
+        }
+        // Milestone 34: price targets, checked on the same rows.
+        val crossed = targetAlerts(following.targetsNow(), deals, following.notified(), today)
+        if (crossed.isNotEmpty()) {
+            PromoNotifier.postTargets(applicationContext, crossed)
+            following.markNotified(crossed.map(::targetKey))
+        }
     }
 
     /** Milestone 33: the weekly digest, if it's on and hasn't gone out this week. */
