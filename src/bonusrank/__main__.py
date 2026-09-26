@@ -142,6 +142,8 @@ def cmd_ingest(args: argparse.Namespace) -> int:
 
     print(f"\n=== ingest: {args.chain} ===\n")
     print(f"  segments expanded      {stats.segments}")
+    if stats.segments_gone:
+        print(f"  segments gone (404)    {stats.segments_gone}")
     print(f"  products upserted      {stats.products}")
     print(f"  observations appended  {stats.observations}")
     print(f"  matched / unmatched    {stats.matched} / {stats.unmatched}"

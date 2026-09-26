@@ -19,6 +19,8 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import httpx
+
 from . import config
 from .matcher import MatchMethod, Matcher, MatchResult
 from .parsers import (
@@ -42,6 +44,7 @@ class IngestStats:
     unmatched: int = 0
     excluded: int = 0
     promo_unparsed: int = 0
+    segments_gone: int = 0
     unit_size_unparsed: int = 0
     unit_price_mismatch: int = 0
     reviews: dict[str, int] = field(default_factory=dict)
@@ -81,7 +84,18 @@ def ingest_ah(
 
         if not offer.group_id:
             continue
-        segment = adapter.fetch_segment(offer.group_id)
+        # A segment listed a minute ago can be gone by the time it's fetched:
+        # AH answers 404 for an expired one. Measured 2026-09-26, segment
+        # 811682 did this and took the whole AH ingest down with it, run after
+        # run, since 2026-09-25. Skip it; every other promotion still counts.
+        try:
+            segment = adapter.fetch_segment(offer.group_id)
+        except httpx.HTTPStatusError as exc:
+            if exc.response is None or exc.response.status_code != 404:
+                raise
+            log.warning("AH segment %s is gone (404), skipped", offer.group_id)
+            stats.segments_gone += 1
+            continue
         stats.segments += 1
 
         for product in segment.get("products") or []:
