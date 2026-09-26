@@ -7,9 +7,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.isImeVisible
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,6 +63,9 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Edge to edge, so the IME and system bar insets are real and the
+        // layout can pad for them itself.
+        enableEdgeToEdge()
         // Idempotent (KEEP), so this re-asserts the schedule rather than stacking jobs.
         CatalogueSyncWorker.schedule(this)
         setContent {
@@ -66,6 +76,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MacroFinderApp(
     meals: MacroFinderViewModel = viewModel(),
@@ -116,8 +127,9 @@ fun MacroFinderApp(
     }
     val openProduct: (String) -> Unit = { id -> catalogue.openDetail(id); go(Route.Product(id)) }
 
-    Column(Modifier.fillMaxSize().background(MF.tokens.paper)) {
-        Box(Modifier.weight(1f).fillMaxWidth()) {
+    val typing = WindowInsets.isImeVisible
+    Column(Modifier.fillMaxSize().background(MF.tokens.paper).statusBarsPadding()) {
+        Box(Modifier.weight(1f).fillMaxWidth().then(if (typing) Modifier.imePadding() else Modifier)) {
             when (val route = stack.last()) {
                 Route.Deals -> DealsScreen(catalogue, sync, refresh, openProduct, onAbout = { go(Route.About) })
                 Route.Search -> SearchScreen(catalogue, openProduct)
@@ -152,14 +164,15 @@ fun MacroFinderApp(
                 }
             }
         }
-        BottomBar(current = stack.tab(), onSelect = ::go)
+        // Out of the way while typing, so the keyboard doesn't push it up the screen.
+        if (!typing) BottomBar(current = stack.tab(), onSelect = ::go)
     }
 }
 
 /** Four text tabs, no icons: DESIGN.md prefers a word to a stock glyph. */
 @Composable
 private fun BottomBar(current: Route, onSelect: (Route) -> Unit) {
-    Column(Modifier.fillMaxWidth().background(MF.tokens.card)) {
+    Column(Modifier.fillMaxWidth().background(MF.tokens.card).navigationBarsPadding()) {
         Hairline()
         TextTabs(
             options = Route.TABS,

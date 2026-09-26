@@ -78,7 +78,9 @@ fun DealRow(
                     style = MF.type.label, color = t.muted, maxLines = 1,
                     modifier = Modifier.padding(top = 2.dp),
                 )
-                Row(
+                val showBadges = deal.promoText != null || quantityText(deal) != null ||
+                    deal.isUpcomingOn(today)
+                if (showBadges) Row(
                     Modifier.padding(top = 6.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalAlignment = Alignment.CenterVertically,

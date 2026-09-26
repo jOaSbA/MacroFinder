@@ -91,8 +91,12 @@ class CatalogueViewModel(
     // -- loading -------------------------------------------------------------
 
     /** Re-read the catalogue if the version on disk changed. Cheap otherwise. */
+    private var loadJob: Job? = null
+
     fun reload(force: Boolean = false) {
-        viewModelScope.launch {
+        val previous = loadJob
+        loadJob = viewModelScope.launch {
+            previous?.join()
             val next = withContext(Dispatchers.IO) { load(force) } ?: return@launch
             _state.value = next
             refreshFollowed(followed.value)
@@ -107,6 +111,10 @@ class CatalogueViewModel(
             return CatalogueState(ready = true, installed = false, deals = fallback)
         }
         db?.close()
+        // Normally the sync worker builds the search index. If it hasn't yet
+        // (first launch after an app update, say), build it here: a couple of
+        // seconds once, rather than a search box that finds nothing.
+        runCatching { store.ensureSearchIndex() }
         val handle = runCatching { store.open() }.getOrNull()
             ?: return CatalogueState(ready = true, installed = false, deals = fallback)
         db = handle
@@ -174,6 +182,7 @@ class CatalogueViewModel(
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(120)
+            loadJob?.join()
             val fts = SearchIndex.query(text)
             _searchResults.value = if (fts == null) emptyList() else withContext(Dispatchers.IO) {
                 reader()?.let { r -> runCatching { r.search(fts) }.getOrDefault(emptyList()) }
@@ -193,6 +202,9 @@ class CatalogueViewModel(
     fun openDetail(id: String) {
         _detail.value = null
         viewModelScope.launch {
+            // A tap during the first load must wait for the catalogue, not
+            // fall back to the thinner latest.json row.
+            loadJob?.join()
             _detail.value = withContext(Dispatchers.IO) {
                 reader()?.let { runCatching { it.detail(id) }.getOrNull() }
                     ?: (fallback + _searchResults.value).firstOrNull { it.id == id }
