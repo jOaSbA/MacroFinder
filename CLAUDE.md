@@ -666,7 +666,8 @@ data/seed/archetypes.yaml       8 archetypes, 9 compositions, ready-made rules
 data/seed/templates.yaml        2 meal templates, 9 slots, 32 candidates, 5 rules
 data/seed/food_types_pantry.yaml  cupboard staples compositions need
 docs/BRIEF.md         the full dossier — source of truth
-docs/PLAN-V2.md       what gets built next, and the autonomy protocol
+docs/PLAN-V2.md       M14-M30, and the autonomy protocol
+docs/PLAN-V3.md       M31 onward: goals picked from what existing apps do
 docs/AUDIT.md         milestone 0: what actually works, measured
 docs/DESIGN.md        the visual direction for M23/M24
 dist/                 milestone 14 release assets — gitignored, never committed
@@ -1364,7 +1365,7 @@ catalogue that lost more than 20% of its products.
     because the carried database now holds every crawled shelf price and the
     export ranked them all; it now exports offers only (about 0.9 MB).
 
-Current position: **the plan is done.** Milestones 1-27, 29 and 30 complete; 28
+Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
 
