@@ -94,6 +94,12 @@ def _ingest_product(conn, product, offer, promo, matcher, stats, now) -> None:
     if not sku:
         return
     category = offer.category or product.get("mainCategory")
+    # A product's own label wins over its segment's. Mixed online segments
+    # ("OP=OP") carry a different discount per product, and the segment's
+    # one label priced a €40 pan at €2.91.
+    own = product.get("discountLabels") or []
+    if own:
+        promo = parse_ah_label(own[0], headline=offer.promo_raw_text)
     _ingest_sku(
         conn, chain="ah", sku=sku, name=product.get("title") or "",
         brand=product.get("brand"), raw_unit_text=product.get("salesUnitSize"),

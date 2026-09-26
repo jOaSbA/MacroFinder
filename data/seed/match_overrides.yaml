@@ -44,6 +44,10 @@ contains:
 # Not food, or not rankable. Suppressed from needs_review so the queue stays
 # worth reading - a queue full of crockery is a queue nobody opens.
 never_match:
+  # Wagner's pizza lines don't say "pizza" in the product name, so "Big
+  # Sensation Salami & BBQ" matched as salami (2026-09-26).
+  - big sensation
+  - original wagner
   - statiegeld
   - emballage
   - cadeaukaart
