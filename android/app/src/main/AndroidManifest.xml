@@ -15,6 +15,18 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.MacroFinder">
 
+        <!-- Milestone 40: the home screen widget. -->
+        <receiver
+            android:name=".widget.DealsWidgetReceiver"
+            android:exported="true"
+            android:label="Goedkoop eiwit">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/deals_widget_info" />
+        </receiver>
         <!-- The scanner's own activity, allowed to follow the phone's rotation. -->
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

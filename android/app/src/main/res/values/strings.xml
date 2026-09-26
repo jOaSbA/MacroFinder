@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MacroFinder</string>
+    <string name="widget_description">De goedkoopste eiwitaanbiedingen voor jouw winkels</string>
 </resources>

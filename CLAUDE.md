@@ -1459,6 +1459,22 @@ catalogue that lost more than 20% of its products.
     carries the mark. Not a shopping list (PLAN-V2 says no) and not a
     planner: nothing to tick off, no days.
 
+39. ~~Supplements shelf.~~ **Done.** The supplement bucket read on real
+    data: 53 products, 33 with no price per protein because nothing matched.
+    Whey powders whose flavour is a food or dish word of its own
+    ("chocolate", "mango peach", "limonade", "milkshake") tripped a guard,
+    so `match_overrides.yaml` gains five whey phrases (every one sold in
+    300-450 g tubs, never ml). Creatine is `never_match`: "Upfront Creatine
+    Sticks Mango" was 3 kg of mango. It stays in the bucket by name. The
+    local re-match moved 17 products. Whey still runs on the seed's 75 g
+    protein until the label fetch and Open Food Facts reach each tub.
+
+40. ~~Home screen widget.~~ **Done.** Glance (`widget/DealsWidget.kt`),
+    one new dependency: the five best deals by protein per euro for my
+    stores and diet, one per food type, the deal list's own ranking, with
+    the estimate mark. The sync worker refreshes it after a new catalogue;
+    there is no timer. Verified on the emulator's home screen.
+
 Next: **docs/PLAN-V3.md** (M31-M41). PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 825 Python tests, 143 Android JVM
 tests and 19 device tests, all in CI.
