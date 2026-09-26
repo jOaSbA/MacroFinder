@@ -391,3 +391,29 @@ def _review(conn, kind: str, ref: str, payload: dict[str, Any], now: str) -> Non
         "ON CONFLICT (kind, ref) DO NOTHING",
         (kind, ref, json.dumps(payload, ensure_ascii=False), now),
     )
+
+
+def rematch_all(conn: sqlite3.Connection, matcher: Matcher) -> int:
+    """Re-run the matcher over every stored product. Returns how many changed.
+
+    Matcher and seed fixes otherwise reach a product only on its next ingest,
+    which for a catalogue-only product is the weekly crawl. Only the match
+    columns change; price observations are never touched.
+    """
+    keys = {r[0]: r[1] for r in conn.execute("SELECT key, id FROM food_types")}
+    rows = conn.execute(
+        "SELECT p.id, p.chain, p.sku, p.name, p.brand, p.category, f.key "
+        "FROM products p LEFT JOIN food_types f ON f.id = p.food_type_id").fetchall()
+    changed = []
+    for pid, chain, sku, name, brand, category, current in rows:
+        if category and category in matcher.non_rankable_categories:
+            match = MatchResult(None, MatchMethod.EXCLUDED, 0.0, False, "category")
+        else:
+            match = matcher.match(name, brand=brand, chain=chain, sku=sku)
+        if match.food_type_key != current:
+            changed.append((keys.get(match.food_type_key), match.method.value,
+                            match.score, pid))
+    conn.executemany(
+        "UPDATE products SET food_type_id=?, match_method=?, match_score=? WHERE id=?", changed)
+    conn.commit()
+    return len(changed)

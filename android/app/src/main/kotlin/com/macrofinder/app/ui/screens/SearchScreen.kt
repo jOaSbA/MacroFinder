@@ -30,7 +30,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.macrofinder.app.data.catalogue.DealSort
 import com.macrofinder.app.ui.CatalogueViewModel
+import com.macrofinder.app.ui.components.ChipRow
 import com.macrofinder.app.ui.components.DealRow
+import com.macrofinder.app.ui.components.FilterChip
 import com.macrofinder.app.ui.components.EmptyState
 import com.macrofinder.app.ui.count
 import com.macrofinder.app.ui.theme.MF
@@ -73,6 +75,13 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
             else "${results.size} gevonden $scope",
             style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp, top = 10.dp),
         )
+        if (text.isBlank()) {
+            // A blank search box is a question with no hint. These are the
+            // things people here actually look for.
+            ChipRow {
+                SUGGESTIONS.forEach { word -> FilterChip(word, false, { vm.search(word) }) }
+            }
+        }
         LazyColumn(contentPadding = PaddingValues(top = 4.dp, bottom = 24.dp)) {
             if (text.isNotBlank() && results.isEmpty()) {
                 item {
@@ -89,3 +98,7 @@ fun SearchScreen(vm: CatalogueViewModel, onOpen: (String) -> Unit) {
         }
     }
 }
+
+private val SUGGESTIONS = listOf(
+    "kwark", "skyr", "kipfilet", "eieren", "whey", "tonijn", "linzen", "tofu", "kaas", "havermout",
+)

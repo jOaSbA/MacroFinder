@@ -24,7 +24,11 @@ fun metricText(deal: Deal, sort: DealSort): String {
         DealSort.KCAL_PER_EURO -> deal.eurPer1000kcal
             ?.let { "$mark${euro(it)} per 1000 kcal" } ?: "kcal onbekend"
         // A discount is a price fact, not a macro, so it never carries the mark.
-        DealSort.DISCOUNT -> deal.discountPct?.let { fmt("%.0f%% korting", it) } ?: "korting onbekend"
+        // BRIEF section 3.4: a discount off a price raised just before the
+        // promo is flagged where it's ranked, not only on the detail screen.
+        DealSort.DISCOUNT -> deal.discountPct?.let {
+            fmt("%.0f%% korting", it) + if (deal.referenceInflated == true) ", prijs vooraf verhoogd" else ""
+        } ?: "korting onbekend"
     }
 }
 

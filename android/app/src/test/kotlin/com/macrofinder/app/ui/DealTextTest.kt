@@ -94,4 +94,10 @@ class DealTextTest {
         assertTrue(proteinQualityNote("incomplete")!!.startsWith("Onvolledig eiwit"))
         assertNotNull(proteinQualityNote("blend"))
     }
+
+    @Test
+    fun `a discount off a raised price says so in the list`() {
+        val d = deal("seed").copy(referenceInflated = true)
+        assertEquals("45% korting, prijs vooraf verhoogd", metricText(d, DealSort.DISCOUNT))
+    }
 }

@@ -710,6 +710,17 @@ def cmd_build_db(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_rematch(args: argparse.Namespace) -> int:
+    """Apply matcher and seed changes to every stored product now."""
+    from .ingest import rematch_all
+    from .matcher import Matcher
+
+    with connect() as conn:
+        changed = rematch_all(conn, Matcher.from_db(conn))
+    print(f"rematched: {changed} products changed food type")
+    return 0
+
+
 def cmd_halt_manifest(args: argparse.Namespace) -> int:
     """Milestone 30: pull the kill switch on a published manifest."""
     from . import appdb
@@ -836,6 +847,9 @@ def main(argv: list[str] | None = None) -> int:
                               help="build the app database release assets")
     build_db.add_argument("--out-dir", default="dist/data",
                           help="where the assets are written; never committed")
+    rematch = sub.add_parser("rematch", help="re-run the matcher over every stored product")
+    rematch.set_defaults(func=cmd_rematch)
+
     halt = sub.add_parser("halt-manifest",
                           help="mark a published manifest halted (the kill switch)")
     halt.add_argument("--manifest", required=True)
