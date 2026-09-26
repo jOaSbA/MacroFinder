@@ -33,7 +33,7 @@ class FakeAH:
     def fetch_promotions(self):
         return [_offer("811682"), _offer("100")]
 
-    def fetch_segment(self, group):
+    def fetch_segment(self, group, on=None):
         if group == "811682":
             url = f"https://api.ah.nl/mobile-services/bonuspage/v2/segment?segmentId={group}"
             raise httpx.HTTPStatusError("gone", request=httpx.Request("GET", url),
@@ -59,3 +59,21 @@ def test_a_gone_segment_is_skipped_and_the_rest_still_counts(conn):
 def test_other_errors_still_fail_loudly(conn):
     with pytest.raises(httpx.HTTPStatusError):
         ingest_ah(conn, FakeAH(status=401))
+
+
+class RecordingAH(FakeAH):
+    def __init__(self):
+        super().__init__()
+        self.dates = []
+
+    def fetch_segment(self, group, on=None):
+        self.dates.append(on)
+        return {"products": []}
+
+
+def test_each_segment_is_fetched_for_its_own_week(conn):
+    """Without the date AH answers 404 for next week's folder."""
+    from datetime import date
+    fake = RecordingAH()
+    ingest_ah(conn, fake)
+    assert fake.dates == [date(2026, 9, 21), date(2026, 9, 21)]

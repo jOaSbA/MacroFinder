@@ -1491,6 +1491,13 @@ either. The workflow's "failed, continuing" kept the run green, which is why
 nobody saw it. `ingest_ah` now skips a 404 segment and counts it; any other
 error still fails loudly.
 
+The root cause turned out to be different: all 140 "gone" segments were next
+week's folder, which AH lists from Friday. `v2/segment` only expands the
+running week unless it gets `&date=` for the period's start, so
+`fetch_segment` now takes `on=` and ingest passes each offer's `valid_from`.
+Measured live: 370 of 370 segments expand, and AH has 2,154 upcoming promos
+for the Binnenkort view, which had only ever held Jumbo's.
+
 PLAN-V3 (M31-M41) is done too. PLAN-V2 is done: Milestones 1-27, 29 and 30 complete; 28
 declined at the user's instruction. About 875 Python tests, 180 Android JVM
 tests and 19 device tests, all in CI.

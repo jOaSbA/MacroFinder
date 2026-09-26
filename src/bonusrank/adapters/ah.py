@@ -186,9 +186,15 @@ class AHAdapter:
     # -- SKU level -----------------------------------------------------------
     # Required by the StoreAdapter protocol. Not exercised by milestone 1.
 
-    def fetch_segment(self, segment_id: str) -> dict[str, Any]:
-        """Expand a segment into its SKUs. Milestone 3 (ingest) uses this."""
-        return self._get(f"{SEGMENT_URL}?segmentId={segment_id}")
+    def fetch_segment(self, segment_id: str, on: date | None = None) -> dict[str, Any]:
+        """Expand a segment into its SKUs. Milestone 3 (ingest) uses this.
+
+        `on` is the promo period's start. Without it AH only expands segments
+        of the running week and answers 404 for next week's folder, which it
+        already lists from Friday: 140 of 370 segments on 2026-09-26.
+        """
+        suffix = f"&date={on.isoformat()}" if on else ""
+        return self._get(f"{SEGMENT_URL}?segmentId={segment_id}{suffix}")
 
     def fetch_product(self, sku: str) -> RawProduct:
         """One SKU with its FIR (EU 1169/2011) nutrition declaration.

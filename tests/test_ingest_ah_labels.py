@@ -33,7 +33,7 @@ class FakeAH:
                            "price": 2.91}],
             valid_from="2026-09-21", valid_to="2026-09-27")]
 
-    def fetch_segment(self, _):
+    def fetch_segment(self, _, on=None):
         return {"products": [
             _product(1, "BK Classic koekenpan 20cm", 39.99, 25.99,
                      {"code": "DISCOUNT_OP_IS_OP", "defaultDescription": "35% korting",
