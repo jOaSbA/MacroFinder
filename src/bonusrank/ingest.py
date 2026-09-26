@@ -84,12 +84,12 @@ def ingest_ah(
 
         if not offer.group_id:
             continue
-        # A segment listed a minute ago can be gone by the time it's fetched:
-        # AH answers 404 for an expired one. Measured 2026-09-26, segment
-        # 811682 did this and took the whole AH ingest down with it, run after
-        # run, since 2026-09-25. Skip it; every other promotion still counts.
+        # A segment can still answer 404 (expired between listing and fetch).
+        # Before the date was passed, next week's segment 811682 did this and
+        # took the whole AH ingest down with it, run after run, from
+        # 2026-09-25. Skip it; every other promotion still counts.
         try:
-            segment = adapter.fetch_segment(offer.group_id)
+            segment = adapter.fetch_segment(offer.group_id, on=_as_date(offer.valid_from))
         except httpx.HTTPStatusError as exc:
             if exc.response is None or exc.response.status_code != 404:
                 raise
@@ -103,6 +103,16 @@ def ingest_ah(
 
     conn.commit()
     return stats
+
+
+def _as_date(value) -> date | None:
+    """RawOffer dates may arrive as date objects or ISO strings."""
+    if value is None or isinstance(value, date):
+        return value
+    try:
+        return date.fromisoformat(str(value)[:10])
+    except ValueError:
+        return None
 
 
 def _ingest_product(conn, product, offer, promo, matcher, stats, now) -> None:
