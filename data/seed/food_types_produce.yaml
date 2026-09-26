@@ -134,6 +134,8 @@
   state: solid
   protein_per_100g: 1.2
   kcal_per_100g: 15
+  carbs_per_100g: 1.5
+  fat_per_100g: 0.2
   shelf_life_days_unopened: 5
   shelf_life_days_opened: 2
   freezable: false
@@ -920,6 +922,8 @@
   state: solid
   protein_per_100g: 1.2
   kcal_per_100g: 25
+  carbs_per_100g: 3.5
+  fat_per_100g: 0.2
   shelf_life_days_unopened: 730
   shelf_life_days_opened: 3
   freezable: true

@@ -3,6 +3,7 @@ package com.macrofinder.app.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.macrofinder.app.BuildConfig
+import com.macrofinder.app.data.cheapestPicks
 import com.macrofinder.app.data.ArchetypeEntry
 import com.macrofinder.app.data.DataRepository
 import com.macrofinder.app.data.ExportSnapshot
@@ -128,10 +129,15 @@ class MacroFinderViewModel(
         _state.value = _state.value.copy(tab = tab, screen = Screen.Tabs)
     }
 
-    /** Open the customiser on a template, starting from an empty plate. */
+    /**
+     * Open the customiser on a template, starting from the cheapest plate: the
+     * same picks the Meals list's "vanaf" price is made of.
+     */
     fun customise(templateKey: String) {
+        val template = _state.value.templates.firstOrNull { it.key == templateKey }
+        val picks = template?.let { cheapestPicks(it, _state.value.templatePrices[it.key].orEmpty()) }
         _state.value = _state.value.copy(
-            screen = Screen.Customise(templateKey), selections = emptyMap(), extras = emptyList(),
+            screen = Screen.Customise(templateKey), selections = picks.orEmpty(), extras = emptyList(),
         )
     }
 

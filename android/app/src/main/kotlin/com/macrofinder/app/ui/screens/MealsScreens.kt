@@ -38,6 +38,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.macrofinder.app.data.cheapestPicks
 import com.macrofinder.app.data.ArchetypeEntry
 import com.macrofinder.app.data.MealTotals
 import com.macrofinder.app.data.QuantityUnit
@@ -138,9 +139,8 @@ fun MealsScreen(
 /** The cheapest way to fill every required slot right now, or null if any is unpriced. */
 private fun cheapestTotal(vm: MacroFinderViewModel, template: TemplateEntry): Double? {
     val prices = vm.state.value.templatePrices[template.key].orEmpty()
-    return template.slots.filter { it.required }.map { slot ->
-        prices[slot.key].orEmpty().mapNotNull { it.price_eur }.minOrNull() ?: return null
-    }.sum()
+    val picks = cheapestPicks(template, prices) ?: return null
+    return picks.entries.sumOf { (slot, food) -> prices[slot].orEmpty().first { it.food_type == food }.price_eur!! }
 }
 
 @Composable
@@ -219,7 +219,7 @@ fun CustomiseScreen(vm: MacroFinderViewModel, onBack: () -> Unit, onSave: (Strin
                 TextAction("‹ Terug", onBack, modifier = Modifier.padding(horizontal = 8.dp))
                 Text(template.name, style = MF.type.display, color = t.ink,
                     modifier = Modifier.padding(start = 16.dp, bottom = 4.dp))
-                Text("Per slot staat het goedkoopste bovenaan. Tik om te kiezen.",
+                Text("We beginnen met het goedkoopste. Tik om te wisselen.",
                     style = MF.type.label, color = t.muted, modifier = Modifier.padding(start = 16.dp))
             }
             template.slots.forEach { slot ->
@@ -395,6 +395,14 @@ private fun TotalsBar(totals: MealTotals, missing: List<String>) {
                     Text(totals.kcal?.let { mark + fmt("%.0f kcal", it) } ?: "kcal onbekend",
                         style = MF.type.label, color = t.muted)
                 }
+            }
+            // Carbs and fat too: the customiser is where you build a whole
+            // meal, and a missing figure shows as "?" rather than hiding the row.
+            if (totals.lines.isNotEmpty()) {
+                val carbs = totals.carbsG?.let { fmt("%.0f g", it) } ?: "?"
+                val fat = totals.fatG?.let { fmt("%.0f g", it) } ?: "?"
+                Text("koolhydraten $carbs · vet $fat", style = MF.type.label, color = t.muted,
+                    modifier = Modifier.padding(top = 2.dp))
             }
             val notes = listOfNotNull(
                 missing.takeIf { it.isNotEmpty() }?.let { "Nog kiezen: ${it.joinToString(", ")}" },

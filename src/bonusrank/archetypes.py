@@ -379,7 +379,7 @@ def _verdict(ready_made: PricedReadyMade | None,
             protein_delta_g=protein_delta,
             extra_minutes=minutes,
             text=(f"Zelf maken is {(ready - diy) / ready * 100:.0f}% goedkoper per "
-                  f"gram eiwit, {protein_delta:+.0f} g eiwit, kost {minutes} min."),
+                  f"gram eiwit{_protein_phrase(protein_delta)}, kost {minutes} min."),
         )
 
     return Verdict(
@@ -390,6 +390,14 @@ def _verdict(ready_made: PricedReadyMade | None,
         text=(f"Gewoon kopen: kant-en-klaar is {(diy - ready) / diy * 100:.0f}% "
               f"goedkoper per gram eiwit en scheelt {minutes} min."),
     )
+
+
+def _protein_phrase(delta: float) -> str:
+    """", 7 g meer eiwit" rather than "+7 g eiwit", which reads like a typo."""
+    grams = round(delta)
+    if grams == 0:
+        return ", evenveel eiwit"
+    return f", {abs(grams)} g {'meer' if grams > 0 else 'minder'} eiwit"
 
 
 def _archetype(row: sqlite3.Row) -> Archetype:

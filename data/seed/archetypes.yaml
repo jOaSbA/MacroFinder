@@ -179,7 +179,7 @@
           grams: 40
 
 - key: huttenkase_spread
-  name: Huttenkase spread
+  name: Hüttenkäse spread
   serving_g: 100
   target_protein_g: 12
   texture: spreadable
@@ -195,7 +195,7 @@
     food_types: [smeerkaas_light]
     contains: ["kruidenkwark", "kruidendip", "kruidenspread"]
   compositions:
-    - name: huttenkase + kruiden + knoflook
+    - name: hüttenkäse + kruiden + knoflook
       effort_minutes: 4
       equipment: kom, vork
       similarity_confidence: medium
@@ -226,7 +226,7 @@
   ready_made:
     contains: ["wrap kip", "kipwrap", "wrap chicken", "wrap caesar"]
   compositions:
-    - name: wrap + kipfilet + huttenkase + sla
+    - name: wrap + kipfilet + hüttenkäse + sla
       effort_minutes: 8
       equipment: snijplank, mes, koekenpan
       similarity_confidence: medium

@@ -126,3 +126,18 @@ private fun perServing(per100g: Double?, grams: Double?): Double? =
 /** Null if ANY element is null. The app-side twin of `archetypes._sum_or_none`. */
 private fun sumOrNull(values: List<Double?>): Double? =
     if (values.any { it == null }) null else values.sumOf { it ?: 0.0 }
+
+/**
+ * The cheapest priced candidate for every required slot, as slot key to food
+ * type. Null if a required slot has nothing priced, because then there is no
+ * cheapest plate to show. The Meals list's "vanaf" price and the customiser's
+ * starting plate both come from this, so they can't disagree.
+ */
+fun cheapestPicks(
+    template: TemplateEntry,
+    prices: Map<String, List<SlotCandidate>>,
+): Map<String, String>? = template.slots.filter { it.required }.associate { slot ->
+    val best = prices[slot.key].orEmpty().filter { it.price_eur != null }
+        .minByOrNull { it.price_eur!! } ?: return null
+    slot.key to best.food_type
+}
