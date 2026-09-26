@@ -1,172 +1,125 @@
 # MacroFinder
 
-Tracks Dutch supermarket promotions (Albert Heijn, Jumbo, Aldi) and ranks food by
-protein-per-euro. Two parts:
+An Android app that ranks what's on offer at Albert Heijn, Jumbo and Aldi by how
+much protein (or how many calories) you get per euro. It's built for people who
+lift and shop on a budget, and it's honest about what it doesn't know.
 
-- **`bonusrank`** (`src/bonusrank/`) - a Python CLI that scrapes the three chains,
-  parses prices and macros, matches products to food types, and ranks what's on
-  offer. It also crawls the full assortment: 52,489 products at last count.
-- **MacroFinder** (`android/`) - a Kotlin/Jetpack Compose Android app that shows
-  that data as a browsable, filterable list: tabs for meals, snacks, drinks, and
-  everything else, each item showing its price, which promo applies and why it's
-  cheaper, and its macros. It does not pick meals for you - you filter and choose.
+The repo has two halves:
+
+- `android/` is the app, in Kotlin and Jetpack Compose.
+- `src/bonusrank/` is a Python CLI that scrapes the three chains, parses prices and
+  nutrition, matches products to food types and builds the data the app reads.
 
 ## The app
 
-Real screenshots, running on an emulator against live Albert Heijn data.
+| Deals | Product | Build a meal | Dark |
+|---|---|---|---|
+| ![The deal list, sorted by euro per 100 g protein](docs/images/deals.png) | ![A product with its macro strip and price](docs/images/detail.png) | ![The pasta customiser with a live total](docs/images/customiser.png) | ![The deal list in dark mode](docs/images/dark-mode.png) |
 
-| Meals | Build your own |
-|---|---|
-| ![The Meals tab: templates to build from, then ready-made-vs-DIY comparisons](docs/images/meals-tab.png) | ![The Pasta customiser: each slot's candidates ranked cheapest-first, with a live total pinned to the bottom](docs/images/customiser.png) |
+What it does:
 
-| Combination rules | Dark mode |
-|---|---|
-| ![Picking pesto alone triggers an authored warning that the dish is unfinished](docs/images/rule-warning.png) | ![The same screen in dark mode](docs/images/dark-mode.png) |
+- **Aanbod** lists this week's offers from all three chains. Sort by protein per
+  euro, protein per 100 kcal, kcal per euro or discount. Filter by chain, shelf,
+  now or next week, and by goal: *eiwitbom*, *cut*, *bulk*, *snel eiwit*,
+  *ontbijt*, *meal prep*, *supplement*.
+- **Product** shows the macro strip (protein per 100 g and per 100 kcal, cost per
+  100 g protein and per 1000 kcal), the price history, whether it usually goes on
+  offer again soon, and a note when the protein is incomplete.
+- **Zoeken** searches the whole catalogue of about 52,000 products, on the phone,
+  offline.
+- **Maaltijden** lets you build a pasta or wrap from this week's cheapest
+  parts, save it, and see it re-priced every week. It also compares ready-made
+  protein products with making them yourself, including what you give up in taste.
+- **Gevolgd** keeps products you follow and sends a notification when one goes on
+  offer.
 
-Three things those screens are doing on purpose:
+A few rules the app sticks to:
 
-- **The red chip is the only saturated colour in the app**, and it is the chain's
-  own: red at Albert Heijn, yellow at Jumbo, blue at Aldi, exactly as on the shelf.
-  `koop 2` next to a `1+1 gratis` is there because that deal means two jars in your
-  fridge, not one cheap one.
-- **Unknowns are shown, never hidden.** `rucola - geen prijs` stays in the list,
-  ranked last. One unpriced line makes the whole total unknown rather than quietly
-  summing the rest.
-- **Rules explain, they never block.** *"Pesto alleen op pasta is droog en eenzijdig
-  vet"* is a sentence a person wrote in `data/seed/templates.yaml`. You can still
-  cook it.
+- A figure from the product's own label is shown plain. A figure estimated from a
+  generic food table gets a ≈ and is shown in grey, however good it looks.
+- Unknown stays unknown. Nothing is counted as zero, and a product with unknown
+  macros sorts last instead of first.
+- "1+1 gratis" always comes with "koop 2", because it means two in your fridge.
+- It ranks, it doesn't choose for you.
 
-Every macro figure carries a marker saying whether it came from the product's own
-label or from a generic table. Most are still generic, and the app says so rather
-than presenting an estimate as a fact.
+The app is not affiliated with any of the chains. Prices and images come from
+their public websites.
 
-## How data gets from one to the other
+## Where the data comes from
 
-There is no backend server and no API. Two scheduled GitHub Actions jobs publish
-two feeds, on different cadences, because they change at different speeds.
+There is no server. One GitHub Actions job runs twice a day, scrapes the chains,
+and publishes everything to a release called `data-latest`:
 
-| Feed | Contents | Size | How | Refresh |
-|---|---|---|---|---|
-| `docs/data/latest.json` | current promos, ranked | ~900 KB | committed to the repo | twice a day |
-| `macrofinder-*.sqlite` | the full catalogue | ~24 MB | GitHub **Release** asset | weekly |
+| File | What | Size |
+|---|---|---|
+| `latest.json` | this week's ranked offers, meal templates, comparisons | ~1 MB |
+| `macrofinder-*.sqlite` | the full catalogue with prices, macros and history | ~29 MB |
+| `delta-*.sqlite` | what changed since an earlier build | a few hundred KB |
+| `manifest.json` | which build is current, plus a chain of deltas | tiny |
+| `history.sqlite3.gz` | the scraper's own database, carried between runs | ~7 MB |
 
-The app fetches `latest.json` straight from `raw.githubusercontent.com` on launch.
-It is small, and it is what keeps a failed catalogue sync from meaning a broken app.
+The app downloads the catalogue once on wifi, then applies small deltas. Each
+delta is checked on the build machine: applied to the previous build it has to
+reproduce the new one byte for byte, or it isn't published. The catalogue crawl
+(about 1,000 requests) only runs on Mondays; the other runs just refresh prices.
 
-The catalogue is a release asset rather than a committed file because git cannot
-prune. A 24 MB snapshot committed twice a day is roughly 10 GB of history a year
-that can never be removed without rewriting it, and the repo becomes un-clonable
-within months. Release assets can be deleted freely.
-
-Each catalogue build also emits a delta against the previous one. The deltas are
-verified on every build: applying one to the previous database has to reproduce
-the next one **byte for byte**, or it is not published. In steady state a delta is
-about 1.8% of a full download.
-
-```
-bonusrank scrape/rank --export--> docs/data/latest.json --raw.githubusercontent--> app
-bonusrank catalogue/build-db ---> macrofinder-{hash}.sqlite + delta + manifest.json
-                                     |
-                                 GitHub Release "data-latest"
-```
-
-**The app does not read the catalogue yet.** The data plane is built and running;
-wiring the app to sync it into a local Room database is the next milestone. Until
-then the app shows what `latest.json` carries.
-
-That cadence is a deliberate choice, not a default: these are undocumented,
-unofficial endpoints. The full catalogue crawl is about 1,000 requests, capped at
-2 per second per chain, and it runs once a week. One scraper run feeds every
-device, and the app never calls a chain directly - that is an architectural rule,
-not a preference, and it is what keeps the request volume flat no matter how many
-people use the app.
+Nothing is committed by the bot. The app never talks to a supermarket directly, so
+the chains see the same traffic whether one person uses it or a thousand.
 
 ## Repo layout
 
 ```
-src/bonusrank/       the CLI: adapters, parsers, matcher, ranking, pricing,
-                      archetypes/compositions, the per-meal optimiser, the
-                      full-catalogue crawl, the published app database, export
-tests/                Python tests (pytest) - kept separate from src/, see below
-data/seed/            hand-authored reference data (food macros, meal archetypes)
-docs/BRIEF.md         the original project brief and domain research
-docs/PLAN-V2.md       what gets built next, and in what order
-docs/AUDIT.md         what actually works, measured against a live run
-docs/DESIGN.md        the visual direction for the UI rework
-docs/data/            the JSON snapshot the app reads (refreshed by CI)
-docs/images/          app screenshots used in this README
-android/              the Android app (Kotlin + Jetpack Compose)
-.github/workflows/    CI (tests), the data refresh, and the catalogue build
-CLAUDE.md             detailed engineering log for the Python backend
+android/              the app
+src/bonusrank/        the scraper and data pipeline
+tests/                Python tests
+data/seed/            hand-written reference data: food macros, shelves,
+                      meal templates, macro buckets, protein quality
+docs/BRIEF.md         the original brief and domain research
+docs/PLAN-V2.md       the plan this was built from
+docs/DESIGN.md        the visual design
+docs/AUDIT.md         an audit of what actually worked, measured
+CLAUDE.md             the engineering log: every endpoint, trap and decision
 ```
 
-## Running the backend yourself
+## Running it yourself
 
 ```bash
 pip install -e ".[dev]"
 bonusrank seed
 bonusrank ingest --chain ah --with-macros 300
 bonusrank prices --refresh --all --chain ah
-bonusrank compare --chain ah
-bonusrank export --out docs/data/latest.json
+bonusrank list --chain ah --sort protein-per-euro
+bonusrank list --chain jumbo --upcoming
+bonusrank catalogue --chain ah
+bonusrank build-db --out-dir dist/data
 ```
 
-The full catalogue crawl is separate, because it is long and only worth running
-weekly. It checkpoints per page and resumes, so killing it costs nothing:
+The app builds with Gradle 8.7 and JDK 17:
 
 ```bash
-bonusrank catalogue --chain ah          # ~300 requests, or use --max-requests N
-bonusrank catalogue --chain jumbo       # ~712 requests
-bonusrank build-db --out-dir dist/data  # the SQLite build, delta and manifest
+cd android && gradle assembleDebug
 ```
+
+CI uploads a debug APK on every run.
 
 ## Tests
 
-Tests live entirely under `tests/` (Python) and `android/app/src/test/` (Kotlin),
-never mixed into the implementation files.
+Tests are kept separate from the code and all of them run in GitHub Actions.
 
-- **Python (`pytest`)**: 749 tests, running fully in GitHub Actions on every push
-  and PR (`.github/workflows/ci.yml`). No live network access is needed - the test
-  suite uses fixtures and an in-memory database.
-- **Android (`android/app/src/test/`)**: 65 plain JVM unit tests (JSON decoding,
-  filtering and sorting, rule evaluation, meal costing, saved-meal round trips).
-  Also run in CI, no emulator needed. There are currently no Compose UI /
-  instrumentation tests, since those need an emulator; UI changes are verified
-  manually. See `android/README.md` for the full story.
+- Python: about 820 tests (`pytest -q`), no network needed.
+- Android, JVM: about 140 tests (`gradle testDebugUnitTest`). These include the
+  catalogue SQL, run against the real published schema through sqlite-jdbc.
+- Android, on a device: 19 tests (`gradle connectedDebugAndroidTest`) for the sync
+  and the main screens. CI runs them on an emulator.
 
-Run everything locally:
+## Known limits
 
-```bash
-pytest -q                                  # Python
-cd android && gradle testDebugUnitTest     # Android (needs a local Gradle install)
-```
+- Aldi only publishes its weekly offers, not a full catalogue, so Aldi products
+  only appear while they're on offer.
+- Price history started accumulating on 2026-09-26. "Cheapest in N weeks" and the
+  promo cycle hints fill in as the weeks go by.
+- Most macros are still estimates from a generic table. Label figures for AH
+  products are added 300 at a time, twice a day.
 
-## Status
-
-Milestones 1-16 are complete. See `CLAUDE.md` for the full engineering history
-(endpoint discovery, parser edge cases, matcher tuning, the optimiser's safety
-rules) and `docs/AUDIT.md` for a verified account of what works, measured against
-a live run rather than claimed.
-
-Working today: three chain adapters, a tested parser and matcher, a ranking CLI, a
-ready-made-vs-DIY substitution engine with a bounded per-meal optimiser, the full
-catalogue crawl with product images, a byte-deterministic SQLite data plane with
-verified deltas, and the app itself - browsable ranked lists plus a slot-based
-meal customiser with on-device re-pricing and saved meals.
-
-Not done yet, in rough order: the app syncing the catalogue into a local database,
-upcoming-week promos, a shelf-category taxonomy, macro goal buckets, and the
-deferred brief features around price history. `docs/PLAN-V2.md` has the list.
-
-Two known limits worth stating plainly:
-
-- **Price history does not accumulate.** Each CI run starts from a fresh checkout
-  with a gitignored database, so "cheapest in N weeks" has nothing to compute
-  from and correctly says so. Everything in the brief that depends on history is
-  blocked on fixing that.
-- **Aldi has no browsable catalogue.** Its own site does not publish one, so Aldi
-  is limited to its weekly offer feed. That is a fact about the site, not a gap
-  here.
-
-This is a personal tool, built against undocumented endpoints and not affiliated
-with any of the three chains.
+This is a personal project built against undocumented endpoints, kept to two
+requests a second per chain.

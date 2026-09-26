@@ -1,29 +1,42 @@
 # MacroFinder Android app
 
-A browsable, filterable list of ranked meals, snacks, drinks, and everything
-else, with price, the promo that makes it cheap, and macros next to each item.
-This is deliberately **not** an optimiser: the app never picks for you, it
-only ranks and filters what you ask to see. (The Python backend does have a
-per-meal optimiser - `bonusrank compare`'s "Optimised" line - but that's a
-CLI-only feature this app does not surface, on purpose.)
+Ranks this week's supermarket offers by protein or calories per euro, and lets
+you search the whole catalogue, follow products and build meals. It ranks; it
+never picks for you.
 
 ## Data flow
 
-This app has no backend and no scraping code of its own:
+The app has no backend and never talks to a supermarket. It reads two things
+from the `data-latest` GitHub release, both published by
+`.github/workflows/refresh-data.yml` twice a day:
 
-1. The Python tool in the repo root (`src/bonusrank/`) scrapes AH/Jumbo/Aldi
-   and ranks offers, exactly as it always has.
-2. `bonusrank export` serializes that into `docs/data/latest.json`
-   (`src/bonusrank/export.py`).
-3. `.github/workflows/refresh-data.yml` runs that on a schedule and commits
-   the result.
-4. This app fetches that file straight from
-   `raw.githubusercontent.com/jOaSbA/MacroFinder/master/docs/data/latest.json`
-   (`app/build.gradle.kts`'s `DATA_URL` build config field) - no server to
-   host, no API to maintain.
+- **`latest.json`**, fetched on launch: ranked offers, meal templates and the
+  ready-made vs home-made comparisons. `data/ExportModels.kt` mirrors
+  `src/bonusrank/export.py` field for field; change one, change the other.
+- **The catalogue**, a SQLite file synced in the background by WorkManager
+  (`data/sync/`), on wifi only unless you tap "Nu verversen". The first sync is
+  the full file; after that it chains small deltas from `manifest.json`.
+  Nothing is installed until its sha256 matches, and an app never installs a
+  catalogue whose schema it can't read (`APP_SCHEMA_VERSION` in `SyncPlan.kt`).
 
-`app/src/main/kotlin/com/macrofinder/app/data/ExportModels.kt` mirrors
-`export.py`'s JSON shape field-for-field. If you change one, change the other.
+Until the catalogue arrives, the deal list falls back to the offers in
+`latest.json`. The same sort and filter code runs on both.
+
+## How it's put together
+
+- `data/catalogue/`: the catalogue as the screens see it. `CatalogueReader`
+  holds the SQL, `DealList` does filtering, sorting and tiers in plain Kotlin,
+  `SearchIndex` builds an FTS4 index on the phone after each sync.
+- `data/following/`: followed products and the "now on offer" notification.
+  The decision is pure (`promoAlerts`) and tested on the JVM.
+- `ui/`: `CatalogueViewModel` for deals, search, detail and following;
+  `MacroFinderViewModel` for meals. `DealText` holds the rules about what text
+  is shown, so the "never a bare estimate" rule has tests.
+- `ui/theme/`: the tokens and type from `docs/DESIGN.md`. Archivo is bundled
+  (`res/font`, OFL licence in `assets/licenses`).
+
+Navigation is a back stack of `Route`s saved as strings, not a navigation
+library. Filter and sort state live in `SavedStateHandle`.
 
 ## The meal customiser (milestone 13)
 
@@ -64,23 +77,22 @@ No backend, nothing committed to the repo, and they do not sync anywhere.
 
 ## Tests
 
-Per this repo's testing rule: **tests are always separate from production
-code**, and everything that can run in CI does.
+Tests are always separate from production code, and all of them run in CI.
 
-- `app/src/test/kotlin/` - plain JVM unit tests (JSON decoding, filtering and
-  sorting, rule evaluation, meal costing, saved-meal serialisation). No Android
-  framework classes, no emulator. These run in GitHub Actions on every push
-  (`.github/workflows/ci.yml`, `gradle testDebugUnitTest`).
-- `SavedMealsTest` tests `serializeMeals`/`deserializeMeals` rather than
-  DataStore itself. Those two are split out of `SavedMealsStore` for exactly
-  that reason: the round trip is the part that can silently lose a user's
-  saved meals, and it is testable where CI runs.
-- **No Compose UI / instrumentation tests exist yet.** They need an Android
-  emulator, which is slow and flaky in CI. Until that's worth the cost, UI
-  changes are verified manually: build the app (`gradle assembleDebug`) and
-  run it on a device or emulator yourself. Do not add `androidTest` UI tests
-  and assume they run in CI - they won't, unless the workflow is updated to
-  provision an emulator.
+- `app/src/test/kotlin/`: JVM tests. The catalogue SQL runs here too, against
+  sqlite-jdbc with the real published schema in `src/test/resources/app_schema.sql`
+  (a Python test fails if that file drifts from `appdb.APP_SCHEMA`).
+- `app/src/androidTest/kotlin/`: on-device tests. The sync end to end against a
+  local HTTP server, and Compose UI tests for the deal list, product detail and
+  meal customiser. CI runs them on an API 34 emulator; locally:
+
+  ```bash
+  cd android && gradle connectedDebugAndroidTest
+  ```
+
+- `tests/test_appdb_kotlin_parity.py` (Python side) checks that
+  `CatalogueStore.kt` applies deltas to the same tables with the same keys as
+  `appdb.py`, and that both agree on the schema version.
 
 ## Getting a runnable app without installing anything
 

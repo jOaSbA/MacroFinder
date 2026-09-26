@@ -82,10 +82,12 @@ def test_an_unmatched_product_is_never_a_candidate(conn):
 
 def test_a_product_that_already_has_label_macros_is_not_fetched_twice(conn):
     pid = _product(conn, "known", promo="x_plus_y_free", valid_to=TODAY + timedelta(days=5))
+    from bonusrank.ingest import LABEL_PARSER_VERSION
+
     conn.execute(
         "INSERT INTO product_macros (product_id, protein_per_100g, source, "
-        "confidence, observed_at) VALUES (?,10.0,'label','high',?)",
-        (pid, TODAY.isoformat()),
+        "confidence, observed_at, parser_version) VALUES (?,10.0,'label','high',?,?)",
+        (pid, TODAY.isoformat(), LABEL_PARSER_VERSION),
     )
     _product(conn, "new", promo="x_plus_y_free", valid_to=TODAY + timedelta(days=5))
 
@@ -114,3 +116,20 @@ def test_an_offer_with_no_end_date_still_counts_as_current(conn):
     _product(conn, "open_ended", promo="x_plus_y_free", valid_to=None)
 
     assert macro_candidates(conn, "ah", 10, on=TODAY) == ["open_ended"]
+
+
+def test_label_macros_from_an_older_parser_are_fetched_again_after_new_ones(conn):
+    """The cooked-table bug: rows parsed before the fix must be refreshed,
+    or they'd stay wrong forever, since products with macros are skipped."""
+    from bonusrank.ingest import LABEL_PARSER_VERSION
+
+    old = _product(conn, "old", promo="x_plus_y_free", valid_to=TODAY + timedelta(days=3))
+    _product(conn, "none", promo="x_plus_y_free", valid_to=TODAY + timedelta(days=3))
+    current = _product(conn, "current", promo="x_plus_y_free", valid_to=TODAY + timedelta(days=3))
+    conn.execute("INSERT INTO product_macros (product_id, protein_per_100g, source, confidence, "
+                 "observed_at, parser_version) VALUES (?, 8.4, 'label', 'high', '2026-09-20', 1)", (old,))
+    conn.execute("INSERT INTO product_macros (product_id, protein_per_100g, source, confidence, "
+                 "observed_at, parser_version) VALUES (?, 24.0, 'label', 'high', '2026-09-20', ?)",
+                 (current, LABEL_PARSER_VERSION))
+
+    assert macro_candidates(conn, "ah", 10, on=TODAY) == ["none", "old"]

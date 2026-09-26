@@ -166,7 +166,16 @@ def _fmt(value, spec="6.2f", unknown="?"):
 
 
 def cmd_list(args: argparse.Namespace) -> int:
-    from .ranking import rank, sort_offers
+    from .ranking import rank, sort_offers, upcoming
+
+    if args.upcoming:
+        with connect() as conn:
+            items = upcoming(conn, chain=args.chain, include_personal=args.include_personal)
+        print(f"\n=== {args.chain.upper()} upcoming, {len(items)} promos not started yet ===\n")
+        for o in items[: args.limit]:
+            print(f"  vanaf {o.valid_from}  {_fmt(o.effective_unit_price, '6.2f')}  "
+                  f"{(o.promo_raw_text or '-')[:22]:<23} {o.name[:44]}")
+        return 0
 
     with connect() as conn:
         offers = rank(conn, chain=args.chain, include_personal=args.include_personal)
@@ -631,7 +640,23 @@ def cmd_build_db(args: argparse.Namespace) -> int:
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    from datetime import date
+
+    from . import shelves
+
     with connect() as conn:
+        # Milestone 19: an unmapped category goes to review, and a build where
+        # too much of the catalogue has no shelf fails instead of publishing.
+        shelf_map = shelves.load()
+        counts = shelves.record_unmapped(conn, observed_at=date.today().isoformat(),
+                                         shelf_map=shelf_map)
+        conn.commit()
+        try:
+            rate = shelf_map.check_rate(counts)
+        except shelves.TooManyUnmapped as exc:
+            print(f"refusing to build: {exc}", file=sys.stderr)
+            return 1
+        print(f"shelves  {1 - rate:.1%} of products mapped")
         built = appdb.build_full(conn, out_dir / "build.tmp")
 
     # Named after its own content, so an unchanged catalogue keeps its name and
@@ -670,9 +695,18 @@ def cmd_build_db(args: argparse.Namespace) -> int:
             delta.unlink()
             deltas.pop()
 
-    manifest = appdb.write_manifest(out_dir / "manifest.json", full=full, deltas=deltas)
+    # Keep the previous manifest's deltas so a phone a few builds behind can
+    # still chain small updates instead of taking the whole file.
+    carried = []
+    if args.previous_manifest and Path(args.previous_manifest).exists():
+        carried = json.loads(Path(args.previous_manifest).read_text("utf-8")).get("deltas", [])
+    entries = appdb.chain_deltas(carried, [appdb.delta_entry(d) for d in deltas],
+                                 target=appdb.version_of(full))
+
+    manifest = appdb.write_manifest(out_dir / "manifest.json", full=full,
+                                    delta_entries=entries)
     print(f"manifest  version {manifest['full']['version']}, "
-          f"{manifest['full']['products']:,} products, {len(deltas)} delta(s)")
+          f"{manifest['full']['products']:,} products, {len(entries)} delta(s)")
     return 0
 
 
@@ -735,6 +769,8 @@ def main(argv: list[str] | None = None) -> int:
     lst.add_argument("--include-shelf-prices", action="store_true",
                      help="also rank plain shelf prices from `bonusrank prices`, "
                           "not just what is on offer")
+    lst.add_argument("--upcoming", action="store_true",
+                     help="list promos that have not started yet, with their start date")
     lst.set_defaults(func=cmd_list)
 
     matches = sub.add_parser("matches", help="audit what the matcher decided")
@@ -775,7 +811,7 @@ def main(argv: list[str] | None = None) -> int:
     tmpl.set_defaults(func=cmd_templates)
 
     export = sub.add_parser("export", help="write a JSON snapshot for the Android app")
-    export.add_argument("--out", default="docs/data/latest.json",
+    export.add_argument("--out", default="dist/latest.json",
                         help="output path, committed by the refresh-data workflow")
     export.add_argument("--chain", action="append", dest="chains",
                         help="repeatable; defaults to every registered chain")
@@ -791,6 +827,8 @@ def main(argv: list[str] | None = None) -> int:
                               help="build the app database release assets")
     build_db.add_argument("--out-dir", default="dist/data",
                           help="where the assets are written; never committed")
+    build_db.add_argument("--previous-manifest", default=None,
+                          help="the last published manifest.json; its deltas are carried over")
     build_db.add_argument("--against", action="append",
                           help="a previous full build to cut a delta against; "
                                "repeatable, missing files are skipped")

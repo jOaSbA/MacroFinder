@@ -166,3 +166,21 @@ def test_is_append_only_across_two_runs_on_different_days(conn, matcher):
 def test_zero_offers_is_not_an_error(conn, matcher):
     stats = ingest_flat(conn, _FakeFlatAdapter([], {}), matcher=matcher)
     assert stats.products == 0
+
+
+def test_a_product_image_from_the_promo_feed_is_kept(conn, matcher):
+    """Aldi has no catalogue crawl, so its promo feed is the only place an
+    image can come from. Before this, every Aldi row in the app was blank."""
+    url = "https://s7g10.scene7.com/is/image/aldinord/product_1_main?wid=400&hei=400"
+    adapter = _FakeFlatAdapter([_offer()], {"sku1": _product(image_url=url, image_width=400)})
+    ingest_flat(conn, adapter, matcher=matcher)
+    row = conn.execute("SELECT image_url, image_width FROM products WHERE sku='sku1'").fetchone()
+    assert (row["image_url"], row["image_width"]) == (url, 400)
+
+
+def test_no_image_in_the_feed_leaves_a_crawled_image_alone(conn, matcher):
+    ingest_flat(conn, _FakeFlatAdapter([_offer()], {"sku1": _product(image_url="https://x/a.png")}),
+                matcher=matcher)
+    ingest_flat(conn, _FakeFlatAdapter([_offer()], {"sku1": _product()}), matcher=matcher)
+    row = conn.execute("SELECT image_url FROM products WHERE sku='sku1'").fetchone()
+    assert row["image_url"] == "https://x/a.png"

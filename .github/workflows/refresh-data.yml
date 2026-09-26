@@ -1,25 +1,43 @@
-name: Refresh app data
+name: Refresh data
 
-# Twice a day, not hourly: bonus prices change weekly per chain (CLAUDE.md
-# section 1's "bonus weeks do not align across chains" applies here too), and
-# CLAUDE.md's own politeness section is explicit that these are undocumented
-# endpoints "tolerable for one personal user... not tolerable as a deployed
-# service." Running this from a scheduled CI job already leans harder on that
-# line than a human running the CLI a few times a week - twice a day keeps
-# total request volume close to that same personal-use budget instead of
-# scraping every few hours. Change the cron below if you want a different
-# cadence, with that tradeoff in mind.
+# One pipeline for both feeds, twice a day. Nothing is committed: everything
+# goes to the `data-latest` release.
+#
+#   history.sqlite3.gz   the dev database, carried from run to run. This is
+#                        what lets price history build up at all.
+#   latest.json          ranked promos, templates, comparisons (the fast path)
+#   macrofinder-*.sqlite the catalogue the app syncs, plus deltas and
+#   manifest.json        a manifest that chains them
+#
+# The full catalogue crawl (~1,000 requests) only runs on the Monday slot. The
+# other runs reuse the crawled products from the carried database and only
+# refresh prices and promos, so the catalogue the app syncs is never older
+# than half a day on price.
 on:
   schedule:
     - cron: "0 6,18 * * *"
-  workflow_dispatch: {}
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+    inputs:
+      crawl:
+        description: "Also crawl the full AH and Jumbo catalogues"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
+concurrency:
+  group: data-release
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: data-latest
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
 
@@ -30,11 +48,31 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
 
+      - name: Restore the previous run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data previous dist/data
+          gh release download "$RELEASE_TAG" --dir previous \
+            --pattern 'history.sqlite3.gz' --pattern 'manifest.json' \
+            --pattern 'macrofinder-*.sqlite' || echo "nothing published yet"
+          ls -la previous
+          if [ -f previous/history.sqlite3.gz ]; then
+            gunzip -c previous/history.sqlite3.gz > data/bonusrank.sqlite3
+            if ! sqlite3 data/bonusrank.sqlite3 "pragma integrity_check" | grep -qx ok; then
+              echo "history unreadable, starting clean"
+              rm -f data/bonusrank.sqlite3
+            fi
+          fi
+          if [ -f data/bonusrank.sqlite3 ]; then
+            sqlite3 data/bonusrank.sqlite3 \
+              "select count(*) || ' price observations over ' || count(distinct observed_at) || ' days' from price_observations"
+          fi
+
       - name: Seed reference data
         run: bonusrank seed
 
-      # A chain's endpoint moving or a transient scrape failure must not take
-      # down the other two - each ingest is independent and non-fatal.
+      # One chain failing must not take the other two down.
       - name: Ingest AH
         run: bonusrank ingest --chain ah || echo "AH ingest failed, continuing"
 
@@ -44,37 +82,81 @@ jobs:
       - name: Ingest Aldi
         run: bonusrank ingest --chain aldi || echo "Aldi ingest failed, continuing"
 
-      # docs/AUDIT.md finding 5: product_macros had never held a row in
-      # production. Tier-1 FIR label figures need --with-macros and no workflow
-      # passed it, so every macro the app has ever shown came from the generic
-      # seed - and all 478 exported AH offers were flagged as needing an
-      # estimate marker. BRIEF section 2 says to prefer a SKU's own label
-      # "always"; there was simply never anything there to prefer.
-      #
-      # 300 is one request each at 2/second, so about two and a half minutes.
-      # `macro_candidates` spends them on matched products that are on a
-      # CURRENT offer first - those are the rows a ranking actually prints.
-      # Only AH has a label endpoint (its FIR lane); Jumbo and Aldi publish no
-      # nutrition this adapter can read.
-      - name: Fetch tier-1 label macros (AH)
+      # Label macros from AH's product pages, spent on products on offer now
+      # first. Jumbo and Aldi don't publish nutrition we can read.
+      - name: Fetch label macros (AH)
         run: bonusrank ingest --chain ah --with-macros 300 || echo "AH macro fetch failed, continuing"
 
-      # Only AH and Jumbo have a product-search lane (CLAUDE.md section 4) -
-      # Aldi's site has no browsable catalogue to refresh a base price from.
+      # Aldi has no searchable catalogue, so only AH and Jumbo get shelf prices.
       - name: Refresh base prices (AH)
         run: bonusrank prices --refresh --all --chain ah || echo "AH price refresh failed, continuing"
 
       - name: Refresh base prices (Jumbo)
         run: bonusrank prices --refresh --all --chain jumbo || echo "Jumbo price refresh failed, continuing"
 
-      - name: Export snapshot for the app
-        run: bonusrank export --out docs/data/latest.json
+      - name: Crawl the AH catalogue
+        if: github.event.schedule == '0 4 * * 1' || inputs.crawl
+        run: bonusrank catalogue --chain ah || echo "AH catalogue crawl failed, continuing"
 
-      - name: Commit and push if the snapshot changed
+      - name: Crawl the Jumbo catalogue
+        if: github.event.schedule == '0 4 * * 1' || inputs.crawl
+        run: bonusrank catalogue --chain jumbo || echo "Jumbo catalogue crawl failed, continuing"
+
+      - name: Export
         run: |
-          git config user.name "macrofinder-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add docs/data/latest.json
-          git diff --cached --quiet && echo "no changes" && exit 0
-          git commit -m "Refresh app data snapshot"
-          git push
+          bonusrank export --out dist/data/latest.json
+          args=""
+          for f in previous/macrofinder-*.sqlite; do
+            [ -e "$f" ] && args="$args --against $f"
+          done
+          bonusrank build-db --out-dir dist/data --previous-manifest previous/manifest.json $args
+
+      # A run that lost the crawled products (bad history, failed restore)
+      # would otherwise publish a catalogue a tenth the size, and every phone
+      # would apply a delta deleting the rest.
+      - name: Check the build did not shrink
+        run: |
+          n=$(python -c "import json; print(json.load(open('dist/data/manifest.json'))['full']['products'])")
+          prev=$(python -c "import json; print(json.load(open('previous/manifest.json'))['full']['products'])" 2>/dev/null || echo 0)
+          echo "products: $n (previous $prev)"
+          [ "$n" -gt 0 ] || { echo "refusing to publish an empty catalogue"; exit 1; }
+          if [ "$n" -lt $((prev * 8 / 10)) ]; then
+            echo "refusing to publish: lost more than 20% of the catalogue"
+            exit 1
+          fi
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sqlite3 data/bonusrank.sqlite3 "vacuum"
+          gzip -9 -c data/bonusrank.sqlite3 > dist/data/history.sqlite3.gz
+          ls -la dist/data
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" --title "App data" --latest=false \
+              --notes "Rolling data for the app. Assets are replaced in place; manifest.json names the current catalogue. Not a source release."
+          gh release upload "$RELEASE_TAG" dist/data/* --clobber
+
+      # Whatever the manifest no longer points at is dead weight.
+      - name: Prune superseded assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          keep=$(python -c "import json; m=json.load(open('dist/data/manifest.json')); print(' '.join(['manifest.json','latest.json','history.sqlite3.gz', m['full']['file']] + [d['file'] for d in m['deltas']]))")
+          echo "keeping: $keep"
+          for asset in $(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name'); do
+            case " $keep " in
+              *" $asset "*) ;;
+              *) echo "deleting $asset"; gh release delete-asset "$RELEASE_TAG" "$asset" --yes ;;
+            esac
+          done
+
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("dist/data/manifest.json"))
+          print(f"catalogue {m['full']['version']}  {m['full']['products']:,} products  {m['full']['bytes']:,} bytes")
+          for d in m["deltas"]:
+              print(f"  delta {d['from']} -> {d['to']}  {d['bytes']:,} bytes")
+          PY

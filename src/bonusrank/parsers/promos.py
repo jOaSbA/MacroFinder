@@ -209,6 +209,8 @@ _AH_CODE_KINDS: dict[str, PromoKind | None] = {
     "DISCOUNT_AMOUNT": PromoKind.AMOUNT_OFF,
     "DISCOUNT_WEIGHT": PromoKind.PRICE_PER_WEIGHT,
     "DISCOUNT_PERCENTAGE_PER_AMOUNT": PromoKind.BULK_TIER,
+    # Online "op = op" clearance, first seen 2026-09-22. "35% korting".
+    "DISCOUNT_OP_IS_OP": PromoKind.PERCENT_OFF,
     # Generic headline ('ACTIE'/'BONUS') but a real price in defaultDescription.
     "DISCOUNT_FALLBACK": PromoKind.FIXED_PRICE,
     # Genuinely contentless - no number anywhere. These are the review cases.

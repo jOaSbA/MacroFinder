@@ -1,0 +1,154 @@
+# PLAN-V2 section 4.3: one word per protein source, so a cheap plant source
+# topping the euro-per-protein list doesn't pass for the whole story.
+#
+#   complete    all essential amino acids in useful amounts
+#   incomplete  low in at least one (lysine in grains, methionine in legumes)
+#   blend       a mix; depends on the recipe
+#
+# Authored, not computed, and deliberately coarse. Not an amino-acid database.
+# A food type not listed here has no flag and the app says nothing.
+
+complete:
+  # meat, fish, eggs, dairy
+  - achterham
+  - bacon
+  - blauwaderkaas
+  - brie
+  - caseine_poeder
+  - ei_gekookt
+  - ei_rauw
+  - eiwit_vloeibaar
+  - eiwitshake_kant_en_klaar
+  - feta
+  - forel
+  - fricandeau
+  - garnalen
+  - gehaktbal
+  - geitenkaas
+  - griekse_yoghurt_0
+  - haring
+  - huttenkase
+  - kaas_belegen_48
+  - kaas_geraspt_30
+  - kaas_jong_30
+  - kaas_jong_48
+  - kabeljauw
+  - kalkoenfilet_rauw
+  - kipdijfilet
+  - kipfilet_rauw
+  - kipfilet_vleeswaren
+  - kipgehakt
+  - kipnuggets
+  - kippenpoten
+  - knakworst
+  - koolvis
+  - kwark_halfvol
+  - kwark_mager
+  - kwark_mager_fruit
+  - kwark_vol
+  - leverworst
+  - makreel_gerookt
+  - melkpoeder_mager
+  - mosselen
+  - mozzarella
+  - pangasius
+  - parmezaanse_kaas
+  - proteine_drinkyoghurt
+  - proteine_pudding
+  - rookworst
+  - rosbief_vleeswaren
+  - runderbiefstuk_mager
+  - rundergehakt
+  - rundergehakt_mager
+  - salami
+  - sardines_blik
+  - schol
+  - shoarmavlees
+  - skyr_fruit
+  - skyr_naturel
+  - smeerkaas_light
+  - spareribs
+  - surimi
+  - tilapia
+  - tonijn_blik_olie
+  - tonijn_blik_water
+  - varkensfilet
+  - varkenshaas
+  - whey_poeder
+  - zalm_gerookt
+  - zalm_vers
+  # the plant exceptions
+  - edamame
+  - sojabrokken_droog
+  - tempeh
+  - tofu_gerookt
+  - tofu_naturel
+  - quinoa_droog
+
+incomplete:
+  # legumes: short on methionine
+  - bruine_bonen_blik
+  - doperwten_blik
+  - falafel
+  - hummus
+  - kapucijners_blik
+  - kidneybonen_blik
+  - kikkererwten_blik
+  - kikkererwten_droog
+  - linzen_blik
+  - linzen_droog
+  - spliterwten_droog
+  - tuinbonen
+  - witte_bonen_blik
+  - zwarte_bonen_blik
+  - pindakaas
+  - pindas
+  # grains: short on lysine
+  - beschuit
+  - brood_volkoren
+  - brood_wit
+  - broodje_bruin
+  - bulgur_droog
+  - couscous_droog
+  - crackers_volkoren
+  - havermout
+  - krentenbol
+  - muesli
+  - naanbrood
+  - noedels_droog
+  - pasta_droog
+  - pasta_volkoren_droog
+  - pitabrood
+  - polenta_droog
+  - rijst_wit_droog
+  - rijst_zilvervlies_droog
+  - rijstwafels
+  - stokbrood
+  - wrap_tortilla
+  - wrap_volkoren
+  # wheat gluten
+  - seitan
+  # nuts and seeds
+  - amandelen
+  - amandelpasta
+  - cashewnoten
+  - chiazaad
+  - hazelnoten
+  - lijnzaad
+  - paranoten
+  - pecannoten
+  - pistachenoten
+  - pompoenpitten
+  - sesamzaad
+  - tahin
+  - walnoten
+  - zonnebloempitten
+
+blend:
+  - kwark_plantaardig
+  - proteine_reep
+  - vega_burger
+  - vega_gehakt
+  - vega_kipstukjes
+  - vega_schnitzel
+  - wrap_proteine

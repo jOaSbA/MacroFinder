@@ -173,6 +173,8 @@ class AldiAdapter:
                 f"per {base['basePriceScale']} {base['basePriceValue']}"
                 if base.get("basePriceValue") is not None else None
             ),
+            image_url=_image(entry),
+            image_width=IMAGE_WIDTH if _image(entry) else None,
             url=f"{BASE_URL}/aanbiedingen/{entry.get('productSlug')}.html"
             if entry.get("productSlug") else None,
             source_url=OFFERS_PAGE,
@@ -243,3 +245,16 @@ def _from_unix(value: Any) -> date | None:
     except (TypeError, ValueError, OSError):
         log.warning("aldi: unparseable timestamp %r", value)
         return None
+
+
+# Scene7 serves any size from the same url. 400px matches the AH rendition:
+# a 64dp thumbnail at 3x and the detail screen, one request.
+IMAGE_WIDTH = 400
+
+
+def _image(entry: dict) -> str | None:
+    """The primary product shot from `assets`, sized for the app."""
+    for asset in entry.get("assets") or []:
+        if asset.get("type") == "primary" and asset.get("url"):
+            return f"{asset['url']}?wid={IMAGE_WIDTH}&hei={IMAGE_WIDTH}"
+    return None
