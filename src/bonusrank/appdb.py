@@ -41,7 +41,7 @@ import sqlite3
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from . import metrics, shelves
+from . import config, history, metrics, shelves
 
 # Bumped whenever APP_SCHEMA changes. This is for the app to read; it is NOT
 # what guards delta building - `_schema_of` compares the databases' actual
@@ -135,7 +135,12 @@ CREATE TABLE products (
     -- Comma-separated macro buckets (PLAN-V2 section 4.1), '' for none.
     -- `bulk` is not in here: it is relative, so meta.bulk_eur_per_1000kcal
     -- carries the cutoff and the app compares prices.eur_per_1000kcal to it.
-    buckets              TEXT NOT NULL DEFAULT ''
+    buckets              TEXT NOT NULL DEFAULT '',
+    -- Milestone 22. Median days between promo starts (NULL under three
+    -- promos) and when the last one started. The phone turns these into
+    -- buy/wait against its own date, so nothing here changes daily.
+    promo_cycle_days     INTEGER,
+    last_promo_start     TEXT
 ) WITHOUT ROWID;
 
 -- Tier 1, the SKU's own FIR label figures. BRIEF section 2 prefers these over
@@ -181,7 +186,27 @@ CREATE TABLE prices (
     -- How far below the shelf price this lane is, in percent. NULL on the
     -- shelf lane and whenever there is no shelf price to compare with.
     discount_pct          REAL,
+    -- Milestone 21, BRIEF section 3.3: the cost per 100 g protein counting
+    -- only what you'd get through before it goes off.
+    waste_adjusted_eur_per_100g_protein  REAL,
+    realistically_consumable             INTEGER,
+    perishable                           INTEGER,
+    -- "Cheapest in N weeks". NULL means not enough history to say.
+    cheapest_in_weeks     INTEGER,
+    -- Milestone 22: the shelf price went up in the 28 days before this promo.
+    -- NULL when there's no earlier price to compare with.
+    reference_inflated    INTEGER,
     PRIMARY KEY (product_id, lane)
+) WITHOUT ROWID;
+
+-- Weekly lowest price, for the sparkline on the detail screen. Only products
+-- with known macros, and only the last 26 weeks, so this stays small. Past
+-- weeks never change, which keeps deltas cheap.
+CREATE TABLE price_history (
+    product_id  TEXT NOT NULL REFERENCES products(id),
+    week        TEXT NOT NULL,     -- the Monday, ISO date
+    price       REAL NOT NULL,
+    PRIMARY KEY (product_id, week)
 ) WITHOUT ROWID;
 
 CREATE INDEX idx_products_chain ON products(chain);
@@ -208,6 +233,7 @@ _TABLES: dict[str, tuple[str, ...]] = {
     "products": ("id",),
     "product_macros": ("product_id",),
     "prices": ("product_id", "lane"),
+    "price_history": ("product_id", "week"),
 }
 
 # ASCII unit separator: it cannot occur in a chain name, an SKU or a lane, so
@@ -303,6 +329,7 @@ def build_full(conn: sqlite3.Connection, out: Path, *, on: date | None = None) -
         _copy_product_macros(conn, db)
         _copy_prices(conn, db, on)
         _derive_metrics(conn, db)
+        _derive_history(conn, db)
         db.commit()
         _vacuum_into(db, out)
     finally:
@@ -476,6 +503,74 @@ def _derive_metrics(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
         "UPDATE products SET mass_g=?, protein_per_100g=?, kcal_per_100g=?, "
         "carbs_per_100g=?, fat_per_100g=?, macro_source=?, macro_confidence=?, "
         "protein_per_100kcal=?, buckets=? WHERE id=?", product_updates)
+
+
+def _derive_history(src: sqlite3.Connection, dst: sqlite3.Connection) -> None:
+    """Milestones 21 and 22: waste adjustment, cheapest-in-N-weeks, reference
+    inflation, the promo cycle, and the weekly series for the sparkline."""
+    from collections import defaultdict
+
+    from .parsers.units import parse_unit_size
+    from .ranking import _history, _waste_adjust
+
+    settings = config.user_settings()
+    dev_ids = {product_id(r[1], r[2]): r[0]
+               for r in src.execute("SELECT id, chain, sku FROM products")}
+    obs: dict[int, list] = defaultdict(list)
+    for r in src.execute(
+            "SELECT product_id, observed_at, shelf_price, effective_unit_price, "
+            "promo_mechanic, valid_from FROM price_observations ORDER BY observed_at, id"):
+        obs[r[0]].append(r)
+    food = {r["key"]: r for r in src.execute(
+        "SELECT key, shelf_life_days_opened, shelf_life_days_unopened, freezable "
+        "FROM food_types")}
+    products = {r[0]: r for r in dst.execute(
+        "SELECT id, food_type, raw_unit_text, mass_g, protein_per_100g FROM products")}
+
+    price_updates = []
+    for pid, lane, price, required, shelf, valid_from in dst.execute(
+            "SELECT product_id, lane, effective_unit_price, required_quantity, shelf_price, "
+            "valid_from FROM prices WHERE lane != 'shelf'").fetchall():
+        p = products[pid]
+        dev = dev_ids.get(pid)
+        rows = obs.get(dev, [])
+        consumable = waste = perishable = None
+        ft = food.get(p[1])
+        if ft is not None:
+            consumable, waste, perishable = _waste_adjust(
+                ft, parse_unit_size(p[2]), p[3], price, required or 1, p[4], settings)
+        weeks = _history(src, dev, price)["cheapest_in_weeks"] if dev else None
+        inflated = None
+        if valid_from:
+            shelf_series = [(date.fromisoformat(r[1][:10]), r[2]) for r in rows if r[2]]
+            inflated = history.reference_inflated(
+                shelf_series, date.fromisoformat(valid_from), shelf)
+        price_updates.append((
+            waste, consumable, None if perishable is None else int(perishable), weeks,
+            None if inflated is None else int(inflated), pid, lane))
+    dst.executemany(
+        "UPDATE prices SET waste_adjusted_eur_per_100g_protein=?, realistically_consumable=?, "
+        "perishable=?, cheapest_in_weeks=?, reference_inflated=? "
+        "WHERE product_id=? AND lane=?", price_updates)
+
+    cycle_updates, series_rows = [], []
+    for pid, p in products.items():
+        rows = obs.get(dev_ids.get(pid), [])
+        if not rows:
+            continue
+        starts = sorted({date.fromisoformat(r[5]) for r in rows
+                         if r[4] != "not_a_promo" and r[5]})
+        if starts:
+            cycle_updates.append((history.cycle_days(starts), starts[-1].isoformat(), pid))
+        if p[4] is not None:
+            series = history.weekly_min(
+                [(date.fromisoformat(r[1][:10]), r[3]) for r in rows])
+            if len(series) >= 2:
+                series_rows += [(pid, week, round(price, 2)) for week, price in series]
+    dst.executemany(
+        "UPDATE products SET promo_cycle_days=?, last_promo_start=? WHERE id=?", cycle_updates)
+    dst.executemany(
+        "INSERT INTO price_history (product_id, week, price) VALUES (?,?,?)", series_rows)
 
 
 def product_id(chain: str, sku: str) -> str:

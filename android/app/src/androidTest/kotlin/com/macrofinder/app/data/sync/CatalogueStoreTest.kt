@@ -70,6 +70,10 @@ class CatalogueStoreTest {
             "CREATE TABLE prices (product_id TEXT NOT NULL, lane TEXT NOT NULL, " +
                 "shelf_price REAL, PRIMARY KEY (product_id, lane)) WITHOUT ROWID"
         )
+        db.execSQL(
+            "CREATE TABLE price_history (product_id TEXT NOT NULL, week TEXT NOT NULL, " +
+                "price REAL NOT NULL, PRIMARY KEY (product_id, week)) WITHOUT ROWID"
+        )
     }
 
     private fun buildBase(): File {

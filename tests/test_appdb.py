@@ -316,7 +316,8 @@ def test_a_delta_carries_only_what_changed(conn, tmp_path):
     _prev, _nxt, delta = _two_generations(conn, tmp_path)
 
     products = {r["id"] for r in _rows(delta, "SELECT id FROM products")}
-    assert products == {"ah:wi4"}          # only the genuinely new one
+    # wi4 is new; wi2 went on promo, which sets its last_promo_start.
+    assert products == {"ah:wi2", "ah:wi4"}
     assert "ah:wi1" not in products        # untouched, so absent
 
     prices = {r["product_id"] for r in _rows(delta, "SELECT product_id FROM prices")}

@@ -161,10 +161,12 @@ class CatalogueStore(private val context: Context) {
          */
         val DELTA_TABLES = listOf(
             "meta", "food_types", "shelves", "products", "product_macros", "prices",
+            "price_history",
         )
 
         private val COMPOSITE_KEYS = mapOf(
             "prices" to listOf("product_id", "lane"),
+            "price_history" to listOf("product_id", "week"),
         )
 
         private val SINGLE_KEYS = mapOf(
