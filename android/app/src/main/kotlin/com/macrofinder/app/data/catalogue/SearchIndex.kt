@@ -29,9 +29,8 @@ object SearchIndex {
                     r.string("name"), r.string("brand"), r.string("name_nl"),
                 ).joinToString(" ")
             }
-            for ((id, text) in rows) {
-                db.exec("INSERT INTO $TABLE (id, body) VALUES (?, ?)", listOf(id, fold(text)))
-            }
+            db.execBatch("INSERT INTO $TABLE (id, body) VALUES (?, ?)",
+                rows.map { (id, text) -> listOf(id, fold(text)) })
         }
     }
 
@@ -42,9 +41,13 @@ object SearchIndex {
     /** Lowercase, accents stripped, anything that isn't a letter or digit made a space. */
     fun fold(text: String): String =
         Normalizer.normalize(text.lowercase(), Normalizer.Form.NFD)
-            .replace(Regex("\\p{M}+"), "")
-            .replace(Regex("[^a-z0-9]+"), " ")
+            .replace(MARKS, "")
+            .replace(NON_WORD, " ")
             .trim()
+
+    // Compiled once: rebuilding the index folds 50k names.
+    private val MARKS = Regex("\\p{M}+")
+    private val NON_WORD = Regex("[^a-z0-9]+")
 
     /**
      * What the user typed, as an FTS query: every word must match, and the

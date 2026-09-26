@@ -406,6 +406,8 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     _add_column_if_missing(conn, "products", "subcategory", "TEXT")
     _add_column_if_missing(conn, "products", "image_url", "TEXT")
     _add_column_if_missing(conn, "products", "image_width", "INTEGER")
+    # Which label parser wrote a row; older rows get fetched again.
+    _add_column_if_missing(conn, "product_macros", "parser_version", "INTEGER")
     conn.commit()
     return conn
 

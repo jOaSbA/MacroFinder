@@ -2,6 +2,7 @@ package com.macrofinder.app.ui
 
 import android.app.Application
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -97,10 +98,14 @@ class CatalogueViewModel(
         val previous = loadJob
         loadJob = viewModelScope.launch {
             previous?.join()
+            // The index build holds a write lock; reading the version during it
+            // can fail with SQLITE_BUSY and look like "no catalogue".
+            indexJob?.join()
             val next = withContext(Dispatchers.IO) { load(force) } ?: return@launch
             // The fallback may have arrived while this load ran; don't let a
             // stale empty list overwrite it.
             _state.value = if (next.installed) next else next.copy(deals = fallback)
+            if (next.installed && !next.searchReady) buildIndex()
             refreshFollowed(followed.value)
             if (_searchText.value.isNotBlank()) search(_searchText.value)
         }
@@ -110,13 +115,12 @@ class CatalogueViewModel(
         val version = store.localVersion()
         if (!force && _state.value.ready && version == _state.value.version) return null
         if (version == null) {
+            // A file that is there but can't be read right now (locked, mid
+            // install) never downgrades a catalogue that already loaded.
+            if (store.exists() && _state.value.installed) return null
             return CatalogueState(ready = true, installed = false, deals = fallback)
         }
         db?.close()
-        // Normally the sync worker builds the search index. If it hasn't yet
-        // (first launch after an app update, say), build it here: a couple of
-        // seconds once, rather than a search box that finds nothing.
-        runCatching { store.ensureSearchIndex() }
         val handle = runCatching { store.open() }.getOrNull()
             ?: return CatalogueState(ready = true, installed = false, deals = fallback)
         db = handle
@@ -135,7 +139,24 @@ class CatalogueViewModel(
                 }.first(),
                 searchReady = SearchIndex.exists(runner),
             )
-        }.getOrElse { CatalogueState(ready = true, installed = false, deals = fallback) }
+        }.getOrElse { e ->
+            Log.w("MacroFinder", "catalogue unreadable, using the short list", e)
+            CatalogueState(ready = true, installed = false, deals = fallback)
+        }
+    }
+
+    private var indexJob: Job? = null
+
+    /**
+     * Normally the sync worker builds the search index. If it hasn't yet
+     * (first launch after an app update, say), build it here, after the list
+     * is already on screen, rather than leave a search box that finds nothing.
+     */
+    private fun buildIndex() {
+        indexJob = viewModelScope.launch {
+            withContext(Dispatchers.IO) { runCatching { store.ensureSearchIndex() } }
+            _state.value = _state.value.copy(searchReady = true)
+        }
     }
 
     /** latest.json's offers, shown until the catalogue has arrived. */
@@ -185,6 +206,7 @@ class CatalogueViewModel(
         searchJob = viewModelScope.launch {
             delay(120)
             loadJob?.join()
+            indexJob?.join()
             val fts = SearchIndex.query(text)
             _searchResults.value = if (fts == null) emptyList() else withContext(Dispatchers.IO) {
                 reader()?.let { r -> runCatching { r.search(fts) }.getOrDefault(emptyList()) }

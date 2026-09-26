@@ -14,6 +14,8 @@ interface Row {
 interface SqlRunner {
     fun <T> query(sql: String, args: List<Any?> = emptyList(), map: (Row) -> T): List<T>
     fun exec(sql: String, args: List<Any?> = emptyList())
+    /** One statement, many rows. Much faster than [exec] in a loop on Android. */
+    fun execBatch(sql: String, rows: List<List<Any?>>) = rows.forEach { exec(sql, it) }
     fun <T> transaction(block: () -> T): T
 }
 

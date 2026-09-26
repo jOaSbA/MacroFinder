@@ -196,13 +196,26 @@ _GS1_CODES = {
 }
 
 
+def _as_sold(headers: list[dict]) -> dict:
+    """The table for the product as sold, when there is a choice.
+
+    Dried pasta, rice and legumes often list a PREPARED (cooked) table first.
+    Prices are per pack as sold, so dividing them by cooked figures makes the
+    protein look two to three times dearer than it is.
+    """
+    for header in headers:
+        if ((header.get("preparationStateCode") or {}).get("value") or "") == "UNPREPARED":
+            return header
+    return headers[0]
+
+
 def parse_gs1_nutrition(nutritional_information: dict | None) -> Macros:
     """Parse `tradeItem.nutritionalInformation` into per-100 macros."""
     headers = (nutritional_information or {}).get("nutrientHeaders") or []
     if not headers:
         return Macros(needs_review=True)
 
-    header = headers[0]
+    header = _as_sold(headers)
     basis = header.get("nutrientBasisQuantity") or {}
     basis_value = basis.get("value")
     basis_unit = ((basis.get("measurementUnitCode") or {}).get("value") or "").lower() or None

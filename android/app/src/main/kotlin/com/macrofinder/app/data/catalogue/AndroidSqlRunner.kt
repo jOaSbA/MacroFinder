@@ -16,6 +16,27 @@ class AndroidSqlRunner(private val db: SQLiteDatabase) : SqlRunner {
         if (args.isEmpty()) db.execSQL(sql) else db.execSQL(sql, args.toTypedArray())
     }
 
+    override fun execBatch(sql: String, rows: List<List<Any?>>) {
+        val statement = db.compileStatement(sql)
+        try {
+            for (row in rows) {
+                statement.clearBindings()
+                row.forEachIndexed { i, v ->
+                    when (v) {
+                        null -> statement.bindNull(i + 1)
+                        is Long -> statement.bindLong(i + 1, v)
+                        is Int -> statement.bindLong(i + 1, v.toLong())
+                        is Double -> statement.bindDouble(i + 1, v)
+                        else -> statement.bindString(i + 1, v.toString())
+                    }
+                }
+                statement.executeInsert()
+            }
+        } finally {
+            statement.close()
+        }
+    }
+
     override fun <T> transaction(block: () -> T): T {
         db.beginTransaction()
         try {

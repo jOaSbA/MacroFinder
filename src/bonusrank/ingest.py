@@ -314,6 +314,11 @@ def ingest_flat(
 # 4,360 matched AH products and only 254 of them on a current offer, so
 # selecting "any matched product" spends the budget almost entirely on rows
 # nobody reads.
+# Bump when the label parser changes what it reads. Rows from an older
+# version are fetched again, after products with no label macros at all.
+# 2: prefer the as-sold (UNPREPARED) table over the cooked one.
+LABEL_PARSER_VERSION = 2
+
 _MACRO_CANDIDATES_SQL = """
 SELECT p.sku,
        MAX(CASE WHEN o.promo_mechanic NOT IN ('not_a_promo','unknown')
@@ -322,9 +327,10 @@ FROM products p
 LEFT JOIN price_observations o ON o.product_id = p.id
 WHERE p.chain = ?
   AND p.food_type_id IS NOT NULL
-  AND p.id NOT IN (SELECT product_id FROM product_macros)
+  AND p.id NOT IN (SELECT product_id FROM product_macros
+                   WHERE coalesce(parser_version, 1) >= ?)
 GROUP BY p.id
-ORDER BY on_promo DESC, p.sku
+ORDER BY on_promo DESC, p.id IN (SELECT product_id FROM product_macros), p.sku
 LIMIT ?
 """
 
@@ -333,7 +339,8 @@ def macro_candidates(conn: sqlite3.Connection, chain: str, limit: int,
                      *, on=None) -> list[str]:
     """SKUs most worth spending a label-macro request on, best first."""
     today = (on or date.today()).isoformat()
-    return [r["sku"] for r in conn.execute(_MACRO_CANDIDATES_SQL, (today, chain, limit))]
+    return [r["sku"] for r in conn.execute(
+        _MACRO_CANDIDATES_SQL, (today, chain, LABEL_PARSER_VERSION, limit))]
 
 
 def fetch_label_macros(conn: sqlite3.Connection, adapter, skus: list[str]) -> int:
@@ -360,13 +367,18 @@ def fetch_label_macros(conn: sqlite3.Connection, adapter, skus: list[str]) -> in
         conn.execute(
             "INSERT INTO product_macros (product_id, protein_per_100g, kcal_per_100g, "
             "carbs_per_100g, fat_per_100g, fiber_per_100g, salt_per_100g, basis_unit, "
-            "kcal_is_derived, source, confidence, observed_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) "
+            "kcal_is_derived, source, confidence, observed_at, parser_version) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) "
             "ON CONFLICT(product_id) DO UPDATE SET protein_per_100g=excluded.protein_per_100g, "
-            "kcal_per_100g=excluded.kcal_per_100g, basis_unit=excluded.basis_unit, "
-            "kcal_is_derived=excluded.kcal_is_derived, observed_at=excluded.observed_at",
+            "kcal_per_100g=excluded.kcal_per_100g, carbs_per_100g=excluded.carbs_per_100g, "
+            "fat_per_100g=excluded.fat_per_100g, fiber_per_100g=excluded.fiber_per_100g, "
+            "salt_per_100g=excluded.salt_per_100g, basis_unit=excluded.basis_unit, "
+            "kcal_is_derived=excluded.kcal_is_derived, observed_at=excluded.observed_at, "
+            "parser_version=excluded.parser_version",
             (row[0], macros.protein_per_100g, macros.kcal_per_100g, macros.carbs_per_100g,
              macros.fat_per_100g, macros.fiber_per_100g, macros.salt_per_100g,
-             macros.basis_unit, int(macros.kcal_is_derived), "label", "high", now),
+             macros.basis_unit, int(macros.kcal_is_derived), "label", "high", now,
+             LABEL_PARSER_VERSION),
         )
         written += 1
     conn.commit()
