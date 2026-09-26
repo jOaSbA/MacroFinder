@@ -1349,10 +1349,24 @@ everything twice a day, and the Monday run also crawls. Each manifest carries
 the previous one's deltas (up to 7), and the build refuses to publish a
 catalogue that lost more than 20% of its products.
 
-Current position: **milestones 1-27 and 29 complete, 28 declined.** About 820
-Python tests, 142 Android JVM tests and 19 device tests, all in CI. Milestone
-30 (distribution) is the author's call; the kill switch and the about screen
-exist.
+30. ~~Distribution readiness.~~ **Done, as PLAN-V2 section 7 scopes it:** the
+    kill switch and the About screen, then stop. Setting the repository
+    variable `DATA_HALTED=true` (optional `DATA_HALTED_MESSAGE`) makes the data
+    job scrape nothing and mark the published manifest halted; phones stop
+    syncing and keep showing the message (`HaltState`, because WorkManager
+    forgets a periodic job's output). No store listing: publishing is the
+    author's decision.
+
+    Verified 2026-09-26 with a fresh install on an emulator: the app synced the
+    real published catalogue from the release (28.6 MB, hash checked) in about
+    20 seconds and listed 1,284 current food offers across the three chains.
+    The same day's first schema-3 run showed `latest.json` had grown to 7.7 MB,
+    because the carried database now holds every crawled shelf price and the
+    export ranked them all; it now exports offers only (about 0.9 MB).
+
+Current position: **the plan is done.** Milestones 1-27, 29 and 30 complete; 28
+declined at the user's instruction. About 825 Python tests, 143 Android JVM
+tests and 19 device tests, all in CI.
 
 Commands: `bonusrank seed` -> `bonusrank ingest --chain ah|jumbo|aldi [--with-macros N]`
 -> `bonusrank prices --refresh --all --chain ah|jumbo` -> `bonusrank compare --chain ah|jumbo|aldi` /
